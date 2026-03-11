@@ -2115,6 +2115,22 @@
   white-space: nowrap;
 }
 
+/* Ecken-Radius: Kopfzeile */
+.leistungs-tabelle thead th:first-child {
+  border-radius: var(--radius-xl) 0 0 0;
+}
+.leistungs-tabelle thead th:last-child {
+  border-radius: 0 var(--radius-xl) 0 0;
+}
+
+/* Ecken-Radius: letzte Zeile */
+.leistungs-tabelle__row:last-child td:first-child {
+  border-radius: 0 0 0 var(--radius-xl);
+}
+.leistungs-tabelle__row:last-child td:last-child {
+  border-radius: 0 0 var(--radius-xl) 0;
+}
+
 /* Erste Spalte (Leistungsname) linksbündig, breiter */
 .leistungs-tabelle__col-label {
   text-align: left !important;
