@@ -133,82 +133,320 @@
     </div>
   </section>
 
-  <!-- LEISTUNGSTABELLE ─────────────────────────────────── -->
-  <section class="section" aria-labelledby="tabelle-heading">
+  <!-- LEISTUNGSKARTEN ──────────────────────────────────── -->
+  <section class="section bg-section" aria-labelledby="tabelle-heading">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header fade-in">
         <span class="section-header__label">Ihr Anspruch im Überblick</span>
         <h2 class="section-header__title" id="tabelle-heading">Welche Gelder stehen Ihnen zu?</h2>
         <div class="section-header__accent" aria-hidden="true"></div>
         <p class="section-header__text">Je nach Pflegegrad haben Sie Anspruch auf verschiedene Leistungen der Pflegekasse. Hier ein Überblick der wichtigsten Beträge (Stand 2024/2025):</p>
       </div>
-      <div class="fade-in" style="margin-top: var(--spacing-3xl); overflow-x: auto; -webkit-overflow-scrolling: touch;">
-        <table class="data-table" style="width: 100%; border-collapse: collapse;">
-          <thead>
-            <tr>
-              <th>Leistungsart</th>
-              <th>Pflegegrad 1</th>
-              <th>Pflegegrad 2</th>
-              <th>Pflegegrad 3</th>
-              <th>Pflegegrad 4</th>
-              <th>Pflegegrad 5</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Entlastungsbetrag §45b</strong><br /><small>für Betreuungsleistungen wie Vitalis</small></td>
-              <td>125 &euro;</td>
-              <td>125 &euro;</td>
-              <td>125 &euro;</td>
-              <td>125 &euro;</td>
-              <td>125 &euro;</td>
-            </tr>
-            <tr>
-              <td><strong>Pflegegeld</strong><br /><small>bei häuslicher Pflege durch Angehörige</small></td>
-              <td>–</td>
-              <td>332 &euro;</td>
-              <td>573 &euro;</td>
-              <td>765 &euro;</td>
-              <td>947 &euro;</td>
-            </tr>
-            <tr>
-              <td><strong>Pflegesachleistungen</strong><br /><small>für professionelle Pflegedienste</small></td>
-              <td>–</td>
-              <td>761 &euro;</td>
-              <td>1.432 &euro;</td>
-              <td>1.778 &euro;</td>
-              <td>2.200 &euro;</td>
-            </tr>
-            <tr>
-              <td><strong>Verhinderungspflege</strong><br /><small>bei Verhinderung der Pflegeperson</small></td>
-              <td>–</td>
-              <td colspan="4" style="text-align: center;">bis zu 1.612 &euro; / Jahr</td>
-            </tr>
-            <tr>
-              <td><strong>Kurzzeitpflege</strong><br /><small>vorübergehende stationäre Pflege</small></td>
-              <td>–</td>
-              <td colspan="4" style="text-align: center;">bis zu 1.774 &euro; / Jahr</td>
-            </tr>
-          </tbody>
-        </table>
+
+      <div class="leistungs-grid stagger-children" role="list">
+
+        <!-- Karte 1: Entlastungsbetrag §45b -->
+        <article class="leistungs-karte fade-in" role="listitem">
+          <div class="leistungs-karte__header">
+            <div class="leistungs-karte__icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="leistungs-karte__meta">
+              <span class="leistungs-badge leistungs-badge--primary">Vitalis-Leistung abrechenbar</span>
+              <h3 class="leistungs-karte__title">Entlastungsbetrag §45b SGB XI</h3>
+              <p class="leistungs-karte__subtitle">Für Betreuungsleistungen wie Alltagsbegleitung durch Vitalis</p>
+            </div>
+          </div>
+          <div class="leistungs-karte__betraege" aria-label="Beträge nach Pflegegrad">
+            <div class="leistungs-karte__betrag">
+              <span class="leistungs-karte__betrag-label">PG 1</span>
+              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">125 &euro;</span>
+            </div>
+            <div class="leistungs-karte__betrag">
+              <span class="leistungs-karte__betrag-label">PG 2</span>
+              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">125 &euro;</span>
+            </div>
+            <div class="leistungs-karte__betrag">
+              <span class="leistungs-karte__betrag-label">PG 3</span>
+              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">125 &euro;</span>
+            </div>
+            <div class="leistungs-karte__betrag">
+              <span class="leistungs-karte__betrag-label">PG 4</span>
+              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">125 &euro;</span>
+            </div>
+            <div class="leistungs-karte__betrag">
+              <span class="leistungs-karte__betrag-label">PG 5</span>
+              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">125 &euro;</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Karte 2: Pflegegeld -->
+        <article class="leistungs-karte fade-in" role="listitem">
+          <div class="leistungs-karte__header">
+            <div class="leistungs-karte__icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="leistungs-karte__meta">
+              <span class="leistungs-badge leistungs-badge--secondary">Für pflegende Angehörige</span>
+              <h3 class="leistungs-karte__title">Pflegegeld</h3>
+              <p class="leistungs-karte__subtitle">Bei häuslicher Pflege durch Angehörige (nicht kombinierbar mit Sachleistungen in voller Höhe)</p>
+            </div>
+          </div>
+          <div class="leistungs-karte__betraege" aria-label="Beträge nach Pflegegrad">
+            <div class="leistungs-karte__betrag">
+              <span class="leistungs-karte__betrag-label">PG 1</span>
+              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--na">–</span>
+            </div>
+            <div class="leistungs-karte__betrag">
+              <span class="leistungs-karte__betrag-label">PG 2</span>
+              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--secondary">332 &euro;</span>
+            </div>
+            <div class="leistungs-karte__betrag">
+              <span class="leistungs-karte__betrag-label">PG 3</span>
+              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--secondary">573 &euro;</span>
+            </div>
+            <div class="leistungs-karte__betrag">
+              <span class="leistungs-karte__betrag-label">PG 4</span>
+              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--secondary">765 &euro;</span>
+            </div>
+            <div class="leistungs-karte__betrag">
+              <span class="leistungs-karte__betrag-label">PG 5</span>
+              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--secondary">947 &euro;</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Karte 3: Pflegesachleistungen -->
+        <article class="leistungs-karte fade-in" role="listitem">
+          <div class="leistungs-karte__header">
+            <div class="leistungs-karte__icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+            </div>
+            <div class="leistungs-karte__meta">
+              <span class="leistungs-badge leistungs-badge--primary">Professionelle Pflege</span>
+              <h3 class="leistungs-karte__title">Pflegesachleistungen</h3>
+              <p class="leistungs-karte__subtitle">Für professionelle ambulante Pflegedienstleistungen</p>
+            </div>
+          </div>
+          <div class="leistungs-karte__betraege" aria-label="Beträge nach Pflegegrad">
+            <div class="leistungs-karte__betrag">
+              <span class="leistungs-karte__betrag-label">PG 1</span>
+              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--na">–</span>
+            </div>
+            <div class="leistungs-karte__betrag">
+              <span class="leistungs-karte__betrag-label">PG 2</span>
+              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">761 &euro;</span>
+            </div>
+            <div class="leistungs-karte__betrag">
+              <span class="leistungs-karte__betrag-label">PG 3</span>
+              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">1.432 &euro;</span>
+            </div>
+            <div class="leistungs-karte__betrag">
+              <span class="leistungs-karte__betrag-label">PG 4</span>
+              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">1.778 &euro;</span>
+            </div>
+            <div class="leistungs-karte__betrag">
+              <span class="leistungs-karte__betrag-label">PG 5</span>
+              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">2.200 &euro;</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Karte 4: Verhinderungspflege -->
+        <article class="leistungs-karte leistungs-karte--secondary fade-in" role="listitem">
+          <div class="leistungs-karte__header">
+            <div class="leistungs-karte__icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="leistungs-karte__meta">
+              <span class="leistungs-badge leistungs-badge--secondary">PG 2–5</span>
+              <h3 class="leistungs-karte__title">Verhinderungspflege</h3>
+              <p class="leistungs-karte__subtitle">Wenn die Pflegeperson verhindert ist (Urlaub, Krankheit)</p>
+            </div>
+          </div>
+          <div class="leistungs-karte__betraege leistungs-karte__betraege--unified" aria-label="Jahresbetrag">
+            <div class="leistungs-karte__betrag">
+              <span class="leistungs-karte__betrag-label">Jahresbetrag für PG 2–5</span>
+              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--secondary">bis zu 1.612 &euro; / Jahr</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Karte 5: Kurzzeitpflege -->
+        <article class="leistungs-karte leistungs-karte--amber fade-in" role="listitem">
+          <div class="leistungs-karte__header">
+            <div class="leistungs-karte__icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div class="leistungs-karte__meta">
+              <span class="leistungs-badge leistungs-badge--amber">PG 2–5</span>
+              <h3 class="leistungs-karte__title">Kurzzeitpflege</h3>
+              <p class="leistungs-karte__subtitle">Vorübergehende stationäre Pflege (z.&nbsp;B. nach Krankenhausaufenthalt)</p>
+            </div>
+          </div>
+          <div class="leistungs-karte__betraege leistungs-karte__betraege--unified" aria-label="Jahresbetrag">
+            <div class="leistungs-karte__betrag">
+              <span class="leistungs-karte__betrag-label">Jahresbetrag für PG 2–5</span>
+              <span class="leistungs-karte__betrag-wert" style="color: var(--color-amber-dark); font-size: var(--fs-lg);">bis zu 1.774 &euro; / Jahr</span>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /.leistungs-grid -->
+
+      <p class="text-center" style="margin-top: var(--spacing-xl); font-size: var(--fs-sm); color: var(--color-text-muted);">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;margin-right:4px;" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Alle Angaben sind Richtwerte (Stand 2024/2025). Die genauen Beträge erfahren Sie von Ihrer Pflegekasse oder in einem kostenfreien Gespräch mit uns.
+      </p>
+    </div>
+  </section>
+
+  <!-- PFLEGEGRADE-ERKLÄRUNG ─────────────────────────────── -->
+  <section class="section bg-white" aria-labelledby="pflegegrade-heading">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-header__label">Begutachtung &amp; Einstufung</span>
+        <h2 class="section-header__title" id="pflegegrade-heading">Die 5 Pflegegrade erklärt</h2>
+        <div class="section-header__accent" aria-hidden="true"></div>
+        <p class="section-header__text">Der Pflegegrad wird durch den Medizinischen Dienst (MD) anhand eines Punktesystems ermittelt. Je höher die Punktzahl, desto schwerwiegender die Beeinträchtigung – und desto höher die Leistungen der Pflegekasse.</p>
       </div>
-      <p style="margin-top: var(--spacing-lg); font-size: var(--fs-sm); color: var(--color-text-muted); text-align: center;">Diese Angaben sind Richtwerte (Stand 2024/2025). Die genauen Beträge erfahren Sie von Ihrer Pflegekasse oder in einem kostenfreien Gespräch mit uns.</p>
+
+      <div class="pflegegrade-grid stagger-children" role="list">
+
+        <!-- Pflegegrad 1 -->
+        <article class="pflegegrad-karte pflegegrad-karte--pg1 fade-in" role="listitem">
+          <div class="pflegegrad-karte__nummer" aria-label="Pflegegrad 1">1</div>
+          <div class="pflegegrad-karte__content">
+            <h3 class="pflegegrad-karte__titel">Geringe Beeinträchtigung</h3>
+            <span class="pflegegrad-karte__punkte">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              12,5 – 27 Punkte
+            </span>
+            <p class="pflegegrad-karte__beschreibung">Selbstständigkeit ist größtenteils erhalten. Leichte Einschränkungen in einzelnen Bereichen, z.&nbsp;B. bei der Mobilität oder einzelnen Alltagsaktivitäten.</p>
+            <span class="pflegegrad-karte__hinweis">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Entlastungsbetrag 125 &euro;/Monat
+            </span>
+            <div class="pflegegrad-karte__skala" aria-hidden="true">
+              <div class="pflegegrad-karte__skala-fill"></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Pflegegrad 2 -->
+        <article class="pflegegrad-karte pflegegrad-karte--pg2 fade-in" role="listitem">
+          <div class="pflegegrad-karte__nummer" aria-label="Pflegegrad 2">2</div>
+          <div class="pflegegrad-karte__content">
+            <h3 class="pflegegrad-karte__titel">Erhebliche Beeinträchtigung</h3>
+            <span class="pflegegrad-karte__punkte">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              27 – 47,5 Punkte
+            </span>
+            <p class="pflegegrad-karte__beschreibung">Selbstständigkeit ist erheblich eingeschränkt. In mehreren Bereichen (Mobilität, Selbstversorgung, Haushaltsführung) ist Unterstützung notwendig.</p>
+            <span class="pflegegrad-karte__hinweis">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Entlastungsbetrag + Pflegegeld 332 &euro;/Monat
+            </span>
+            <div class="pflegegrad-karte__skala" aria-hidden="true">
+              <div class="pflegegrad-karte__skala-fill"></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Pflegegrad 3 -->
+        <article class="pflegegrad-karte pflegegrad-karte--pg3 fade-in" role="listitem">
+          <div class="pflegegrad-karte__nummer" aria-label="Pflegegrad 3">3</div>
+          <div class="pflegegrad-karte__content">
+            <h3 class="pflegegrad-karte__titel">Schwere Beeinträchtigung</h3>
+            <span class="pflegegrad-karte__punkte">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              47,5 – 70 Punkte
+            </span>
+            <p class="pflegegrad-karte__beschreibung">Erhebliche Einschränkungen in der Selbstständigkeit. Umfangreiche Unterstützung bei der Körperpflege, Ernährung und bei allgemeinen Alltagsaktivitäten nötig.</p>
+            <span class="pflegegrad-karte__hinweis">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Entlastungsbetrag + Pflegegeld 573 &euro;/Monat
+            </span>
+            <div class="pflegegrad-karte__skala" aria-hidden="true">
+              <div class="pflegegrad-karte__skala-fill"></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Pflegegrad 4 -->
+        <article class="pflegegrad-karte pflegegrad-karte--pg4 fade-in" role="listitem">
+          <div class="pflegegrad-karte__nummer" aria-label="Pflegegrad 4">4</div>
+          <div class="pflegegrad-karte__content">
+            <h3 class="pflegegrad-karte__titel">Schwerste Beeinträchtigung</h3>
+            <span class="pflegegrad-karte__punkte">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              70 – 90 Punkte
+            </span>
+            <p class="pflegegrad-karte__beschreibung">Weitgehender Verlust der Selbstständigkeit. Die Person ist auf umfassende Hilfe bei nahezu allen Verrichtungen des täglichen Lebens angewiesen.</p>
+            <span class="pflegegrad-karte__hinweis">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Entlastungsbetrag + Pflegegeld 765 &euro;/Monat
+            </span>
+            <div class="pflegegrad-karte__skala" aria-hidden="true">
+              <div class="pflegegrad-karte__skala-fill"></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Pflegegrad 5 -->
+        <article class="pflegegrad-karte pflegegrad-karte--pg5 fade-in" role="listitem">
+          <div class="pflegegrad-karte__nummer" aria-label="Pflegegrad 5">5</div>
+          <div class="pflegegrad-karte__content">
+            <h3 class="pflegegrad-karte__titel">Schwerste Beeinträchtigung mit besonderem Bedarf</h3>
+            <span class="pflegegrad-karte__punkte">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              90 – 100 Punkte
+            </span>
+            <p class="pflegegrad-karte__beschreibung">Vollständiger Verlust der Selbstständigkeit mit außergewöhnlichem und besonders hohem Versorgungsbedarf – z.&nbsp;B. bei lebenserhaltenden Maßnahmen.</p>
+            <span class="pflegegrad-karte__hinweis">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Entlastungsbetrag + Pflegegeld 947 &euro;/Monat
+            </span>
+            <div class="pflegegrad-karte__skala" aria-hidden="true">
+              <div class="pflegegrad-karte__skala-fill"></div>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /.pflegegrade-grid -->
+
+      <p class="text-center" style="margin-top: var(--spacing-xl); font-size: var(--fs-sm); color: var(--color-text-muted);">
+        Noch keinen Pflegegrad? Wir begleiten Sie bei der Antragstellung und bereiten Sie auf den Besuch des Medizinischen Dienstes vor.
+        <a href="kontakt.html" style="color: var(--color-primary); font-weight: var(--fw-semibold); margin-left: 4px;">Jetzt anfragen &rsaquo;</a>
+      </p>
     </div>
   </section>
 
   <!-- HINWEIS-BOXEN ────────────────────────────────────── -->
-  <section class="section bg-white" aria-labelledby="hinweise-heading">
+  <section class="section bg-section" aria-labelledby="hinweise-heading">
     <div class="container">
       <h2 class="sr-only" id="hinweise-heading">Weitere Hinweise</h2>
       <div class="grid grid-2 fade-in" style="gap: var(--spacing-xl);">
-        <div style="padding: var(--spacing-xl); background: rgba(80,121,165,0.08); border-radius: var(--radius-lg); border-left: 4px solid var(--color-secondary);">
-          <h3 style="font-size: var(--fs-lg); margin-bottom: var(--spacing-sm);">Auch ohne Pflegegrad beraten wir Sie gerne.</h3>
-          <p style="color: var(--color-text-muted); line-height: 1.7;">Auch wer noch keinen Pflegegrad hat, kann unsere Leistungen privat in Anspruch nehmen. Und wir helfen Ihnen, den Pflegegrad zu beantragen.</p>
+
+        <div class="hinweis-box hinweis-box--green">
+          <span class="hinweis-box__badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            Kein Pflegegrad? Kein Problem.
+          </span>
+          <h3 class="hinweis-box__title">Auch ohne Pflegegrad beraten wir Sie gerne.</h3>
+          <p class="hinweis-box__text">Auch wer noch keinen Pflegegrad hat, kann unsere Leistungen privat in Anspruch nehmen. Und wir helfen Ihnen dabei, den Pflegegrad zu beantragen.</p>
         </div>
-        <div style="padding: var(--spacing-xl); background: rgba(80,121,165,0.06); border-radius: var(--radius-lg); border-left: 4px solid var(--color-primary);">
-          <h3 style="font-size: var(--fs-lg); margin-bottom: var(--spacing-sm);">Keine Sorge – wir helfen bei allen Formularen.</h3>
-          <p style="color: var(--color-text-muted); line-height: 1.7;">Bürokratie ist nicht Ihre Welt? Muss sie auch nicht sein. Unser Team unterstützt Sie bei Antrag, Abrechnung und Korrespondenz mit der Pflegekasse.</p>
+
+        <div class="hinweis-box hinweis-box--blue">
+          <span class="hinweis-box__badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Bürokratie übernehmen wir
+          </span>
+          <h3 class="hinweis-box__title">Keine Sorge – wir helfen bei allen Formularen.</h3>
+          <p class="hinweis-box__text">Bürokratie ist nicht Ihre Welt? Muss sie auch nicht sein. Unser Team unterstützt Sie bei Antrag, Abrechnung und Korrespondenz mit der Pflegekasse.</p>
         </div>
+
       </div>
     </div>
   </section>

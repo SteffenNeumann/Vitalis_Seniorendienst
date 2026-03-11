@@ -2025,6 +2025,463 @@
   background-color: var(--color-primary-bg);
 }
 
+/* ─────────────────────────────────────────────────────────
+   LEISTUNGS-KARTEN (ersetzt Vergleichstabelle)
+   ───────────────────────────────────────────────────────── */
+
+/* Badge für Leistungsart (z. B. "Vitalis-Leistung") */
+.leistungs-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 4px 12px;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: var(--radius-pill);
+  margin-bottom: var(--spacing-md);
+}
+
+.leistungs-badge--primary {
+  background-color: var(--color-primary-bg);
+  color: var(--color-primary-dark);
+  border: 1px solid rgba(80, 121, 165, 0.2);
+}
+
+.leistungs-badge--secondary {
+  background-color: var(--color-secondary-bg);
+  color: var(--color-secondary-dark);
+  border: 1px solid rgba(61, 138, 138, 0.2);
+}
+
+.leistungs-badge--amber {
+  background-color: rgba(201, 123, 58, 0.1);
+  color: var(--color-amber-dark);
+  border: 1px solid rgba(201, 123, 58, 0.2);
+}
+
+/* Grid der Leistungskarten */
+.leistungs-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-3xl);
+}
+
+/* Einzelne Leistungskarte */
+.leistungs-karte {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow var(--transition-base), transform var(--transition-base), border-color var(--transition-base);
+}
+
+.leistungs-karte::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--color-primary);
+  border-radius: 0 0 0 0;
+  transition: width var(--transition-base);
+}
+
+.leistungs-karte--secondary::before {
+  background: var(--color-secondary);
+}
+
+.leistungs-karte--amber::before {
+  background: var(--color-amber);
+}
+
+.leistungs-karte:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+  border-color: var(--color-primary-light);
+}
+
+.leistungs-karte__header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.leistungs-karte__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  background: var(--color-primary-bg);
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+  color: var(--color-primary);
+  transition: background var(--transition-base), color var(--transition-base);
+}
+
+.leistungs-karte--secondary .leistungs-karte__icon {
+  background: var(--color-secondary-bg);
+  color: var(--color-secondary);
+}
+
+.leistungs-karte--amber .leistungs-karte__icon {
+  background: rgba(201, 123, 58, 0.1);
+  color: var(--color-amber-dark);
+}
+
+.leistungs-karte:hover .leistungs-karte__icon {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.leistungs-karte--secondary:hover .leistungs-karte__icon {
+  background: var(--color-secondary);
+  color: var(--color-white);
+}
+
+.leistungs-karte--amber:hover .leistungs-karte__icon {
+  background: var(--color-amber);
+  color: var(--color-white);
+}
+
+.leistungs-karte__icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.leistungs-karte__meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.leistungs-karte__title {
+  font-family: var(--font-heading);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xs);
+  line-height: 1.3;
+}
+
+.leistungs-karte__subtitle {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+/* Pflegegrad-Betragszeilen */
+.leistungs-karte__betraege {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-md);
+}
+
+.leistungs-karte__betrag {
+  text-align: center;
+  background: var(--color-bg-light);
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-sm) var(--spacing-xs);
+  transition: background var(--transition-fast);
+}
+
+.leistungs-karte__betrag:hover {
+  background: var(--color-primary-light);
+}
+
+.leistungs-karte__betrag-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.leistungs-karte__betrag-wert {
+  display: block;
+  font-size: var(--fs-base);
+  font-weight: var(--fw-bold);
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.leistungs-karte__betrag-wert--highlight {
+  color: var(--color-primary);
+}
+
+.leistungs-karte__betrag-wert--secondary {
+  color: var(--color-secondary);
+}
+
+.leistungs-karte__betrag-wert--na {
+  color: var(--color-text-light);
+  font-weight: var(--fw-regular);
+}
+
+/* Für Einträge die alle PG gemeinsam haben (colspan-Ersatz) */
+.leistungs-karte__betraege--unified {
+  grid-template-columns: 1fr;
+}
+
+.leistungs-karte__betraege--unified .leistungs-karte__betrag {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--color-primary-light);
+}
+
+.leistungs-karte__betraege--unified .leistungs-karte__betrag-wert {
+  font-size: var(--fs-lg);
+}
+
+/* ─────────────────────────────────────────────────────────
+   PFLEGEGRADE-SEKTION
+   ───────────────────────────────────────────────────────── */
+
+.pflegegrade-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-3xl);
+}
+
+.pflegegrad-karte {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-xl) calc(var(--spacing-xl) + 4px);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+  display: flex;
+  gap: var(--spacing-lg);
+  align-items: flex-start;
+}
+
+/* Farbige linke Akzentlinie pro Pflegegrad */
+.pflegegrad-karte::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+}
+
+.pflegegrad-karte--pg1::before { background: #7CB9E8; }  /* Hellblau */
+.pflegegrad-karte--pg2::before { background: #5079A5; }  /* Primary Blue */
+.pflegegrad-karte--pg3::before { background: #C97B3A; }  /* Amber */
+.pflegegrad-karte--pg4::before { background: #C0602A; }  /* Amber Dark */
+.pflegegrad-karte--pg5::before { background: #9B2226; }  /* Rot */
+
+.pflegegrad-karte:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+}
+
+/* Runde Nummernanzeige */
+.pflegegrad-karte__nummer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-circle);
+  font-family: var(--font-heading);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-white);
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.pflegegrad-karte--pg1 .pflegegrad-karte__nummer { background: #7CB9E8; }
+.pflegegrad-karte--pg2 .pflegegrad-karte__nummer { background: #5079A5; }
+.pflegegrad-karte--pg3 .pflegegrad-karte__nummer { background: #C97B3A; }
+.pflegegrad-karte--pg4 .pflegegrad-karte__nummer { background: #C0602A; }
+.pflegegrad-karte--pg5 .pflegegrad-karte__nummer { background: #9B2226; }
+
+.pflegegrad-karte__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.pflegegrad-karte__titel {
+  font-family: var(--font-heading);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xs);
+  line-height: 1.3;
+}
+
+.pflegegrad-karte__punkte {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-md);
+  background: var(--color-bg-light);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.pflegegrad-karte__punkte svg {
+  width: 14px;
+  height: 14px;
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.pflegegrad-karte__beschreibung {
+  font-size: var(--fs-base);
+  color: var(--color-text-muted);
+  line-height: var(--lh-relaxed);
+  margin-bottom: var(--spacing-md);
+}
+
+.pflegegrad-karte__hinweis {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--color-secondary);
+  padding: 6px 12px;
+  background: var(--color-secondary-bg);
+  border-radius: var(--radius-pill);
+}
+
+.pflegegrad-karte__hinweis svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+/* ─────────────────────────────────────────────────────────
+   HINWEIS-BOXEN (überarbeitete Variante mit Badge)
+   ───────────────────────────────────────────────────────── */
+
+.hinweis-box {
+  padding: var(--spacing-xl);
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.hinweis-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+}
+
+.hinweis-box--blue::before {
+  background: linear-gradient(90deg, var(--color-primary-dark), var(--color-primary));
+}
+
+.hinweis-box--green::before {
+  background: linear-gradient(90deg, var(--color-secondary-dark), var(--color-secondary));
+}
+
+.hinweis-box:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.hinweis-box__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 5px 12px;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: var(--radius-pill);
+  margin-bottom: var(--spacing-md);
+}
+
+.hinweis-box--blue .hinweis-box__badge {
+  background: var(--color-primary-bg);
+  color: var(--color-primary-dark);
+}
+
+.hinweis-box--green .hinweis-box__badge {
+  background: var(--color-secondary-bg);
+  color: var(--color-secondary-dark);
+}
+
+.hinweis-box__badge svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
+.hinweis-box__title {
+  font-family: var(--font-heading);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.35;
+}
+
+.hinweis-box__text {
+  font-size: var(--fs-base);
+  color: var(--color-text-muted);
+  line-height: var(--lh-relaxed);
+}
+
+/* Punkte-Skala für Pflegegrade (visuelle Fortschrittsleiste) */
+.pflegegrad-karte__skala {
+  margin-top: var(--spacing-sm);
+  height: 6px;
+  background: var(--color-bg-light);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.pflegegrad-karte__skala-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  /* Start: unsichtbar, erst bei is-visible auf Zielbreite */
+  width: 0;
+  transition: width 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+}
+
+/* Farben je Pflegegrad – Breite nur bei sichtbarer Karte */
+.pflegegrad-karte--pg1 .pflegegrad-karte__skala-fill { background: #7CB9E8; }
+.pflegegrad-karte--pg2 .pflegegrad-karte__skala-fill { background: #5079A5; }
+.pflegegrad-karte--pg3 .pflegegrad-karte__skala-fill { background: #C97B3A; }
+.pflegegrad-karte--pg4 .pflegegrad-karte__skala-fill { background: #C0602A; }
+.pflegegrad-karte--pg5 .pflegegrad-karte__skala-fill { background: #9B2226; }
+
+/* Zielbreite wird ausgelöst sobald die Karte per Intersection Observer is-visible erhält */
+.pflegegrad-karte--pg1.is-visible .pflegegrad-karte__skala-fill { width: 20%; }
+.pflegegrad-karte--pg2.is-visible .pflegegrad-karte__skala-fill { width: 40%; }
+.pflegegrad-karte--pg3.is-visible .pflegegrad-karte__skala-fill { width: 60%; }
+.pflegegrad-karte--pg4.is-visible .pflegegrad-karte__skala-fill { width: 80%; }
+.pflegegrad-karte--pg5.is-visible .pflegegrad-karte__skala-fill { width: 100%; }
+
 /* --- Floating Phone Button (Mobile) --- */
 @keyframes phonePulse {
   0% { box-shadow: 0 4px 20px rgba(80, 121, 165, 0.45), 0 0 0 0 rgba(80, 121, 165, 0.4); }

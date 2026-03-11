@@ -550,6 +550,45 @@ body.nav-open .nav-overlay {
   .engagement-banner__title { font-size: var(--fs-xl); }
 }
 
+/* ── Leistungs-Karten & Pflegegrade – Responsive ──── */
+@media (min-width: 640px) {
+  .leistungs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pflegegrade-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .leistungs-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .pflegegrade-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* PG5 erhält volle Breite auf Desktop (5 Karten im 3-Spalten-Grid)
+     → bleibt normal (kein special-case nötig bei 3+2 Layout) */
+}
+
+@media (max-width: 480px) {
+  /* Auf sehr kleinen Screens die Betragsboxen untereinander */
+  .leistungs-karte__betraege {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .leistungs-karte__betrag-label {
+    font-size: 0.625rem;
+  }
+
+  .leistungs-karte__betrag-wert {
+    font-size: var(--fs-sm);
+  }
+}
+
 /* ── Page Header – Mobile Padding-Korrektur ─────────── */
 /* Auf kleinen Screens das Padding reduzieren,
    damit der Header nicht übermäßig viel Raum einnimmt */
