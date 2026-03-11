@@ -2332,73 +2332,74 @@
   --pg5-color: #9B2226;   /* Rot       */
 }
 
-/* ── Pflegegrade: Zeilenweise Übersicht ─────────────────── */
-.pg-rows {
-  margin-top: var(--spacing-3xl);
+/* ── Pflegegrade: Card-Grid ─────────────────────────────── */
+.pg-grid {
+  margin-top: var(--spacing-2xl);
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-md);
 }
 
-/* ── Einzelne Pflegegrad-Zeile ──────────────────────────── */
-.pg-row {
+/* ── Einzelne Pflegegrad-Karte ──────────────────────────── */
+.pg-card {
+  position: relative;
   background: var(--color-white);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  padding: var(--spacing-xl) var(--spacing-xl);
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-md);
-  transition: box-shadow var(--transition-base);
+  padding: var(--spacing-lg) var(--spacing-xl) var(--spacing-lg) calc(var(--spacing-xl) + 4px);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.pg-row:hover {
-  box-shadow: var(--shadow-md);
+.pg-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
-/* Farbige linke Bordüre je Pflegegrad */
-.pg-row--pg1 { border-left: 5px solid var(--pg1-color); }
-.pg-row--pg2 { border-left: 5px solid var(--pg2-color); }
-.pg-row--pg3 { border-left: 5px solid var(--pg3-color); }
-.pg-row--pg4 { border-left: 5px solid var(--pg4-color); }
-.pg-row--pg5 { border-left: 5px solid var(--pg5-color); }
+/* Farbiger Top-Akzent-Streifen */
+.pg-card__accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+}
 
-/* ── Header: Bubble + Titel + Punkte ────────────────────── */
-.pg-row__header {
+.pg-card--pg1 .pg-card__accent { background: linear-gradient(90deg, var(--pg1-color), var(--pg1-color) 50%, transparent); }
+.pg-card--pg2 .pg-card__accent { background: linear-gradient(90deg, var(--pg2-color), var(--pg2-color) 60%, transparent); }
+.pg-card--pg3 .pg-card__accent { background: linear-gradient(90deg, var(--pg3-color), var(--pg3-color) 70%, transparent); }
+.pg-card--pg4 .pg-card__accent { background: linear-gradient(90deg, var(--pg4-color), var(--pg4-color) 80%, transparent); }
+.pg-card--pg5 .pg-card__accent { background: linear-gradient(90deg, var(--pg5-color), var(--pg5-color) 90%, transparent); }
+
+/* ── Top-Bereich: Badge + Titel ─────────────────────────── */
+.pg-card__top {
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
 }
 
-.pg-row__bubble {
+.pg-card__badge {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: var(--radius-circle);
-  font-family: var(--font-body);
-  font-size: 1.375rem;
+  font-size: 1.25rem;
   font-weight: var(--fw-bold);
   color: var(--color-white);
   flex-shrink: 0;
   line-height: 1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.pg-row__bubble--pg1 { background: var(--pg1-color); }
-.pg-row__bubble--pg2 { background: var(--pg2-color); }
-.pg-row__bubble--pg3 { background: var(--pg3-color); }
-.pg-row__bubble--pg4 { background: var(--pg4-color); }
-.pg-row__bubble--pg5 { background: var(--pg5-color); }
+.pg-card__badge--pg1 { background: var(--pg1-color); }
+.pg-card__badge--pg2 { background: var(--pg2-color); }
+.pg-card__badge--pg3 { background: var(--pg3-color); }
+.pg-card__badge--pg4 { background: var(--pg4-color); }
+.pg-card__badge--pg5 { background: var(--pg5-color); }
 
-.pg-row__title-group {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--spacing-xs) var(--spacing-md);
-}
-
-.pg-row__title {
+.pg-card__title {
   font-family: var(--font-heading);
   font-size: var(--fs-lg);
   font-weight: var(--fw-bold);
@@ -2407,81 +2408,74 @@
   line-height: var(--lh-tight);
 }
 
-.pg-row__punkte {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: var(--fs-sm);
+.pg-card__punkte {
+  display: block;
+  font-size: var(--fs-xs);
   font-weight: var(--fw-semibold);
   color: var(--color-text-muted);
-  background: var(--color-bg-light);
-  padding: 4px 10px;
-  border-radius: var(--radius-pill);
-}
-
-.pg-row__punkte svg {
-  flex-shrink: 0;
-  color: var(--color-primary);
+  margin-top: 2px;
+  letter-spacing: 0.02em;
 }
 
 /* ── Beschreibung ───────────────────────────────────────── */
-.pg-row__beschreibung {
-  font-size: var(--fs-base);
+.pg-card__desc {
+  font-size: var(--fs-sm);
   color: var(--color-text-muted);
   line-height: var(--lh-relaxed);
-  margin: 0;
+  margin: var(--spacing-sm) 0 0;
 }
 
-/* ── Leistungs-Chips ────────────────────────────────────── */
-.pg-row__leistungen {
+/* ── Trennlinie ─────────────────────────────────────────── */
+.pg-card__divider {
+  height: 1px;
+  background: var(--color-border);
+  margin: var(--spacing-md) 0;
+}
+
+/* ── Leistungen: Kompakte Zeilen ────────────────────────── */
+.pg-card__benefits {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-sm);
-  align-items: center;
+  gap: var(--spacing-xs) var(--spacing-lg);
 }
 
-.pg-row__chip {
-  display: inline-flex;
-  align-items: center;
+.pg-card__benefit {
+  display: flex;
+  align-items: baseline;
   gap: var(--spacing-xs);
-  padding: 6px var(--spacing-md);
-  border-radius: var(--radius-md);
-  border: 1px solid transparent;
-  font-size: var(--fs-sm);
-  line-height: 1.4;
 }
 
-.pg-row__chip svg { flex-shrink: 0; }
-
-.pg-row__chip span {
-  color: var(--color-text-muted);
+.pg-card__benefit-label {
+  font-size: var(--fs-xs);
+  color: var(--color-text-light);
+  white-space: nowrap;
 }
 
-.pg-row__chip strong {
+.pg-card__benefit-value {
+  font-size: var(--fs-base);
   font-weight: var(--fw-bold);
   white-space: nowrap;
 }
 
-.pg-row__chip--primary {
-  background: var(--color-primary-bg);
-  border-color: rgba(80, 121, 165, 0.15);
+.pg-card__benefit-value small {
+  font-size: 0.75em;
+  font-weight: var(--fw-medium);
+  opacity: 0.7;
 }
 
-.pg-row__chip--primary svg   { color: var(--color-primary); }
-.pg-row__chip--primary strong { color: var(--color-primary-dark); }
-
-.pg-row__chip--secondary {
-  background: var(--color-secondary-bg);
-  border-color: rgba(61, 138, 138, 0.15);
+.pg-card__benefit-value--primary {
+  color: var(--color-primary-dark);
 }
 
-.pg-row__chip--secondary svg    { color: var(--color-secondary); }
-.pg-row__chip--secondary strong { color: var(--color-secondary-dark); }
+.pg-card__benefit-value--secondary {
+  color: var(--color-secondary-dark);
+}
 
-.pg-row__hinweis {
+/* ── Hinweis ────────────────────────────────────────────── */
+.pg-card__note {
   font-size: var(--fs-xs);
   color: var(--color-text-light);
-  line-height: var(--lh-normal);
+  font-style: italic;
   margin: 0;
 }
 

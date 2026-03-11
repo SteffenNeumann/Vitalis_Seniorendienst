@@ -500,161 +500,143 @@
         <p class="section-header__text">Der Pflegegrad wird durch den Medizinischen Dienst (MD) anhand eines Punktesystems ermittelt. Je höher die Punktzahl, desto schwerwiegender die Beeinträchtigung – und desto höher die Leistungen der Pflegekasse.</p>
       </div>
 
-      <!-- ── Pflegegrade: Zeilenweise Übersicht ──────────── -->
-      <div class="pg-rows fade-in" role="list" aria-label="Die 5 Pflegegrade im Überblick">
+      <!-- ── Pflegegrade: Übersicht ──────────────────────── -->
+      <div class="pg-grid stagger-children" role="list" aria-label="Die 5 Pflegegrade im Überblick">
 
         <!-- PG 1 -->
-        <article class="pg-row pg-row--pg1" role="listitem">
-          <div class="pg-row__header">
-            <div class="pg-row__bubble pg-row__bubble--pg1" aria-hidden="true">1</div>
-            <div class="pg-row__title-group">
-              <h3 class="pg-row__title">Geringe Beeinträchtigung</h3>
-              <span class="pg-row__punkte">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                12,5 – 27 Punkte
-              </span>
+        <article class="pg-card pg-card--pg1" role="listitem">
+          <div class="pg-card__accent" aria-hidden="true"></div>
+          <div class="pg-card__top">
+            <div class="pg-card__badge pg-card__badge--pg1" aria-hidden="true">1</div>
+            <div>
+              <h3 class="pg-card__title">Geringe Beeinträchtigung</h3>
+              <span class="pg-card__punkte">12,5 – 27 Punkte</span>
             </div>
           </div>
-          <p class="pg-row__beschreibung">Selbstständigkeit ist größtenteils erhalten. Leichte Einschränkungen in einzelnen Bereichen, z.&nbsp;B. bei der Mobilität oder einzelnen Alltagsaktivitäten.</p>
-          <div class="pg-row__leistungen">
-            <div class="pg-row__chip pg-row__chip--primary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              <span>Entlastungsbetrag</span>
-              <strong>125 €/Mo.</strong>
+          <p class="pg-card__desc">Selbstständigkeit ist größtenteils erhalten. Leichte Einschränkungen in einzelnen Bereichen, z.&nbsp;B. bei der Mobilität oder einzelnen Alltagsaktivitäten.</p>
+          <div class="pg-card__divider"></div>
+          <div class="pg-card__benefits">
+            <div class="pg-card__benefit">
+              <span class="pg-card__benefit-label">Entlastungsbetrag</span>
+              <span class="pg-card__benefit-value pg-card__benefit-value--primary">125 €<small>/Mo.</small></span>
             </div>
-            <p class="pg-row__hinweis">Pflegegeld und Pflegesachleistungen erst ab Pflegegrad 2.</p>
+            <p class="pg-card__note">Pflegegeld &amp; Sachleistungen ab PG 2</p>
           </div>
         </article>
 
         <!-- PG 2 -->
-        <article class="pg-row pg-row--pg2" role="listitem">
-          <div class="pg-row__header">
-            <div class="pg-row__bubble pg-row__bubble--pg2" aria-hidden="true">2</div>
-            <div class="pg-row__title-group">
-              <h3 class="pg-row__title">Erhebliche Beeinträchtigung</h3>
-              <span class="pg-row__punkte">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                27 – 47,5 Punkte
-              </span>
+        <article class="pg-card pg-card--pg2" role="listitem">
+          <div class="pg-card__accent" aria-hidden="true"></div>
+          <div class="pg-card__top">
+            <div class="pg-card__badge pg-card__badge--pg2" aria-hidden="true">2</div>
+            <div>
+              <h3 class="pg-card__title">Erhebliche Beeinträchtigung</h3>
+              <span class="pg-card__punkte">27 – 47,5 Punkte</span>
             </div>
           </div>
-          <p class="pg-row__beschreibung">Selbstständigkeit ist erheblich eingeschränkt. In mehreren Bereichen (Mobilität, Selbstversorgung, Haushaltsführung) ist Unterstützung notwendig.</p>
-          <div class="pg-row__leistungen">
-            <div class="pg-row__chip pg-row__chip--primary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              <span>Entlastungsbetrag</span>
-              <strong>125 €/Mo.</strong>
+          <p class="pg-card__desc">Selbstständigkeit ist erheblich eingeschränkt. In mehreren Bereichen (Mobilität, Selbstversorgung, Haushaltsführung) ist Unterstützung notwendig.</p>
+          <div class="pg-card__divider"></div>
+          <div class="pg-card__benefits">
+            <div class="pg-card__benefit">
+              <span class="pg-card__benefit-label">Entlastungsbetrag</span>
+              <span class="pg-card__benefit-value pg-card__benefit-value--primary">125 €<small>/Mo.</small></span>
             </div>
-            <div class="pg-row__chip pg-row__chip--secondary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-              <span>Pflegegeld</span>
-              <strong>332 €/Mo.</strong>
+            <div class="pg-card__benefit">
+              <span class="pg-card__benefit-label">Pflegegeld</span>
+              <span class="pg-card__benefit-value pg-card__benefit-value--secondary">332 €<small>/Mo.</small></span>
             </div>
-            <div class="pg-row__chip pg-row__chip--secondary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-              <span>Pflegesachleistungen</span>
-              <strong>761 €/Mo.</strong>
+            <div class="pg-card__benefit">
+              <span class="pg-card__benefit-label">Sachleistungen</span>
+              <span class="pg-card__benefit-value pg-card__benefit-value--secondary">761 €<small>/Mo.</small></span>
             </div>
           </div>
         </article>
 
         <!-- PG 3 -->
-        <article class="pg-row pg-row--pg3" role="listitem">
-          <div class="pg-row__header">
-            <div class="pg-row__bubble pg-row__bubble--pg3" aria-hidden="true">3</div>
-            <div class="pg-row__title-group">
-              <h3 class="pg-row__title">Schwere Beeinträchtigung</h3>
-              <span class="pg-row__punkte">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                47,5 – 70 Punkte
-              </span>
+        <article class="pg-card pg-card--pg3" role="listitem">
+          <div class="pg-card__accent" aria-hidden="true"></div>
+          <div class="pg-card__top">
+            <div class="pg-card__badge pg-card__badge--pg3" aria-hidden="true">3</div>
+            <div>
+              <h3 class="pg-card__title">Schwere Beeinträchtigung</h3>
+              <span class="pg-card__punkte">47,5 – 70 Punkte</span>
             </div>
           </div>
-          <p class="pg-row__beschreibung">Erhebliche Einschränkungen in der Selbstständigkeit. Umfangreiche Unterstützung bei der Körperpflege, Ernährung und bei allgemeinen Alltagsaktivitäten nötig.</p>
-          <div class="pg-row__leistungen">
-            <div class="pg-row__chip pg-row__chip--primary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              <span>Entlastungsbetrag</span>
-              <strong>125 €/Mo.</strong>
+          <p class="pg-card__desc">Erhebliche Einschränkungen in der Selbstständigkeit. Umfangreiche Unterstützung bei der Körperpflege, Ernährung und bei allgemeinen Alltagsaktivitäten nötig.</p>
+          <div class="pg-card__divider"></div>
+          <div class="pg-card__benefits">
+            <div class="pg-card__benefit">
+              <span class="pg-card__benefit-label">Entlastungsbetrag</span>
+              <span class="pg-card__benefit-value pg-card__benefit-value--primary">125 €<small>/Mo.</small></span>
             </div>
-            <div class="pg-row__chip pg-row__chip--secondary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-              <span>Pflegegeld</span>
-              <strong>573 €/Mo.</strong>
+            <div class="pg-card__benefit">
+              <span class="pg-card__benefit-label">Pflegegeld</span>
+              <span class="pg-card__benefit-value pg-card__benefit-value--secondary">573 €<small>/Mo.</small></span>
             </div>
-            <div class="pg-row__chip pg-row__chip--secondary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-              <span>Pflegesachleistungen</span>
-              <strong>1.432 €/Mo.</strong>
+            <div class="pg-card__benefit">
+              <span class="pg-card__benefit-label">Sachleistungen</span>
+              <span class="pg-card__benefit-value pg-card__benefit-value--secondary">1.432 €<small>/Mo.</small></span>
             </div>
           </div>
         </article>
 
         <!-- PG 4 -->
-        <article class="pg-row pg-row--pg4" role="listitem">
-          <div class="pg-row__header">
-            <div class="pg-row__bubble pg-row__bubble--pg4" aria-hidden="true">4</div>
-            <div class="pg-row__title-group">
-              <h3 class="pg-row__title">Schwerste Beeinträchtigung</h3>
-              <span class="pg-row__punkte">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                70 – 90 Punkte
-              </span>
+        <article class="pg-card pg-card--pg4" role="listitem">
+          <div class="pg-card__accent" aria-hidden="true"></div>
+          <div class="pg-card__top">
+            <div class="pg-card__badge pg-card__badge--pg4" aria-hidden="true">4</div>
+            <div>
+              <h3 class="pg-card__title">Schwerste Beeinträchtigung</h3>
+              <span class="pg-card__punkte">70 – 90 Punkte</span>
             </div>
           </div>
-          <p class="pg-row__beschreibung">Weitgehender Verlust der Selbstständigkeit. Die Person ist auf umfassende Hilfe bei nahezu allen Verrichtungen des täglichen Lebens angewiesen.</p>
-          <div class="pg-row__leistungen">
-            <div class="pg-row__chip pg-row__chip--primary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              <span>Entlastungsbetrag</span>
-              <strong>125 €/Mo.</strong>
+          <p class="pg-card__desc">Weitgehender Verlust der Selbstständigkeit. Die Person ist auf umfassende Hilfe bei nahezu allen Verrichtungen des täglichen Lebens angewiesen.</p>
+          <div class="pg-card__divider"></div>
+          <div class="pg-card__benefits">
+            <div class="pg-card__benefit">
+              <span class="pg-card__benefit-label">Entlastungsbetrag</span>
+              <span class="pg-card__benefit-value pg-card__benefit-value--primary">125 €<small>/Mo.</small></span>
             </div>
-            <div class="pg-row__chip pg-row__chip--secondary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-              <span>Pflegegeld</span>
-              <strong>765 €/Mo.</strong>
+            <div class="pg-card__benefit">
+              <span class="pg-card__benefit-label">Pflegegeld</span>
+              <span class="pg-card__benefit-value pg-card__benefit-value--secondary">765 €<small>/Mo.</small></span>
             </div>
-            <div class="pg-row__chip pg-row__chip--secondary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-              <span>Pflegesachleistungen</span>
-              <strong>1.778 €/Mo.</strong>
+            <div class="pg-card__benefit">
+              <span class="pg-card__benefit-label">Sachleistungen</span>
+              <span class="pg-card__benefit-value pg-card__benefit-value--secondary">1.778 €<small>/Mo.</small></span>
             </div>
           </div>
         </article>
 
         <!-- PG 5 -->
-        <article class="pg-row pg-row--pg5" role="listitem">
-          <div class="pg-row__header">
-            <div class="pg-row__bubble pg-row__bubble--pg5" aria-hidden="true">5</div>
-            <div class="pg-row__title-group">
-              <h3 class="pg-row__title">Schwerste Beeinträchtigung mit besonderem Bedarf</h3>
-              <span class="pg-row__punkte">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                90 – 100 Punkte
-              </span>
+        <article class="pg-card pg-card--pg5" role="listitem">
+          <div class="pg-card__accent" aria-hidden="true"></div>
+          <div class="pg-card__top">
+            <div class="pg-card__badge pg-card__badge--pg5" aria-hidden="true">5</div>
+            <div>
+              <h3 class="pg-card__title">Schwerste Beeinträchtigung mit besonderem Bedarf</h3>
+              <span class="pg-card__punkte">90 – 100 Punkte</span>
             </div>
           </div>
-          <p class="pg-row__beschreibung">Vollständiger Verlust der Selbstständigkeit mit außergewöhnlichem und besonders hohem Versorgungsbedarf – z.&nbsp;B. bei lebenserhaltenden Maßnahmen.</p>
-          <div class="pg-row__leistungen">
-            <div class="pg-row__chip pg-row__chip--primary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              <span>Entlastungsbetrag</span>
-              <strong>125 €/Mo.</strong>
+          <p class="pg-card__desc">Vollständiger Verlust der Selbstständigkeit mit außergewöhnlichem und besonders hohem Versorgungsbedarf – z.&nbsp;B. bei lebenserhaltenden Maßnahmen.</p>
+          <div class="pg-card__divider"></div>
+          <div class="pg-card__benefits">
+            <div class="pg-card__benefit">
+              <span class="pg-card__benefit-label">Entlastungsbetrag</span>
+              <span class="pg-card__benefit-value pg-card__benefit-value--primary">125 €<small>/Mo.</small></span>
             </div>
-            <div class="pg-row__chip pg-row__chip--secondary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-              <span>Pflegegeld</span>
-              <strong>947 €/Mo.</strong>
+            <div class="pg-card__benefit">
+              <span class="pg-card__benefit-label">Pflegegeld</span>
+              <span class="pg-card__benefit-value pg-card__benefit-value--secondary">947 €<small>/Mo.</small></span>
             </div>
-            <div class="pg-row__chip pg-row__chip--secondary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-              <span>Pflegesachleistungen</span>
-              <strong>2.200 €/Mo.</strong>
+            <div class="pg-card__benefit">
+              <span class="pg-card__benefit-label">Sachleistungen</span>
+              <span class="pg-card__benefit-value pg-card__benefit-value--secondary">2.200 €<small>/Mo.</small></span>
             </div>
           </div>
         </article>
 
-      </div><!-- /.pg-rows -->
+      </div><!-- /.pg-grid -->
 
       <p class="text-center" style="margin-top: var(--spacing-2xl); font-size: var(--fs-base); color: var(--color-text-muted);">
         Noch keinen Pflegegrad? Wir begleiten Sie bei der Antragstellung und bereiten Sie auf den Besuch des Medizinischen Dienstes vor.

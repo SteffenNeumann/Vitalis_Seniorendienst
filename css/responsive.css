@@ -554,60 +554,63 @@ body.nav-open .nav-overlay {
    Leistungstabelle:
    ─  Mobile  (<680px):  horizontal scrollbar (min-width: 680px auf Tabelle)
    ─  Alle Breiten:      Wrap-Container scrollt, Tabelle behält Struktur
-   Pflegegrade-Zeilen (Row-Layout):
-   ─  Mobile  (<480px):  Kompaktere Abstände, kleinere Bubble
-   ─  Desktop (≥900px):  Zeilen mit 3-Spalten-Grid (Header, Beschreibung, Leistungen)
-   ─  Wide    (≥1280px): Größere Schriften, mehr Luft
+   Pflegegrade-Cards:
+   ─  Mobile  (<480px):  Kompakte Karten, kleinere Badge
+   ─  Tablet  (≥680px):  2-Spalten-Grid
+   ─  Desktop (≥1100px): Karten etwas luftiger
    ───────────────────────────────────────────────────────────────────────── */
 
-/* ── Mobile: Pflegegrad-Zeilen kompakter ───────────────────────────────── */
+/* ── Mobile: Pflegegrad-Karten kompakter ───────────────────────────────── */
 @media (max-width: 479px) {
-  .pg-row {
-    padding: var(--spacing-md);
+  .pg-card {
+    padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) calc(var(--spacing-md) + 4px);
   }
 
-  .pg-row__bubble {
-    width: 40px;
-    height: 40px;
-    font-size: 1.125rem;
+  .pg-card__badge {
+    width: 38px;
+    height: 38px;
+    font-size: 1.1rem;
   }
 
-  .pg-row__title {
+  .pg-card__title {
     font-size: var(--fs-base);
   }
-}
 
-/* ── Desktop ab 900px: Zeilen-Grid mit Spalten ──────────────────────────── */
-@media (min-width: 900px) {
-  .pg-row {
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    gap: var(--spacing-lg) var(--spacing-xl);
-    padding: var(--spacing-lg) var(--spacing-xl);
-  }
-
-  .pg-row__header {
-    grid-column: 1;
-    min-width: 280px;
-  }
-
-  .pg-row__beschreibung {
-    grid-column: 2;
-  }
-
-  .pg-row__leistungen {
-    grid-column: 3;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: var(--spacing-xs);
-  }
-
-  .pg-row__hinweis {
-    text-align: right;
+  .pg-card__desc {
+    font-size: var(--fs-xs);
   }
 }
 
+/* ── Tablet ab 680px: 2 Karten nebeneinander ────────────────────────────── */
+@media (min-width: 680px) {
+  .pg-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+
+  /* PG 5 bekommt volle Breite als letzte Karte */
+  .pg-card--pg5 {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ── Desktop ab 1100px: 3 Karten, letzte 2 auf eine Zeile ───────────────── */
 @media (min-width: 1100px) {
+  .pg-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+  }
+
+  /* PG 4 und PG 5 teilen sich die letzte Zeile */
+  .pg-card--pg4 {
+    grid-column: auto;
+  }
+
+  .pg-card--pg5 {
+    grid-column: auto;
+  }
+
   /* Wizard: 5-spaltige PG-Buttons passen auf Desktop gut */
   .wizard__options--5col {
     grid-template-columns: repeat(5, 1fr);
@@ -624,19 +627,18 @@ body.nav-open .nav-overlay {
     font-size: 1.5rem;               /* 24px auf breiten Screens */
   }
 
-  /* Pflegegrad-Zeilen: mehr Luft auf breiten Screens */
-  .pg-row {
-    padding: var(--spacing-xl) var(--spacing-2xl);
+  .pg-card {
+    padding: var(--spacing-xl) var(--spacing-2xl) var(--spacing-xl) calc(var(--spacing-2xl) + 4px);
   }
 
-  .pg-row__title {
+  .pg-card__title {
     font-size: var(--fs-xl);
   }
 
-  .pg-row__bubble {
-    width: 56px;
-    height: 56px;
-    font-size: 1.5rem;
+  .pg-card__badge {
+    width: 50px;
+    height: 50px;
+    font-size: 1.375rem;
   }
 }
 
