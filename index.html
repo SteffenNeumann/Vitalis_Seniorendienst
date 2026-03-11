@@ -111,14 +111,6 @@
           </div>
         </div>
       </div>
-      <div class="hero__image fade-in-right">
-        <img
-          src="images/hero-homecare.jpeg"
-          alt="Betreuerin und ältere Dame im Gespräch – herzliche Alltagsbegleitung bei Vitalis Seniorendienst"
-          width="700" height="560"
-          loading="eager" fetchpriority="high"
-        />
-      </div>
     </div>
   </section>
 
@@ -283,7 +275,7 @@
   </section>
 
   <!-- VORTEILE ─────────────────────────────────────────── -->
-  <section class="section bg-cream" aria-labelledby="vorteile-heading">
+  <section class="section bg-section" aria-labelledby="vorteile-heading">
     <div class="container">
       <div class="section-header">
         <span class="section-header__label">Warum Vitalis</span>
@@ -415,13 +407,28 @@
     </div>
   </section>
 
-  <!-- BEWERTUNGS-WIDGET (sorglos-pflege.de) ──────────── -->
-  <section class="bewertung-section bg-primary-light" aria-label="Bewertungen von sorglos-pflege.de">
+  <!-- BEWERTUNGS-WIDGET (sorglos-pflege.de) – nur sichtbar wenn Widget Inhalt liefert -->
+  <section class="bewertung-section" id="bewertung-wrapper" aria-label="Bewertungen von sorglos-pflege.de" style="display:none">
     <div class="container bewertung-section__inner">
       <div id="sorglospflege-banner-vitalis-seniorendienst-gmbh"></div>
     </div>
   </section>
-  <script src="https://sorglos-pflege.de/api/embed/partner/vitalis-seniorendienst-gmbh.js?variant=transparent" async></script>
+  <script>
+    (function() {
+      var s = document.createElement('script');
+      s.src = 'https://sorglos-pflege.de/api/embed/partner/vitalis-seniorendienst-gmbh.js?variant=transparent';
+      s.async = true;
+      s.onload = function() {
+        setTimeout(function() {
+          var el = document.getElementById('sorglospflege-banner-vitalis-seniorendienst-gmbh');
+          if (el && el.children.length > 0) {
+            document.getElementById('bewertung-wrapper').style.display = '';
+          }
+        }, 500);
+      };
+      document.head.appendChild(s);
+    })();
+  </script>
 
   <!-- MID-PAGE CTA (Leistungsangebot) ─────────────────── -->
   <section class="section bg-white" aria-label="Leistungsangebot">
