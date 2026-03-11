@@ -525,6 +525,7 @@
   padding: var(--spacing-sm) 0;
   font-size: var(--fs-sm);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
 }
 
 .trust-bar__inner {
@@ -581,10 +582,13 @@
   right: 0;
   bottom: 0;
   background:
-    radial-gradient(ellipse at 20% 50%, rgba(244, 162, 97, 0.1) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 20% 40%, rgba(255,255,255,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 80% 60%, rgba(80,121,165,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse at 20% 50%, rgba(244, 162, 97, 0.10) 0%, transparent 60%),
     radial-gradient(ellipse at 80% 20%, rgba(255, 255, 255, 0.07) 0%, transparent 50%),
     radial-gradient(ellipse at 60% 80%, rgba(80, 121, 165, 0.08) 0%, transparent 50%);
   pointer-events: none;
+  z-index: 1;
   animation: heroGlow 8s ease-in-out infinite alternate;
 }
 
@@ -595,6 +599,7 @@
 
 .hero__inner {
   position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: 1fr;
   align-items: center;
@@ -622,12 +627,15 @@
   background: rgba(255,255,255,0.12);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-top: 1px solid rgba(255,255,255,0.32);
+  border-left: 1px solid rgba(255,255,255,0.22);
   border-radius: var(--radius-lg);
   padding: var(--spacing-md) var(--spacing-lg);
   min-width: 120px;
   flex: 1;
   text-align: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.12);
 }
 
 .hero__stat-number {
@@ -667,12 +675,18 @@
   line-height: 1.15;
 }
 
+.hero__title-accent {
+  color: var(--color-amber);
+  /* Kein text-shadow hier – Amber auf dunklem Hintergrund hat ausreichend Eigenkontrast */
+}
+
 .hero__subtitle {
   font-size: var(--fs-lg);
   color: rgba(255, 255, 255, 0.9);
   line-height: var(--lh-relaxed);
   margin-bottom: var(--spacing-2xl);
   max-width: 520px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.30);
 }
 
 .hero__actions {
@@ -1837,11 +1851,15 @@
  * Kein helles Pastell mehr – das wirkte farblos und abgehackt.
  */
 .page-header {
-  background: var(--color-primary); /* #5079A5 */
+  background:
+    radial-gradient(ellipse 80% 120% at 110% 50%, rgba(255,255,255,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 80% at -10% 50%, rgba(0,0,0,0.15) 0%, transparent 60%),
+    var(--color-primary); /* #5079A5 */
   color: var(--color-white);
   padding: var(--spacing-4xl) 0 calc(var(--spacing-3xl) + 48px);
   text-align: center;
   position: relative;
+  overflow: hidden;
   /* border-bottom entfernt – Wave-Divider übernimmt die Trennung */
 }
 
@@ -1862,6 +1880,26 @@
   color: var(--color-white);
 }
 
+/* Dekoratives Licht-Highlight von oben – erzeugt Tiefe ohne Überladen */
+.page-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 100% at 50% -20%, rgba(255,255,255,0.12) 0%, transparent 70%);
+  pointer-events: none;
+  animation: headerGlow 6s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes headerGlow {
+  0%   { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-header::before { animation: none; }
+}
+
 /* Dekorativer Wave-Divider am unteren Rand – Übergang zu weißem Content */
 .page-header::after {
   content: '';
@@ -1872,6 +1910,7 @@
   height: 48px;
   background: var(--color-white);
   clip-path: ellipse(55% 100% at 50% 100%);
+  z-index: 2; /* Über ::before Glow-Overlay */
 }
 
 /* --- Page-Header Varianten (eine Klasse pro Seite) ---
@@ -1893,9 +1932,12 @@
 }
 
 .page-header__title {
-  font-size: var(--fs-4xl);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
   color: var(--color-white);
   margin-bottom: var(--spacing-md);
+  text-shadow: 0 2px 12px rgba(0,0,0,0.20);
+  letter-spacing: -0.01em;
 }
 
 .page-header__breadcrumb {
