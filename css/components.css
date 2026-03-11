@@ -1845,7 +1845,11 @@
 }
 
 .page-header .page-header__subtitle {
-  color: rgba(255, 255, 255, 0.9);
+  font-size: var(--fs-lg);
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 640px;
+  margin: var(--spacing-md) auto 0;
+  line-height: var(--lh-relaxed);
 }
 
 .page-header .page-header__breadcrumb,
@@ -2065,9 +2069,16 @@
 .leistungs-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-xl);
   margin-top: var(--spacing-3xl);
   align-items: stretch;              /* gleiche Kartenhöhe innerhalb einer Zeile */
+}
+
+/* Hinweis unterhalb des Leistungs-Grids */
+.leistungs-grid__hinweis {
+  margin-top: var(--spacing-2xl);
+  font-size: var(--fs-base);
+  color: var(--color-text-muted);
 }
 
 
@@ -2075,8 +2086,8 @@
 .leistungs-karte {
   background: var(--color-white);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-xl);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-2xl);
   position: relative;
   overflow: hidden;
   transition: box-shadow var(--transition-base), transform var(--transition-base), border-color var(--transition-base);
@@ -2182,43 +2193,55 @@
 .leistungs-karte__betraege {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 6px;                           /* etwas enger als --spacing-xs für dichtere Zellen */
-  margin-top: var(--spacing-md);
-  padding-top: var(--spacing-md);
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
   border-top: 1px solid var(--color-border);
 }
 
 .leistungs-karte__betrag {
   text-align: center;
   background: var(--color-bg-light);
-  border-radius: var(--radius-sm);
-  padding: 10px 4px;                  /* kompakteres Padding, Zelle bleibt überschaubar */
-  transition: background var(--transition-fast);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md) var(--spacing-xs);
+  transition: background var(--transition-fast), transform var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
 }
 
 .leistungs-karte__betrag:hover {
   background: var(--color-primary-light);
+  transform: translateY(-2px);
 }
 
 .leistungs-karte__betrag-label {
   display: block;
-  font-size: 0.6875rem;              /* 11px – klarer als var(--fs-xs), weniger als 0.75rem */
-  font-weight: var(--fw-semibold);
+  font-size: 0.6875rem;              /* 11px – PG-Label klein aber lesbar */
+  font-weight: var(--fw-bold);
   color: var(--color-text-light);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 6px;
+  letter-spacing: 0.07em;
   line-height: 1;
 }
 
 .leistungs-karte__betrag-wert {
   display: block;
   font-family: var(--font-body);
-  font-size: 0.875rem;               /* 14px – kompakt, passt sicher in Betragszelle */
+  font-size: 1.125rem;               /* 18px – gut lesbar, prominent */
   font-weight: var(--fw-bold);
   color: var(--color-text);
-  line-height: 1.2;
-  word-break: keep-all;              /* keine Trennungen, aber erlaubt Zeilenumbruch */
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.leistungs-karte__betrag-unit {
+  display: block;
+  font-size: 0.6875rem;              /* 11px – Einheit dezent darunter */
+  color: var(--color-text-light);
+  font-weight: var(--fw-medium);
+  line-height: 1;
 }
 
 .leistungs-karte__betrag-wert--highlight {
@@ -2276,7 +2299,7 @@
 .pflegegrade-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-xl);
   margin-top: var(--spacing-3xl);
   align-items: stretch;              /* gleiche Kartenhöhe innerhalb einer Zeile */
 }
@@ -2284,13 +2307,13 @@
 .pflegegrad-karte {
   background: var(--color-white);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-lg) calc(var(--spacing-lg) + 5px);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-xl) calc(var(--spacing-xl) + 5px);
   position: relative;
   overflow: hidden;
   transition: box-shadow var(--transition-base), transform var(--transition-base);
   display: flex;
-  gap: var(--spacing-md);            /* etwas enger als --spacing-lg */
+  gap: var(--spacing-lg);
   align-items: flex-start;
   height: 100%;                      /* gleiche Höhe innerhalb einer Grid-Zeile */
   box-sizing: border-box;
@@ -2409,9 +2432,9 @@
    ───────────────────────────────────────────────────────── */
 
 .hinweis-box {
-  padding: var(--spacing-xl);
+  padding: var(--spacing-2xl);
   background: var(--color-white);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   border: 1px solid var(--color-border);
   position: relative;
   overflow: hidden;
@@ -2738,3 +2761,518 @@
 .bg-section       { background: #F4F7FB; }
 .bg-cream         { background: #F5F1EB; }
 .bg-primary-light { background: #EEF4FA; }
+
+
+/* ─────────────────────────────────────────────────────────
+   LEISTUNGS-FINDER WIZARD
+   Schrittweiser Fragebogen zur personalisierten Leistungsberechnung
+   ───────────────────────────────────────────────────────── */
+
+/* Wrapper-Box des gesamten Wizards */
+.wizard {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-3xl);
+  box-shadow: var(--shadow-lg);
+  margin-top: var(--spacing-3xl);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Fortschrittsleiste ──────────────────────────────── */
+
+.wizard__progress {
+  margin-bottom: var(--spacing-3xl);
+}
+
+.wizard__progress-bar {
+  height: 6px;
+  background: var(--color-border);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  margin-bottom: var(--spacing-md);
+}
+
+.wizard__progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary-dark), var(--color-primary));
+  border-radius: var(--radius-pill);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wizard__progress-steps {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.wizard__progress-step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-circle);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  font-family: var(--font-body);
+  background: var(--color-border);
+  color: var(--color-text-light);
+  transition: background var(--transition-base), color var(--transition-base);
+  flex-shrink: 0;
+}
+
+.wizard__progress-step.is-active {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.wizard__progress-step.is-done {
+  background: var(--color-secondary);
+  color: var(--color-white);
+}
+
+.wizard__progress-label {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  font-weight: var(--fw-medium);
+  margin: 0;
+}
+
+/* ── Wizard-Schritt Container ────────────────────────── */
+
+.wizard__step {
+  /* Sichtbarer Zustand – .is-active steuert Sichtbarkeit, hidden-Attr. entfernt aus DOM-Flow */
+  animation: wizardStepIn 0.35s ease both;
+}
+
+@keyframes wizardStepIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Fragen-Text ─────────────────────────────────────── */
+
+.wizard__question {
+  font-family: var(--font-heading);
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-2xl);
+  line-height: var(--lh-tight);
+}
+
+/* ── Options: 2-spaltig (Schritt 1) ─────────────────── */
+
+.wizard__options {
+  display: grid;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.wizard__options--2col {
+  grid-template-columns: 1fr 1fr;
+}
+
+.wizard__options--3col {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* ── Option-Buttons (Schritt 1 + 3) ─────────────────── */
+
+.wizard__option-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-xl) var(--spacing-lg);
+  background: var(--color-bg-light);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-align: center;
+  min-height: 130px;
+  justify-content: center;
+}
+
+.wizard__option-btn:hover,
+.wizard__option-btn:focus-visible {
+  background: var(--color-primary-bg);
+  border-color: var(--color-primary);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-primary);
+}
+
+.wizard__option-btn--secondary:hover,
+.wizard__option-btn--secondary:focus-visible {
+  background: var(--color-secondary-bg);
+  border-color: var(--color-secondary);
+  box-shadow: var(--shadow-secondary);
+}
+
+.wizard__option-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: var(--color-white);
+  border-radius: var(--radius-circle);
+  color: var(--color-primary);
+  flex-shrink: 0;
+  transition: background var(--transition-base), color var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.wizard__option-btn:hover .wizard__option-icon,
+.wizard__option-btn:focus-visible .wizard__option-icon {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.wizard__option-btn--secondary .wizard__option-icon {
+  color: var(--color-secondary);
+}
+
+.wizard__option-btn--secondary:hover .wizard__option-icon,
+.wizard__option-btn--secondary:focus-visible .wizard__option-icon {
+  background: var(--color-secondary);
+  color: var(--color-white);
+}
+
+.wizard__option-label {
+  font-size: var(--fs-base);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text);
+  line-height: 1.4;
+  font-family: var(--font-body);
+}
+
+/* ── Pflegegrad-Buttons (Schritt 2) ─────────────────── */
+
+.wizard__options--5col {
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--spacing-md);
+}
+
+.wizard__pg-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-lg) var(--spacing-sm);
+  background: var(--color-bg-light);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-align: center;
+  min-height: 110px;
+  justify-content: center;
+}
+
+.wizard__pg-btn:hover,
+.wizard__pg-btn:focus-visible {
+  border-color: var(--color-primary);
+  background: var(--color-primary-bg);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-primary);
+}
+
+.wizard__pg-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-circle);
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+  font-family: var(--font-body);
+  flex-shrink: 0;
+  transition: background var(--transition-base), transform var(--transition-base);
+}
+
+/* Farbige Kreise je Pflegegrad */
+.wizard__pg-btn[data-wizard-pg="1"] .wizard__pg-number { background: #7CB9E8; }
+.wizard__pg-btn[data-wizard-pg="2"] .wizard__pg-number { background: #5079A5; }
+.wizard__pg-btn[data-wizard-pg="3"] .wizard__pg-number { background: #C97B3A; }
+.wizard__pg-btn[data-wizard-pg="4"] .wizard__pg-number { background: #C0602A; }
+.wizard__pg-btn[data-wizard-pg="5"] .wizard__pg-number { background: #9B2226; }
+
+.wizard__pg-btn:hover .wizard__pg-number,
+.wizard__pg-btn:focus-visible .wizard__pg-number {
+  transform: scale(1.1);
+}
+
+.wizard__pg-label {
+  font-size: 0.75rem;
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-muted);
+  line-height: 1.3;
+  font-family: var(--font-body);
+}
+
+/* ── Kein-PG Info-Box ────────────────────────────────── */
+
+.wizard__info-box {
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-2xl);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+.wizard__info-box--green {
+  background: var(--color-secondary-bg);
+  border: 1px solid rgba(61, 138, 138, 0.2);
+}
+
+.wizard__info-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-circle);
+  background: var(--color-white);
+  color: var(--color-secondary);
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.wizard__info-title {
+  font-family: var(--font-heading);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-text);
+  margin: 0;
+  line-height: var(--lh-tight);
+}
+
+.wizard__info-text {
+  font-size: var(--fs-base);
+  color: var(--color-text-muted);
+  line-height: var(--lh-relaxed);
+  margin: 0;
+}
+
+.wizard__info-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+  margin-top: var(--spacing-sm);
+}
+
+/* ── Zurück-Button ───────────────────────────────────── */
+
+.wizard__back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 10px var(--spacing-md);
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-medium);
+  font-family: var(--font-body);
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  transition: color var(--transition-fast), background var(--transition-fast);
+  min-height: 48px;
+}
+
+.wizard__back-btn:hover {
+  color: var(--color-primary);
+  background: var(--color-primary-bg);
+}
+
+.wizard__back-btn--inline {
+  color: rgba(255,255,255,0.75);
+}
+
+.wizard__back-btn--inline:hover {
+  color: var(--color-white);
+  background: rgba(255,255,255,0.12);
+}
+
+/* ── Ergebnis-Anzeige ────────────────────────────────── */
+
+.wizard__result {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.wizard__result-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-lg);
+  padding-bottom: var(--spacing-xl);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.wizard__result-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-circle);
+  background: var(--color-primary);
+  color: var(--color-white);
+  flex-shrink: 0;
+}
+
+.wizard__result-eyebrow {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  font-weight: var(--fw-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 var(--spacing-xs);
+}
+
+.wizard__result-title {
+  font-family: var(--font-heading);
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-text);
+  margin: 0;
+  line-height: var(--lh-tight);
+}
+
+/* Leistungs-Items im Ergebnis */
+.wizard__result-leistungen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.wizard__result-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--color-bg-light);
+  border-radius: var(--radius-md);
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.wizard__result-item--highlight {
+  background: var(--color-primary-bg);
+  border: 1px solid rgba(80, 121, 165, 0.2);
+}
+
+.wizard__result-item--secondary {
+  background: var(--color-secondary-bg);
+  border: 1px solid rgba(61, 138, 138, 0.15);
+}
+
+.wizard__result-item-name {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text);
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.wizard__result-item-name svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--color-primary);
+}
+
+.wizard__result-item--secondary .wizard__result-item-name svg {
+  color: var(--color-secondary);
+}
+
+.wizard__result-item-betrag {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-primary);
+  white-space: nowrap;
+  font-family: var(--font-body);
+}
+
+.wizard__result-item--secondary .wizard__result-item-betrag {
+  color: var(--color-secondary);
+}
+
+.wizard__result-item-betrag--amber {
+  color: var(--color-amber-dark);
+}
+
+/* Gesamt-Box */
+.wizard__result-gesamt {
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl) var(--spacing-2xl);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-xl);
+  flex-wrap: wrap;
+}
+
+.wizard__result-gesamt-label {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+  color: rgba(255,255,255,0.9);
+  margin: 0;
+}
+
+.wizard__result-gesamt-betrag {
+  font-size: var(--fs-3xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  white-space: nowrap;
+}
+
+.wizard__result-gesamt-note {
+  font-size: var(--fs-sm);
+  color: rgba(255,255,255,0.7);
+  margin: 0;
+  width: 100%;
+}
+
+/* Aktions-Bereich Ergebnis */
+.wizard__result-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+/* Hinweis-Text Ergebnis */
+.wizard__result-hinweis {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-xs);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.wizard__result-hinweis svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--color-text-light);
+}

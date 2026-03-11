@@ -95,7 +95,7 @@
         <a href="index.html">Startseite</a> &rsaquo; <span aria-current="page">Kostenübernahme</span>
       </nav>
       <h1 class="page-header__title" id="page-title">Kostenübernahme durch die Pflegekasse</h1>
-      <p style="font-size: var(--fs-lg); color: rgba(255,255,255,0.85); max-width: 640px; margin: var(--spacing-md) auto 0;">Viele unserer Leistungen sind erstattungsfähig – wir helfen Ihnen dabei, das Beste für Sie herauszuholen.</p>
+      <p class="page-header__subtitle">Viele unserer Leistungen sind erstattungsfähig – wir helfen Ihnen dabei, das Beste für Sie herauszuholen.</p>
     </div>
   </section>
 
@@ -133,8 +133,175 @@
     </div>
   </section>
 
+  <!-- LEISTUNGS-FINDER WIZARD ──────────────────────────── -->
+  <section class="section bg-section" aria-labelledby="wizard-heading" id="leistungs-finder">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-header__label">Ihr persönlicher Anspruch</span>
+        <h2 class="section-header__title" id="wizard-heading">Was steht Ihnen zu?</h2>
+        <div class="section-header__accent" aria-hidden="true"></div>
+        <p class="section-header__text">Beantworten Sie drei kurze Fragen – wir zeigen Ihnen sofort, welche Leistungen Sie bei der Pflegekasse beantragen können.</p>
+      </div>
+
+      <div class="wizard fade-in" role="region" aria-label="Leistungs-Finder">
+
+        <!-- Fortschrittsanzeige -->
+        <div class="wizard__progress" aria-hidden="true">
+          <div class="wizard__progress-bar">
+            <div class="wizard__progress-fill" id="wizardProgressFill" style="width: 33%;"></div>
+          </div>
+          <div class="wizard__progress-steps">
+            <span class="wizard__progress-step is-active" data-step="1">1</span>
+            <span class="wizard__progress-step" data-step="2">2</span>
+            <span class="wizard__progress-step" data-step="3">3</span>
+          </div>
+          <p class="wizard__progress-label" id="wizardProgressLabel">Schritt 1 von 3</p>
+        </div>
+
+        <!-- Schritt 1: Pflegegrad vorhanden? -->
+        <div class="wizard__step is-active" id="wizardStep1" role="group" aria-labelledby="wizardQ1">
+          <p class="wizard__question" id="wizardQ1">Haben Sie bereits einen Pflegegrad?</p>
+          <div class="wizard__options wizard__options--2col">
+            <button class="wizard__option-btn" data-wizard-action="pg-yes" type="button">
+              <span class="wizard__option-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              </span>
+              <span class="wizard__option-label">Ja, ich habe einen Pflegegrad</span>
+            </button>
+            <button class="wizard__option-btn wizard__option-btn--secondary" data-wizard-action="pg-no" type="button">
+              <span class="wizard__option-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </span>
+              <span class="wizard__option-label">Nein / Weiß nicht</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Schritt 1b: Kein Pflegegrad -->
+        <div class="wizard__step" id="wizardStepNoPG" role="group" aria-labelledby="wizardNoPGTitle" hidden>
+          <div class="wizard__info-box wizard__info-box--green">
+            <div class="wizard__info-icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3 class="wizard__info-title" id="wizardNoPGTitle">Wir helfen Ihnen beim Antrag</h3>
+            <p class="wizard__info-text">Noch kein Pflegegrad? Das ist kein Problem. Viele Menschen wissen nicht, dass sie Anspruch haben. Wir begleiten Sie kostenlos bei der Antragstellung und bereiten Sie auf den Besuch des Medizinischen Dienstes vor.</p>
+            <p class="wizard__info-text">Unsere Leistungen können Sie außerdem jederzeit auch privat in Anspruch nehmen – ganz ohne Pflegegrad.</p>
+            <div class="wizard__info-actions">
+              <a href="kontakt.html" class="btn btn-primary btn-lg">Jetzt kostenlos beraten lassen</a>
+              <a href="tel:+4989XXXXXXXX" class="btn btn-phone btn-lg">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                Jetzt anrufen
+              </a>
+            </div>
+          </div>
+          <button class="wizard__back-btn" data-wizard-action="restart" type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Zum Anfang zurück
+          </button>
+        </div>
+
+        <!-- Schritt 2: Welchen Pflegegrad? -->
+        <div class="wizard__step" id="wizardStep2" role="group" aria-labelledby="wizardQ2" hidden>
+          <p class="wizard__question" id="wizardQ2">Welchen Pflegegrad haben Sie?</p>
+          <div class="wizard__options wizard__options--5col">
+            <button class="wizard__pg-btn" data-wizard-pg="1" type="button" aria-label="Pflegegrad 1 auswählen">
+              <span class="wizard__pg-number">1</span>
+              <span class="wizard__pg-label">Geringe<br>Beeintr.</span>
+            </button>
+            <button class="wizard__pg-btn" data-wizard-pg="2" type="button" aria-label="Pflegegrad 2 auswählen">
+              <span class="wizard__pg-number">2</span>
+              <span class="wizard__pg-label">Erhebliche<br>Beeintr.</span>
+            </button>
+            <button class="wizard__pg-btn" data-wizard-pg="3" type="button" aria-label="Pflegegrad 3 auswählen">
+              <span class="wizard__pg-number">3</span>
+              <span class="wizard__pg-label">Schwere<br>Beeintr.</span>
+            </button>
+            <button class="wizard__pg-btn" data-wizard-pg="4" type="button" aria-label="Pflegegrad 4 auswählen">
+              <span class="wizard__pg-number">4</span>
+              <span class="wizard__pg-label">Schwerste<br>Beeintr.</span>
+            </button>
+            <button class="wizard__pg-btn" data-wizard-pg="5" type="button" aria-label="Pflegegrad 5 auswählen">
+              <span class="wizard__pg-number">5</span>
+              <span class="wizard__pg-label">Höchster<br>Bedarf</span>
+            </button>
+          </div>
+          <button class="wizard__back-btn" data-wizard-action="back-to-1" type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Zurück
+          </button>
+        </div>
+
+        <!-- Schritt 3: Wer pflegt hauptsächlich? -->
+        <div class="wizard__step" id="wizardStep3" role="group" aria-labelledby="wizardQ3" hidden>
+          <p class="wizard__question" id="wizardQ3">Wer übernimmt die Pflege hauptsächlich?</p>
+          <div class="wizard__options wizard__options--3col">
+            <button class="wizard__option-btn" data-wizard-pflege="angehoerige" type="button">
+              <span class="wizard__option-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              </span>
+              <span class="wizard__option-label">Ich selbst oder<br>Angehörige</span>
+            </button>
+            <button class="wizard__option-btn" data-wizard-pflege="pflegedienst" type="button">
+              <span class="wizard__option-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+              </span>
+              <span class="wizard__option-label">Ein ambulanter<br>Pflegedienst</span>
+            </button>
+            <button class="wizard__option-btn" data-wizard-pflege="beides" type="button">
+              <span class="wizard__option-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </span>
+              <span class="wizard__option-label">Beides /<br>Gemischt</span>
+            </button>
+          </div>
+          <button class="wizard__back-btn" data-wizard-action="back-to-2" type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Zurück
+          </button>
+        </div>
+
+        <!-- Ergebnis -->
+        <div class="wizard__step" id="wizardResult" role="region" aria-labelledby="wizardResultTitle" hidden>
+          <div class="wizard__result">
+            <div class="wizard__result-header">
+              <div class="wizard__result-badge" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div>
+                <p class="wizard__result-eyebrow">Ihr persönlicher Anspruch</p>
+                <h3 class="wizard__result-title" id="wizardResultTitle">Bei <span id="wizardResultPGLabel">Pflegegrad X</span></h3>
+              </div>
+            </div>
+
+            <div class="wizard__result-leistungen" id="wizardResultLeistungen" role="list">
+              <!-- Wird per JS befüllt -->
+            </div>
+
+            <div class="wizard__result-gesamt" id="wizardResultGesamt">
+              <!-- Wird per JS befüllt -->
+            </div>
+
+            <div class="wizard__result-actions">
+              <a href="kontakt.html" class="btn btn-primary btn-lg">Jetzt kostenlos beraten lassen</a>
+              <button class="wizard__back-btn wizard__back-btn--inline" data-wizard-action="restart" type="button">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-4.95L1 10"/></svg>
+                Neu starten
+              </button>
+            </div>
+
+            <p class="wizard__result-hinweis">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Alle Angaben sind Richtwerte (Stand 2024/2025). Die genauen Beträge erfahren Sie von Ihrer Pflegekasse.
+            </p>
+          </div>
+        </div>
+
+      </div><!-- /.wizard -->
+    </div>
+  </section>
+
   <!-- LEISTUNGSKARTEN ──────────────────────────────────── -->
-  <section class="section bg-section" aria-labelledby="tabelle-heading">
+  <section class="section bg-white" aria-labelledby="tabelle-heading">
     <div class="container">
       <div class="section-header fade-in">
         <span class="section-header__label">Ihr Anspruch im Überblick</span>
@@ -161,22 +328,27 @@
             <div class="leistungs-karte__betrag">
               <span class="leistungs-karte__betrag-label">PG 1</span>
               <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">125 &euro;</span>
+              <span class="leistungs-karte__betrag-unit">/Monat</span>
             </div>
             <div class="leistungs-karte__betrag">
               <span class="leistungs-karte__betrag-label">PG 2</span>
               <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">125 &euro;</span>
+              <span class="leistungs-karte__betrag-unit">/Monat</span>
             </div>
             <div class="leistungs-karte__betrag">
               <span class="leistungs-karte__betrag-label">PG 3</span>
               <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">125 &euro;</span>
+              <span class="leistungs-karte__betrag-unit">/Monat</span>
             </div>
             <div class="leistungs-karte__betrag">
               <span class="leistungs-karte__betrag-label">PG 4</span>
               <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">125 &euro;</span>
+              <span class="leistungs-karte__betrag-unit">/Monat</span>
             </div>
             <div class="leistungs-karte__betrag">
               <span class="leistungs-karte__betrag-label">PG 5</span>
               <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">125 &euro;</span>
+              <span class="leistungs-karte__betrag-unit">/Monat</span>
             </div>
           </div>
         </article>
@@ -197,22 +369,27 @@
             <div class="leistungs-karte__betrag">
               <span class="leistungs-karte__betrag-label">PG 1</span>
               <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--na">–</span>
+              <span class="leistungs-karte__betrag-unit">&nbsp;</span>
             </div>
             <div class="leistungs-karte__betrag">
               <span class="leistungs-karte__betrag-label">PG 2</span>
               <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--secondary">332 &euro;</span>
+              <span class="leistungs-karte__betrag-unit">/Monat</span>
             </div>
             <div class="leistungs-karte__betrag">
               <span class="leistungs-karte__betrag-label">PG 3</span>
               <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--secondary">573 &euro;</span>
+              <span class="leistungs-karte__betrag-unit">/Monat</span>
             </div>
             <div class="leistungs-karte__betrag">
               <span class="leistungs-karte__betrag-label">PG 4</span>
               <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--secondary">765 &euro;</span>
+              <span class="leistungs-karte__betrag-unit">/Monat</span>
             </div>
             <div class="leistungs-karte__betrag">
               <span class="leistungs-karte__betrag-label">PG 5</span>
               <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--secondary">947 &euro;</span>
+              <span class="leistungs-karte__betrag-unit">/Monat</span>
             </div>
           </div>
         </article>
@@ -233,22 +410,27 @@
             <div class="leistungs-karte__betrag">
               <span class="leistungs-karte__betrag-label">PG 1</span>
               <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--na">–</span>
+              <span class="leistungs-karte__betrag-unit">&nbsp;</span>
             </div>
             <div class="leistungs-karte__betrag">
               <span class="leistungs-karte__betrag-label">PG 2</span>
               <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">761 &euro;</span>
+              <span class="leistungs-karte__betrag-unit">/Monat</span>
             </div>
             <div class="leistungs-karte__betrag">
               <span class="leistungs-karte__betrag-label">PG 3</span>
               <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">1.432 &euro;</span>
+              <span class="leistungs-karte__betrag-unit">/Monat</span>
             </div>
             <div class="leistungs-karte__betrag">
               <span class="leistungs-karte__betrag-label">PG 4</span>
               <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">1.778 &euro;</span>
+              <span class="leistungs-karte__betrag-unit">/Monat</span>
             </div>
             <div class="leistungs-karte__betrag">
               <span class="leistungs-karte__betrag-label">PG 5</span>
               <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">2.200 &euro;</span>
+              <span class="leistungs-karte__betrag-unit">/Monat</span>
             </div>
           </div>
         </article>
@@ -295,7 +477,7 @@
 
       </div><!-- /.leistungs-grid -->
 
-      <p class="text-center" style="margin-top: var(--spacing-xl); font-size: var(--fs-sm); color: var(--color-text-muted);">
+      <p class="leistungs-grid__hinweis text-center">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;margin-right:4px;" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         Alle Angaben sind Richtwerte (Stand 2024/2025). Die genauen Beträge erfahren Sie von Ihrer Pflegekasse oder in einem kostenfreien Gespräch mit uns.
       </p>
@@ -303,7 +485,7 @@
   </section>
 
   <!-- PFLEGEGRADE-ERKLÄRUNG ─────────────────────────────── -->
-  <section class="section bg-white" aria-labelledby="pflegegrade-heading">
+  <section class="section bg-section" aria-labelledby="pflegegrade-heading">
     <div class="container">
       <div class="section-header fade-in">
         <span class="section-header__label">Begutachtung &amp; Einstufung</span>
@@ -416,7 +598,7 @@
 
       </div><!-- /.pflegegrade-grid -->
 
-      <p class="text-center" style="margin-top: var(--spacing-xl); font-size: var(--fs-sm); color: var(--color-text-muted);">
+      <p class="text-center" style="margin-top: var(--spacing-2xl); font-size: var(--fs-base); color: var(--color-text-muted);">
         Noch keinen Pflegegrad? Wir begleiten Sie bei der Antragstellung und bereiten Sie auf den Besuch des Medizinischen Dienstes vor.
         <a href="kontakt.html" style="color: var(--color-primary); font-weight: var(--fw-semibold); margin-left: 4px;">Jetzt anfragen &rsaquo;</a>
       </p>
@@ -424,10 +606,10 @@
   </section>
 
   <!-- HINWEIS-BOXEN ────────────────────────────────────── -->
-  <section class="section bg-section" aria-labelledby="hinweise-heading">
+  <section class="section bg-white" aria-labelledby="hinweise-heading">
     <div class="container">
       <h2 class="sr-only" id="hinweise-heading">Weitere Hinweise</h2>
-      <div class="grid grid-2 fade-in" style="gap: var(--spacing-xl);">
+      <div class="grid grid-2 fade-in" style="gap: var(--spacing-2xl);">
 
         <div class="hinweis-box hinweis-box--green">
           <span class="hinweis-box__badge">
