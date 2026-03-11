@@ -160,21 +160,34 @@
 
         <!-- Schritt 1: Pflegegrad vorhanden? -->
         <div class="wizard__step is-active" id="wizardStep1" role="group" aria-labelledby="wizardQ1">
-          <p class="wizard__question" id="wizardQ1">Haben Sie bereits einen Pflegegrad?</p>
-          <div class="wizard__options wizard__options--2col">
-            <button class="wizard__option-btn" data-wizard-action="pg-yes" type="button">
-              <span class="wizard__option-icon" aria-hidden="true">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-              </span>
-              <span class="wizard__option-label">Ja, ich habe einen Pflegegrad</span>
-            </button>
-            <button class="wizard__option-btn wizard__option-btn--secondary" data-wizard-action="pg-no" type="button">
-              <span class="wizard__option-icon" aria-hidden="true">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              </span>
-              <span class="wizard__option-label">Nein / Weiß nicht</span>
-            </button>
+          <div class="wizard__step-main">
+            <p class="wizard__question" id="wizardQ1">Haben Sie bereits einen Pflegegrad?</p>
+            <div class="wizard__options wizard__options--2col">
+              <button class="wizard__option-btn" data-wizard-action="pg-yes" type="button">
+                <span class="wizard__option-icon" aria-hidden="true">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+                </span>
+                <span class="wizard__option-label">Ja, ich habe einen Pflegegrad</span>
+              </button>
+              <button class="wizard__option-btn wizard__option-btn--secondary" data-wizard-action="pg-no" type="button">
+                <span class="wizard__option-icon" aria-hidden="true">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                </span>
+                <span class="wizard__option-label">Nein / Weiß nicht</span>
+              </button>
+            </div>
           </div>
+          <aside class="wizard__step-aside" aria-label="Hintergrundinformation">
+            <div class="wizard__aside-icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h4 class="wizard__aside-title">Was ist ein Pflegegrad?</h4>
+            <p class="wizard__aside-text">Der Pflegegrad bestimmt, wie viel Unterstützung Sie im Alltag benötigen – und welche Leistungen der Pflegekasse Ihnen zustehen.</p>
+            <div class="wizard__aside-fact">
+              <strong class="wizard__aside-fact-number">125 €</strong>
+              <span class="wizard__aside-fact-label">Entlastungsbetrag pro Monat – für jeden Pflegegrad ab PG&nbsp;1</span>
+            </div>
+          </aside>
         </div>
 
         <!-- Schritt 1b: Kein Pflegegrad -->
@@ -222,8 +235,12 @@
             </button>
             <button class="wizard__pg-btn" data-wizard-pg="5" type="button" aria-label="Pflegegrad 5 auswählen">
               <span class="wizard__pg-number">5</span>
-              <span class="wizard__pg-label">Höchster<br>Bedarf</span>
+              <span class="wizard__pg-label">Besonderer<br>Bedarf</span>
             </button>
+          </div>
+          <div class="wizard__step2-tip">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span>Den Pflegegrad finden Sie auf dem Bescheid Ihrer Pflegekasse. Nicht sicher? <strong>Wir helfen Ihnen gerne beim Herausfinden.</strong></span>
           </div>
           <button class="wizard__back-btn" data-wizard-action="back-to-1" type="button">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
@@ -233,31 +250,42 @@
 
         <!-- Schritt 3: Wer pflegt hauptsächlich? -->
         <div class="wizard__step" id="wizardStep3" role="group" aria-labelledby="wizardQ3" hidden>
-          <p class="wizard__question" id="wizardQ3">Wer übernimmt die Pflege hauptsächlich?</p>
-          <div class="wizard__options wizard__options--3col">
-            <button class="wizard__option-btn" data-wizard-pflege="angehoerige" type="button">
-              <span class="wizard__option-icon" aria-hidden="true">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-              </span>
-              <span class="wizard__option-label">Ich selbst oder<br>Angehörige</span>
-            </button>
-            <button class="wizard__option-btn" data-wizard-pflege="pflegedienst" type="button">
-              <span class="wizard__option-icon" aria-hidden="true">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-              </span>
-              <span class="wizard__option-label">Ein ambulanter<br>Pflegedienst</span>
-            </button>
-            <button class="wizard__option-btn" data-wizard-pflege="beides" type="button">
-              <span class="wizard__option-icon" aria-hidden="true">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              </span>
-              <span class="wizard__option-label">Beides /<br>Gemischt</span>
+          <div class="wizard__step-main">
+            <p class="wizard__question" id="wizardQ3">Wer übernimmt die Pflege hauptsächlich?</p>
+            <div class="wizard__options wizard__options--3col">
+              <button class="wizard__option-btn" data-wizard-pflege="angehoerige" type="button">
+                <span class="wizard__option-icon" aria-hidden="true">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                </span>
+                <span class="wizard__option-label">Ich selbst oder<br>Angehörige</span>
+              </button>
+              <button class="wizard__option-btn" data-wizard-pflege="pflegedienst" type="button">
+                <span class="wizard__option-icon" aria-hidden="true">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                </span>
+                <span class="wizard__option-label">Ein ambulanter<br>Pflegedienst</span>
+              </button>
+              <button class="wizard__option-btn" data-wizard-pflege="beides" type="button">
+                <span class="wizard__option-icon" aria-hidden="true">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </span>
+                <span class="wizard__option-label">Beides /<br>Gemischt</span>
+              </button>
+            </div>
+            <button class="wizard__back-btn" data-wizard-action="back-to-2" type="button">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+              Zurück
             </button>
           </div>
-          <button class="wizard__back-btn" data-wizard-action="back-to-2" type="button">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-            Zurück
-          </button>
+          <aside class="wizard__step-aside" aria-label="Hintergrundinformation">
+            <div class="wizard__aside-icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <h4 class="wizard__aside-title">Pflegegeld vs. Sachleistungen</h4>
+            <p class="wizard__aside-text">Pflegen <strong>Angehörige</strong>, erhalten Sie <strong>Pflegegeld</strong> als finanzielle Anerkennung direkt ausgezahlt.</p>
+            <p class="wizard__aside-text">Pflegt ein <strong>Pflegedienst</strong>, werden <strong>Sachleistungen</strong> direkt mit der Kasse abgerechnet – oft höhere Beträge.</p>
+            <p class="wizard__aside-text wizard__aside-text--note">Beides ist anteilig kombinierbar.</p>
+          </aside>
         </div>
 
         <!-- Ergebnis -->

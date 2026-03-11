@@ -677,6 +677,17 @@ body.nav-open .nav-overlay {
 
 /* Tablet (<768px): 2col-Options reduzieren */
 @media (max-width: 767px) {
+  /* 2-Spalten-Steps auf 1-Spalte */
+  #wizardStep1:not([hidden]),
+  #wizardStep3:not([hidden]) {
+    grid-template-columns: 1fr;
+  }
+
+  .wizard__step-aside {
+    border-left: none;
+    border-top: 4px solid var(--color-primary);
+  }
+
   .wizard {
     padding: var(--spacing-2xl) var(--spacing-xl);
     margin-top: var(--spacing-2xl);
