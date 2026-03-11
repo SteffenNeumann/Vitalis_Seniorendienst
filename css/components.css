@@ -559,7 +559,7 @@
 .hero {
   position: relative;
   background:
-    linear-gradient(105deg, rgba(28,43,58,0.90) 0%, rgba(42,65,99,0.80) 40%, rgba(80,121,165,0.45) 100%),
+    linear-gradient(to right, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.15) 100%),
     url('../images/hero-homecare.jpeg') center 30% / cover no-repeat;
   color: var(--color-white);
   padding: var(--spacing-5xl) 0;
