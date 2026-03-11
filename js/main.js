@@ -233,81 +233,87 @@ document.addEventListener('click', e => {
   }
 });
 
-/* ══ VOLLBILD-SUCHE ══════════════════════════════════════════ */
+
+/* ══ NAV INLINE-SUCHE ════════════════════════════════════════ */
 (function() {
   const PAGES = [
-    { title: 'Startseite', desc: 'Herzliche Alltagsbegleitung & Haushaltshilfe für Senioren', url: 'index.html', keywords: 'start home alltagsbegleitung senioren betreuung' },
-    { title: 'Unsere Leistungen', desc: 'Haushaltshilfe, Begleitung, Arzttermine, Einkaufen & mehr', url: 'leistungen.html', keywords: 'leistungen haushalt kochen einkaufen arzt spazieren begleitung reinigung' },
-    { title: 'Über uns', desc: 'Das Team von Vitalis Seniorendienst – wer wir sind', url: 'ueber-uns.html', keywords: 'über uns team mitarbeiter werte qualität geschichte' },
-    { title: 'Kostenübernahme', desc: 'Pflegekasse übernimmt Kosten – §45a SGB XI erklärt', url: 'kostenuebernahme.html', keywords: 'kosten pflegekasse krankenkasse 45a sgb xi finanzierung kostenlos' },
-    { title: 'Häufige Fragen', desc: 'Antworten auf die häufigsten Fragen zur Betreuung', url: 'faq.html', keywords: 'faq fragen antworten hilfe wie was wann wo' },
-    { title: 'Kontakt', desc: 'Kostenlose Beratung – wir rufen Sie zurück', url: 'kontakt.html', keywords: 'kontakt anrufen email telefon termin beratung formular' },
-    { title: 'Standorte', desc: 'Einzugsgebiet: Erding, München, Freising & Umgebung', url: 'standorte.html', keywords: 'standorte erding münchen freising ebersberg landshut garching unterföhring gebiet' },
-    { title: 'Karriere', desc: 'Jobs & Stellen bei Vitalis Seniorendienst', url: 'karriere.html', keywords: 'karriere job stelle bewerbung alltagsbegleiter arbeit' },
-    { title: 'Datenschutz', desc: 'Datenschutzerklärung', url: 'datenschutz.html', keywords: 'datenschutz dsgvo privacy' },
-    { title: 'Impressum', desc: 'Impressum & rechtliche Angaben', url: 'impressum.html', keywords: 'impressum rechtlich kontakt firma' }
+    { title: 'Startseite',      desc: 'Alltagsbegleitung & Haushaltshilfe für Senioren',        url: 'index.html',           keys: 'start home betreuung senioren' },
+    { title: 'Unsere Leistungen', desc: 'Haushaltshilfe, Arztbegleitung, Einkaufen & mehr',     url: 'leistungen.html',      keys: 'leistungen haushalt kochen arzt einkaufen reinigung' },
+    { title: 'Über uns',        desc: 'Das Team & unsere Werte',                                 url: 'ueber-uns.html',       keys: 'über uns team mitarbeiter werte qualität' },
+    { title: 'Kostenübernahme', desc: 'Pflegekasse übernimmt Kosten – §45a SGB XI',              url: 'kostenuebernahme.html',keys: 'kosten pflegekasse krankenkasse 45a sgb finanzierung kostenlos' },
+    { title: 'Häufige Fragen',  desc: 'FAQ – Antworten auf die häufigsten Fragen',               url: 'faq.html',             keys: 'faq fragen antworten hilfe wie was wann' },
+    { title: 'Kontakt',         desc: 'Kostenlose Beratung – wir rufen Sie zurück',              url: 'kontakt.html',         keys: 'kontakt anrufen email telefon beratung formular' },
+    { title: 'Standorte',       desc: 'Erding, München, Freising & Umgebung',                   url: 'standorte.html',       keys: 'standorte erding münchen freising ebersberg garching gebiet' },
+    { title: 'Karriere',        desc: 'Jobs bei Vitalis Seniorendienst',                         url: 'karriere.html',        keys: 'karriere job stelle bewerbung arbeit alltagsbegleiter' },
+    { title: 'Datenschutz',     desc: 'Datenschutzerklärung',                                    url: 'datenschutz.html',     keys: 'datenschutz dsgvo privacy' },
+    { title: 'Impressum',       desc: 'Impressum & rechtliche Angaben',                          url: 'impressum.html',       keys: 'impressum rechtlich firma' }
   ];
 
-  const overlay  = document.getElementById('searchOverlay');
-  const input    = document.getElementById('searchInput');
-  const results  = document.getElementById('searchResults');
-  const empty    = document.getElementById('searchEmpty');
+  const nav      = document.querySelector('.nav');
   const openBtn  = document.getElementById('searchOpen');
   const closeBtn = document.getElementById('searchClose');
+  const wrap     = document.getElementById('navSearchWrap');
+  const input    = document.getElementById('searchInput');
+  const dropdown = document.getElementById('searchDropdown');
+  const results  = document.getElementById('searchResults');
+  const empty    = document.getElementById('searchEmpty');
 
-  if (!overlay || !openBtn) return;
+  if (!nav || !openBtn || !wrap) return;
 
   function openSearch() {
-    overlay.removeAttribute('hidden');
-    document.body.style.overflow = 'hidden';
-    setTimeout(() => input && input.focus(), 50);
-    renderResults('');
+    nav.classList.add('is-searching');
+    wrap.setAttribute('aria-hidden', 'false');
+    setTimeout(() => { if (input) input.focus(); }, 320);
   }
 
   function closeSearch() {
-    overlay.setAttribute('hidden', '');
-    document.body.style.overflow = '';
+    nav.classList.remove('is-searching');
+    wrap.setAttribute('aria-hidden', 'true');
     if (input) input.value = '';
+    if (dropdown) dropdown.classList.remove('is-visible');
+    if (results) results.innerHTML = '';
+    if (empty) empty.hidden = true;
   }
 
-  function renderResults(query) {
+  function renderResults(q) {
     results.innerHTML = '';
     empty.hidden = true;
-    const q = query.trim().toLowerCase();
-    if (!q) return;
+    dropdown.classList.remove('is-visible');
+    if (!q.trim()) return;
+    const ql = q.toLowerCase();
     const hits = PAGES.filter(p =>
-      p.title.toLowerCase().includes(q) ||
-      p.desc.toLowerCase().includes(q) ||
-      p.keywords.includes(q)
+      p.title.toLowerCase().includes(ql) ||
+      p.desc.toLowerCase().includes(ql) ||
+      p.keys.includes(ql)
     );
-    if (!hits.length) { empty.hidden = false; return; }
+    if (!hits.length) {
+      empty.hidden = false;
+      dropdown.classList.add('is-visible');
+      return;
+    }
     hits.forEach(p => {
       const li = document.createElement('li');
       li.setAttribute('role', 'option');
       li.innerHTML = `<a href="${p.url}"><span class="search-result__title">${p.title}</span><span class="search-result__desc">${p.desc}</span></a>`;
       results.appendChild(li);
     });
+    dropdown.classList.add('is-visible');
   }
 
   openBtn.addEventListener('click', openSearch);
-  closeBtn.addEventListener('click', closeSearch);
-
-  overlay.addEventListener('click', e => {
-    if (e.target === overlay) closeSearch();
-  });
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && !overlay.hasAttribute('hidden')) closeSearch();
-    if ((e.key === 'k' && (e.metaKey || e.ctrlKey))) { e.preventDefault(); openSearch(); }
-  });
-
+  if (closeBtn) closeBtn.addEventListener('click', closeSearch);
   if (input) {
     input.addEventListener('input', () => renderResults(input.value));
     input.addEventListener('keydown', e => {
-      if (e.key === 'Enter') {
-        const first = results.querySelector('a');
-        if (first) first.click();
-      }
+      if (e.key === 'Enter') { const a = results.querySelector('a'); if (a) a.click(); }
     });
   }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeSearch();
+    if ((e.key === 'k') && (e.metaKey || e.ctrlKey)) { e.preventDefault(); openSearch(); }
+  });
+  document.addEventListener('click', e => {
+    if (nav.classList.contains('is-searching') &&
+        !wrap.contains(e.target) && !openBtn.contains(e.target)) closeSearch();
+  });
 })();

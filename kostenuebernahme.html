@@ -62,6 +62,17 @@
       <button class="nav__search-btn" id="searchOpen" aria-label="Suche öffnen" type="button">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       </button>
+      <div class="nav__search-wrap" id="navSearchWrap">
+        <div class="nav__search-bar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="search" id="searchInput" class="nav__search-input" placeholder="Seite suchen…" autocomplete="off" spellcheck="false" aria-label="Suche" />
+          <button class="nav__search-close" id="searchClose" aria-label="Suche schließen" type="button"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        </div>
+        <div class="nav__search-dropdown" id="searchDropdown">
+          <ul id="searchResults" class="nav__search-results" role="listbox"></ul>
+          <p id="searchEmpty" class="nav__search-empty" hidden>Keine Ergebnisse gefunden.</p>
+        </div>
+      </div>
       <div class="nav__actions">
         <a href="tel:+4989XXXXXXXX" class="nav__phone">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -292,22 +303,6 @@
       <button id="cookie-accept" class="btn btn-primary btn-sm">Akzeptieren</button>
       <button id="cookie-decline" class="btn btn-secondary btn-sm">Ablehnen</button>
     </div>
-  </div>
-</div>
-
-<!-- ══ VOLLBILD-SUCHE ═══════════════════════════════════════ -->
-<div id="searchOverlay" class="search-overlay" role="dialog" aria-modal="true" aria-label="Seitensuche" hidden>
-  <button class="search-overlay__close" id="searchClose" aria-label="Suche schließen" type="button">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-  </button>
-  <div class="search-overlay__inner">
-    <p class="search-overlay__label">Was suchen Sie?</p>
-    <div class="search-overlay__field">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="search" id="searchInput" class="search-overlay__input" placeholder="z.B. Haushaltshilfe, Kosten, Standorte …" autocomplete="off" spellcheck="false" />
-    </div>
-    <ul id="searchResults" class="search-overlay__results" role="listbox" aria-label="Suchergebnisse"></ul>
-    <p id="searchEmpty" class="search-overlay__empty" hidden>Keine Ergebnisse gefunden.</p>
   </div>
 </div>
 
