@@ -433,14 +433,14 @@
             </tr>
 
             <!-- Zeile 4: Verhinderungspflege (Jahresbetrag → colspan) -->
-            <tr class="leistungs-tabelle__row leistungs-tabelle__row--jahresbetrag">
+            <tr class="leistungs-tabelle__row">
               <td class="leistungs-tabelle__cell-label">
                 <div class="leistungs-tabelle__leistung">
-                  <div class="leistungs-tabelle__icon leistungs-tabelle__icon--secondary" aria-hidden="true">
+                  <div class="leistungs-tabelle__icon leistungs-tabelle__icon--primary" aria-hidden="true">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                   </div>
                   <div class="leistungs-tabelle__leistung-text">
-                    <span class="leistungs-badge leistungs-badge--secondary">PG 2–5</span>
+                    <span class="leistungs-badge leistungs-badge--primary">PG 2–5</span>
                     <strong class="leistungs-tabelle__leistung-name">Verhinderungspflege</strong>
                     <span class="leistungs-tabelle__leistung-desc">Wenn die Pflegeperson verhindert ist (Urlaub, Krankheit)</span>
                   </div>
@@ -450,20 +450,20 @@
                 <span class="leistungs-tabelle__wert leistungs-tabelle__wert--na" aria-label="nicht verfügbar">–</span>
               </td>
               <td class="leistungs-tabelle__cell-betrag leistungs-tabelle__cell-betrag--jahresspanne" colspan="4" data-pg="PG 2–5">
-                <span class="leistungs-tabelle__wert leistungs-tabelle__wert--secondary">bis zu 1.612 &euro;</span>
+                <span class="leistungs-tabelle__wert leistungs-tabelle__wert--primary">bis zu 1.612 &euro;</span>
                 <span class="leistungs-tabelle__einheit">/Jahr &middot; gilt für PG 2–5</span>
               </td>
             </tr>
 
             <!-- Zeile 5: Kurzzeitpflege (Jahresbetrag → colspan) -->
-            <tr class="leistungs-tabelle__row leistungs-tabelle__row--jahresbetrag">
+            <tr class="leistungs-tabelle__row">
               <td class="leistungs-tabelle__cell-label">
                 <div class="leistungs-tabelle__leistung">
-                  <div class="leistungs-tabelle__icon leistungs-tabelle__icon--amber" aria-hidden="true">
+                  <div class="leistungs-tabelle__icon leistungs-tabelle__icon--primary" aria-hidden="true">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                   </div>
                   <div class="leistungs-tabelle__leistung-text">
-                    <span class="leistungs-badge leistungs-badge--amber">PG 2–5</span>
+                    <span class="leistungs-badge leistungs-badge--primary">PG 2–5</span>
                     <strong class="leistungs-tabelle__leistung-name">Kurzzeitpflege</strong>
                     <span class="leistungs-tabelle__leistung-desc">Vorübergehende stationäre Pflege (z.&nbsp;B. nach Krankenhausaufenthalt)</span>
                   </div>
@@ -472,8 +472,8 @@
               <td class="leistungs-tabelle__cell-betrag leistungs-tabelle__cell-betrag--na" data-pg="PG 1">
                 <span class="leistungs-tabelle__wert leistungs-tabelle__wert--na" aria-label="nicht verfügbar">–</span>
               </td>
-              <td class="leistungs-tabelle__cell-betrag leistungs-tabelle__cell-betrag--jahresspanne leistungs-tabelle__cell-betrag--jahresspanne-amber" colspan="4" data-pg="PG 2–5">
-                <span class="leistungs-tabelle__wert leistungs-tabelle__wert--amber">bis zu 1.774 &euro;</span>
+              <td class="leistungs-tabelle__cell-betrag leistungs-tabelle__cell-betrag--jahresspanne" colspan="4" data-pg="PG 2–5">
+                <span class="leistungs-tabelle__wert leistungs-tabelle__wert--primary">bis zu 1.774 &euro;</span>
                 <span class="leistungs-tabelle__einheit">/Jahr &middot; gilt für PG 2–5</span>
               </td>
             </tr>
@@ -500,143 +500,214 @@
         <p class="section-header__text">Der Pflegegrad wird durch den Medizinischen Dienst (MD) anhand eines Punktesystems ermittelt. Je höher die Punktzahl, desto schwerwiegender die Beeinträchtigung – und desto höher die Leistungen der Pflegekasse.</p>
       </div>
 
-      <!-- ── Pflegegrade: Übersicht ──────────────────────── -->
-      <div class="pg-grid stagger-children" role="list" aria-label="Die 5 Pflegegrade im Überblick">
+      <!-- ── Pflegegrade: Tab-Stepper ────────────────────── -->
+      <div class="pg-tabs fade-in" id="pflegegrade-tabs">
 
-        <!-- PG 1 -->
-        <article class="pg-card pg-card--pg1" role="listitem">
-          <div class="pg-card__accent" aria-hidden="true"></div>
-          <div class="pg-card__top">
-            <div class="pg-card__badge pg-card__badge--pg1" aria-hidden="true">1</div>
-            <div>
-              <h3 class="pg-card__title">Geringe Beeinträchtigung</h3>
-              <span class="pg-card__punkte">12,5 – 27 Punkte</span>
-            </div>
-          </div>
-          <p class="pg-card__desc">Selbstständigkeit ist größtenteils erhalten. Leichte Einschränkungen in einzelnen Bereichen, z.&nbsp;B. bei der Mobilität oder einzelnen Alltagsaktivitäten.</p>
-          <div class="pg-card__divider"></div>
-          <div class="pg-card__benefits">
-            <div class="pg-card__benefit">
-              <span class="pg-card__benefit-label">Entlastungsbetrag</span>
-              <span class="pg-card__benefit-value pg-card__benefit-value--primary">125 €<small>/Mo.</small></span>
-            </div>
-            <p class="pg-card__note">Pflegegeld &amp; Sachleistungen ab PG 2</p>
-          </div>
-        </article>
+        <!-- Tab-Leiste -->
+        <div class="pg-tabs__nav" role="tablist" aria-label="Pflegegrade 1 bis 5">
+          <button class="pg-tabs__tab pg-tabs__tab--pg1 is-active"
+                  role="tab" aria-selected="true" aria-controls="pg-panel-1" id="pg-tab-1"
+                  data-pg-tab="1">
+            <span class="pg-tabs__tab-num">1</span>
+            <span class="pg-tabs__tab-label">Gering</span>
+          </button>
+          <button class="pg-tabs__tab pg-tabs__tab--pg2"
+                  role="tab" aria-selected="false" aria-controls="pg-panel-2" id="pg-tab-2"
+                  data-pg-tab="2" tabindex="-1">
+            <span class="pg-tabs__tab-num">2</span>
+            <span class="pg-tabs__tab-label">Erheblich</span>
+          </button>
+          <button class="pg-tabs__tab pg-tabs__tab--pg3"
+                  role="tab" aria-selected="false" aria-controls="pg-panel-3" id="pg-tab-3"
+                  data-pg-tab="3" tabindex="-1">
+            <span class="pg-tabs__tab-num">3</span>
+            <span class="pg-tabs__tab-label">Schwer</span>
+          </button>
+          <button class="pg-tabs__tab pg-tabs__tab--pg4"
+                  role="tab" aria-selected="false" aria-controls="pg-panel-4" id="pg-tab-4"
+                  data-pg-tab="4" tabindex="-1">
+            <span class="pg-tabs__tab-num">4</span>
+            <span class="pg-tabs__tab-label">Schwerst</span>
+          </button>
+          <button class="pg-tabs__tab pg-tabs__tab--pg5"
+                  role="tab" aria-selected="false" aria-controls="pg-panel-5" id="pg-tab-5"
+                  data-pg-tab="5" tabindex="-1">
+            <span class="pg-tabs__tab-num">5</span>
+            <span class="pg-tabs__tab-label">Besonderer Bedarf</span>
+          </button>
+        </div>
 
-        <!-- PG 2 -->
-        <article class="pg-card pg-card--pg2" role="listitem">
-          <div class="pg-card__accent" aria-hidden="true"></div>
-          <div class="pg-card__top">
-            <div class="pg-card__badge pg-card__badge--pg2" aria-hidden="true">2</div>
-            <div>
-              <h3 class="pg-card__title">Erhebliche Beeinträchtigung</h3>
-              <span class="pg-card__punkte">27 – 47,5 Punkte</span>
-            </div>
-          </div>
-          <p class="pg-card__desc">Selbstständigkeit ist erheblich eingeschränkt. In mehreren Bereichen (Mobilität, Selbstversorgung, Haushaltsführung) ist Unterstützung notwendig.</p>
-          <div class="pg-card__divider"></div>
-          <div class="pg-card__benefits">
-            <div class="pg-card__benefit">
-              <span class="pg-card__benefit-label">Entlastungsbetrag</span>
-              <span class="pg-card__benefit-value pg-card__benefit-value--primary">125 €<small>/Mo.</small></span>
-            </div>
-            <div class="pg-card__benefit">
-              <span class="pg-card__benefit-label">Pflegegeld</span>
-              <span class="pg-card__benefit-value pg-card__benefit-value--secondary">332 €<small>/Mo.</small></span>
-            </div>
-            <div class="pg-card__benefit">
-              <span class="pg-card__benefit-label">Sachleistungen</span>
-              <span class="pg-card__benefit-value pg-card__benefit-value--secondary">761 €<small>/Mo.</small></span>
-            </div>
-          </div>
-        </article>
+        <!-- Content-Panel -->
+        <div class="pg-tabs__panels">
 
-        <!-- PG 3 -->
-        <article class="pg-card pg-card--pg3" role="listitem">
-          <div class="pg-card__accent" aria-hidden="true"></div>
-          <div class="pg-card__top">
-            <div class="pg-card__badge pg-card__badge--pg3" aria-hidden="true">3</div>
-            <div>
-              <h3 class="pg-card__title">Schwere Beeinträchtigung</h3>
-              <span class="pg-card__punkte">47,5 – 70 Punkte</span>
+          <!-- Panel PG 1 -->
+          <div class="pg-tabs__panel pg-tabs__panel--pg1 is-active"
+               role="tabpanel" id="pg-panel-1" aria-labelledby="pg-tab-1">
+            <div class="pg-tabs__panel-inner">
+              <div class="pg-tabs__panel-info">
+                <div class="pg-tabs__panel-header">
+                  <div class="pg-tabs__panel-badge pg-tabs__panel-badge--pg1" aria-hidden="true">1</div>
+                  <div>
+                    <h3 class="pg-tabs__panel-title">Geringe Beeinträchtigung</h3>
+                    <span class="pg-tabs__panel-punkte">12,5 – 27 Punkte</span>
+                  </div>
+                </div>
+                <p class="pg-tabs__panel-desc">Selbstständigkeit ist größtenteils erhalten. Leichte Einschränkungen in einzelnen Bereichen, z.&nbsp;B. bei der Mobilität oder einzelnen Alltagsaktivitäten.</p>
+              </div>
+              <div class="pg-tabs__panel-leistungen">
+                <p class="pg-tabs__panel-leistungen-title">Leistungen der Pflegekasse</p>
+                <div class="pg-tabs__chips">
+                  <div class="pg-tabs__chip pg-tabs__chip--primary">
+                    <span class="pg-tabs__chip-label">Entlastungsbetrag §45b</span>
+                    <span class="pg-tabs__chip-value">125 €/Mo.</span>
+                  </div>
+                  <div class="pg-tabs__chip pg-tabs__chip--note">
+                    <span class="pg-tabs__chip-label">Pflegegeld &amp; Sachleistungen</span>
+                    <span class="pg-tabs__chip-value">ab PG 2</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <p class="pg-card__desc">Erhebliche Einschränkungen in der Selbstständigkeit. Umfangreiche Unterstützung bei der Körperpflege, Ernährung und bei allgemeinen Alltagsaktivitäten nötig.</p>
-          <div class="pg-card__divider"></div>
-          <div class="pg-card__benefits">
-            <div class="pg-card__benefit">
-              <span class="pg-card__benefit-label">Entlastungsbetrag</span>
-              <span class="pg-card__benefit-value pg-card__benefit-value--primary">125 €<small>/Mo.</small></span>
-            </div>
-            <div class="pg-card__benefit">
-              <span class="pg-card__benefit-label">Pflegegeld</span>
-              <span class="pg-card__benefit-value pg-card__benefit-value--secondary">573 €<small>/Mo.</small></span>
-            </div>
-            <div class="pg-card__benefit">
-              <span class="pg-card__benefit-label">Sachleistungen</span>
-              <span class="pg-card__benefit-value pg-card__benefit-value--secondary">1.432 €<small>/Mo.</small></span>
-            </div>
-          </div>
-        </article>
 
-        <!-- PG 4 -->
-        <article class="pg-card pg-card--pg4" role="listitem">
-          <div class="pg-card__accent" aria-hidden="true"></div>
-          <div class="pg-card__top">
-            <div class="pg-card__badge pg-card__badge--pg4" aria-hidden="true">4</div>
-            <div>
-              <h3 class="pg-card__title">Schwerste Beeinträchtigung</h3>
-              <span class="pg-card__punkte">70 – 90 Punkte</span>
+          <!-- Panel PG 2 -->
+          <div class="pg-tabs__panel pg-tabs__panel--pg2"
+               role="tabpanel" id="pg-panel-2" aria-labelledby="pg-tab-2" hidden>
+            <div class="pg-tabs__panel-inner">
+              <div class="pg-tabs__panel-info">
+                <div class="pg-tabs__panel-header">
+                  <div class="pg-tabs__panel-badge pg-tabs__panel-badge--pg2" aria-hidden="true">2</div>
+                  <div>
+                    <h3 class="pg-tabs__panel-title">Erhebliche Beeinträchtigung</h3>
+                    <span class="pg-tabs__panel-punkte">27 – 47,5 Punkte</span>
+                  </div>
+                </div>
+                <p class="pg-tabs__panel-desc">Selbstständigkeit ist erheblich eingeschränkt. In mehreren Bereichen (Mobilität, Selbstversorgung, Haushaltsführung) ist Unterstützung notwendig.</p>
+              </div>
+              <div class="pg-tabs__panel-leistungen">
+                <p class="pg-tabs__panel-leistungen-title">Leistungen der Pflegekasse</p>
+                <div class="pg-tabs__chips">
+                  <div class="pg-tabs__chip pg-tabs__chip--primary">
+                    <span class="pg-tabs__chip-label">Entlastungsbetrag §45b</span>
+                    <span class="pg-tabs__chip-value">125 €/Mo.</span>
+                  </div>
+                  <div class="pg-tabs__chip pg-tabs__chip--secondary">
+                    <span class="pg-tabs__chip-label">Pflegegeld</span>
+                    <span class="pg-tabs__chip-value">332 €/Mo.</span>
+                  </div>
+                  <div class="pg-tabs__chip pg-tabs__chip--secondary">
+                    <span class="pg-tabs__chip-label">Pflegesachleistungen</span>
+                    <span class="pg-tabs__chip-value">761 €/Mo.</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <p class="pg-card__desc">Weitgehender Verlust der Selbstständigkeit. Die Person ist auf umfassende Hilfe bei nahezu allen Verrichtungen des täglichen Lebens angewiesen.</p>
-          <div class="pg-card__divider"></div>
-          <div class="pg-card__benefits">
-            <div class="pg-card__benefit">
-              <span class="pg-card__benefit-label">Entlastungsbetrag</span>
-              <span class="pg-card__benefit-value pg-card__benefit-value--primary">125 €<small>/Mo.</small></span>
-            </div>
-            <div class="pg-card__benefit">
-              <span class="pg-card__benefit-label">Pflegegeld</span>
-              <span class="pg-card__benefit-value pg-card__benefit-value--secondary">765 €<small>/Mo.</small></span>
-            </div>
-            <div class="pg-card__benefit">
-              <span class="pg-card__benefit-label">Sachleistungen</span>
-              <span class="pg-card__benefit-value pg-card__benefit-value--secondary">1.778 €<small>/Mo.</small></span>
-            </div>
-          </div>
-        </article>
 
-        <!-- PG 5 -->
-        <article class="pg-card pg-card--pg5" role="listitem">
-          <div class="pg-card__accent" aria-hidden="true"></div>
-          <div class="pg-card__top">
-            <div class="pg-card__badge pg-card__badge--pg5" aria-hidden="true">5</div>
-            <div>
-              <h3 class="pg-card__title">Schwerste Beeinträchtigung mit besonderem Bedarf</h3>
-              <span class="pg-card__punkte">90 – 100 Punkte</span>
+          <!-- Panel PG 3 -->
+          <div class="pg-tabs__panel pg-tabs__panel--pg3"
+               role="tabpanel" id="pg-panel-3" aria-labelledby="pg-tab-3" hidden>
+            <div class="pg-tabs__panel-inner">
+              <div class="pg-tabs__panel-info">
+                <div class="pg-tabs__panel-header">
+                  <div class="pg-tabs__panel-badge pg-tabs__panel-badge--pg3" aria-hidden="true">3</div>
+                  <div>
+                    <h3 class="pg-tabs__panel-title">Schwere Beeinträchtigung</h3>
+                    <span class="pg-tabs__panel-punkte">47,5 – 70 Punkte</span>
+                  </div>
+                </div>
+                <p class="pg-tabs__panel-desc">Erhebliche Einschränkungen in der Selbstständigkeit. Umfangreiche Unterstützung bei der Körperpflege, Ernährung und allgemeinen Alltagsaktivitäten nötig.</p>
+              </div>
+              <div class="pg-tabs__panel-leistungen">
+                <p class="pg-tabs__panel-leistungen-title">Leistungen der Pflegekasse</p>
+                <div class="pg-tabs__chips">
+                  <div class="pg-tabs__chip pg-tabs__chip--primary">
+                    <span class="pg-tabs__chip-label">Entlastungsbetrag §45b</span>
+                    <span class="pg-tabs__chip-value">125 €/Mo.</span>
+                  </div>
+                  <div class="pg-tabs__chip pg-tabs__chip--secondary">
+                    <span class="pg-tabs__chip-label">Pflegegeld</span>
+                    <span class="pg-tabs__chip-value">573 €/Mo.</span>
+                  </div>
+                  <div class="pg-tabs__chip pg-tabs__chip--secondary">
+                    <span class="pg-tabs__chip-label">Pflegesachleistungen</span>
+                    <span class="pg-tabs__chip-value">1.432 €/Mo.</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <p class="pg-card__desc">Vollständiger Verlust der Selbstständigkeit mit außergewöhnlichem und besonders hohem Versorgungsbedarf – z.&nbsp;B. bei lebenserhaltenden Maßnahmen.</p>
-          <div class="pg-card__divider"></div>
-          <div class="pg-card__benefits">
-            <div class="pg-card__benefit">
-              <span class="pg-card__benefit-label">Entlastungsbetrag</span>
-              <span class="pg-card__benefit-value pg-card__benefit-value--primary">125 €<small>/Mo.</small></span>
-            </div>
-            <div class="pg-card__benefit">
-              <span class="pg-card__benefit-label">Pflegegeld</span>
-              <span class="pg-card__benefit-value pg-card__benefit-value--secondary">947 €<small>/Mo.</small></span>
-            </div>
-            <div class="pg-card__benefit">
-              <span class="pg-card__benefit-label">Sachleistungen</span>
-              <span class="pg-card__benefit-value pg-card__benefit-value--secondary">2.200 €<small>/Mo.</small></span>
-            </div>
-          </div>
-        </article>
 
-      </div><!-- /.pg-grid -->
+          <!-- Panel PG 4 -->
+          <div class="pg-tabs__panel pg-tabs__panel--pg4"
+               role="tabpanel" id="pg-panel-4" aria-labelledby="pg-tab-4" hidden>
+            <div class="pg-tabs__panel-inner">
+              <div class="pg-tabs__panel-info">
+                <div class="pg-tabs__panel-header">
+                  <div class="pg-tabs__panel-badge pg-tabs__panel-badge--pg4" aria-hidden="true">4</div>
+                  <div>
+                    <h3 class="pg-tabs__panel-title">Schwerste Beeinträchtigung</h3>
+                    <span class="pg-tabs__panel-punkte">70 – 90 Punkte</span>
+                  </div>
+                </div>
+                <p class="pg-tabs__panel-desc">Weitgehender Verlust der Selbstständigkeit. Die Person ist auf umfassende Hilfe bei nahezu allen Verrichtungen des täglichen Lebens angewiesen.</p>
+              </div>
+              <div class="pg-tabs__panel-leistungen">
+                <p class="pg-tabs__panel-leistungen-title">Leistungen der Pflegekasse</p>
+                <div class="pg-tabs__chips">
+                  <div class="pg-tabs__chip pg-tabs__chip--primary">
+                    <span class="pg-tabs__chip-label">Entlastungsbetrag §45b</span>
+                    <span class="pg-tabs__chip-value">125 €/Mo.</span>
+                  </div>
+                  <div class="pg-tabs__chip pg-tabs__chip--secondary">
+                    <span class="pg-tabs__chip-label">Pflegegeld</span>
+                    <span class="pg-tabs__chip-value">765 €/Mo.</span>
+                  </div>
+                  <div class="pg-tabs__chip pg-tabs__chip--secondary">
+                    <span class="pg-tabs__chip-label">Pflegesachleistungen</span>
+                    <span class="pg-tabs__chip-value">1.778 €/Mo.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Panel PG 5 -->
+          <div class="pg-tabs__panel pg-tabs__panel--pg5"
+               role="tabpanel" id="pg-panel-5" aria-labelledby="pg-tab-5" hidden>
+            <div class="pg-tabs__panel-inner">
+              <div class="pg-tabs__panel-info">
+                <div class="pg-tabs__panel-header">
+                  <div class="pg-tabs__panel-badge pg-tabs__panel-badge--pg5" aria-hidden="true">5</div>
+                  <div>
+                    <h3 class="pg-tabs__panel-title">Schwerste Beeinträchtigung mit besonderem Bedarf</h3>
+                    <span class="pg-tabs__panel-punkte">90 – 100 Punkte</span>
+                  </div>
+                </div>
+                <p class="pg-tabs__panel-desc">Vollständiger Verlust der Selbstständigkeit mit außergewöhnlichem und besonders hohem Versorgungsbedarf – z.&nbsp;B. bei lebenserhaltenden Maßnahmen.</p>
+              </div>
+              <div class="pg-tabs__panel-leistungen">
+                <p class="pg-tabs__panel-leistungen-title">Leistungen der Pflegekasse</p>
+                <div class="pg-tabs__chips">
+                  <div class="pg-tabs__chip pg-tabs__chip--primary">
+                    <span class="pg-tabs__chip-label">Entlastungsbetrag §45b</span>
+                    <span class="pg-tabs__chip-value">125 €/Mo.</span>
+                  </div>
+                  <div class="pg-tabs__chip pg-tabs__chip--secondary">
+                    <span class="pg-tabs__chip-label">Pflegegeld</span>
+                    <span class="pg-tabs__chip-value">947 €/Mo.</span>
+                  </div>
+                  <div class="pg-tabs__chip pg-tabs__chip--secondary">
+                    <span class="pg-tabs__chip-label">Pflegesachleistungen</span>
+                    <span class="pg-tabs__chip-value">2.200 €/Mo.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /.pg-tabs__panels -->
+      </div><!-- /.pg-tabs -->
 
       <p class="text-center" style="margin-top: var(--spacing-2xl); font-size: var(--fs-base); color: var(--color-text-muted);">
         Noch keinen Pflegegrad? Wir begleiten Sie bei der Antragstellung und bereiten Sie auf den Besuch des Medizinischen Dienstes vor.

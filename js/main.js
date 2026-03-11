@@ -609,3 +609,79 @@ function initLeistungsWizard() {
     }
   });
 }
+
+
+// ══ PFLEGEGRADE TAB-STEPPER ══════════════════════════════
+// Schaltet zwischen den 5 Pflegegrad-Panels um.
+// Unterstützt Maus/Touch sowie Tastatur (Pfeiltasten im tablist).
+
+(function initPflegegradeTabs() {
+  const tabsContainer = document.getElementById('pflegegrade-tabs');
+  if (!tabsContainer) return;
+
+  const tabs   = Array.from(tabsContainer.querySelectorAll('.pg-tabs__tab'));
+  const panels = Array.from(tabsContainer.querySelectorAll('.pg-tabs__panel'));
+
+  if (!tabs.length || !panels.length) return;
+
+  function activateTab(targetTab) {
+    // Alle deaktivieren
+    tabs.forEach(t => {
+      t.classList.remove('is-active');
+      t.setAttribute('aria-selected', 'false');
+      t.setAttribute('tabindex', '-1');
+    });
+    panels.forEach(p => {
+      p.classList.remove('is-active');
+      p.hidden = true;
+    });
+
+    // Ziel-Tab aktivieren
+    targetTab.classList.add('is-active');
+    targetTab.setAttribute('aria-selected', 'true');
+    targetTab.removeAttribute('tabindex');
+
+    // Zugehöriges Panel einblenden: hidden zuerst entfernen, dann Klasse für Animation setzen
+    const panelId = targetTab.getAttribute('aria-controls');
+    const panel = document.getElementById(panelId);
+    if (panel) {
+      panel.hidden = false;
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => panel.classList.add('is-active'));
+      });
+    }
+  }
+
+  // Klick-Handler
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => activateTab(tab));
+  });
+
+  // Tastatur-Navigation (Pfeiltasten im tablist gemäß ARIA-Pattern)
+  tabsContainer.addEventListener('keydown', e => {
+    const currentTab = document.activeElement;
+    if (!currentTab || !currentTab.classList.contains('pg-tabs__tab')) return;
+
+    const currentIndex = tabs.indexOf(currentTab);
+    let nextIndex = currentIndex;
+
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      e.preventDefault();
+      nextIndex = (currentIndex + 1) % tabs.length;
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      nextIndex = 0;
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      nextIndex = tabs.length - 1;
+    } else {
+      return;
+    }
+
+    activateTab(tabs[nextIndex]);
+    tabs[nextIndex].focus();
+  });
+})();

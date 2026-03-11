@@ -3300,3 +3300,305 @@
   margin-top: 3px;
   color: var(--color-text-light);
 }
+
+
+/* ─────────────────────────────────────────────────────────
+   PFLEGEGRADE TAB-STEPPER
+   5 klickbare Tabs oben, darunter ein Content-Panel.
+   Mobil: Tabs stapeln vertikal als Akkordeon.
+   ───────────────────────────────────────────────────────── */
+
+.pg-tabs {
+  margin-top: var(--spacing-3xl);
+}
+
+/* ── Tab-Leiste ─────────────────────────────────────────── */
+.pg-tabs__nav {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  overflow: hidden;
+}
+
+.pg-tabs__tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: var(--spacing-md) var(--spacing-sm);
+  border: none;
+  background: var(--color-white);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  border-right: 1px solid var(--color-border);
+  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+  min-height: 72px;
+  position: relative;
+  color: var(--color-text-muted);
+}
+
+.pg-tabs__tab:last-child {
+  border-right: none;
+}
+
+.pg-tabs__tab:hover:not(.is-active) {
+  background: var(--color-bg-light);
+  color: var(--color-text);
+}
+
+/* Aktiver Tab: Primary Blue Hintergrund, weißer Text */
+.pg-tabs__tab.is-active {
+  color: var(--color-white);
+  border-bottom-color: transparent;
+  position: relative;
+  z-index: 1;
+}
+
+/* Aktive Tab-Farben per PG */
+.pg-tabs__tab--pg1.is-active { background: var(--pg1-color); }
+.pg-tabs__tab--pg2.is-active { background: var(--pg2-color); }
+.pg-tabs__tab--pg3.is-active { background: var(--pg3-color); }
+.pg-tabs__tab--pg4.is-active { background: var(--pg4-color); }
+.pg-tabs__tab--pg5.is-active { background: var(--pg5-color); }
+
+/* Hover auf inaktiven Tabs: Leichte Farbtönung */
+.pg-tabs__tab--pg1:hover:not(.is-active) { border-bottom-color: var(--pg1-color); color: var(--pg1-color); }
+.pg-tabs__tab--pg2:hover:not(.is-active) { border-bottom-color: var(--pg2-color); color: var(--pg2-color); }
+.pg-tabs__tab--pg3:hover:not(.is-active) { border-bottom-color: var(--pg3-color); color: var(--pg3-color); }
+.pg-tabs__tab--pg4:hover:not(.is-active) { border-bottom-color: var(--pg4-color); color: var(--pg4-color); }
+.pg-tabs__tab--pg5:hover:not(.is-active) { border-bottom-color: var(--pg5-color); color: var(--pg5-color); }
+
+.pg-tabs__tab-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-circle);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  background: rgba(0, 0, 0, 0.07);
+  transition: background var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.pg-tabs__tab.is-active .pg-tabs__tab-num {
+  background: rgba(255, 255, 255, 0.25);
+  color: var(--color-white);
+}
+
+.pg-tabs__tab-label {
+  font-size: 0.75rem;
+  font-weight: var(--fw-semibold);
+  line-height: 1.2;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+/* ── Panel-Bereich ──────────────────────────────────────── */
+.pg-tabs__panels {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-top: none;
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.pg-tabs__panel {
+  display: none;
+}
+
+.pg-tabs__panel.is-active {
+  display: block;
+  animation: pgPanelFadeIn 0.3s ease forwards;
+}
+
+@keyframes pgPanelFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Innerer Flex-Container: links Info, rechts Chips */
+.pg-tabs__panel-inner {
+  display: flex;
+  gap: var(--spacing-3xl);
+  padding: var(--spacing-3xl);
+  align-items: flex-start;
+}
+
+.pg-tabs__panel-info {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Header: Badge + Titel nebeneinander */
+.pg-tabs__panel-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.pg-tabs__panel-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-circle);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-white);
+  flex-shrink: 0;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+}
+
+.pg-tabs__panel-badge--pg1 { background: var(--pg1-color); }
+.pg-tabs__panel-badge--pg2 { background: var(--pg2-color); }
+.pg-tabs__panel-badge--pg3 { background: var(--pg3-color); }
+.pg-tabs__panel-badge--pg4 { background: var(--pg4-color); }
+.pg-tabs__panel-badge--pg5 { background: var(--pg5-color); }
+
+.pg-tabs__panel-title {
+  font-family: var(--font-heading);
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-text);
+  margin: 0 0 4px;
+  line-height: var(--lh-tight);
+}
+
+.pg-tabs__panel-punkte {
+  display: block;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-muted);
+  letter-spacing: 0.02em;
+}
+
+.pg-tabs__panel-desc {
+  font-size: var(--fs-base);
+  color: var(--color-text-muted);
+  line-height: var(--lh-relaxed);
+  margin: 0;
+}
+
+/* Leistungs-Bereich (rechts) */
+.pg-tabs__panel-leistungen {
+  flex-shrink: 0;
+  width: 280px;
+}
+
+.pg-tabs__panel-leistungen-title {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+  margin: 0 0 var(--spacing-md);
+}
+
+/* Leistungs-Chips */
+.pg-tabs__chips {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.pg-tabs__chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  min-height: 48px;
+}
+
+.pg-tabs__chip--primary {
+  background: var(--color-primary-bg);
+  border-color: rgba(80, 121, 165, 0.18);
+}
+
+.pg-tabs__chip--secondary {
+  background: var(--color-secondary-bg);
+  border-color: rgba(61, 138, 138, 0.18);
+}
+
+.pg-tabs__chip--note {
+  background: var(--color-bg-light);
+  border-color: var(--color-border);
+}
+
+.pg-tabs__chip-label {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  font-weight: var(--fw-medium);
+  line-height: 1.3;
+}
+
+.pg-tabs__chip-value {
+  font-size: var(--fs-base);
+  font-weight: var(--fw-bold);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.pg-tabs__chip--primary .pg-tabs__chip-value {
+  color: var(--color-primary-dark);
+}
+
+.pg-tabs__chip--secondary .pg-tabs__chip-value {
+  color: var(--color-secondary-dark);
+}
+
+.pg-tabs__chip--note .pg-tabs__chip-value {
+  color: var(--color-text-light);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+}
+
+
+/* ─────────────────────────────────────────────────────────
+   LEISTUNGSTABELLE – Konsistenz-Fixes
+   ───────────────────────────────────────────────────────── */
+
+/* Jahresbetrags-Zeilen: KEIN warmer Hintergrund mehr, gleich wie andere Zeilen */
+.leistungs-tabelle__row--jahresbetrag {
+  background: var(--color-white);
+}
+
+.leistungs-tabelle__row--jahresbetrag:hover {
+  background: var(--color-bg-light);
+}
+
+/* colspan-Zelle für Jahresbeträge: einheitliche Border-Farbe wie alle anderen Zellen */
+.leistungs-tabelle__cell-betrag--jahresspanne {
+  background: transparent;
+  border-left: 1px solid var(--color-border);
+}
+
+/* Amber-Variante entfällt: alle Jahresbetrags-Zellen gleich */
+.leistungs-tabelle__cell-betrag--jahresspanne-amber {
+  background: transparent;
+  border-left: 1px solid var(--color-border);
+}
+
+/* Icon-Farben: Amber-Icon auf primär normalisieren, um Konsistenz zu wahren */
+/* (Amber bleibt als Farboption erhalten, aber alle Icons im Row-Hover reagieren einheitlich) */
+
+/* Tabellen-Rahmen: Outer Border-Radius konsistent mit dem Wrap-Container abschneiden */
+.leistungs-tabelle-wrap {
+  border-radius: var(--radius-xl);
+}
+
+.leistungs-tabelle {
+  border-radius: 0;
+}

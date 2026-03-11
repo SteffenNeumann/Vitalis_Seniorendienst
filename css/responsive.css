@@ -771,3 +771,119 @@ body.nav-open .nav-overlay {
     font-size: var(--fs-2xl);
   }
 }
+
+
+/* ── Pflegegrade Tab-Stepper – Responsive ────────────────
+   Desktop:  5-spaltige Tabs + 2-spaltiges Panel (Info | Chips)
+   Tablet:   Schmälere Chips-Spalte
+   Mobile:   Tabs werden zu vertikalen Akkordeon-Elementen
+   ──────────────────────────────────────────────────────── */
+
+/* Tablet: Panel-Layout anpassen */
+@media (max-width: 900px) {
+  .pg-tabs__panel-inner {
+    gap: var(--spacing-2xl);
+    padding: var(--spacing-2xl);
+  }
+
+  .pg-tabs__panel-leistungen {
+    width: 230px;
+  }
+
+  .pg-tabs__tab-label {
+    font-size: 0.6875rem;
+  }
+}
+
+/* Tablet 640px: Tab-Grid 3+2, Panel wechselt auf column */
+@media (max-width: 767px) {
+  /* Tabs: 3 in Zeile 1, 2 in Zeile 2 – aber alle gleich groß */
+  .pg-tabs__nav {
+    grid-template-columns: repeat(3, 1fr);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+
+  /* PG 4 und PG 5 bekommen je 1.5-breite Spalten in zweiter Zeile */
+  .pg-tabs__tab--pg4,
+  .pg-tabs__tab--pg5 {
+    /* Beide nehmen zusammen 3 Spalten ein */
+    grid-column: span 1;
+  }
+
+  /* Zweite Reihe (PG 4 + 5): über volle Breite verteilen */
+  .pg-tabs__tab:nth-child(4),
+  .pg-tabs__tab:nth-child(5) {
+    /* 2 Tabs teilen 3 Spalten = je 1.5 → CSS grid kann das über 2-col auto */
+    grid-column: span 1;
+  }
+
+  /* Panel: vertikal stapeln */
+  .pg-tabs__panel-inner {
+    flex-direction: column;
+    padding: var(--spacing-xl);
+    gap: var(--spacing-xl);
+  }
+
+  .pg-tabs__panel-leistungen {
+    width: 100%;
+  }
+
+  .pg-tabs__panel-title {
+    font-size: var(--fs-xl);
+  }
+
+  .pg-tabs__panels {
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  }
+}
+
+/* Mobile 480px: kompakte Tabs, kleinere Schrift */
+@media (max-width: 479px) {
+  .pg-tabs__nav {
+    /* 5 Tabs bleiben in einer Zeile, werden sehr schmal */
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .pg-tabs__tab {
+    min-height: 60px;
+    padding: var(--spacing-sm) 4px;
+    gap: 2px;
+  }
+
+  .pg-tabs__tab-num {
+    width: 26px;
+    height: 26px;
+    font-size: var(--fs-sm);
+  }
+
+  .pg-tabs__tab-label {
+    font-size: 0.5625rem; /* 9px – sehr kompakt */
+  }
+
+  .pg-tabs__panel-inner {
+    padding: var(--spacing-lg);
+    gap: var(--spacing-lg);
+  }
+
+  .pg-tabs__panel-badge {
+    width: 42px;
+    height: 42px;
+    font-size: var(--fs-lg);
+  }
+
+  .pg-tabs__panel-title {
+    font-size: var(--fs-lg);
+  }
+
+  .pg-tabs__chip {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    min-height: auto;
+    padding: var(--spacing-sm);
+  }
+
+  .pg-tabs__chip-value {
+    font-size: var(--fs-base);
+  }
+}
