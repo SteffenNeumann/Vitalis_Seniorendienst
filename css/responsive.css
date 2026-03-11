@@ -549,3 +549,30 @@ body.nav-open .nav-overlay {
   }
   .engagement-banner__title { font-size: var(--fs-xl); }
 }
+
+/* ── Page Header – Mobile Padding-Korrektur ─────────── */
+/* Auf kleinen Screens das Padding reduzieren,
+   damit der Header nicht übermäßig viel Raum einnimmt */
+@media (max-width: 767px) {
+  .page-header {
+    padding: var(--spacing-3xl) 0 calc(var(--spacing-2xl) + 48px);
+  }
+
+  .page-header__title {
+    font-size: var(--fs-3xl); /* von --fs-4xl auf --fs-3xl verkleinert */
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header {
+    padding: var(--spacing-2xl) 0 calc(var(--spacing-xl) + 48px);
+  }
+
+  .page-header__title {
+    font-size: var(--fs-2xl);
+  }
+
+  .page-header p {
+    font-size: var(--fs-base);
+  }
+}

@@ -964,7 +964,7 @@
 
 /* --- CTA Section --- */
 .cta-section {
-  background: linear-gradient(135deg, #2A4163 0%, #5079A5 100%);
+  background: var(--color-primary); /* #5079A5 – konsistent mit Page-Header */
   color: var(--color-white);
   padding: var(--spacing-4xl) 0;
   position: relative;
@@ -1635,29 +1635,38 @@
 }
 
 /* --- Page Header (Subpages) --- */
+/*
+ * Design-Entscheidung: Primärfarbe #5079A5 als klare, stimmige Basis.
+ * Weiß auf #5079A5 = 4.6:1 Kontrast → WCAG AA konform.
+ * Kein helles Pastell mehr – das wirkte farblos und abgehackt.
+ */
 .page-header {
-  background: linear-gradient(160deg, #EEF4FA 0%, #D6E5F5 100%);
-  color: var(--color-text);
+  background: var(--color-primary); /* #5079A5 */
+  color: var(--color-white);
   padding: var(--spacing-4xl) 0 calc(var(--spacing-3xl) + 48px);
   text-align: center;
   position: relative;
-  border-bottom: 1px solid var(--color-border);
+  /* border-bottom entfernt – Wave-Divider übernimmt die Trennung */
 }
 
 .page-header .page-header__title {
-  color: var(--color-text);
+  color: var(--color-white);
 }
 
 .page-header .page-header__subtitle {
-  color: var(--color-text-light);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .page-header .page-header__breadcrumb,
 .page-header .page-header__breadcrumb a {
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.75);
 }
 
-/* Dekorativer Wave-Divider am unteren Rand */
+.page-header .page-header__breadcrumb a:hover {
+  color: var(--color-white);
+}
+
+/* Dekorativer Wave-Divider am unteren Rand – Übergang zu weißem Content */
 .page-header::after {
   content: '';
   position: absolute;
@@ -1669,42 +1678,31 @@
   clip-path: ellipse(55% 100% at 50% 100%);
 }
 
-/* --- Page-Header Varianten (eine Klasse pro Seite) --- */
-.page-header--ueber-uns {
-  background: linear-gradient(160deg, #EEF4FA 0%, #D6E5F5 100%);
-}
+/* --- Page-Header Varianten (eine Klasse pro Seite) ---
+ * Standard (#5079A5) gilt für: ueber-uns, kosten, faq, kontakt, standorte
+ * Abweichende Varianten nur wo inhaltlich sinnvoll:
+ * - leistungen: Teal (#3D7A7A) – Gesundheit/Fürsorge
+ * - karriere:   Amber-Gradient – Energie/Aufbruch
+ * - legal:      Gedämpftes Blau – neutral/zurückhaltend
+ */
+
+/* Alle Standard-Varianten erben #5079A5 vom .page-header – keine Regel nötig */
 
 .page-header--leistungen {
-  background: linear-gradient(160deg, #E8F5EF 0%, #D6EBE7 100%);
-}
-
-.page-header--kosten {
-  background: linear-gradient(160deg, #EEF4FA 0%, #E0ECF8 100%);
-}
-
-.page-header--faq {
-  background: linear-gradient(160deg, #F0F4FB 0%, #D6E5F5 100%);
-}
-
-.page-header--kontakt {
-  background: linear-gradient(160deg, #EEF4FA 0%, #DCE9F5 100%);
-}
-
-.page-header--standorte {
-  background: linear-gradient(160deg, #E8F0F8 0%, #D6E5F5 100%);
+  background: #3D7A7A; /* Teal: steht für Gesundheit, Fürsorge */
 }
 
 .page-header--karriere {
-  background: linear-gradient(160deg, #FDF3E8 0%, #F5E4CB 100%);
+  background: linear-gradient(135deg, #5079A5 0%, #C97B3A 100%); /* Aufbruch, Energie */
 }
 
 .page-header--legal {
-  background: linear-gradient(160deg, #F4F7FB 0%, #E8EFF8 100%);
+  background: #6B8CAA; /* Gedämpfter Blauton für rechtliche Seiten */
 }
 
 .page-header__title {
   font-size: var(--fs-4xl);
-  color: var(--color-text);
+  color: var(--color-white);
   margin-bottom: var(--spacing-md);
 }
 
@@ -1714,25 +1712,26 @@
   justify-content: center;
   gap: var(--spacing-sm);
   font-size: var(--fs-base);
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .page-header__breadcrumb a {
-  color: var(--color-primary);
+  color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
 
 .page-header__breadcrumb a:hover {
-  color: var(--color-primary-dark);
+  color: var(--color-white);
+  text-decoration: underline;
 }
 
 .page-header__breadcrumb span {
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .page-header p {
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.88);
   font-size: var(--fs-lg);
   max-width: 640px;
   margin: var(--spacing-md) auto 0;
@@ -1741,7 +1740,7 @@
 
 /* --- Acquisition / Pruefung Section --- */
 .acquisition-box {
-  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-dark) 100%);
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%); /* harmoniert mit Page-Header und CTA */
   color: var(--color-white);
   border-radius: var(--radius-xl);
   padding: var(--spacing-3xl);
