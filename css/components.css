@@ -109,6 +109,13 @@
   font-size: var(--fs-lg);
 }
 
+.btn-nav {
+  padding: 10px 18px;
+  font-size: 0.9375rem;
+  min-height: 44px;
+  white-space: nowrap;
+}
+
 .btn-icon {
   width: 24px;
   height: 24px;
@@ -137,6 +144,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--spacing-md);
   height: var(--nav-height);
   max-width: var(--container-max);
   margin: 0 auto;
@@ -177,20 +185,22 @@
 .nav__links {
   display: flex;
   align-items: center;
-  gap: var(--spacing-xl);
+  gap: var(--spacing-sm);
+  list-style: none;
 }
 
 .nav__link {
-  font-size: var(--fs-base);
+  font-size: 0.9375rem;
   font-weight: var(--fw-medium);
   color: var(--color-text-muted);
   text-decoration: none;
-  padding: var(--spacing-xs) 0;
+  padding: var(--spacing-xs) var(--spacing-xs);
   position: relative;
   transition: color var(--transition-fast);
-  min-height: 48px;
+  min-height: 44px;
   display: flex;
   align-items: center;
+  white-space: nowrap;
 }
 
 .nav__link::after {
@@ -218,21 +228,31 @@
 .nav__actions {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
+  gap: var(--spacing-sm);
+  flex-shrink: 0;
 }
 
 .nav__phone {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
-  font-size: var(--fs-base);
+  font-size: 0.9375rem;
   font-weight: var(--fw-semibold);
   color: var(--color-secondary);
   text-decoration: none;
-  min-height: 48px;
-  padding: var(--spacing-xs);
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 2px solid var(--color-secondary);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
+}
+.nav__phone:hover {
+  background: var(--color-secondary);
+  color: var(--color-white);
 }
 
 .nav__phone svg {

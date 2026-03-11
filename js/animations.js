@@ -1,54 +1,58 @@
 // ============================================================
 // Vitalis Seniorendienst – animations.js
-// Dezente Einblend-Animationen via Intersection Observer
 // ============================================================
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Kein Animations-Support oder reduzierte Bewegung bevorzugt
-  if (!('IntersectionObserver' in window)) return;
+  if (!('IntersectionObserver' in window)) {
+    // Fallback: alles sofort sichtbar
+    document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .scale-in').forEach(el => {
+      el.classList.add('is-visible');
+    });
+    return;
+  }
+
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ── Basis Intersection Observer ────────────────────────
   const observerOptions = {
-    threshold: 0.12,
-    rootMargin: '0px 0px -40px 0px'
+    threshold: 0.08,
+    rootMargin: '0px 0px -20px 0px'
   };
 
+  // ── Basis Observer: fügt 'is-visible' hinzu (passt zur CSS) ──
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('animated');
+        entry.target.classList.add('is-visible');
         observer.unobserve(entry.target);
       }
     });
   }, observerOptions);
 
-  // Alle Animations-Klassen beobachten
+  // Alle Animations-Klassen beobachten (inkl. fade-in-left/right)
   const animatedElements = document.querySelectorAll(
-    '.fade-in, .slide-up, .slide-left, .slide-right'
+    '.fade-in, .fade-in-left, .fade-in-right, .scale-in'
   );
 
   animatedElements.forEach(el => {
     if (prefersReduced) {
-      // Bei reduzierter Bewegung sofort sichtbar machen
-      el.classList.add('animated');
+      el.classList.add('is-visible');
     } else {
-      el.style.opacity = '0';
       observer.observe(el);
     }
   });
 
-  // ── Stagger-Animation für Kinderlemente ────────────────
+  // ── Stagger-Animation ──────────────────────────────────
   document.querySelectorAll('.stagger-children').forEach(parent => {
-    const children = parent.children;
-    Array.from(children).forEach((child, i) => {
-      if (!prefersReduced) {
+    const children = Array.from(parent.children);
+
+    if (!prefersReduced) {
+      children.forEach((child, i) => {
         child.style.opacity = '0';
-        child.style.transform = 'translateY(20px)';
+        child.style.transform = 'translateY(16px)';
         child.style.transition = `opacity 0.5s ease ${i * 0.1}s, transform 0.5s ease ${i * 0.1}s`;
-      }
-    });
+      });
+    }
 
     const staggerObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -65,11 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
     staggerObserver.observe(parent);
   });
 
-  // ── Zahlen-Hochzähl-Animation ──────────────────────────
+  // ── Zahlen-Animation ───────────────────────────────────
   document.querySelectorAll('.count-up').forEach(el => {
     const target = parseInt(el.dataset.target, 10);
     if (isNaN(target)) return;
-
     const countObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -78,7 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }, { threshold: 0.5 });
-
     countObserver.observe(el);
   });
 
@@ -87,10 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const duration = 1500;
     const start = performance.now();
     const suffix = el.dataset.suffix || '';
-
     const step = (now) => {
       const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
       el.textContent = Math.round(eased * target) + suffix;
       if (progress < 1) requestAnimationFrame(step);
     };
