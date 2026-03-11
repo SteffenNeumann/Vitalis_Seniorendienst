@@ -1636,11 +1636,25 @@
 
 /* --- Page Header (Subpages) --- */
 .page-header {
-  background: linear-gradient(135deg, #3D6089 0%, #5079A5 100%);
-  color: var(--color-white);
-  padding: var(--spacing-4xl) 0 calc(var(--spacing-3xl) + 48px); /* Platz für Wave */
+  background: linear-gradient(160deg, #EEF4FA 0%, #D6E5F5 100%);
+  color: var(--color-text);
+  padding: var(--spacing-4xl) 0 calc(var(--spacing-3xl) + 48px);
   text-align: center;
   position: relative;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.page-header .page-header__title {
+  color: var(--color-text);
+}
+
+.page-header .page-header__subtitle {
+  color: var(--color-text-light);
+}
+
+.page-header .page-header__breadcrumb,
+.page-header .page-header__breadcrumb a {
+  color: var(--color-text-muted);
 }
 
 /* Dekorativer Wave-Divider am unteren Rand */
@@ -1656,49 +1670,41 @@
 }
 
 /* --- Page-Header Varianten (eine Klasse pro Seite) --- */
-/* ueber-uns */
 .page-header--ueber-uns {
-  background: linear-gradient(120deg, #1C2B3A 0%, #5079A5 100%);
+  background: linear-gradient(160deg, #EEF4FA 0%, #D6E5F5 100%);
 }
 
-/* leistungen */
 .page-header--leistungen {
-  background: linear-gradient(135deg, #2A4163 0%, #3D8A8A 100%);
+  background: linear-gradient(160deg, #E8F5EF 0%, #D6EBE7 100%);
 }
 
-/* kostenuebernahme */
 .page-header--kosten {
-  background: linear-gradient(150deg, #1C2B3A 0%, #5079A5 80%, #3D8A8A 100%);
+  background: linear-gradient(160deg, #EEF4FA 0%, #E0ECF8 100%);
 }
 
-/* faq */
 .page-header--faq {
-  background: linear-gradient(120deg, #2A4163 0%, #5079A5 100%);
+  background: linear-gradient(160deg, #F0F4FB 0%, #D6E5F5 100%);
 }
 
-/* kontakt */
 .page-header--kontakt {
-  background: linear-gradient(135deg, #1C2B3A 0%, #3D6089 100%);
+  background: linear-gradient(160deg, #EEF4FA 0%, #DCE9F5 100%);
 }
 
-/* standorte */
 .page-header--standorte {
-  background: linear-gradient(140deg, #2A4163 0%, #5079A5 60%, #3D8A8A 100%);
+  background: linear-gradient(160deg, #E8F0F8 0%, #D6E5F5 100%);
 }
 
-/* karriere */
 .page-header--karriere {
-  background: linear-gradient(135deg, #1C2B3A 0%, #C97B3A 150%);
+  background: linear-gradient(160deg, #FDF3E8 0%, #F5E4CB 100%);
 }
 
-/* datenschutz / impressum: neutral */
 .page-header--legal {
-  background: linear-gradient(135deg, #2A3F5A 0%, #5079A5 100%);
+  background: linear-gradient(160deg, #F4F7FB 0%, #E8EFF8 100%);
 }
 
 .page-header__title {
   font-size: var(--fs-4xl);
-  color: var(--color-white);
+  color: var(--color-text);
   margin-bottom: var(--spacing-md);
 }
 
@@ -1708,21 +1714,21 @@
   justify-content: center;
   gap: var(--spacing-sm);
   font-size: var(--fs-base);
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--color-text-muted);
 }
 
 .page-header__breadcrumb a {
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--color-primary);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
 
 .page-header__breadcrumb a:hover {
-  color: var(--color-white);
+  color: var(--color-primary-dark);
 }
 
 .page-header__breadcrumb span {
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--color-text-muted);
 }
 
 .page-header p {
