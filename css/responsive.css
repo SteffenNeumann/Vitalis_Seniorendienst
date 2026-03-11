@@ -550,75 +550,60 @@ body.nav-open .nav-overlay {
   .engagement-banner__title { font-size: var(--fs-xl); }
 }
 
-/* ── Leistungstabelle & Pflegegrade – Responsive ─────────────────────────
+/* ── Leistungstabelle & Pflegegrade-Stepper – Responsive ─────────────────
    Leistungstabelle:
    ─  Mobile  (<680px):  horizontal scrollbar (min-width: 680px auf Tabelle)
    ─  Alle Breiten:      Wrap-Container scrollt, Tabelle behält Struktur
-   Pflegegrade-Grid: 5 Karten
-   ─  Mobile  (<640px):  1 Spalte
-   ─  Tablet  (≥640px):  2 Spalten, PG5 zentriert
-   ─  Desktop (≥900px):  3+2 via 6-Spalten-Raster
-   ─  Wide    (≥1024px): 5 in einer Reihe
+   Pflegegrade-Zeilen (Row-Layout):
+   ─  Mobile  (<480px):  Kompaktere Abstände, kleinere Bubble
+   ─  Desktop (≥900px):  Zeilen mit 3-Spalten-Grid (Header, Beschreibung, Leistungen)
+   ─  Wide    (≥1280px): Größere Schriften, mehr Luft
    ───────────────────────────────────────────────────────────────────────── */
 
-@media (min-width: 640px) {
-  /* Pflegegrade: 2-spaltig */
-  .pflegegrade-grid {
-    grid-template-columns: repeat(2, 1fr);
-    align-items: stretch;
+/* ── Mobile: Pflegegrad-Zeilen kompakter ───────────────────────────────── */
+@media (max-width: 479px) {
+  .pg-row {
+    padding: var(--spacing-md);
   }
 
-  /* Karte 5 (PG 5) zentriert in der unteren Zeile */
-  .pflegegrad-karte:nth-child(5) {
-    grid-column: 1 / -1;
-    max-width: calc(50% - var(--spacing-lg) / 2);
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
+  .pg-row__bubble {
+    width: 40px;
+    height: 40px;
+    font-size: 1.125rem;
+  }
+
+  .pg-row__title {
+    font-size: var(--fs-base);
   }
 }
 
+/* ── Desktop ab 900px: Zeilen-Grid mit Spalten ──────────────────────────── */
 @media (min-width: 900px) {
-  /* Pflegegrade: 3-spaltig – PG 1–3 oben, PG 4–5 unten zentriert */
-  .pflegegrade-grid {
-    grid-template-columns: repeat(6, 1fr);
+  .pg-row {
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--spacing-lg) var(--spacing-xl);
+    padding: var(--spacing-lg) var(--spacing-xl);
   }
 
-  .pflegegrad-karte:nth-child(1),
-  .pflegegrad-karte:nth-child(2),
-  .pflegegrad-karte:nth-child(3) {
-    grid-column: span 2;
+  .pg-row__header {
+    grid-column: 1;
+    min-width: 280px;
   }
 
-  .pflegegrad-karte:nth-child(4) {
-    grid-column: 1 / span 3;
+  .pg-row__beschreibung {
+    grid-column: 2;
   }
 
-  .pflegegrad-karte:nth-child(5) {
-    grid-column: 4 / span 3;
-    max-width: none;
-    margin-left: 0;
-    margin-right: 0;
-  }
-}
-
-@media (min-width: 1024px) {
-  /* Ab Desktop: alle 5 Pflegegrade in einer einzigen Reihe nebeneinander */
-  .pflegegrade-grid {
-    grid-template-columns: repeat(5, 1fr);
-    gap: var(--spacing-lg);
+  .pg-row__leistungen {
+    grid-column: 3;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--spacing-xs);
   }
 
-  /* Alle nth-child-Overrides zurücksetzen */
-  .pflegegrad-karte:nth-child(1),
-  .pflegegrad-karte:nth-child(2),
-  .pflegegrad-karte:nth-child(3),
-  .pflegegrad-karte:nth-child(4),
-  .pflegegrad-karte:nth-child(5) {
-    grid-column: auto;
-    max-width: none;
-    margin-left: 0;
-    margin-right: 0;
+  .pg-row__hinweis {
+    text-align: right;
   }
 }
 
@@ -630,11 +615,6 @@ body.nav-open .nav-overlay {
 }
 
 @media (min-width: 1280px) {
-  /* Mehr Luft auf großen Screens */
-  .pflegegrade-grid {
-    gap: var(--spacing-xl);
-  }
-
   /* Leistungstabelle: Betragsspalten etwas luftiger */
   .leistungs-tabelle__cell-betrag {
     padding: var(--spacing-xl) var(--spacing-lg);
@@ -642,6 +622,21 @@ body.nav-open .nav-overlay {
 
   .leistungs-tabelle__wert {
     font-size: 1.5rem;               /* 24px auf breiten Screens */
+  }
+
+  /* Pflegegrad-Zeilen: mehr Luft auf breiten Screens */
+  .pg-row {
+    padding: var(--spacing-xl) var(--spacing-2xl);
+  }
+
+  .pg-row__title {
+    font-size: var(--fs-xl);
+  }
+
+  .pg-row__bubble {
+    width: 56px;
+    height: 56px;
+    font-size: 1.5rem;
   }
 }
 

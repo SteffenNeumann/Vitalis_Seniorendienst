@@ -500,109 +500,161 @@
         <p class="section-header__text">Der Pflegegrad wird durch den Medizinischen Dienst (MD) anhand eines Punktesystems ermittelt. Je höher die Punktzahl, desto schwerwiegender die Beeinträchtigung – und desto höher die Leistungen der Pflegekasse.</p>
       </div>
 
-      <div class="pflegegrade-grid stagger-children" role="list">
+      <!-- ── Pflegegrade: Zeilenweise Übersicht ──────────── -->
+      <div class="pg-rows fade-in" role="list" aria-label="Die 5 Pflegegrade im Überblick">
 
-        <!-- Pflegegrad 1 -->
-        <article class="pflegegrad-karte pflegegrad-karte--pg1 fade-in" role="listitem">
-          <div class="pflegegrad-karte__nummer" aria-label="Pflegegrad 1">1</div>
-          <div class="pflegegrad-karte__content">
-            <h3 class="pflegegrad-karte__titel">Geringe Beeinträchtigung</h3>
-            <span class="pflegegrad-karte__punkte">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              12,5 – 27 Punkte
-            </span>
-            <p class="pflegegrad-karte__beschreibung">Selbstständigkeit ist größtenteils erhalten. Leichte Einschränkungen in einzelnen Bereichen, z.&nbsp;B. bei der Mobilität oder einzelnen Alltagsaktivitäten.</p>
-            <span class="pflegegrad-karte__hinweis">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              Entlastungsbetrag 125 &euro;/Monat
-            </span>
-            <div class="pflegegrad-karte__skala" aria-hidden="true">
-              <div class="pflegegrad-karte__skala-fill"></div>
+        <!-- PG 1 -->
+        <article class="pg-row pg-row--pg1" role="listitem">
+          <div class="pg-row__header">
+            <div class="pg-row__bubble pg-row__bubble--pg1" aria-hidden="true">1</div>
+            <div class="pg-row__title-group">
+              <h3 class="pg-row__title">Geringe Beeinträchtigung</h3>
+              <span class="pg-row__punkte">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                12,5 – 27 Punkte
+              </span>
+            </div>
+          </div>
+          <p class="pg-row__beschreibung">Selbstständigkeit ist größtenteils erhalten. Leichte Einschränkungen in einzelnen Bereichen, z.&nbsp;B. bei der Mobilität oder einzelnen Alltagsaktivitäten.</p>
+          <div class="pg-row__leistungen">
+            <div class="pg-row__chip pg-row__chip--primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>Entlastungsbetrag</span>
+              <strong>125 €/Mo.</strong>
+            </div>
+            <p class="pg-row__hinweis">Pflegegeld und Pflegesachleistungen erst ab Pflegegrad 2.</p>
+          </div>
+        </article>
+
+        <!-- PG 2 -->
+        <article class="pg-row pg-row--pg2" role="listitem">
+          <div class="pg-row__header">
+            <div class="pg-row__bubble pg-row__bubble--pg2" aria-hidden="true">2</div>
+            <div class="pg-row__title-group">
+              <h3 class="pg-row__title">Erhebliche Beeinträchtigung</h3>
+              <span class="pg-row__punkte">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                27 – 47,5 Punkte
+              </span>
+            </div>
+          </div>
+          <p class="pg-row__beschreibung">Selbstständigkeit ist erheblich eingeschränkt. In mehreren Bereichen (Mobilität, Selbstversorgung, Haushaltsführung) ist Unterstützung notwendig.</p>
+          <div class="pg-row__leistungen">
+            <div class="pg-row__chip pg-row__chip--primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>Entlastungsbetrag</span>
+              <strong>125 €/Mo.</strong>
+            </div>
+            <div class="pg-row__chip pg-row__chip--secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              <span>Pflegegeld</span>
+              <strong>332 €/Mo.</strong>
+            </div>
+            <div class="pg-row__chip pg-row__chip--secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+              <span>Pflegesachleistungen</span>
+              <strong>761 €/Mo.</strong>
             </div>
           </div>
         </article>
 
-        <!-- Pflegegrad 2 -->
-        <article class="pflegegrad-karte pflegegrad-karte--pg2 fade-in" role="listitem">
-          <div class="pflegegrad-karte__nummer" aria-label="Pflegegrad 2">2</div>
-          <div class="pflegegrad-karte__content">
-            <h3 class="pflegegrad-karte__titel">Erhebliche Beeinträchtigung</h3>
-            <span class="pflegegrad-karte__punkte">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              27 – 47,5 Punkte
-            </span>
-            <p class="pflegegrad-karte__beschreibung">Selbstständigkeit ist erheblich eingeschränkt. In mehreren Bereichen (Mobilität, Selbstversorgung, Haushaltsführung) ist Unterstützung notwendig.</p>
-            <span class="pflegegrad-karte__hinweis">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              Entlastungsbetrag + Pflegegeld 332&thinsp;&euro;/Mo.
-            </span>
-            <div class="pflegegrad-karte__skala" aria-hidden="true">
-              <div class="pflegegrad-karte__skala-fill"></div>
+        <!-- PG 3 -->
+        <article class="pg-row pg-row--pg3" role="listitem">
+          <div class="pg-row__header">
+            <div class="pg-row__bubble pg-row__bubble--pg3" aria-hidden="true">3</div>
+            <div class="pg-row__title-group">
+              <h3 class="pg-row__title">Schwere Beeinträchtigung</h3>
+              <span class="pg-row__punkte">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                47,5 – 70 Punkte
+              </span>
+            </div>
+          </div>
+          <p class="pg-row__beschreibung">Erhebliche Einschränkungen in der Selbstständigkeit. Umfangreiche Unterstützung bei der Körperpflege, Ernährung und bei allgemeinen Alltagsaktivitäten nötig.</p>
+          <div class="pg-row__leistungen">
+            <div class="pg-row__chip pg-row__chip--primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>Entlastungsbetrag</span>
+              <strong>125 €/Mo.</strong>
+            </div>
+            <div class="pg-row__chip pg-row__chip--secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              <span>Pflegegeld</span>
+              <strong>573 €/Mo.</strong>
+            </div>
+            <div class="pg-row__chip pg-row__chip--secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+              <span>Pflegesachleistungen</span>
+              <strong>1.432 €/Mo.</strong>
             </div>
           </div>
         </article>
 
-        <!-- Pflegegrad 3 -->
-        <article class="pflegegrad-karte pflegegrad-karte--pg3 fade-in" role="listitem">
-          <div class="pflegegrad-karte__nummer" aria-label="Pflegegrad 3">3</div>
-          <div class="pflegegrad-karte__content">
-            <h3 class="pflegegrad-karte__titel">Schwere Beeinträchtigung</h3>
-            <span class="pflegegrad-karte__punkte">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              47,5 – 70 Punkte
-            </span>
-            <p class="pflegegrad-karte__beschreibung">Erhebliche Einschränkungen in der Selbstständigkeit. Umfangreiche Unterstützung bei der Körperpflege, Ernährung und bei allgemeinen Alltagsaktivitäten nötig.</p>
-            <span class="pflegegrad-karte__hinweis">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              Entlastungsbetrag + Pflegegeld 573&thinsp;&euro;/Mo.
-            </span>
-            <div class="pflegegrad-karte__skala" aria-hidden="true">
-              <div class="pflegegrad-karte__skala-fill"></div>
+        <!-- PG 4 -->
+        <article class="pg-row pg-row--pg4" role="listitem">
+          <div class="pg-row__header">
+            <div class="pg-row__bubble pg-row__bubble--pg4" aria-hidden="true">4</div>
+            <div class="pg-row__title-group">
+              <h3 class="pg-row__title">Schwerste Beeinträchtigung</h3>
+              <span class="pg-row__punkte">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                70 – 90 Punkte
+              </span>
+            </div>
+          </div>
+          <p class="pg-row__beschreibung">Weitgehender Verlust der Selbstständigkeit. Die Person ist auf umfassende Hilfe bei nahezu allen Verrichtungen des täglichen Lebens angewiesen.</p>
+          <div class="pg-row__leistungen">
+            <div class="pg-row__chip pg-row__chip--primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>Entlastungsbetrag</span>
+              <strong>125 €/Mo.</strong>
+            </div>
+            <div class="pg-row__chip pg-row__chip--secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              <span>Pflegegeld</span>
+              <strong>765 €/Mo.</strong>
+            </div>
+            <div class="pg-row__chip pg-row__chip--secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+              <span>Pflegesachleistungen</span>
+              <strong>1.778 €/Mo.</strong>
             </div>
           </div>
         </article>
 
-        <!-- Pflegegrad 4 -->
-        <article class="pflegegrad-karte pflegegrad-karte--pg4 fade-in" role="listitem">
-          <div class="pflegegrad-karte__nummer" aria-label="Pflegegrad 4">4</div>
-          <div class="pflegegrad-karte__content">
-            <h3 class="pflegegrad-karte__titel">Schwerste Beeinträchtigung</h3>
-            <span class="pflegegrad-karte__punkte">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              70 – 90 Punkte
-            </span>
-            <p class="pflegegrad-karte__beschreibung">Weitgehender Verlust der Selbstständigkeit. Die Person ist auf umfassende Hilfe bei nahezu allen Verrichtungen des täglichen Lebens angewiesen.</p>
-            <span class="pflegegrad-karte__hinweis">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              Entlastungsbetrag + Pflegegeld 765&thinsp;&euro;/Mo.
-            </span>
-            <div class="pflegegrad-karte__skala" aria-hidden="true">
-              <div class="pflegegrad-karte__skala-fill"></div>
+        <!-- PG 5 -->
+        <article class="pg-row pg-row--pg5" role="listitem">
+          <div class="pg-row__header">
+            <div class="pg-row__bubble pg-row__bubble--pg5" aria-hidden="true">5</div>
+            <div class="pg-row__title-group">
+              <h3 class="pg-row__title">Schwerste Beeinträchtigung mit besonderem Bedarf</h3>
+              <span class="pg-row__punkte">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                90 – 100 Punkte
+              </span>
+            </div>
+          </div>
+          <p class="pg-row__beschreibung">Vollständiger Verlust der Selbstständigkeit mit außergewöhnlichem und besonders hohem Versorgungsbedarf – z.&nbsp;B. bei lebenserhaltenden Maßnahmen.</p>
+          <div class="pg-row__leistungen">
+            <div class="pg-row__chip pg-row__chip--primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>Entlastungsbetrag</span>
+              <strong>125 €/Mo.</strong>
+            </div>
+            <div class="pg-row__chip pg-row__chip--secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              <span>Pflegegeld</span>
+              <strong>947 €/Mo.</strong>
+            </div>
+            <div class="pg-row__chip pg-row__chip--secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+              <span>Pflegesachleistungen</span>
+              <strong>2.200 €/Mo.</strong>
             </div>
           </div>
         </article>
 
-        <!-- Pflegegrad 5 -->
-        <article class="pflegegrad-karte pflegegrad-karte--pg5 fade-in" role="listitem">
-          <div class="pflegegrad-karte__nummer" aria-label="Pflegegrad 5">5</div>
-          <div class="pflegegrad-karte__content">
-            <h3 class="pflegegrad-karte__titel">Schwerste Beeinträchtigung<br>mit besonderem Bedarf</h3>
-            <span class="pflegegrad-karte__punkte">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              90 – 100 Punkte
-            </span>
-            <p class="pflegegrad-karte__beschreibung">Vollständiger Verlust der Selbstständigkeit mit außergewöhnlichem und besonders hohem Versorgungsbedarf – z.&nbsp;B. bei lebenserhaltenden Maßnahmen.</p>
-            <span class="pflegegrad-karte__hinweis">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              Entlastungsbetrag + Pflegegeld 947&thinsp;&euro;/Mo.
-            </span>
-            <div class="pflegegrad-karte__skala" aria-hidden="true">
-              <div class="pflegegrad-karte__skala-fill"></div>
-            </div>
-          </div>
-        </article>
-
-      </div><!-- /.pflegegrade-grid -->
+      </div><!-- /.pg-rows -->
 
       <p class="text-center" style="margin-top: var(--spacing-2xl); font-size: var(--fs-base); color: var(--color-text-muted);">
         Noch keinen Pflegegrad? Wir begleiten Sie bei der Antragstellung und bereiten Sie auf den Besuch des Medizinischen Dienstes vor.
