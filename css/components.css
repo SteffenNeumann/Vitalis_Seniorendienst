@@ -1886,9 +1886,7 @@
 
 /* .page-header--leistungen erbt #5079A5 vom Standard */
 
-.page-header--karriere {
-  background: linear-gradient(135deg, #5079A5 0%, #C97B3A 100%); /* Aufbruch, Energie */
-}
+/* .page-header--karriere erbt #5079A5 vom Standard */
 
 .page-header--legal {
   background: #6B8CAA; /* Gedämpfter Blauton für rechtliche Seiten */
