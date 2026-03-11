@@ -310,172 +310,178 @@
         <p class="section-header__text">Je nach Pflegegrad haben Sie Anspruch auf verschiedene Leistungen der Pflegekasse. Hier ein Überblick der wichtigsten Beträge (Stand 2024/2025):</p>
       </div>
 
-      <div class="leistungs-grid stagger-children" role="list">
+      <!-- Leistungstabelle: vollbreit, alle PG-Beträge vergleichbar -->
+      <div class="leistungs-tabelle-wrap fade-in" role="region" aria-label="Leistungsübersicht nach Pflegegrad">
 
-        <!-- Karte 1: Entlastungsbetrag §45b -->
-        <article class="leistungs-karte fade-in" role="listitem">
-          <div class="leistungs-karte__header">
-            <div class="leistungs-karte__icon" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-            <div class="leistungs-karte__meta">
-              <span class="leistungs-badge leistungs-badge--primary">Vitalis-Leistung abrechenbar</span>
-              <h3 class="leistungs-karte__title">Entlastungsbetrag §45b SGB XI</h3>
-              <p class="leistungs-karte__subtitle">Für Betreuungsleistungen wie Alltagsbegleitung durch Vitalis</p>
-            </div>
-          </div>
-          <div class="leistungs-karte__betraege" aria-label="Beträge nach Pflegegrad">
-            <div class="leistungs-karte__betrag">
-              <span class="leistungs-karte__betrag-label">PG 1</span>
-              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">125 &euro;</span>
-              <span class="leistungs-karte__betrag-unit">/Monat</span>
-            </div>
-            <div class="leistungs-karte__betrag">
-              <span class="leistungs-karte__betrag-label">PG 2</span>
-              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">125 &euro;</span>
-              <span class="leistungs-karte__betrag-unit">/Monat</span>
-            </div>
-            <div class="leistungs-karte__betrag">
-              <span class="leistungs-karte__betrag-label">PG 3</span>
-              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">125 &euro;</span>
-              <span class="leistungs-karte__betrag-unit">/Monat</span>
-            </div>
-            <div class="leistungs-karte__betrag">
-              <span class="leistungs-karte__betrag-label">PG 4</span>
-              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">125 &euro;</span>
-              <span class="leistungs-karte__betrag-unit">/Monat</span>
-            </div>
-            <div class="leistungs-karte__betrag">
-              <span class="leistungs-karte__betrag-label">PG 5</span>
-              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">125 &euro;</span>
-              <span class="leistungs-karte__betrag-unit">/Monat</span>
-            </div>
-          </div>
-        </article>
+        <table class="leistungs-tabelle" aria-describedby="tabelle-heading">
+          <thead>
+            <tr>
+              <th scope="col" class="leistungs-tabelle__col-label">Leistung</th>
+              <th scope="col" class="leistungs-tabelle__col-pg">PG&nbsp;1</th>
+              <th scope="col" class="leistungs-tabelle__col-pg">PG&nbsp;2</th>
+              <th scope="col" class="leistungs-tabelle__col-pg">PG&nbsp;3</th>
+              <th scope="col" class="leistungs-tabelle__col-pg">PG&nbsp;4</th>
+              <th scope="col" class="leistungs-tabelle__col-pg">PG&nbsp;5</th>
+            </tr>
+          </thead>
+          <tbody>
 
-        <!-- Karte 2: Pflegegeld -->
-        <article class="leistungs-karte fade-in" role="listitem">
-          <div class="leistungs-karte__header">
-            <div class="leistungs-karte__icon" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            </div>
-            <div class="leistungs-karte__meta">
-              <span class="leistungs-badge leistungs-badge--secondary">Für pflegende Angehörige</span>
-              <h3 class="leistungs-karte__title">Pflegegeld</h3>
-              <p class="leistungs-karte__subtitle">Bei häuslicher Pflege durch Angehörige (nicht kombinierbar mit Sachleistungen in voller Höhe)</p>
-            </div>
-          </div>
-          <div class="leistungs-karte__betraege" aria-label="Beträge nach Pflegegrad">
-            <div class="leistungs-karte__betrag">
-              <span class="leistungs-karte__betrag-label">PG 1</span>
-              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--na">–</span>
-              <span class="leistungs-karte__betrag-unit">&nbsp;</span>
-            </div>
-            <div class="leistungs-karte__betrag">
-              <span class="leistungs-karte__betrag-label">PG 2</span>
-              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--secondary">332 &euro;</span>
-              <span class="leistungs-karte__betrag-unit">/Monat</span>
-            </div>
-            <div class="leistungs-karte__betrag">
-              <span class="leistungs-karte__betrag-label">PG 3</span>
-              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--secondary">573 &euro;</span>
-              <span class="leistungs-karte__betrag-unit">/Monat</span>
-            </div>
-            <div class="leistungs-karte__betrag">
-              <span class="leistungs-karte__betrag-label">PG 4</span>
-              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--secondary">765 &euro;</span>
-              <span class="leistungs-karte__betrag-unit">/Monat</span>
-            </div>
-            <div class="leistungs-karte__betrag">
-              <span class="leistungs-karte__betrag-label">PG 5</span>
-              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--secondary">947 &euro;</span>
-              <span class="leistungs-karte__betrag-unit">/Monat</span>
-            </div>
-          </div>
-        </article>
+            <!-- Zeile 1: Entlastungsbetrag – Vitalis-Leistung hervorgehoben -->
+            <tr class="leistungs-tabelle__row leistungs-tabelle__row--highlight">
+              <td class="leistungs-tabelle__cell-label">
+                <div class="leistungs-tabelle__leistung">
+                  <div class="leistungs-tabelle__icon leistungs-tabelle__icon--primary" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  </div>
+                  <div class="leistungs-tabelle__leistung-text">
+                    <span class="leistungs-badge leistungs-badge--primary">Vitalis-Leistung abrechenbar</span>
+                    <strong class="leistungs-tabelle__leistung-name">Entlastungsbetrag §45b SGB XI</strong>
+                    <span class="leistungs-tabelle__leistung-desc">Für Betreuungsleistungen wie Alltagsbegleitung durch Vitalis</span>
+                  </div>
+                </div>
+              </td>
+              <td class="leistungs-tabelle__cell-betrag" data-pg="PG 1">
+                <span class="leistungs-tabelle__wert leistungs-tabelle__wert--primary">125 &euro;</span>
+                <span class="leistungs-tabelle__einheit">/Monat</span>
+              </td>
+              <td class="leistungs-tabelle__cell-betrag" data-pg="PG 2">
+                <span class="leistungs-tabelle__wert leistungs-tabelle__wert--primary">125 &euro;</span>
+                <span class="leistungs-tabelle__einheit">/Monat</span>
+              </td>
+              <td class="leistungs-tabelle__cell-betrag" data-pg="PG 3">
+                <span class="leistungs-tabelle__wert leistungs-tabelle__wert--primary">125 &euro;</span>
+                <span class="leistungs-tabelle__einheit">/Monat</span>
+              </td>
+              <td class="leistungs-tabelle__cell-betrag" data-pg="PG 4">
+                <span class="leistungs-tabelle__wert leistungs-tabelle__wert--primary">125 &euro;</span>
+                <span class="leistungs-tabelle__einheit">/Monat</span>
+              </td>
+              <td class="leistungs-tabelle__cell-betrag" data-pg="PG 5">
+                <span class="leistungs-tabelle__wert leistungs-tabelle__wert--primary">125 &euro;</span>
+                <span class="leistungs-tabelle__einheit">/Monat</span>
+              </td>
+            </tr>
 
-        <!-- Karte 3: Pflegesachleistungen -->
-        <article class="leistungs-karte fade-in" role="listitem">
-          <div class="leistungs-karte__header">
-            <div class="leistungs-karte__icon" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-            </div>
-            <div class="leistungs-karte__meta">
-              <span class="leistungs-badge leistungs-badge--primary">Professionelle Pflege</span>
-              <h3 class="leistungs-karte__title">Pflegesachleistungen</h3>
-              <p class="leistungs-karte__subtitle">Für professionelle ambulante Pflegedienstleistungen</p>
-            </div>
-          </div>
-          <div class="leistungs-karte__betraege" aria-label="Beträge nach Pflegegrad">
-            <div class="leistungs-karte__betrag">
-              <span class="leistungs-karte__betrag-label">PG 1</span>
-              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--na">–</span>
-              <span class="leistungs-karte__betrag-unit">&nbsp;</span>
-            </div>
-            <div class="leistungs-karte__betrag">
-              <span class="leistungs-karte__betrag-label">PG 2</span>
-              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">761 &euro;</span>
-              <span class="leistungs-karte__betrag-unit">/Monat</span>
-            </div>
-            <div class="leistungs-karte__betrag">
-              <span class="leistungs-karte__betrag-label">PG 3</span>
-              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">1.432 &euro;</span>
-              <span class="leistungs-karte__betrag-unit">/Monat</span>
-            </div>
-            <div class="leistungs-karte__betrag">
-              <span class="leistungs-karte__betrag-label">PG 4</span>
-              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">1.778 &euro;</span>
-              <span class="leistungs-karte__betrag-unit">/Monat</span>
-            </div>
-            <div class="leistungs-karte__betrag">
-              <span class="leistungs-karte__betrag-label">PG 5</span>
-              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--highlight">2.200 &euro;</span>
-              <span class="leistungs-karte__betrag-unit">/Monat</span>
-            </div>
-          </div>
-        </article>
+            <!-- Zeile 2: Pflegegeld -->
+            <tr class="leistungs-tabelle__row">
+              <td class="leistungs-tabelle__cell-label">
+                <div class="leistungs-tabelle__leistung">
+                  <div class="leistungs-tabelle__icon leistungs-tabelle__icon--secondary" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                  </div>
+                  <div class="leistungs-tabelle__leistung-text">
+                    <span class="leistungs-badge leistungs-badge--secondary">Für pflegende Angehörige</span>
+                    <strong class="leistungs-tabelle__leistung-name">Pflegegeld</strong>
+                    <span class="leistungs-tabelle__leistung-desc">Bei häuslicher Pflege durch Angehörige (nicht kombinierbar mit Sachleistungen in voller Höhe)</span>
+                  </div>
+                </div>
+              </td>
+              <td class="leistungs-tabelle__cell-betrag leistungs-tabelle__cell-betrag--na" data-pg="PG 1">
+                <span class="leistungs-tabelle__wert leistungs-tabelle__wert--na" aria-label="nicht verfügbar">–</span>
+              </td>
+              <td class="leistungs-tabelle__cell-betrag" data-pg="PG 2">
+                <span class="leistungs-tabelle__wert leistungs-tabelle__wert--secondary">332 &euro;</span>
+                <span class="leistungs-tabelle__einheit">/Monat</span>
+              </td>
+              <td class="leistungs-tabelle__cell-betrag" data-pg="PG 3">
+                <span class="leistungs-tabelle__wert leistungs-tabelle__wert--secondary">573 &euro;</span>
+                <span class="leistungs-tabelle__einheit">/Monat</span>
+              </td>
+              <td class="leistungs-tabelle__cell-betrag" data-pg="PG 4">
+                <span class="leistungs-tabelle__wert leistungs-tabelle__wert--secondary">765 &euro;</span>
+                <span class="leistungs-tabelle__einheit">/Monat</span>
+              </td>
+              <td class="leistungs-tabelle__cell-betrag" data-pg="PG 5">
+                <span class="leistungs-tabelle__wert leistungs-tabelle__wert--secondary">947 &euro;</span>
+                <span class="leistungs-tabelle__einheit">/Monat</span>
+              </td>
+            </tr>
 
-        <!-- Karte 4: Verhinderungspflege -->
-        <article class="leistungs-karte leistungs-karte--secondary fade-in" role="listitem">
-          <div class="leistungs-karte__header">
-            <div class="leistungs-karte__icon" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
-            <div class="leistungs-karte__meta">
-              <span class="leistungs-badge leistungs-badge--secondary">PG 2–5</span>
-              <h3 class="leistungs-karte__title">Verhinderungspflege</h3>
-              <p class="leistungs-karte__subtitle">Wenn die Pflegeperson verhindert ist (Urlaub, Krankheit)</p>
-            </div>
-          </div>
-          <div class="leistungs-karte__betraege leistungs-karte__betraege--unified" aria-label="Jahresbetrag">
-            <div class="leistungs-karte__betrag">
-              <span class="leistungs-karte__betrag-label">Jahresbetrag für PG 2–5</span>
-              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--secondary">bis zu 1.612 &euro; / Jahr</span>
-            </div>
-          </div>
-        </article>
+            <!-- Zeile 3: Pflegesachleistungen -->
+            <tr class="leistungs-tabelle__row">
+              <td class="leistungs-tabelle__cell-label">
+                <div class="leistungs-tabelle__leistung">
+                  <div class="leistungs-tabelle__icon leistungs-tabelle__icon--primary" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                  </div>
+                  <div class="leistungs-tabelle__leistung-text">
+                    <span class="leistungs-badge leistungs-badge--primary">Professionelle Pflege</span>
+                    <strong class="leistungs-tabelle__leistung-name">Pflegesachleistungen</strong>
+                    <span class="leistungs-tabelle__leistung-desc">Für professionelle ambulante Pflegedienstleistungen</span>
+                  </div>
+                </div>
+              </td>
+              <td class="leistungs-tabelle__cell-betrag leistungs-tabelle__cell-betrag--na" data-pg="PG 1">
+                <span class="leistungs-tabelle__wert leistungs-tabelle__wert--na" aria-label="nicht verfügbar">–</span>
+              </td>
+              <td class="leistungs-tabelle__cell-betrag" data-pg="PG 2">
+                <span class="leistungs-tabelle__wert leistungs-tabelle__wert--primary">761 &euro;</span>
+                <span class="leistungs-tabelle__einheit">/Monat</span>
+              </td>
+              <td class="leistungs-tabelle__cell-betrag" data-pg="PG 3">
+                <span class="leistungs-tabelle__wert leistungs-tabelle__wert--primary">1.432 &euro;</span>
+                <span class="leistungs-tabelle__einheit">/Monat</span>
+              </td>
+              <td class="leistungs-tabelle__cell-betrag" data-pg="PG 4">
+                <span class="leistungs-tabelle__wert leistungs-tabelle__wert--primary">1.778 &euro;</span>
+                <span class="leistungs-tabelle__einheit">/Monat</span>
+              </td>
+              <td class="leistungs-tabelle__cell-betrag" data-pg="PG 5">
+                <span class="leistungs-tabelle__wert leistungs-tabelle__wert--primary">2.200 &euro;</span>
+                <span class="leistungs-tabelle__einheit">/Monat</span>
+              </td>
+            </tr>
 
-        <!-- Karte 5: Kurzzeitpflege -->
-        <article class="leistungs-karte leistungs-karte--amber fade-in" role="listitem">
-          <div class="leistungs-karte__header">
-            <div class="leistungs-karte__icon" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            </div>
-            <div class="leistungs-karte__meta">
-              <span class="leistungs-badge leistungs-badge--amber">PG 2–5</span>
-              <h3 class="leistungs-karte__title">Kurzzeitpflege</h3>
-              <p class="leistungs-karte__subtitle">Vorübergehende stationäre Pflege (z.&nbsp;B. nach Krankenhausaufenthalt)</p>
-            </div>
-          </div>
-          <div class="leistungs-karte__betraege leistungs-karte__betraege--unified" aria-label="Jahresbetrag">
-            <div class="leistungs-karte__betrag">
-              <span class="leistungs-karte__betrag-label">Jahresbetrag für PG 2–5</span>
-              <span class="leistungs-karte__betrag-wert leistungs-karte__betrag-wert--amber">bis zu 1.774 &euro;&thinsp;/ Jahr</span>
-            </div>
-          </div>
-        </article>
+            <!-- Zeile 4: Verhinderungspflege (Jahresbetrag → colspan) -->
+            <tr class="leistungs-tabelle__row leistungs-tabelle__row--jahresbetrag">
+              <td class="leistungs-tabelle__cell-label">
+                <div class="leistungs-tabelle__leistung">
+                  <div class="leistungs-tabelle__icon leistungs-tabelle__icon--secondary" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  </div>
+                  <div class="leistungs-tabelle__leistung-text">
+                    <span class="leistungs-badge leistungs-badge--secondary">PG 2–5</span>
+                    <strong class="leistungs-tabelle__leistung-name">Verhinderungspflege</strong>
+                    <span class="leistungs-tabelle__leistung-desc">Wenn die Pflegeperson verhindert ist (Urlaub, Krankheit)</span>
+                  </div>
+                </div>
+              </td>
+              <td class="leistungs-tabelle__cell-betrag leistungs-tabelle__cell-betrag--na" data-pg="PG 1">
+                <span class="leistungs-tabelle__wert leistungs-tabelle__wert--na" aria-label="nicht verfügbar">–</span>
+              </td>
+              <td class="leistungs-tabelle__cell-betrag leistungs-tabelle__cell-betrag--jahresspanne" colspan="4" data-pg="PG 2–5">
+                <span class="leistungs-tabelle__wert leistungs-tabelle__wert--secondary">bis zu 1.612 &euro;</span>
+                <span class="leistungs-tabelle__einheit">/Jahr &middot; gilt für PG 2–5</span>
+              </td>
+            </tr>
 
-      </div><!-- /.leistungs-grid -->
+            <!-- Zeile 5: Kurzzeitpflege (Jahresbetrag → colspan) -->
+            <tr class="leistungs-tabelle__row leistungs-tabelle__row--jahresbetrag">
+              <td class="leistungs-tabelle__cell-label">
+                <div class="leistungs-tabelle__leistung">
+                  <div class="leistungs-tabelle__icon leistungs-tabelle__icon--amber" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                  </div>
+                  <div class="leistungs-tabelle__leistung-text">
+                    <span class="leistungs-badge leistungs-badge--amber">PG 2–5</span>
+                    <strong class="leistungs-tabelle__leistung-name">Kurzzeitpflege</strong>
+                    <span class="leistungs-tabelle__leistung-desc">Vorübergehende stationäre Pflege (z.&nbsp;B. nach Krankenhausaufenthalt)</span>
+                  </div>
+                </div>
+              </td>
+              <td class="leistungs-tabelle__cell-betrag leistungs-tabelle__cell-betrag--na" data-pg="PG 1">
+                <span class="leistungs-tabelle__wert leistungs-tabelle__wert--na" aria-label="nicht verfügbar">–</span>
+              </td>
+              <td class="leistungs-tabelle__cell-betrag leistungs-tabelle__cell-betrag--jahresspanne leistungs-tabelle__cell-betrag--jahresspanne-amber" colspan="4" data-pg="PG 2–5">
+                <span class="leistungs-tabelle__wert leistungs-tabelle__wert--amber">bis zu 1.774 &euro;</span>
+                <span class="leistungs-tabelle__einheit">/Jahr &middot; gilt für PG 2–5</span>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+
+      </div><!-- /.leistungs-tabelle-wrap -->
 
       <p class="leistungs-grid__hinweis text-center">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;margin-right:4px;" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
