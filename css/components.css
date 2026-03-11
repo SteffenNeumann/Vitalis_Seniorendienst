@@ -2902,7 +2902,7 @@
   background: linear-gradient(160deg, #f0f4ff 0%, #eaf5f0 100%);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
-  border-left: 4px solid var(--color-primary);
+  border: 1px solid rgba(47, 93, 255, 0.15);
 }
 
 .wizard__aside-icon {

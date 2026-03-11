@@ -684,8 +684,7 @@ body.nav-open .nav-overlay {
   }
 
   .wizard__step-aside {
-    border-left: none;
-    border-top: 4px solid var(--color-primary);
+    border: 1px solid rgba(47, 93, 255, 0.15);
   }
 
   .wizard {
