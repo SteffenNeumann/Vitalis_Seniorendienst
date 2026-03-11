@@ -2163,20 +2163,9 @@
   position: relative;
 }
 
-/* Linke Akzentlinie über ein Pseudo-Element auf der ersten TD */
+/* Linke Akzentlinie entfernt – war unharmonisch */
 .leistungs-tabelle__row--highlight .leistungs-tabelle__cell-label {
   position: relative;
-}
-
-.leistungs-tabelle__row--highlight .leistungs-tabelle__cell-label::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: var(--color-primary);
-  border-radius: 0;
 }
 
 .leistungs-tabelle__row--highlight:hover {
