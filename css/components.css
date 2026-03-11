@@ -1431,6 +1431,7 @@
   font-size: var(--fs-base);
   color: rgba(255, 255, 255, 0.65);
   line-height: var(--lh-relaxed);
+  margin-top: var(--spacing-lg);
   margin-bottom: var(--spacing-xl);
 }
 

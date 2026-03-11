@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.vitalis-seniorendienst.de)",
+      "Bash(ls -la /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html && echo \"\" && ls -la /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/css/ && echo \"\" && ls -la /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/js/)",
+      "Bash(grep -l 'engagement-banner' /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html | wc -l)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(find . -name \"*.html\" -exec sed -i '' 's/fill=\"#2f5dff\"/fill=\"#4b916d\"/g' {} +)",
+      "Bash(\\\\ sed:*)",
+      "Bash(\\\\ for:*)",
+      "Bash(grep -rn '#f9ad4d' *.html | wc -l)",
+      "Bash(grep -rn 'href=\"#\"' /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html)",
+      "Bash(grep -rn '<img' /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html | grep -v 'alt=' | grep -v 'vitalis-logo')",
+      "Bash(grep -rn '<img[^>]*>' /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html | grep -v 'alt=' | grep -v 'vitalis-logo')",
+      "Bash(grep -rn 'loading=\"lazy\"' /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html | wc -l && grep -rn '<img' /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html | grep -v 'loading=' | grep -v 'vitalis-logo')",
+      "Bash(grep -l \"footer__logo\" /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html)",
+      "Bash(grep -rn \"nav__logo-icon\\\\|nav__logo-text\\\\|footer__logo-text\" /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html)",
+      "Bash(grep -rn \"vitalis-logo.avif\" /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html | wc -l)",
+      "Bash(for f:*)",
+      "Bash(grep -l \"Zugelassener Anbieter\" /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html)",
+      "Bash(grep -c \"Zugelassener Anbieter nach\" /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html)"
+    ]
+  }
+}
