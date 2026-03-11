@@ -18,14 +18,19 @@ Vollständige, responsive Unternehmenswebsite für die **Vitalis Seniorendienst 
 ## Farbpalette (Markenfarben)
 | Farbe | Hex | Verwendung |
 |-------|-----|-----------|
-| Primary Blue | `#2f5dff` | Buttons, Links, Akzente |
-| Deep Blue | `#0f2ccf` | Hover-States, Header-Gradient |
-| Sage Green | `#4b916d` | Erfolg, Vertrauen, sekundäre Akzente |
-| Off-White | `#f1f0ef` | Sektionshintergründe |
-| Near Black | `#151414` | Primärtext |
-| Dark Gray | `#383838` | Sekundärtext |
+| Primary Blue | `#3b6cb7` | Buttons, Links, Hauptakzent |
+| Primary Dark | `#2a518f` | Hover-States, Gradient-Endpunkt |
+| Primary Light | `#e8eef8` | Helle Hintergründe, Akzent-BG |
+| Secondary Teal | `#4a9d8f` | Sekundärakzent, Badges |
+| Accent Amber | `#f4a261` | Highlights, Sterne, Kontrastakzent |
+| Text Dark | `#1e2d45` | Primärtext |
+| Text Muted | `#5a6a80` | Sekundärtext |
+| BG Light | `#f0f4fb` | Helles Blau-Grau für Sektionen |
+| BG Cream | `#f5f1eb` | Warmes Creme |
+| BG Warm | `#faf8f5` | Warmes Off-White |
+| Border | `#d0dae8` | Rahmen, Trennlinien |
 | White | `#ffffff` | Karten, Formulare |
-| Amber | `#f9ad4d` | Highlights, Sterne (Testimonials) |
+| Success | `#2e7d5e` | Erfolgsmeldungen |
 
 ## Seiten-Struktur
 | Datei | Seite | Status |
