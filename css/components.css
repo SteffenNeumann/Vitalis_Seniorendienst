@@ -1884,9 +1884,7 @@
 
 /* Alle Standard-Varianten erben #5079A5 vom .page-header – keine Regel nötig */
 
-.page-header--leistungen {
-  background: #3D7A7A; /* Teal: steht für Gesundheit, Fürsorge */
-}
+/* .page-header--leistungen erbt #5079A5 vom Standard */
 
 .page-header--karriere {
   background: linear-gradient(135deg, #5079A5 0%, #C97B3A 100%); /* Aufbruch, Energie */
