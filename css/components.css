@@ -412,8 +412,8 @@
 .hero {
   position: relative;
   background:
-    linear-gradient(135deg, rgba(28,43,58,0.82) 0%, rgba(42,65,99,0.75) 50%, rgba(80,121,165,0.60) 100%),
-    url('../images/hero-homecare.jpeg') center center / cover no-repeat;
+    linear-gradient(105deg, rgba(28,43,58,0.90) 0%, rgba(42,65,99,0.80) 40%, rgba(80,121,165,0.45) 100%),
+    url('../images/hero-homecare.jpeg') center 30% / cover no-repeat;
   color: var(--color-white);
   padding: var(--spacing-5xl) 0;
   overflow: hidden;
@@ -444,9 +444,10 @@
 
 .hero__inner {
   position: relative;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   align-items: center;
+  gap: var(--spacing-3xl);
   text-align: center;
   max-width: var(--container-max);
   margin: 0 auto;
@@ -455,6 +456,42 @@
 
 .hero__content {
   max-width: 720px;
+}
+
+/* --- Hero Stats (rechte Spalte Desktop) --- */
+.hero__stats {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-md);
+}
+
+.hero__stat {
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md) var(--spacing-lg);
+  min-width: 120px;
+  flex: 1;
+  text-align: center;
+}
+
+.hero__stat-number {
+  display: block;
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-white);
+  line-height: 1.1;
+}
+
+.hero__stat-label {
+  display: block;
+  font-size: var(--fs-sm);
+  color: rgba(255,255,255,0.75);
+  margin-top: 2px;
 }
 
 .hero__badge {
@@ -516,29 +553,9 @@
   flex-shrink: 0;
 }
 
+/* .hero__image is no longer used — image is handled as CSS background on .hero */
 .hero__image {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero__image img {
-  width: 100%;
-  max-width: 520px;
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-xl);
-  animation: heroImageIn 1.2s ease-out both;
-}
-
-@keyframes heroImageIn {
-  from {
-    opacity: 0;
-    transform: scale(1.05);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  display: none;
 }
 
 /* --- Section Header --- */
@@ -1280,19 +1297,22 @@
 }
 
 .step__number {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80px;
-  height: 80px;
+  line-height: 1;
+  text-align: center;
+  flex-shrink: 0;
   margin: 0 auto var(--spacing-lg);
-  background: var(--color-primary);
-  color: var(--color-white);
-  font-family: var(--font-heading);
-  font-size: var(--fs-3xl);
-  font-weight: var(--fw-bold);
-  border-radius: var(--radius-circle);
   box-shadow: var(--shadow-primary);
+  /* Kein padding, kein letter-spacing der verschiebt */
 }
 
 .step__title {
@@ -1618,8 +1638,62 @@
 .page-header {
   background: linear-gradient(135deg, #3D6089 0%, #5079A5 100%);
   color: var(--color-white);
-  padding: var(--spacing-4xl) 0 var(--spacing-3xl);
+  padding: var(--spacing-4xl) 0 calc(var(--spacing-3xl) + 48px); /* Platz für Wave */
   text-align: center;
+  position: relative;
+}
+
+/* Dekorativer Wave-Divider am unteren Rand */
+.page-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: var(--color-white);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+
+/* --- Page-Header Varianten (eine Klasse pro Seite) --- */
+/* ueber-uns */
+.page-header--ueber-uns {
+  background: linear-gradient(120deg, #1C2B3A 0%, #5079A5 100%);
+}
+
+/* leistungen */
+.page-header--leistungen {
+  background: linear-gradient(135deg, #2A4163 0%, #3D8A8A 100%);
+}
+
+/* kostenuebernahme */
+.page-header--kosten {
+  background: linear-gradient(150deg, #1C2B3A 0%, #5079A5 80%, #3D8A8A 100%);
+}
+
+/* faq */
+.page-header--faq {
+  background: linear-gradient(120deg, #2A4163 0%, #5079A5 100%);
+}
+
+/* kontakt */
+.page-header--kontakt {
+  background: linear-gradient(135deg, #1C2B3A 0%, #3D6089 100%);
+}
+
+/* standorte */
+.page-header--standorte {
+  background: linear-gradient(140deg, #2A4163 0%, #5079A5 60%, #3D8A8A 100%);
+}
+
+/* karriere */
+.page-header--karriere {
+  background: linear-gradient(135deg, #1C2B3A 0%, #C97B3A 150%);
+}
+
+/* datenschutz / impressum: neutral */
+.page-header--legal {
+  background: linear-gradient(135deg, #2A3F5A 0%, #5079A5 100%);
 }
 
 .page-header__title {

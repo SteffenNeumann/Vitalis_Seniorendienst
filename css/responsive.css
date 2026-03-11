@@ -104,14 +104,7 @@ body.nav-open .nav-overlay {
 .hero__inner {
   grid-template-columns: 1fr;
   gap: var(--spacing-2xl);
-}
-
-.hero__image {
-  order: -1;
-}
-
-.hero__image img {
-  max-width: 100%;
+  text-align: center;
 }
 
 .hero__actions {
@@ -125,6 +118,19 @@ body.nav-open .nav-overlay {
 .hero__trust {
   flex-direction: column;
   gap: var(--spacing-md);
+}
+
+/* Stats: auf Mobile als Row mit Wrap */
+.hero__stats {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero__stat {
+  min-width: 120px;
+  flex: 1;
+  text-align: center;
 }
 
 .trust-bar__inner {
@@ -366,11 +372,24 @@ body.nav-open .nav-overlay {
   }
 
   .hero__inner {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.2fr 0.8fr;
+    text-align: left;
   }
 
-  .hero__image {
-    order: 0;
+  .hero__content {
+    max-width: 620px;
+  }
+
+  .hero__stats {
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+  }
+
+  .hero__stat {
+    min-width: 180px;
+    flex: 0 0 auto;
+    text-align: left;
   }
 
   .hero__trust {
