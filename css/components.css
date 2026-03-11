@@ -1872,9 +1872,16 @@
   background: var(--color-bg-light);
 }
 .bewertung-section__inner {
-  max-width: 480px;
+  max-width: 900px;
   margin: 0 auto;
   text-align: center;
+  min-height: 120px;
+}
+
+#sorglospflege-banner-vitalis-seniorendienst-gmbh {
+  display: block;
+  width: 100%;
+  min-height: 80px;
 }
 
 /* --- Mid-Page CTA Banner --- */
