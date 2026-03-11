@@ -20,7 +20,10 @@
       "Bash(grep -rn \"vitalis-logo.avif\" /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html | wc -l)",
       "Bash(for f:*)",
       "Bash(grep -l \"Zugelassener Anbieter\" /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html)",
-      "Bash(grep -c \"Zugelassener Anbieter nach\" /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html)"
+      "Bash(grep -c \"Zugelassener Anbieter nach\" /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html)",
+      "WebFetch(domain:steffenneumann.github.io)",
+      "Bash(git remote:*)",
+      "Bash(gh run:*)"
     ]
   }
 }
