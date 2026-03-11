@@ -23,7 +23,9 @@
       "Bash(grep -c \"Zugelassener Anbieter nach\" /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html)",
       "WebFetch(domain:steffenneumann.github.io)",
       "Bash(git remote:*)",
-      "Bash(gh run:*)"
+      "Bash(gh run:*)",
+      "Bash(grep -n \"page-header.*style\\\\|style.*page-header\" /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html)",
+      "Bash(grep -rn \"page-header--\" /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html)"
     ]
   }
 }

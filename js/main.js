@@ -232,3 +232,82 @@ document.addEventListener('click', e => {
     closeEngagementBanner();
   }
 });
+
+/* ══ VOLLBILD-SUCHE ══════════════════════════════════════════ */
+(function() {
+  const PAGES = [
+    { title: 'Startseite', desc: 'Herzliche Alltagsbegleitung & Haushaltshilfe für Senioren', url: 'index.html', keywords: 'start home alltagsbegleitung senioren betreuung' },
+    { title: 'Unsere Leistungen', desc: 'Haushaltshilfe, Begleitung, Arzttermine, Einkaufen & mehr', url: 'leistungen.html', keywords: 'leistungen haushalt kochen einkaufen arzt spazieren begleitung reinigung' },
+    { title: 'Über uns', desc: 'Das Team von Vitalis Seniorendienst – wer wir sind', url: 'ueber-uns.html', keywords: 'über uns team mitarbeiter werte qualität geschichte' },
+    { title: 'Kostenübernahme', desc: 'Pflegekasse übernimmt Kosten – §45a SGB XI erklärt', url: 'kostenuebernahme.html', keywords: 'kosten pflegekasse krankenkasse 45a sgb xi finanzierung kostenlos' },
+    { title: 'Häufige Fragen', desc: 'Antworten auf die häufigsten Fragen zur Betreuung', url: 'faq.html', keywords: 'faq fragen antworten hilfe wie was wann wo' },
+    { title: 'Kontakt', desc: 'Kostenlose Beratung – wir rufen Sie zurück', url: 'kontakt.html', keywords: 'kontakt anrufen email telefon termin beratung formular' },
+    { title: 'Standorte', desc: 'Einzugsgebiet: Erding, München, Freising & Umgebung', url: 'standorte.html', keywords: 'standorte erding münchen freising ebersberg landshut garching unterföhring gebiet' },
+    { title: 'Karriere', desc: 'Jobs & Stellen bei Vitalis Seniorendienst', url: 'karriere.html', keywords: 'karriere job stelle bewerbung alltagsbegleiter arbeit' },
+    { title: 'Datenschutz', desc: 'Datenschutzerklärung', url: 'datenschutz.html', keywords: 'datenschutz dsgvo privacy' },
+    { title: 'Impressum', desc: 'Impressum & rechtliche Angaben', url: 'impressum.html', keywords: 'impressum rechtlich kontakt firma' }
+  ];
+
+  const overlay  = document.getElementById('searchOverlay');
+  const input    = document.getElementById('searchInput');
+  const results  = document.getElementById('searchResults');
+  const empty    = document.getElementById('searchEmpty');
+  const openBtn  = document.getElementById('searchOpen');
+  const closeBtn = document.getElementById('searchClose');
+
+  if (!overlay || !openBtn) return;
+
+  function openSearch() {
+    overlay.removeAttribute('hidden');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => input && input.focus(), 50);
+    renderResults('');
+  }
+
+  function closeSearch() {
+    overlay.setAttribute('hidden', '');
+    document.body.style.overflow = '';
+    if (input) input.value = '';
+  }
+
+  function renderResults(query) {
+    results.innerHTML = '';
+    empty.hidden = true;
+    const q = query.trim().toLowerCase();
+    if (!q) return;
+    const hits = PAGES.filter(p =>
+      p.title.toLowerCase().includes(q) ||
+      p.desc.toLowerCase().includes(q) ||
+      p.keywords.includes(q)
+    );
+    if (!hits.length) { empty.hidden = false; return; }
+    hits.forEach(p => {
+      const li = document.createElement('li');
+      li.setAttribute('role', 'option');
+      li.innerHTML = `<a href="${p.url}"><span class="search-result__title">${p.title}</span><span class="search-result__desc">${p.desc}</span></a>`;
+      results.appendChild(li);
+    });
+  }
+
+  openBtn.addEventListener('click', openSearch);
+  closeBtn.addEventListener('click', closeSearch);
+
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) closeSearch();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !overlay.hasAttribute('hidden')) closeSearch();
+    if ((e.key === 'k' && (e.metaKey || e.ctrlKey))) { e.preventDefault(); openSearch(); }
+  });
+
+  if (input) {
+    input.addEventListener('input', () => renderResults(input.value));
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        const first = results.querySelector('a');
+        if (first) first.click();
+      }
+    });
+  }
+})();
