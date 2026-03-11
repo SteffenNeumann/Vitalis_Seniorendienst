@@ -1594,6 +1594,14 @@
   color: rgba(255, 255, 255, 0.4);
 }
 
+.page-header p {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: var(--fs-lg);
+  max-width: 640px;
+  margin: var(--spacing-md) auto 0;
+  line-height: var(--lh-relaxed);
+}
+
 /* --- Acquisition / Pruefung Section --- */
 .acquisition-box {
   background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-dark) 100%);
