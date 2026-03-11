@@ -1604,7 +1604,7 @@
   color: rgba(255, 255, 255, 0.65);
   line-height: var(--lh-relaxed);
   margin-top: var(--spacing-lg);
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
 }
 
 .footer__social {
@@ -1692,6 +1692,51 @@
 
 .footer__contact-item a:hover {
   color: var(--color-white);
+}
+
+/* --- muenchen.de Badge im Footer --- */
+.footer__muenchen-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: var(--radius-lg);
+  padding: 10px 14px;
+  text-decoration: none;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+  margin-top: var(--spacing-md);
+}
+.footer__muenchen-badge:hover {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.30);
+}
+.footer__muenchen-badge-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.footer__muenchen-badge-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.footer__muenchen-badge-stars {
+  color: #f9c74f;
+  font-size: 13px;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+.footer__muenchen-badge-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.70);
+  line-height: 1.4;
+}
+.footer__muenchen-badge-label strong {
+  color: rgba(255,255,255,0.90);
+  font-weight: 600;
 }
 
 .footer__bottom {

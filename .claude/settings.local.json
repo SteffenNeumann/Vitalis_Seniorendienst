@@ -25,7 +25,8 @@
       "Bash(git remote:*)",
       "Bash(gh run:*)",
       "Bash(grep -n \"page-header.*style\\\\|style.*page-header\" /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html)",
-      "Bash(grep -rn \"page-header--\" /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html)"
+      "Bash(grep -rn \"page-header--\" /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html)",
+      "WebFetch(domain:branchenbuch.portal.muenchen.de)"
     ]
   }
 }
