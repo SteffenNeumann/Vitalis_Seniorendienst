@@ -170,6 +170,35 @@
     </div>
   </section>
 
+  <!-- PLZ-CHECKER ──────────────────────────────────────────────────── -->
+  <section class="section bg-section" id="plz-checker" aria-labelledby="plz-checker-heading">
+    <div class="container">
+      <div class="plz-checker">
+        <div class="plz-checker__inner">
+          <label class="plz-checker__label" for="plzInput" id="plz-checker-heading">
+            Ist mein Ort dabei?
+          </label>
+          <p class="plz-checker__hint">Geben Sie Ihre Postleitzahl ein – wir zeigen Ihnen sofort, ob Vitalis in Ihrer Region tätig ist.</p>
+          <div class="plz-checker__field-wrap" role="search">
+            <input
+              class="plz-checker__input"
+              type="text"
+              id="plzInput"
+              name="plz"
+              inputmode="numeric"
+              maxlength="5"
+              placeholder="z.B. 85435"
+              autocomplete="postal-code"
+              aria-label="Postleitzahl eingeben"
+              aria-describedby="plz-feedback"
+            />
+          </div>
+          <div class="plz-checker__feedback" id="plz-feedback" aria-live="polite" aria-atomic="true"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- KARTE ────────────────────────────────────────────── -->
   <section class="section" aria-labelledby="karte-heading">
     <div class="container">
@@ -330,11 +359,11 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 <script>
   (function() {
-    var map = L.map('map', { scrollWheelZoom: false }).setView([48.3, 11.9], 9);
+    window.vitalisMap = L.map('map', { scrollWheelZoom: false }).setView([48.3, 11.9], 9);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       maxZoom: 18
-    }).addTo(map);
+    }).addTo(window.vitalisMap);
 
     var vitalisIcon = L.divIcon({
       className: 'custom-marker',
@@ -356,12 +385,12 @@
 
     orte.forEach(function(ort) {
       L.marker([ort[0], ort[1]], { icon: vitalisIcon })
-        .addTo(map)
+        .addTo(window.vitalisMap)
         .bindPopup('<strong style="color:#5079A5;">' + ort[2] + '</strong><br/>Vitalis Seniorendienst ist hier für Sie tätig.');
     });
 
     /* Sicherstellen dass die Karte korrekte Dimensionen kennt */
-    setTimeout(function() { map.invalidateSize(); }, 250);
+    setTimeout(function() { window.vitalisMap.invalidateSize(); }, 250);
   })();
 </script>
 </body>

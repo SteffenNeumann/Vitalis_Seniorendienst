@@ -175,7 +175,51 @@
           <h2 class="contact-form__title">Kostenlose Beratung anfragen</h2>
           <p class="contact-form__subtitle">Wir rufen Sie zurück – bequem und unverbindlich.</p>
 
+          <!-- BETREFF-VORAUSWAHL -->
+          <div class="kontakt-vorauswahl" id="kontakt-vorauswahl" aria-label="Anfragetyp wählen">
+            <p class="kontakt-vorauswahl__heading">Was können wir für Sie tun?</p>
+            <div class="kontakt-vorauswahl__buttons">
+              <button
+                type="button"
+                class="kontakt-vorauswahl__btn"
+                data-subject="Hilfe für mich – Vitalis Seniorendienst"
+                data-prefill="Ich suche Unterstützung für meinen Alltag und würde gerne mehr über Ihre Leistungen erfahren."
+                aria-pressed="false"
+              >
+                <span class="kontakt-vorauswahl__btn-icon" aria-hidden="true">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                </span>
+                <span class="kontakt-vorauswahl__btn-label">Ich suche Hilfe für mich</span>
+              </button>
+              <button
+                type="button"
+                class="kontakt-vorauswahl__btn"
+                data-subject="Hilfe für Angehörige – Vitalis Seniorendienst"
+                data-prefill="Ich suche Unterstützung für meine Mutter / meinen Vater und möchte gerne eine Beratung vereinbaren."
+                aria-pressed="false"
+              >
+                <span class="kontakt-vorauswahl__btn-icon" aria-hidden="true">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </span>
+                <span class="kontakt-vorauswahl__btn-label">Ich suche Hilfe für Angehörige</span>
+              </button>
+              <button
+                type="button"
+                class="kontakt-vorauswahl__btn"
+                data-subject="Bewerbung Betreuungskraft – Vitalis Seniorendienst"
+                data-prefill="Ich interessiere mich für eine Stelle als Alltagsbegleiter/in bei Vitalis und möchte mehr Informationen erhalten."
+                aria-pressed="false"
+              >
+                <span class="kontakt-vorauswahl__btn-icon" aria-hidden="true">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+                </span>
+                <span class="kontakt-vorauswahl__btn-label">Ich möchte als Betreuungskraft arbeiten</span>
+              </button>
+            </div>
+          </div>
+
           <form id="contact-form" data-action="https://formspree.io/f/PLATZHALTER" novalidate>
+            <input type="hidden" name="_subject" id="form-subject" value="Kontaktanfrage – Vitalis Seniorendienst" />
 
             <div class="form-group">
               <label class="form-label" for="name">Name <span class="required" aria-label="Pflichtfeld">*</span></label>

@@ -260,6 +260,63 @@
           <p class="target-card__text">Nach einer Operation oder einem langen Aufenthalt helfen wir beim sanften Wiedereinstieg in den Alltag zu Hause.</p>
         </div>
       </div>
+
+      <!-- FÜR WEN – MINI-CHECK -->
+      <div class="fuer-wen" id="fuer-wen" style="margin-top: var(--spacing-3xl);">
+        <div class="fuer-wen__buttons">
+          <button
+            type="button"
+            class="fuer-wen__btn"
+            data-target="fuer-wen-panel-selbst"
+            aria-expanded="false"
+            aria-controls="fuer-wen-panel-selbst"
+          >
+            <span class="fuer-wen__btn-icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            </span>
+            Ich suche Hilfe für mich
+          </button>
+          <button
+            type="button"
+            class="fuer-wen__btn"
+            data-target="fuer-wen-panel-angehoerige"
+            aria-expanded="false"
+            aria-controls="fuer-wen-panel-angehoerige"
+          >
+            <span class="fuer-wen__btn-icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </span>
+            Ich suche Hilfe für meine Angehörigen
+          </button>
+        </div>
+
+        <div class="fuer-wen__panel" id="fuer-wen-panel-selbst" aria-hidden="true">
+          <div class="fuer-wen__panel-inner">
+            <p class="fuer-wen__panel-text">
+              Haben Sie bereits einen Pflegegrad? Die Kosten können vollständig übernommen werden –
+              der Entlastungsbetrag nach §45b beträgt 125&nbsp;€/Monat und ist für unsere Leistungen einsetzbar.
+            </p>
+            <a href="kostenuebernahme.html" class="btn btn-primary btn-lg">
+              Anspruch prüfen
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="fuer-wen__panel" id="fuer-wen-panel-angehoerige" aria-hidden="true">
+          <div class="fuer-wen__panel-inner">
+            <p class="fuer-wen__panel-text">
+              Viele Angehörige unterschätzen die Leistungen der Pflegekasse. Unser Wizard zeigt Ihnen
+              in 2 Minuten, welche Leistungen möglich sind – und wie hoch die monatliche Übernahme sein kann.
+            </p>
+            <a href="kostenuebernahme.html" class="btn btn-primary btn-lg">
+              Jetzt Anspruch prüfen
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 

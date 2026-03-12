@@ -171,6 +171,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── Leistungs-Finder Wizard ────────────────────────────
   initLeistungsWizard();
 
+  // ── Neue interaktive Features ─────────────────────────
+  initPlzChecker();
+  initKontaktVorauswahl();
+  initFuerWenCheck();
+
 });
 
 // ── Engagement Banner ─────────────────────────────────────
@@ -701,3 +706,196 @@ function initLeistungsWizard() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 })();
+
+// ============================================================
+// PLZ-CHECKER (standorte.html)
+// ============================================================
+function initPlzChecker() {
+  const input    = document.getElementById('plzInput');
+  const feedback = document.getElementById('plz-feedback');
+  if (!input || !feedback) return;
+
+  const PLZ_DATA = {
+    // Landkreis Erding
+    '85435': { name: 'Landkreis Erding',    coords: [48.3059, 12.0714] },
+    '85445': { name: 'Landkreis Erding',    coords: [48.3059, 12.0714] },
+    '85452': { name: 'Landkreis Erding',    coords: [48.3059, 12.0714] },
+    '85456': { name: 'Landkreis Erding',    coords: [48.3059, 12.0714] },
+    '85457': { name: 'Landkreis Erding',    coords: [48.3059, 12.0714] },
+    '85461': { name: 'Landkreis Erding',    coords: [48.3059, 12.0714] },
+    '85462': { name: 'Landkreis Erding',    coords: [48.3059, 12.0714] },
+    '85463': { name: 'Landkreis Erding',    coords: [48.3059, 12.0714] },
+    '85464': { name: 'Landkreis Erding',    coords: [48.3059, 12.0714] },
+    '85465': { name: 'Landkreis Erding',    coords: [48.3059, 12.0714] },
+    // Landkreis Ebersberg
+    '85560': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
+    '85567': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
+    '85570': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
+    '85579': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
+    '85586': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
+    '85591': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
+    '85598': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
+    '85599': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
+    '85604': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
+    '85614': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
+    '85622': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
+    '85625': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
+    '85630': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
+    '85635': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
+    '85640': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
+    // Landkreis Freising
+    '85354': { name: 'Landkreis Freising',  coords: [48.3975, 11.7251] },
+    '85356': { name: 'Landkreis Freising',  coords: [48.3975, 11.7251] },
+    '85368': { name: 'Landkreis Freising',  coords: [48.3975, 11.7251] },
+    '85375': { name: 'Landkreis Freising',  coords: [48.3975, 11.7251] },
+    '85386': { name: 'Landkreis Freising',  coords: [48.3975, 11.7251] },
+    '85391': { name: 'Landkreis Freising',  coords: [48.3975, 11.7251] },
+    '85395': { name: 'Landkreis Freising',  coords: [48.3975, 11.7251] },
+    // Landkreis Moosburg
+    '85405': { name: 'Landkreis Moosburg',  coords: [48.4655, 11.9338] },
+    '85416': { name: 'Landkreis Moosburg',  coords: [48.4655, 11.9338] },
+    '85417': { name: 'Landkreis Moosburg',  coords: [48.4655, 11.9338] },
+    // Landkreis Landshut
+    '84028': { name: 'Landkreis Landshut',  coords: [48.5369, 12.1545] },
+    '84030': { name: 'Landkreis Landshut',  coords: [48.5369, 12.1545] },
+    '84032': { name: 'Landkreis Landshut',  coords: [48.5369, 12.1545] },
+    '84034': { name: 'Landkreis Landshut',  coords: [48.5369, 12.1545] },
+    '84036': { name: 'Landkreis Landshut',  coords: [48.5369, 12.1545] },
+    // Einzelorte
+    '85737': { name: 'Ismaning',            coords: [48.2286, 11.6826] },
+    '85748': { name: 'Garching',            coords: [48.2489, 11.6529] },
+    '85774': { name: 'Unterföhring',        coords: [48.1855, 11.7218] }
+  };
+
+  function checkPlz(val) {
+    feedback.className = 'plz-checker__feedback';
+    if (val.length < 5) {
+      feedback.innerHTML = '';
+      return;
+    }
+    const entry = PLZ_DATA[val];
+    if (entry) {
+      feedback.classList.add('plz-checker__feedback--match');
+      feedback.innerHTML =
+        '<div class="plz-checker__result plz-checker__result--match">' +
+          '<span class="plz-checker__result-icon" aria-hidden="true">\u2713</span>' +
+          '<div class="plz-checker__result-content">' +
+            '<strong>Ja! Wir sind in Ihrer Region t\u00e4tig.</strong>' +
+            '<span class="plz-checker__region-name">' + entry.name + '</span>' +
+            '<a href="kontakt.html" class="btn btn-primary btn-sm">Jetzt kostenlos beraten lassen</a>' +
+          '</div>' +
+        '</div>';
+      if (window.vitalisMap) {
+        var mapEl = document.getElementById('map');
+        if (mapEl) {
+          mapEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          setTimeout(function() { window.vitalisMap.flyTo(entry.coords, 12); }, 400);
+        }
+      }
+    } else {
+      feedback.classList.add('plz-checker__feedback--no-match');
+      feedback.innerHTML =
+        '<div class="plz-checker__result plz-checker__result--no-match">' +
+          '<span class="plz-checker__result-icon" aria-hidden="true">\u25cb</span>' +
+          '<div class="plz-checker__result-content">' +
+            '<strong>Diese PLZ liegt noch nicht in unserem Einzugsgebiet.</strong>' +
+            '<span>Sprechen Sie uns an \u2013 unser Gebiet w\u00e4chst stetig.</span>' +
+            '<a href="tel:+4989XXXXXXXX" class="btn btn-phone btn-sm">Jetzt anrufen</a>' +
+          '</div>' +
+        '</div>';
+    }
+  }
+
+  input.addEventListener('input', function() {
+    input.value = input.value.replace(/\D/g, '').slice(0, 5);
+    checkPlz(input.value);
+  });
+}
+
+// ============================================================
+// KONTAKT-VORAUSWAHL (kontakt.html)
+// ============================================================
+function initKontaktVorauswahl() {
+  var container = document.getElementById('kontakt-vorauswahl');
+  if (!container) return;
+
+  var buttons  = container.querySelectorAll('[data-prefill]');
+  var textarea = document.getElementById('message');
+  var subject  = document.getElementById('form-subject');
+
+  buttons.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var wasActive = btn.classList.contains('is-active');
+
+      // Deactivate all
+      buttons.forEach(function(b) {
+        b.classList.remove('is-active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+
+      if (!wasActive) {
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-pressed', 'true');
+
+        if (textarea) {
+          textarea.value = btn.dataset.prefill;
+          textarea.dispatchEvent(new Event('input'));
+        }
+        if (subject) {
+          subject.value = btn.dataset.subject;
+        }
+
+        if (textarea) {
+          var offset = 100;
+          var top = textarea.getBoundingClientRect().top + window.scrollY - offset;
+          setTimeout(function() {
+            window.scrollTo({ top: top, behavior: 'smooth' });
+            setTimeout(function() { textarea.focus(); }, 350);
+          }, 50);
+        }
+      } else {
+        // Deactivate: clear fields
+        if (textarea) textarea.value = '';
+        if (subject) subject.value = 'Kontaktanfrage \u2013 Vitalis Seniorendienst';
+      }
+    });
+  });
+}
+
+// ============================================================
+// FÜR-WEN MINI-CHECK (index.html)
+// ============================================================
+function initFuerWenCheck() {
+  var container = document.getElementById('fuer-wen');
+  if (!container) return;
+
+  var buttons = container.querySelectorAll('.fuer-wen__btn[data-target]');
+
+  buttons.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var targetId = btn.dataset.target;
+      var panel    = document.getElementById(targetId);
+      var isOpen   = btn.getAttribute('aria-expanded') === 'true';
+
+      // Close all (FAQ-accordion pattern)
+      buttons.forEach(function(b) {
+        b.classList.remove('is-active');
+        b.setAttribute('aria-expanded', 'false');
+      });
+      container.querySelectorAll('.fuer-wen__panel').forEach(function(p) {
+        p.classList.remove('is-open');
+        p.style.maxHeight = null;
+        p.setAttribute('aria-hidden', 'true');
+      });
+
+      // Open target if it was closed
+      if (!isOpen && panel) {
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-expanded', 'true');
+        panel.classList.add('is-open');
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        panel.setAttribute('aria-hidden', 'false');
+      }
+    });
+  });
+}
