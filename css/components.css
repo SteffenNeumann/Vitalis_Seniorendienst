@@ -4078,3 +4078,45 @@
   margin: 0;
   line-height: var(--lh-normal);
 }
+
+/* ============================================================
+   BACK TO TOP BUTTON
+   ============================================================ */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 1.5rem;
+  z-index: 900;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(47, 93, 255, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: var(--color-primary-dark, #0f2ccf);
+}
+
+/* On mobile, place above the floating phone button */
+@media (max-width: 768px) {
+  .back-to-top {
+    bottom: 5.5rem;
+  }
+}

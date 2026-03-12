@@ -685,3 +685,19 @@ function initLeistungsWizard() {
     tabs[nextIndex].focus();
   });
 })();
+
+// ============================================================
+// BACK TO TOP BUTTON
+// ============================================================
+(function () {
+  const backToTopBtn = document.getElementById('backToTop');
+  if (!backToTopBtn) return;
+
+  window.addEventListener('scroll', () => {
+    backToTopBtn.classList.toggle('is-visible', window.scrollY > 300);
+  }, { passive: true });
+
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
