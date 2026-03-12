@@ -684,7 +684,13 @@ body.nav-open .nav-overlay {
   }
 
   .wizard__step-aside {
-    border: 1px solid rgba(47, 93, 255, 0.15);
+    /* Akzentlinie bleibt auf Mobile erhalten, restliche Seiten dünn */
+    border-left: 4px solid var(--color-primary);
+    border-top: 1px solid rgba(47, 93, 255, 0.15);
+    border-right: 1px solid rgba(47, 93, 255, 0.15);
+    border-bottom: 1px solid rgba(47, 93, 255, 0.15);
+    /* Auf Mobile weniger Innenabstand – Panel erscheint unterhalb der Buttons */
+    padding: var(--spacing-xl);
   }
 
   .wizard {

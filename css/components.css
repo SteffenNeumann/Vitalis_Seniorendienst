@@ -2816,12 +2816,30 @@
   margin-bottom: var(--spacing-3xl);
 }
 
+/*
+ * wizard__progress-track: Wrapper, der Balken und Bubbles übereinanderlegt.
+ * Der Balken liegt als normaler Block-Element, die Bubbles werden absolut
+ * auf dem Balken positioniert, gleichmäßig über die volle Breite verteilt.
+ */
+.wizard__progress-track {
+  position: relative;
+  /* Vertikaler Platz, damit die Bubbles (36px hoch) nicht abgeschnitten werden */
+  padding: 18px 0;
+  margin-bottom: var(--spacing-sm);
+}
+
 .wizard__progress-bar {
   height: 6px;
   background: var(--color-border);
   border-radius: var(--radius-pill);
   overflow: hidden;
-  margin-bottom: var(--spacing-md);
+  /* Vertikale Mitte des track-Containers – Bubbles sitzen darauf */
+  position: absolute;
+  top: 50%;
+  left: 16px;   /* halbe Bubble-Breite – Balken startet/endet an Bubble-Mitte */
+  right: 16px;
+  transform: translateY(-50%);
+  margin: 0;
 }
 
 .wizard__progress-fill {
@@ -2831,10 +2849,17 @@
   transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/*
+ * Bubbles: gleichmäßig über die volle Breite verteilt.
+ * justify-content: space-between sorgt dafür, dass Bubble 1 am linken Rand,
+ * Bubble 3 am rechten Rand sitzt – kein Leerraum rechts.
+ */
 .wizard__progress-steps {
   display: flex;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-sm);
+  justify-content: space-between;
+  align-items: center;
+  position: relative; /* liegt über dem absolut positionierten Balken */
+  z-index: 1;
 }
 
 .wizard__progress-step {
@@ -2849,13 +2874,18 @@
   font-family: var(--font-body);
   background: var(--color-border);
   color: var(--color-text-light);
-  transition: background var(--transition-base), color var(--transition-base);
+  transition: background var(--transition-base), color var(--transition-base),
+              box-shadow var(--transition-base);
   flex-shrink: 0;
+  /* Weißer Ring damit die Bubble visuell vom Balken abgehoben wird */
+  outline: 3px solid var(--color-white);
+  outline-offset: 0;
 }
 
 .wizard__progress-step.is-active {
   background: var(--color-primary);
   color: var(--color-white);
+  box-shadow: 0 0 0 4px rgba(47, 93, 255, 0.18);
 }
 
 .wizard__progress-step.is-done {
@@ -2887,7 +2917,7 @@
 #wizardStep1:not([hidden]),
 #wizardStep3:not([hidden]) {
   display: grid;
-  grid-template-columns: 1fr 280px;
+  grid-template-columns: 1fr 300px;
   gap: var(--spacing-2xl);
   align-items: stretch;
 }
@@ -2911,8 +2941,13 @@
 .wizard__step-aside {
   background: linear-gradient(160deg, #f0f4ff 0%, #eaf5f0 100%);
   border-radius: var(--radius-lg);
-  padding: var(--spacing-xl);
-  border: 1px solid rgba(47, 93, 255, 0.15);
+  padding: var(--spacing-2xl);
+  /* Linke Akzentlinie macht das Panel als intentionales UI-Element erkennbar */
+  border-left: 4px solid var(--color-primary);
+  border-top: 1px solid rgba(47, 93, 255, 0.15);
+  border-right: 1px solid rgba(47, 93, 255, 0.15);
+  border-bottom: 1px solid rgba(47, 93, 255, 0.15);
+  box-shadow: 0 2px 12px rgba(47, 93, 255, 0.08), 0 1px 4px rgba(0, 0, 0, 0.06);
 }
 
 .wizard__aside-icon {
