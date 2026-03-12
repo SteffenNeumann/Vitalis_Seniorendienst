@@ -31,6 +31,11 @@
   display: flex;
 }
 
+/* Search-Button: Kein display:none auf Mobile – Symbol bleibt zugänglich */
+.nav__search-btn {
+  display: flex;
+}
+
 /* Mobile Navigation: Offener Zustand */
 body.nav-open {
   overflow: hidden;
@@ -399,6 +404,10 @@ body.nav-open .nav-overlay {
   .feature-section {
     grid-template-columns: 1fr 1fr;
     gap: var(--spacing-3xl);
+  }
+
+  .feature-section__content {
+    max-width: 540px;
   }
 
   .feature-section--reverse {
@@ -964,5 +973,548 @@ body.nav-open .nav-overlay {
 
   .widerspruch-cta {
     padding: var(--spacing-lg);
+  }
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   MOBILE LAYOUT AUDIT FIXES
+   Vollständige Überarbeitung aller mobilen Layout-Probleme.
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Trust Bar: Overflow auf sehr kleinen Screens verhindern ── */
+@media (max-width: 479px) {
+  .trust-bar {
+    overflow: hidden;
+  }
+
+  .trust-bar__inner {
+    padding: var(--spacing-xs) var(--container-padding);
+  }
+
+  /* Trust-Bar-Texte dürfen wrappen, damit nichts abgeschnitten wird */
+  .trust-bar__item {
+    white-space: normal;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+/* ── Nav: Such-Overlay auf Mobile korrekt positionieren ─────── */
+@media (max-width: 767px) {
+  /* Suche nimmt auf Mobile die verfügbare Breite ein,
+     Logo (links) + Hamburger (rechts) bleiben erreichbar.
+     ca. 130px für Logo + Hamburger reservieren */
+  .nav.is-searching .nav__search-wrap {
+    width: calc(100% - 130px);
+    right: calc(var(--container-padding) + 48px);
+  }
+
+  /* Nav Actions: Suchbutton bleibt sichtbar, alle anderen Aktionen versteckt */
+  .nav__actions {
+    gap: var(--spacing-xs);
+  }
+
+  /* Floating Phone Button + Back-to-top: Kein Überlappen */
+  .back-to-top {
+    bottom: 5.5rem; /* Bereits in components.css, hier bekräftigt */
+    right: 1.25rem;
+    width: 48px;
+    height: 48px;
+  }
+
+  .floating-phone-btn {
+    bottom: 1.5rem;
+    right: 1.25rem;
+    width: 56px;
+    height: 56px;
+  }
+
+  /* Standorte Karte: Höhe auf Mobile reduzieren */
+  #map {
+    height: 320px !important;
+  }
+
+  /* Engagement Banner: volle Breite auf kleinen Screens */
+  .engagement-banner {
+    padding: var(--spacing-md);
+  }
+
+  /* Midpage CTA: Padding im Container statt außerhalb */
+  .midpage-cta {
+    margin: var(--spacing-2xl) 0;
+    padding: var(--spacing-xl) var(--spacing-lg);
+  }
+
+  /* CTA Section: weniger vertikales Padding auf Mobile */
+  .cta-section {
+    padding: var(--spacing-3xl) 0;
+  }
+
+  .cta-section__title {
+    font-size: var(--fs-3xl);
+  }
+
+  /* Acquisition-Box: Padding reduzieren */
+  .acquisition-box {
+    padding: var(--spacing-2xl) var(--spacing-xl);
+  }
+
+  .acquisition-box__title {
+    font-size: var(--fs-2xl);
+  }
+
+  /* Feature-Section: Gap auf Mobile reduzieren */
+  .feature-section {
+    gap: var(--spacing-2xl);
+  }
+
+  /* Vorteile-Item: Kompakteres Layout */
+  .vorteile-item {
+    padding: var(--spacing-lg);
+    gap: var(--spacing-md);
+  }
+
+  /* Section Header: Schrift und Abstand auf Mobile anpassen */
+  .section-header__text {
+    font-size: var(--fs-base);
+  }
+
+  /* Feature-Card: Padding reduzieren */
+  .feature-card {
+    padding: var(--spacing-xl);
+  }
+
+  /* Testimonial-Card: Padding reduzieren */
+  .testimonial-card {
+    padding: var(--spacing-xl);
+  }
+
+  /* Target-Card: Padding reduzieren */
+  .target-card {
+    padding: var(--spacing-xl);
+  }
+
+  /* Footer Contact-Item: nowrap aufheben */
+  .footer__contact-item {
+    white-space: normal;
+  }
+
+  /* Footer: Marken-Bereich zentrieren */
+  .footer__brand {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .footer__logo {
+    justify-content: center;
+  }
+
+  .footer__social {
+    justify-content: center;
+  }
+
+  /* Section-Wave: Kein Leerraum durch falsche Höhenberechnung */
+  .section-wave {
+    height: 40px;
+  }
+
+  /* Hero Stats: Kompaktere Karten auf Mobile */
+  .hero__stat {
+    padding: var(--spacing-sm) var(--spacing-md);
+    min-width: 100px;
+  }
+
+  .hero__stat-number {
+    font-size: var(--fs-xl);
+  }
+
+  .hero__stat-label {
+    font-size: var(--fs-xs);
+  }
+
+  /* Hero Subtitle: Schriftgröße anpassen */
+  .hero__subtitle {
+    font-size: var(--fs-base);
+  }
+
+  /* Hero Badge: kleinere Padding auf Mobile */
+  .hero__badge {
+    font-size: var(--fs-xs);
+    padding: 6px var(--spacing-md);
+  }
+
+  /* Steps Nummerkreise: Größe auf Mobile */
+  .step__number {
+    width: 56px;
+    height: 56px;
+    font-size: var(--fs-lg);
+  }
+
+  /* Wizard Buttons: Mindestbreite sicherstellen */
+  .wizard__result-actions .btn {
+    min-height: 52px;
+  }
+
+  /* Contact Form: Padding reduzieren */
+  .contact-form {
+    padding: var(--spacing-xl);
+  }
+
+  /* Hinweis-Box: Padding reduzieren */
+  .hinweis-box {
+    padding: var(--spacing-xl);
+  }
+}
+
+/* ── Sehr kleine Screens (<480px): Extra-Komprimierung ─────── */
+@media (max-width: 479px) {
+  /* Nav: Logo-Bild etwas kleiner damit Platz für Hamburger */
+  .nav__logo-img {
+    height: 36px;
+  }
+
+  .nav__inner {
+    gap: var(--spacing-xs);
+  }
+
+  /* Hero: Noch kompakteres Padding */
+  .hero {
+    padding: var(--spacing-2xl) 0;
+  }
+
+  .hero__title {
+    font-size: var(--fs-3xl);
+  }
+
+  /* Section-Header: kompakter */
+  .section-header {
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  /* Sections: Weniger vertikales Padding */
+  .section {
+    padding-top: var(--spacing-2xl);
+    padding-bottom: var(--spacing-2xl);
+  }
+
+  .section-sm {
+    padding-top: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+  }
+
+  /* Feature-Card: Noch kompakter */
+  .feature-card {
+    padding: var(--spacing-lg);
+  }
+
+  .feature-card__icon {
+    width: 52px;
+    height: 52px;
+  }
+
+  .feature-card__title {
+    font-size: var(--fs-lg);
+  }
+
+  /* Testimonial-Card: Kompakt */
+  .testimonial-card {
+    padding: var(--spacing-lg);
+  }
+
+  /* Vorteile */
+  .vorteile-item {
+    padding: var(--spacing-md);
+    gap: var(--spacing-sm);
+  }
+
+  .vorteile-item__icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* Target Cards */
+  .target-card {
+    padding: var(--spacing-lg);
+  }
+
+  .target-card__icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: var(--spacing-md);
+  }
+
+  /* CTA Section */
+  .cta-section {
+    padding: var(--spacing-2xl) 0;
+  }
+
+  .cta-section__text {
+    font-size: var(--fs-base);
+  }
+
+  .cta-section__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cta-section__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Acquisition Box */
+  .acquisition-box {
+    padding: var(--spacing-xl) var(--spacing-lg);
+    border-radius: var(--radius-lg);
+  }
+
+  /* Midpage CTA */
+  .midpage-cta {
+    padding: var(--spacing-lg);
+    margin: var(--spacing-xl) 0;
+  }
+
+  .midpage-cta__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .midpage-cta__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* FAQ Item Question: Smaller padding */
+  .faq-item__question {
+    padding: var(--spacing-lg);
+    font-size: var(--fs-base);
+    min-height: 56px;
+  }
+
+  .faq-item__answer-inner {
+    padding: 0 var(--spacing-lg) var(--spacing-lg);
+  }
+
+  /* Steps: Kompakteres Layout auf kleinen Screens */
+  .step {
+    padding: var(--spacing-md);
+  }
+
+  .step__number {
+    width: 48px;
+    height: 48px;
+    margin-bottom: var(--spacing-md);
+  }
+
+  /* Contact Form: Noch kompakter */
+  .contact-form {
+    padding: var(--spacing-lg);
+  }
+
+  .form-input,
+  .form-textarea,
+  .form-select {
+    padding: 12px 14px;
+    min-height: 48px;
+  }
+
+  /* Footer: Kleinere Schrift im Footer-Bottom */
+  .footer__bottom-inner {
+    font-size: var(--fs-xs);
+  }
+
+  /* Back-to-top Button */
+  .back-to-top {
+    width: 44px;
+    height: 44px;
+    bottom: 5rem;
+    right: 1rem;
+  }
+
+  .floating-phone-btn {
+    width: 52px;
+    height: 52px;
+    bottom: 1.25rem;
+    right: 1rem;
+  }
+
+  /* Hinweis-Box */
+  .hinweis-box {
+    padding: var(--spacing-lg);
+  }
+
+  /* Contact-Grid Info-Badge: voll breite und stapeln auf Mobile */
+  .contact-card {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .contact-card__icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  /* Wizard Result Gesamt */
+  .wizard__result-gesamt {
+    padding: var(--spacing-lg);
+  }
+
+  .wizard__result-gesamt-betrag {
+    font-size: var(--fs-2xl);
+  }
+}
+
+/* ── Tablet 768px: Spezielle Anpassungen ─────────────────── */
+@media (min-width: 480px) and (max-width: 767px) {
+  /* Hero Stats: 3 nebeneinander passen gut auf Phones 480px+ */
+  .hero__stats {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: var(--spacing-sm);
+  }
+
+  .hero__stat {
+    flex: 1;
+    min-width: 0;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  /* CTA Actions: 2-spaltig auf mittleren Phones */
+  .cta-section__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Feature Cards: 2-spaltig ab 480px */
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Acquisition Box: mittel */
+  .acquisition-box {
+    padding: var(--spacing-2xl);
+  }
+}
+
+/* ── Standorte Karte: Höhe responsive ───────────────────── */
+@media (max-width: 480px) {
+  #map {
+    height: 280px !important;
+  }
+}
+
+/* ── Grid Auto: Minimum-Breite auf Mobile anpassen ──────── */
+@media (max-width: 767px) {
+  .grid-auto {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Footer: Mobile Verbesserungen ───────────────────────── */
+@media (max-width: 767px) {
+  /* Footer Contact Items: white-space:nowrap aufheben */
+  .footer__contact-item {
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  /* Footer Grid: Einzelne Spalte mit mehr Abstand */
+  .footer__grid {
+    gap: var(--spacing-2xl);
+  }
+
+  /* Footer Logo-Bereich zentrieren */
+  .footer__brand {
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .footer__logo {
+    justify-content: center;
+  }
+
+  .footer__social {
+    justify-content: center;
+  }
+
+  .footer__muenchen-badge {
+    display: block;
+    margin: var(--spacing-md) auto 0;
+    text-align: center;
+  }
+}
+
+/* ── Nav-Aktionen auf Mobile schlanker ───────────────────── */
+@media (max-width: 1023px) {
+  /* Zwischen 768px und 1023px (kein Desktop) zeigen wir
+     weder Hamburger noch full Nav. Dieser Zustand existiert
+     nicht – Nav springt direkt von Hamburger (< 1024px) auf Desktop. */
+  /* Suchbutton bleibt auf allen Breakpoints sichtbar */
+  .nav__search-btn {
+    display: flex;
+  }
+}
+
+/* ── Leistungstabelle: Extra-Hinweis für Mobile-Scroll ──── */
+@media (max-width: 679px) {
+  .leistungs-tabelle-wrap::before {
+    content: '← Tabelle horizontal scrollbar →';
+    display: block;
+    text-align: center;
+    font-size: var(--fs-xs);
+    color: var(--color-text-light);
+    padding: var(--spacing-xs) var(--spacing-md);
+    background: var(--color-bg-light);
+    border-bottom: 1px solid var(--color-border);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  }
+}
+
+/* ── Section Waves: sauberer Übergang auf Mobile ─────────── */
+@media (max-width: 767px) {
+  .section-wave {
+    height: 40px;
+    max-height: 40px;
+  }
+}
+
+/* ── Kontakt-Seite: Formular-Checkbox Touch-Target ──────── */
+@media (max-width: 767px) {
+  .contact-form label input[type="checkbox"] {
+    min-width: 22px;
+    min-height: 22px;
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* ── Touch-Devices: Hover-Animationen deaktivieren ───────
+   Auf Touchscreens bleiben :hover-Zustände „kleben".
+   Daher transform-Effekte für reine Pointer-Devices reservieren.
+   ──────────────────────────────────────────────────────── */
+@media (hover: none) {
+  .feature-card:hover,
+  .testimonial-card:hover,
+  .vorteile-item:hover,
+  .target-card:hover,
+  .contact-card:hover,
+  .hinweis-box:hover,
+  .pg-card:hover,
+  .antrag-step:hover,
+  .trust-badge:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* Btn hover auf Touch: kein translateY, nur Farbwechsel */
+  .btn:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .btn-primary:hover {
+    box-shadow: var(--shadow-primary);
   }
 }

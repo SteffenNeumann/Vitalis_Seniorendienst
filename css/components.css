@@ -277,7 +277,7 @@
   z-index: 10;
 }
 .nav.is-searching .nav__search-wrap {
-  width: min(560px, calc(100% - 200px));
+  width: min(560px, calc(100% - 180px));
   opacity: 1;
   pointer-events: auto;
 }
@@ -860,9 +860,9 @@
 /* --- Feature Section (Two-Column) --- */
 .feature-section {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;  /* Mobile-first: 1 Spalte, Desktop-Override in responsive.css */
   align-items: center;
-  gap: var(--spacing-3xl);
+  gap: var(--spacing-2xl);
 }
 
 .feature-section--reverse {
@@ -941,8 +941,8 @@
 /* --- Vorteile Section --- */
 .vorteile-list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--spacing-xl);
+  grid-template-columns: 1fr;  /* Mobile-first: 1 Spalte; Desktop ab 768px → 2 Spalten */
+  gap: var(--spacing-lg);
 }
 
 .vorteile-item {
@@ -1033,7 +1033,7 @@
 /* --- Testimonials --- */
 .testimonial-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;  /* Mobile-first; ab 768px → 2-spaltig, ab 1024px → 3-spaltig */
   gap: var(--spacing-xl);
 }
 
@@ -1184,8 +1184,8 @@
 /* --- Kontakt Section --- */
 .contact-grid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: var(--spacing-3xl);
+  grid-template-columns: 1fr;  /* Mobile-first; ab 1024px → 2-spaltig in responsive.css */
+  gap: var(--spacing-2xl);
   align-items: start;
 }
 
@@ -1344,7 +1344,7 @@
 
 .form-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;  /* Mobile-first; ab 1024px → 2-spaltig in responsive.css */
   gap: var(--spacing-lg);
 }
 
@@ -1438,7 +1438,7 @@
 /* --- Steps / Ablauf --- */
 .steps {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1fr;  /* Mobile-first; Desktop-Overrides in responsive.css */
   gap: var(--spacing-xl);
   position: relative;
 }
@@ -1579,8 +1579,8 @@
 
 .footer__grid {
   display: grid;
-  grid-template-columns: 1.6fr 1fr 1.4fr 0.9fr;
-  gap: var(--spacing-xl);
+  grid-template-columns: 1fr;  /* Mobile-first; ab 768px → 2-spaltig, ab 1024px → 4-spaltig */
+  gap: var(--spacing-2xl);
   max-width: var(--container-max);
   margin: 0 auto;
   padding: 0 var(--container-padding);
@@ -1770,7 +1770,7 @@
 /* --- Target Group Cards (Fuer wen ist Vitalis da?) --- */
 .target-cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;  /* Mobile-first; ab 768px → 2-spaltig, ab 1024px → 3-spaltig */
   gap: var(--spacing-xl);
 }
 
@@ -3816,7 +3816,7 @@
 
 .antrag-module-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;  /* Mobile-first; ab 640px → 3-spaltig in responsive.css */
   gap: var(--spacing-md);
   list-style: none;
   padding: 0;
@@ -4115,8 +4115,12 @@
 }
 
 /* On mobile, place above the floating phone button */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .back-to-top {
     bottom: 5.5rem;
+    right: 1.25rem;
+    /* Etwas kleiner auf Mobile, damit Overlap mit Floating-Button minimal */
+    width: 48px;
+    height: 48px;
   }
 }
