@@ -5,32 +5,28 @@
 
 /* --- CSS Custom Properties --- */
 :root {
-  --color-primary: #5079A5;
-  --color-primary-dark: #3D6089;
-  --color-primary-darker: #2A4163;
-  --color-primary-light: #EEF4FA;
-  --color-primary-bg: rgba(80, 121, 165, 0.08);
-  --color-secondary: #3D8A8A;
-  --color-secondary-dark: #2E6B6B;
-  --color-secondary-light: #5AABAB;
-  --color-secondary-bg: rgba(61, 138, 138, 0.08);
-  --color-bg-light: #F4F7FB;
-  --color-bg-white: #ffffff;
-  --color-bg-cream: #F5F1EB;
-  --color-bg-warm: #FAF8F5;
-  --color-bg-section: #F4F7FB;
-  --color-text: #1C2B3A;
-  --color-text-muted: #556070;
-  --color-text-light: #7A8A9A;
-  --color-white: #ffffff;
-  --color-amber: #C97B3A;
-  --color-amber-dark: #A85E1F;
-  --color-accent: #C97B3A;
-  --color-accent-dark: #A85E1F;
-  --color-danger: #d4534a;
-  --color-success: #2E7D5E;
-  --color-border: #CDD8E8;
-  --color-border-dark: #B0C0D4;
+  /* Base Colors */
+  --blue:           #5079A5;
+  --blue-dark:      #3D6089;
+  --blue-soft:      #EEF4FA;
+  --blue-ghost:     rgba(80, 121, 165, 0.08);
+
+  --teal:           #3D8A8A;
+  --teal-dark:      #2E6B6B;
+  --teal-ghost:     rgba(61, 138, 138, 0.08);
+
+  --amber:          #C97B3A;
+  --amber-dark:     #A85E1F;
+
+  --ink:            #1C2B3A;
+  --ink-muted:      #556070;
+  --ink-light:      #7A8A9A;
+  --ink-border:     #CDD8E8;
+  --ink-bg:         #F4F7FB;
+  --ink-warm:       #F6F2EC;
+  --white:          #ffffff;
+
+  --color-danger:   #d4534a;
 
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
@@ -77,8 +73,8 @@
   --shadow-md: 0 4px 12px rgba(45, 41, 38, 0.06), 0 2px 4px rgba(45, 41, 38, 0.03);
   --shadow-lg: 0 8px 30px rgba(45, 41, 38, 0.07), 0 4px 8px rgba(45, 41, 38, 0.03);
   --shadow-xl: 0 16px 48px rgba(45, 41, 38, 0.09), 0 8px 16px rgba(45, 41, 38, 0.04);
-  --shadow-primary: 0 4px 16px rgba(80, 121, 165, 0.3);
-  --shadow-secondary: 0 4px 16px rgba(61, 138, 138, 0.25);
+  --shadow-primary: 0 4px 16px rgba(80, 121, 165, 0.3);   /* based on --blue */
+  --shadow-secondary: 0 4px 16px rgba(61, 138, 138, 0.25); /* based on --teal */
   --shadow-warm: 0 4px 20px rgba(244, 162, 97, 0.15);
 
   --transition-fast: 0.15s ease;
@@ -126,8 +122,8 @@ body {
   font-size: var(--fs-base);
   font-weight: var(--fw-regular);
   line-height: var(--lh-normal);
-  color: var(--color-text);
-  background-color: var(--color-bg-white);
+  color: var(--ink);
+  background-color: var(--white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -159,13 +155,13 @@ button {
 }
 
 a {
-  color: var(--color-primary);
+  color: var(--blue);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
 
 a:hover {
-  color: var(--color-primary-dark);
+  color: var(--blue-dark);
 }
 
 ul,
@@ -186,7 +182,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: var(--fw-bold);
   line-height: var(--lh-tight);
-  color: var(--color-text);
+  color: var(--ink);
   text-wrap: balance;
 }
 
@@ -225,7 +221,7 @@ h6 {
 p {
   font-size: var(--fs-base);
   line-height: var(--lh-normal);
-  color: var(--color-text-muted);
+  color: var(--ink-muted);
 }
 
 .text-large {
@@ -238,23 +234,23 @@ p {
 }
 
 .text-muted {
-  color: var(--color-text-muted);
+  color: var(--ink-muted);
 }
 
 .text-light {
-  color: var(--color-text-light);
+  color: var(--ink-light);
 }
 
 .text-white {
-  color: var(--color-white);
+  color: var(--white);
 }
 
 .text-primary {
-  color: var(--color-primary);
+  color: var(--blue);
 }
 
 .text-secondary {
-  color: var(--color-secondary);
+  color: var(--teal);
 }
 
 .text-center {
@@ -330,15 +326,15 @@ strong, b {
 }
 
 .section-bg {
-  background: var(--color-bg-light);
+  background: var(--ink-bg);
 }
 
 .section-cream {
-  background-color: var(--color-bg-cream);
+  background-color: var(--ink-warm);
 }
 
 .section-white {
-  background-color: var(--color-bg-white);
+  background-color: var(--white);
 }
 
 /* --- Background Utility Classes --- */
@@ -484,8 +480,8 @@ strong, b {
   left: var(--spacing-md);
   z-index: var(--z-skip);
   padding: var(--spacing-md) var(--spacing-xl);
-  background-color: var(--color-primary);
-  color: var(--color-white);
+  background-color: var(--blue);
+  color: var(--white);
   font-size: var(--fs-base);
   font-weight: var(--fw-semibold);
   border-radius: 0 0 var(--radius-md) var(--radius-md);
@@ -495,11 +491,11 @@ strong, b {
 .skip-link:focus {
   top: 0;
   outline: none;
-  color: var(--color-white);
+  color: var(--white);
 }
 
 *:focus-visible {
-  outline: 3px solid var(--color-primary);
+  outline: 3px solid var(--blue);
   outline-offset: 3px;
   border-radius: var(--radius-sm);
 }
@@ -529,8 +525,8 @@ strong, b {
 
 /* --- Selection --- */
 ::selection {
-  background-color: var(--color-primary);
-  color: var(--color-white);
+  background-color: var(--blue);
+  color: var(--white);
 }
 
 /* --- Scrollbar --- */
@@ -539,16 +535,16 @@ strong, b {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-bg-light);
+  background: var(--ink-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-border-dark);
+  background: var(--ink-light);
   border-radius: var(--radius-pill);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-text-light);
+  background: var(--ink-light);
 }
 
 /* --- Cookie Banner --- */
@@ -558,8 +554,8 @@ strong, b {
   left: 0;
   right: 0;
   z-index: var(--z-cookie);
-  background-color: var(--color-white);
-  border-top: 1px solid var(--color-border);
+  background-color: var(--white);
+  border-top: 1px solid var(--ink-border);
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
   padding: var(--spacing-xl) 0;
   transform: translateY(100%);
@@ -582,13 +578,13 @@ strong, b {
 
 .cookie-banner__text {
   font-size: var(--fs-base);
-  color: var(--color-text-muted);
+  color: var(--ink-muted);
   line-height: var(--lh-normal);
   flex: 1;
 }
 
 .cookie-banner__text a {
-  color: var(--color-primary);
+  color: var(--blue);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
