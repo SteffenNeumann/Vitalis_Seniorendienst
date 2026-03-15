@@ -466,12 +466,17 @@ body.nav-open .nav-overlay {
     --container-padding: 2rem;
   }
 
-  .grid-4 {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
   .hero__title {
     font-size: 3.75rem;
+  }
+}
+
+/* --- 1440px+ (XL Desktop) --- */
+/* grid-4 erst ab 1440px auf 4 Spalten: Kacheln bekommen auf
+   normalen Desktop-Breiten (1024–1439px) mehr Luft zum Atmen. */
+@media (min-width: 1440px) {
+  .grid-4 {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -1080,9 +1085,21 @@ body.nav-open .nav-overlay {
     font-size: var(--fs-base);
   }
 
-  /* Feature-Card: Padding reduzieren */
+  /* Feature-Card: Padding und Abstände auf mittleren Mobile-Screens anpassen */
   .feature-card {
-    padding: var(--spacing-xl);
+    padding: var(--spacing-2xl);
+  }
+
+  .feature-card__icon {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .feature-card__title {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .feature-card__text {
+    font-size: var(--fs-base);
   }
 
   /* Testimonial-Card: Padding reduzieren */
@@ -1203,18 +1220,24 @@ body.nav-open .nav-overlay {
     padding-bottom: var(--spacing-xl);
   }
 
-  /* Feature-Card: Noch kompakter */
+  /* Feature-Card: Kompakt auf sehr kleinen Screens */
   .feature-card {
-    padding: var(--spacing-lg);
+    padding: var(--spacing-xl);
   }
 
   .feature-card__icon {
     width: 52px;
     height: 52px;
+    margin-bottom: var(--spacing-md);
   }
 
   .feature-card__title {
     font-size: var(--fs-lg);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .feature-card__text {
+    font-size: var(--fs-sm);
   }
 
   /* Testimonial-Card: Kompakt */

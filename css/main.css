@@ -370,6 +370,7 @@ strong, b {
 
 .grid-4 {
   grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-2xl);
 }
 
 .grid-auto {

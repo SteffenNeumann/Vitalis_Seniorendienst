@@ -769,7 +769,7 @@
   background-color: var(--white);
   border: 1px solid var(--ink-border);
   border-radius: var(--radius-lg);
-  padding: var(--spacing-2xl);
+  padding: var(--spacing-3xl);
   transition: all var(--transition-base);
   position: relative;
   overflow: hidden;
@@ -806,7 +806,7 @@
   height: 64px;
   background-color: var(--blue-ghost);
   border-radius: var(--radius-circle);
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
   color: var(--blue);
   transition: all var(--transition-base);
 }
@@ -825,12 +825,12 @@
 .feature-card__title {
   font-size: var(--fs-xl);
   font-weight: var(--fw-bold);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
   color: var(--ink);
 }
 
 .feature-card__text {
-  font-size: var(--fs-base);
+  font-size: var(--fs-lg);
   color: var(--ink-muted);
   line-height: var(--lh-relaxed);
 }
