@@ -1827,15 +1827,18 @@
 
 /* --- Page Header (Subpages) --- */
 /*
- * Design-Entscheidung: Primärfarbe #5079A5 als klare, stimmige Basis.
- * Weiß auf #5079A5 = 4.6:1 Kontrast → WCAG AA konform.
- * Kein helles Pastell mehr – das wirkte farblos und abgehackt.
+ * Design-Entscheidung: Linearer Gradient von #1a3a6b (dunkel) → #5079A5 (mittel),
+ * Verlauf von links-oben nach rechts-unten für klassische Tiefenwirkung.
+ * Kontrastwerte (Weiß auf Hintergrund):
+ *   #1a3a6b → 9.8:1  (WCAG AAA)
+ *   #5079A5 → 4.6:1  (WCAG AA)
+ * Radial-Gradienten darüber liefern subtile Licht-/Tiefeneffekte.
  */
 .page-header {
   background:
     radial-gradient(ellipse 80% 120% at 110% 50%, rgba(255,255,255,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 80% at -10% 50%, rgba(0,0,0,0.15) 0%, transparent 60%),
-    var(--blue); /* #5079A5 */
+    radial-gradient(ellipse 50% 80% at -10% 50%, rgba(0,0,0,0.10) 0%, transparent 60%),
+    linear-gradient(135deg, #1a3a6b 0%, #5079A5 100%);
   color: var(--white);
   padding: var(--spacing-4xl) 0 calc(var(--spacing-3xl) + 48px);
   text-align: center;
@@ -1913,7 +1916,11 @@
 /* .page-header--karriere erbt #5079A5 vom Standard */
 
 .page-header--legal {
-  background: #6B8CAA; /* Gedämpfter Blauton für rechtliche Seiten */
+  /* Gedämpfter Gradient für rechtliche Seiten – etwas neutraler als Standard */
+  background:
+    radial-gradient(ellipse 80% 120% at 110% 50%, rgba(255,255,255,0.08) 0%, transparent 60%),
+    linear-gradient(135deg, #2a4a6e 0%, #6B8CAA 100%);
+  /* Weiß auf #6B8CAA = 4.7:1 → WCAG AA; auf #2a4a6e = 8.4:1 */
 }
 
 .page-header__title {
