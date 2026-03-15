@@ -451,8 +451,8 @@ body.nav-open .nav-overlay {
   }
 
   .footer__grid {
-    grid-template-columns: 1.5fr 1fr 1fr 1fr;
-    gap: var(--spacing-3xl);
+    grid-template-columns: 1.2fr 1fr 1.5fr 0.8fr;
+    gap: var(--spacing-2xl);
   }
 
   .footer__brand {
