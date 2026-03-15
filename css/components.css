@@ -1838,7 +1838,7 @@
   background:
     radial-gradient(ellipse 80% 120% at 110% 50%, rgba(255,255,255,0.08) 0%, transparent 60%),
     radial-gradient(ellipse 50% 80% at -10% 50%, rgba(0,0,0,0.10) 0%, transparent 60%),
-    linear-gradient(to right, #1a3a6b 0%, #5079A5 100%);
+    linear-gradient(to right, #7a9ec4 0%, #5079A5 40%, #5079A5 60%, #7a9ec4 100%);
   color: var(--white);
   padding: var(--spacing-4xl) 0 calc(var(--spacing-3xl) + 48px);
   text-align: center;
