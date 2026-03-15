@@ -423,7 +423,7 @@ body.nav-open .nav-overlay {
   }
 
   .grid-4 {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 
   .testimonial-grid {
@@ -471,14 +471,6 @@ body.nav-open .nav-overlay {
   }
 }
 
-/* --- 1440px+ (XL Desktop) --- */
-/* grid-4 erst ab 1440px auf 4 Spalten: Kacheln bekommen auf
-   normalen Desktop-Breiten (1024–1439px) mehr Luft zum Atmen. */
-@media (min-width: 1440px) {
-  .grid-4 {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
 
 /* --- Reduced Motion --- */
 @media (prefers-reduced-motion: reduce) {

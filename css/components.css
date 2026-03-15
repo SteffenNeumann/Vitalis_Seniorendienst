@@ -769,7 +769,7 @@
   background-color: var(--white);
   border: 1px solid var(--ink-border);
   border-radius: var(--radius-lg);
-  padding: var(--spacing-3xl);
+  padding: var(--spacing-xl);
   transition: all var(--transition-base);
   position: relative;
   overflow: hidden;
@@ -806,7 +806,7 @@
   height: 64px;
   background-color: var(--blue-ghost);
   border-radius: var(--radius-circle);
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
   color: var(--blue);
   transition: all var(--transition-base);
 }
@@ -825,12 +825,12 @@
 .feature-card__title {
   font-size: var(--fs-xl);
   font-weight: var(--fw-bold);
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-sm);
   color: var(--ink);
 }
 
 .feature-card__text {
-  font-size: var(--fs-lg);
+  font-size: var(--fs-base);
   color: var(--ink-muted);
   line-height: var(--lh-relaxed);
 }
@@ -930,12 +930,16 @@
   border-radius: var(--radius-xl);
   overflow: hidden;
   box-shadow: var(--shadow-lg);
+  max-height: 520px;
+  align-self: center;
 }
 
 .feature-section__image img {
   width: 100%;
   height: 100%;
+  max-height: 520px;
   object-fit: cover;
+  display: block;
 }
 
 /* --- Vorteile Section --- */
