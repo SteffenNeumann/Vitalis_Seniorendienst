@@ -1,0 +1,1660 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vitalis Seniorendienst – Website Präsentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Base ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      color: #1C2B3A;
+      background: #F4F7FB;
+    }
+
+    /* ── Variables ────────────────────────────────────── */
+    :root {
+      --blue:      #5079A5;
+      --blue-dark: #3D6089;
+      --blue-soft: #EEF4FA;
+      --teal:      #3D8A8A;
+      --amber:     #C97B3A;
+      --ink:       #1C2B3A;
+      --ink-muted: #556070;
+      --ink-light: #7A8A9A;
+      --ink-border:#CDD8E8;
+      --ink-bg:    #F4F7FB;
+      --ink-warm:  #F6F2EC;
+      --white:     #ffffff;
+      --radius:    14px;
+      --shadow:    0 4px 24px rgba(28,43,58,0.07), 0 1px 4px rgba(28,43,58,0.04);
+      --shadow-lg: 0 12px 48px rgba(28,43,58,0.10), 0 4px 12px rgba(28,43,58,0.05);
+    }
+
+    /* ── Layout ───────────────────────────────────────── */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .container--wide {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ── Header / Hero ────────────────────────────────── */
+    .page-hero {
+      background: linear-gradient(135deg, #1C2B3A 0%, #2f4a68 50%, #3D8A8A 100%);
+      color: white;
+      padding: 4rem 1.5rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 700px 400px at 80% -10%, rgba(80,121,165,0.35) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 500px at -10% 100%, rgba(61,138,138,0.25) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .page-hero__inner {
+      position: relative;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .page-hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50px;
+      padding: 0.35rem 1rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 1.5rem;
+    }
+    .page-hero__title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .page-hero__title span { color: #7EC8C8; }
+    .page-hero__subtitle {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.75);
+      max-width: 580px;
+      margin-bottom: 2rem;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+    .page-hero__meta {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .page-hero__meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+    .page-hero__meta-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.5);
+      font-weight: 500;
+    }
+    .page-hero__meta-value {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.9);
+      font-weight: 500;
+    }
+
+    /* ── Navigation (sticky TOC) ──────────────────────── */
+    .toc-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--ink-border);
+      padding: 0 1.5rem;
+    }
+    .toc-nav__inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .toc-nav__inner::-webkit-scrollbar { display: none; }
+    .toc-nav__link {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 1rem 1.1rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--ink-muted);
+      text-decoration: none;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .toc-nav__link:hover,
+    .toc-nav__link.is-active {
+      color: var(--blue);
+      border-bottom-color: var(--blue);
+    }
+    .toc-nav__dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.6;
+    }
+
+    /* ── Section Wrapper ──────────────────────────────── */
+    .section {
+      padding: 5rem 0;
+    }
+    .section--alt {
+      background: white;
+    }
+    .section--warm {
+      background: var(--ink-warm);
+    }
+
+    /* ── Section Headers ──────────────────────────────── */
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.76rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--blue);
+      margin-bottom: 0.75rem;
+    }
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 20px; height: 2px;
+      background: var(--blue);
+      border-radius: 2px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.25;
+      margin-bottom: 1rem;
+    }
+    .section-desc {
+      font-size: 1.05rem;
+      color: var(--ink-muted);
+      max-width: 640px;
+      line-height: 1.7;
+    }
+    .section-header {
+      margin-bottom: 3.5rem;
+    }
+
+    /* ── Cards ────────────────────────────────────────── */
+    .card {
+      background: white;
+      border-radius: var(--radius);
+      border: 1px solid var(--ink-border);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* ── Grid ─────────────────────────────────────────── */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+
+    /* ── Intro Block ──────────────────────────────────── */
+    .intro-block {
+      background: white;
+      border-radius: var(--radius);
+      border: 1px solid var(--ink-border);
+      padding: 2.5rem 3rem;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    @media (max-width: 680px) {
+      .intro-block { grid-template-columns: 1fr; gap: 2rem; padding: 1.75rem; }
+    }
+    .intro-block__heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+    }
+    .intro-block__text {
+      color: var(--ink-muted);
+      line-height: 1.75;
+      font-size: 1rem;
+    }
+    .intro-block__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+    .intro-block__list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.97rem;
+      color: var(--ink-muted);
+    }
+    .intro-block__list li::before {
+      content: '✓';
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px; height: 20px;
+      min-width: 20px;
+      background: #e8f4ed;
+      color: #2e7d5e;
+      border-radius: 50%;
+      font-size: 0.68rem;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+
+    /* ── Sitemap / Pages Grid ─────────────────────────── */
+    .page-card {
+      background: white;
+      border-radius: var(--radius);
+      border: 1px solid var(--ink-border);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .page-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .page-card__num {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      opacity: 0.6;
+    }
+    .page-card__title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .page-card__file {
+      font-size: 0.78rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      color: var(--teal);
+      background: rgba(61,138,138,0.06);
+      border-radius: 6px;
+      padding: 0.2rem 0.5rem;
+      display: inline-block;
+      width: fit-content;
+    }
+    .page-card__desc {
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      line-height: 1.6;
+      flex: 1;
+    }
+    .page-card__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      border-radius: 50px;
+      width: fit-content;
+    }
+    .page-card__badge--done {
+      background: #e8f4ed;
+      color: #2e7d5e;
+    }
+    .page-card__badge--pending {
+      background: #fef3e2;
+      color: #9c6a0f;
+    }
+
+    /* ── Layout Diagram ───────────────────────────────── */
+    .layout-diagram {
+      background: white;
+      border-radius: var(--radius);
+      border: 1px solid var(--ink-border);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .layout-diagram__header {
+      background: var(--ink);
+      color: white;
+      padding: 0.6rem 1rem;
+      font-size: 0.78rem;
+      font-family: monospace;
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+    }
+    .layout-diagram__dot {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+    .layout-diagram__body { padding: 1.5rem; }
+    .layout-zone {
+      border-radius: 8px;
+      padding: 0.9rem 1.2rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .layout-zone__label { display: flex; align-items: center; gap: 0.5rem; }
+    .layout-zone__note {
+      font-size: 0.78rem;
+      font-weight: 400;
+      opacity: 0.75;
+      text-align: right;
+    }
+    .zone--trust    { background: #e8eef8; color: #3D6089; }
+    .zone--nav      { background: var(--ink); color: white; }
+    .zone--hero     { background: linear-gradient(90deg,#2f4a68,#3D8A8A); color: white; }
+    .zone--services { background: #f0f8f5; color: #2e7d5e; }
+    .zone--cta      { background: #fef3e2; color: #9c6a0f; }
+    .zone--testimonials { background: var(--blue-soft); color: var(--blue-dark); }
+    .zone--process  { background: #fafafa; color: var(--ink); border: 1px dashed var(--ink-border); }
+    .zone--faq-widget { background: #f5f0fa; color: #6b3fa0; }
+    .zone--footer   { background: #1C2B3A; color: white; }
+
+    /* ── Color Palette ────────────────────────────────── */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .color-swatch {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: white;
+      border: 1px solid var(--ink-border);
+    }
+    .color-swatch__preview {
+      height: 90px;
+      width: 100%;
+    }
+    .color-swatch__info {
+      padding: 0.9rem 1rem 1rem;
+    }
+    .color-swatch__name {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--ink);
+      margin-bottom: 0.15rem;
+    }
+    .color-swatch__hex {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.8rem;
+      color: var(--ink-light);
+      margin-bottom: 0.5rem;
+    }
+    .color-swatch__usage {
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      line-height: 1.5;
+    }
+
+    /* ── Why Colors ───────────────────────────────────── */
+    .why-block {
+      background: white;
+      border-radius: var(--radius);
+      border: 1px solid var(--ink-border);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+    .why-block__icon {
+      width: 52px; height: 52px; min-width: 52px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+    }
+    .why-block__title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
+    }
+    .why-block__text {
+      font-size: 0.92rem;
+      color: var(--ink-muted);
+      line-height: 1.7;
+    }
+
+    /* ── Interactions ─────────────────────────────────── */
+    .interaction-card {
+      background: white;
+      border-radius: var(--radius);
+      border: 1px solid var(--ink-border);
+      box-shadow: var(--shadow);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .interaction-card__top {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .interaction-icon {
+      width: 46px; height: 46px; min-width: 46px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .icon--blue   { background: #EEF4FA; }
+    .icon--teal   { background: rgba(61,138,138,0.1); }
+    .icon--amber  { background: rgba(201,123,58,0.1); }
+    .icon--purple { background: #f5f0fa; }
+    .icon--green  { background: #e8f4ed; }
+    .icon--slate  { background: #f0f4fb; }
+    .interaction-card__title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+    }
+    .interaction-card__subtitle {
+      font-size: 0.8rem;
+      color: var(--blue);
+      font-weight: 500;
+    }
+    .interaction-card__desc {
+      font-size: 0.91rem;
+      color: var(--ink-muted);
+      line-height: 1.65;
+    }
+    .interaction-card__triggers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .trigger-tag {
+      font-size: 0.74rem;
+      font-weight: 500;
+      padding: 0.2rem 0.6rem;
+      border-radius: 50px;
+      background: var(--blue-soft);
+      color: var(--blue-dark);
+    }
+    .trigger-tag--teal {
+      background: rgba(61,138,138,0.1);
+      color: var(--teal);
+    }
+    .trigger-tag--amber {
+      background: rgba(201,123,58,0.1);
+      color: var(--amber);
+    }
+
+    /* ── Typography Section ───────────────────────────── */
+    .type-showcase {
+      background: white;
+      border-radius: var(--radius);
+      border: 1px solid var(--ink-border);
+      box-shadow: var(--shadow);
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .type-row {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--ink-border);
+    }
+    .type-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .type-row__meta {
+      min-width: 120px;
+      font-size: 0.75rem;
+      font-family: monospace;
+      color: var(--ink-light);
+      line-height: 1.4;
+    }
+    .type-row__sample { flex: 1; }
+
+    /* ── Accessibility Block ──────────────────────────── */
+    .a11y-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .a11y-card {
+      background: white;
+      border-radius: var(--radius);
+      border: 1px solid var(--ink-border);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .a11y-card__icon {
+      font-size: 1.6rem;
+      margin-bottom: 0.2rem;
+    }
+    .a11y-card__title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--ink);
+    }
+    .a11y-card__text {
+      font-size: 0.85rem;
+      color: var(--ink-muted);
+      line-height: 1.6;
+    }
+    .a11y-card__value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    /* ── Next Steps ───────────────────────────────────── */
+    .todo-list {
+      background: white;
+      border-radius: var(--radius);
+      border: 1px solid var(--ink-border);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .todo-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.1rem 1.5rem;
+      border-bottom: 1px solid var(--ink-border);
+      transition: background 0.15s;
+    }
+    .todo-item:last-child { border-bottom: none; }
+    .todo-item:hover { background: var(--ink-bg); }
+    .todo-item__icon {
+      width: 24px; height: 24px; min-width: 24px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+      margin-top: 1px;
+    }
+    .todo-item__icon--pending { background: #fef3e2; color: #9c6a0f; }
+    .todo-item__icon--done    { background: #e8f4ed; color: #2e7d5e; }
+    .todo-item__text {
+      flex: 1;
+      font-size: 0.95rem;
+      color: var(--ink);
+    }
+    .todo-item__sub {
+      font-size: 0.82rem;
+      color: var(--ink-muted);
+      margin-top: 0.2rem;
+    }
+
+    /* ── Footer ───────────────────────────────────────── */
+    .page-footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      font-size: 0.85rem;
+    }
+    .page-footer strong { color: rgba(255,255,255,0.9); }
+
+    /* ── Scroll Fade-in ───────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Utility ──────────────────────────────────────── */
+    .mt-sm { margin-top: 1rem; }
+    .mt-md { margin-top: 1.5rem; }
+    .mt-lg { margin-top: 2.5rem; }
+    .text-muted { color: var(--ink-muted); }
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--ink-border);
+      margin: 0.5rem 0 1.5rem;
+    }
+
+    /* ── Responsive ───────────────────────────────────── */
+    @media (max-width: 600px) {
+      .section { padding: 3.5rem 0; }
+      .page-hero { padding: 3rem 1.25rem 4rem; }
+      .page-hero__meta { gap: 1rem; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .color-grid { grid-template-columns: repeat(2, 1fr); }
+      .a11y-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════ -->
+<header class="page-hero" id="top">
+  <div class="page-hero__inner">
+    <div class="page-hero__badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Website-Dokumentation · Vertraulich
+    </div>
+    <h1 class="page-hero__title">
+      Vitalis Seniorendienst<br/>
+      <span>Website-Präsentation</span>
+    </h1>
+    <p class="page-hero__subtitle">
+      Vollständige Übersicht über Struktur, Design, Interaktionen und Farbwelt Ihrer neuen Website – aufbereitet für Sie als Auftraggeber.
+    </p>
+    <div class="page-hero__meta">
+      <div class="page-hero__meta-item">
+        <span class="page-hero__meta-label">Seiten</span>
+        <span class="page-hero__meta-value">10 Seiten</span>
+      </div>
+      <div class="page-hero__meta-item">
+        <span class="page-hero__meta-label">Technologie</span>
+        <span class="page-hero__meta-value">HTML · CSS · JavaScript</span>
+      </div>
+      <div class="page-hero__meta-item">
+        <span class="page-hero__meta-label">Status</span>
+        <span class="page-hero__meta-value">Fertig zur Befüllung</span>
+      </div>
+      <div class="page-hero__meta-item">
+        <span class="page-hero__meta-label">Stand</span>
+        <span class="page-hero__meta-value">März 2026</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ── Sticky TOC ─────────────────────────────── -->
+<nav class="toc-nav" aria-label="Inhalt">
+  <div class="toc-nav__inner">
+    <a href="#einleitung"     class="toc-nav__link"><span class="toc-nav__dot"></span>Einleitung</a>
+    <a href="#seiten"         class="toc-nav__link"><span class="toc-nav__dot"></span>Seiten</a>
+    <a href="#layout"         class="toc-nav__link"><span class="toc-nav__dot"></span>Layout</a>
+    <a href="#farben"         class="toc-nav__link"><span class="toc-nav__dot"></span>Farben</a>
+    <a href="#typografie"     class="toc-nav__link"><span class="toc-nav__dot"></span>Typografie</a>
+    <a href="#interaktionen"  class="toc-nav__link"><span class="toc-nav__dot"></span>Interaktionen</a>
+    <a href="#accessibility"  class="toc-nav__link"><span class="toc-nav__dot"></span>Barrierefreiheit</a>
+    <a href="#naechste-schritte" class="toc-nav__link"><span class="toc-nav__dot"></span>Nächste Schritte</a>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════
+     1. EINLEITUNG
+══════════════════════════════════════════════ -->
+<section class="section section--alt" id="einleitung">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">01 · Einleitung</span>
+      <h2 class="section-title">Was wurde gebaut – und warum?</h2>
+      <p class="section-desc">
+        Eine professionelle, zugängliche Unternehmenswebsite, die Vertrauen schafft, Informationen klar kommuniziert und Interessenten direkt zur Kontaktaufnahme führt.
+      </p>
+    </div>
+
+    <div class="intro-block reveal">
+      <div>
+        <h3 class="intro-block__heading">Das Projekt</h3>
+        <p class="intro-block__text">
+          Für die <strong>Vitalis Seniorendienst GmbH</strong> wurde eine vollständige Unternehmenswebsite von Grund auf neu entwickelt. Die Website richtet sich an Senioren ab 65 Jahren sowie deren Angehörige und wirbt für Leistungen wie Alltagsbegleitung, Haushaltshilfe und Seniorenbetreuung im Raum München/Erding.
+        </p>
+        <p class="intro-block__text mt-sm">
+          Bewusst wurde auf keine Frameworks wie React oder WordPress gesetzt – die Website läuft als reines <strong>HTML + CSS + JavaScript</strong>, ist damit blitzschnell, wartungsarm und benötigt kein CMS-Know-how für einfache Textänderungen.
+        </p>
+      </div>
+      <div>
+        <h3 class="intro-block__heading">Ziele der Website</h3>
+        <ul class="intro-block__list">
+          <li>Vertrauen aufbauen durch seriöses, warmes Design</li>
+          <li>Pflegekassen-Zulassung (§45a SGB XI) prominent kommunizieren</li>
+          <li>Einfache Navigation – max. 2 Klicks zum Ziel</li>
+          <li>Mobilgeräte-tauglich: Über 60 % der Zielgruppe nutzt Smartphones</li>
+          <li>Barrierefreiheit: Große Schrift, hohe Kontraste, klare Struktur</li>
+          <li>Leadgenerierung: Telefon & Kontaktformular jederzeit sichtbar</li>
+          <li>SEO-optimiert für lokale Suchanfragen (München, Erding)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     2. SEITEN
+══════════════════════════════════════════════ -->
+<section class="section" id="seiten">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">02 · Seitenstruktur</span>
+      <h2 class="section-title">10 Seiten – jede mit klarem Zweck</h2>
+      <p class="section-desc">
+        Jede Seite hat eine spezifische Aufgabe im Nutzerfluss: vom ersten Eindruck bis zur Kontaktaufnahme.
+      </p>
+    </div>
+
+    <div class="grid-3 reveal">
+
+      <div class="page-card">
+        <span class="page-card__num">Seite 01</span>
+        <h3 class="page-card__title">Startseite</h3>
+        <span class="page-card__file">index.html</span>
+        <p class="page-card__desc">Erster Eindruck. Hero-Bereich mit Kernbotschaft, Leistungsübersicht, Kundenstimmen, Prozess-Erklärung, FAQ-Widget und prominenten CTAs.</p>
+        <span class="page-card__badge page-card__badge--done">✓ Fertig</span>
+      </div>
+
+      <div class="page-card">
+        <span class="page-card__num">Seite 02</span>
+        <h3 class="page-card__title">Leistungen</h3>
+        <span class="page-card__file">leistungen.html</span>
+        <p class="page-card__desc">Detaillierte Darstellung aller 6 Leistungsbereiche inkl. Preishinweisen, Pflegekassen-Info und direkter Anfragemöglichkeit.</p>
+        <span class="page-card__badge page-card__badge--done">✓ Fertig</span>
+      </div>
+
+      <div class="page-card">
+        <span class="page-card__num">Seite 03</span>
+        <h3 class="page-card__title">Über uns</h3>
+        <span class="page-card__file">ueber-uns.html</span>
+        <p class="page-card__desc">Unternehmensgeschichte, Team-Vorstellung, Werte und Zertifizierungen – baut persönliches Vertrauen auf.</p>
+        <span class="page-card__badge page-card__badge--done">✓ Fertig</span>
+      </div>
+
+      <div class="page-card">
+        <span class="page-card__num">Seite 04</span>
+        <h3 class="page-card__title">Kostenübernahme</h3>
+        <span class="page-card__file">kostenuebernahme.html</span>
+        <p class="page-card__desc">Erklärt §45a SGB XI verständlich, zeigt Leistungsbeträge nach Pflegegrad und nimmt die Kostenfrage ab – ein wichtiger Conversion-Treiber.</p>
+        <span class="page-card__badge page-card__badge--done">✓ Fertig</span>
+      </div>
+
+      <div class="page-card">
+        <span class="page-card__num">Seite 05</span>
+        <h3 class="page-card__title">FAQ</h3>
+        <span class="page-card__file">faq.html</span>
+        <p class="page-card__desc">Häufige Fragen mit Akkordeon-Antworten. Reduziert Support-Anfragen und beantwortet Einwände vor dem Erstkontakt.</p>
+        <span class="page-card__badge page-card__badge--done">✓ Fertig</span>
+      </div>
+
+      <div class="page-card">
+        <span class="page-card__num">Seite 06</span>
+        <h3 class="page-card__title">Kontakt</h3>
+        <span class="page-card__file">kontakt.html</span>
+        <p class="page-card__desc">Kontaktformular, Karte, Telefon und Öffnungszeiten. Mehrere Kontaktwege für unterschiedliche Zielgruppen.</p>
+        <span class="page-card__badge page-card__badge--done">✓ Fertig</span>
+      </div>
+
+      <div class="page-card">
+        <span class="page-card__num">Seite 07</span>
+        <h3 class="page-card__title">Standorte</h3>
+        <span class="page-card__file">standorte.html</span>
+        <p class="page-card__desc">Interaktive Karte (OpenStreetMap/Leaflet) mit Einzugsgebiet. Beantwortet die Frage: „Betreuen Sie auch meinen Ort?"</p>
+        <span class="page-card__badge page-card__badge--done">✓ Fertig</span>
+      </div>
+
+      <div class="page-card">
+        <span class="page-card__num">Seite 08</span>
+        <h3 class="page-card__title">Karriere</h3>
+        <span class="page-card__file">karriere.html</span>
+        <p class="page-card__desc">Stellenanzeigen, Bewerbungsformular und Arbeitgeber-Benefits – für die Mitarbeitergewinnung.</p>
+        <span class="page-card__badge page-card__badge--done">✓ Fertig</span>
+      </div>
+
+      <div class="page-card">
+        <span class="page-card__num">Seite 09</span>
+        <h3 class="page-card__title">Datenschutz</h3>
+        <span class="page-card__file">datenschutz.html</span>
+        <p class="page-card__desc">DSGVO-konforme Datenschutzerklärung. Vollständig strukturiert, bereit zur Befüllung mit Ihren echten Unternehmensdaten.</p>
+        <span class="page-card__badge page-card__badge--done">✓ Fertig</span>
+      </div>
+
+      <div class="page-card">
+        <span class="page-card__num">Seite 10</span>
+        <h3 class="page-card__title">Impressum</h3>
+        <span class="page-card__file">impressum.html</span>
+        <p class="page-card__desc">Gesetzlich vorgeschriebenes Impressum. Nur Echtdaten (HRB, USt-ID, Geschäftsführer) einzutragen.</p>
+        <span class="page-card__badge page-card__badge--done">✓ Fertig</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     3. LAYOUT
+══════════════════════════════════════════════ -->
+<section class="section section--alt" id="layout">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">03 · Seitenlayout</span>
+      <h2 class="section-title">Aufbau der Startseite – Abschnitt für Abschnitt</h2>
+      <p class="section-desc">
+        Jede Seite folgt einer klaren vertikalen Logik: Vertrauen aufbauen → informieren → zur Aktion führen.
+      </p>
+    </div>
+
+    <div class="layout-diagram reveal">
+      <div class="layout-diagram__header">
+        <span class="layout-diagram__dot" style="background:#ff5f57;"></span>
+        <span class="layout-diagram__dot" style="background:#febc2e;"></span>
+        <span class="layout-diagram__dot" style="background:#28c840;"></span>
+        <span style="margin-left:0.5rem;opacity:0.6;">index.html – Startseite</span>
+      </div>
+      <div class="layout-diagram__body">
+
+        <div class="layout-zone zone--trust">
+          <span class="layout-zone__label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Trust-Bar
+          </span>
+          <span class="layout-zone__note">§45a · Pflegekasse · Feste Bezugsperson · Schnellstart</span>
+        </div>
+
+        <div class="layout-zone zone--nav">
+          <span class="layout-zone__label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+            Sticky Navigation
+          </span>
+          <span class="layout-zone__note">Logo · Links · Suche · Telefon · CTA-Button</span>
+        </div>
+
+        <div class="layout-zone zone--hero">
+          <span class="layout-zone__label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Hero-Bereich
+          </span>
+          <span class="layout-zone__note">Headline · Subline · 2 CTAs · Vertrauens-Checkmarks · Stats</span>
+        </div>
+
+        <div class="layout-zone zone--services">
+          <span class="layout-zone__label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            Leistungsübersicht
+          </span>
+          <span class="layout-zone__note">6 Karten: Soziale Betreuung, Haushaltshilfe, Arztfahrten, Einkauf, Botengänge, Begleitung</span>
+        </div>
+
+        <div class="layout-zone zone--cta">
+          <span class="layout-zone__label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/></svg>
+            Mid-Page CTA
+          </span>
+          <span class="layout-zone__note">Engagement-Block · Rückruf-Angebot · Pflegekassen-Hinweis</span>
+        </div>
+
+        <div class="layout-zone zone--testimonials">
+          <span class="layout-zone__label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Kundenstimmen
+          </span>
+          <span class="layout-zone__note">3 Testimonials mit Namen, Ort und ⭐ Bewertung</span>
+        </div>
+
+        <div class="layout-zone zone--process">
+          <span class="layout-zone__label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            Prozess-Erklärung
+          </span>
+          <span class="layout-zone__note">4 Schritte: Anfrage → Beratung → Matching → Start</span>
+        </div>
+
+        <div class="layout-zone zone--faq-widget">
+          <span class="layout-zone__label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Sorglos-Widget &amp; FAQ-Vorschau
+          </span>
+          <span class="layout-zone__note">Eingebettetes Kostenrechner-Widget · 5 häufige Fragen</span>
+        </div>
+
+        <div class="layout-zone zone--footer">
+          <span class="layout-zone__label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            Footer
+          </span>
+          <span class="layout-zone__note">Logo · Navigation · Kontakt · Social · Rechtliches · Copyright</span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="mt-lg reveal">
+      <div class="grid-2">
+        <div class="card">
+          <h4 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:0.5rem;">Desktop-Layout</h4>
+          <p style="font-size:0.9rem;color:var(--ink-muted);line-height:1.65;">
+            Maximale Breite 1280px, zentriert. Hero zweispaltig (Text links, Stats-Box rechts). Leistungskarten im 3er-Grid. Navigation horizontal mit rechts ausgerichteten Aktionen.
+          </p>
+        </div>
+        <div class="card">
+          <h4 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:0.5rem;">Mobile-Layout</h4>
+          <p style="font-size:0.9rem;color:var(--ink-muted);line-height:1.65;">
+            Vollbreite, alles einspaltiger Stack. Hamburger-Navigation (3 Balken). Floating-Telefonbutton unten rechts. Touch-optimierte Buttons (min. 48px). Schriften leicht vergrößert.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     4. FARBEN
+══════════════════════════════════════════════ -->
+<section class="section" id="farben">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">04 · Farbpalette</span>
+      <h2 class="section-title">Die Farben Ihrer Marke</h2>
+      <p class="section-desc">
+        Jede Farbe wurde bewusst gewählt – für Seriosität, Wärme und optimale Lesbarkeit für Ihre Zielgruppe.
+      </p>
+    </div>
+
+    <div class="color-grid reveal">
+
+      <div class="color-swatch">
+        <div class="color-swatch__preview" style="background:#5079A5;"></div>
+        <div class="color-swatch__info">
+          <div class="color-swatch__name">Primary Blue</div>
+          <div class="color-swatch__hex">#5079A5</div>
+          <div class="color-swatch__usage">Buttons, Links, Haupt-Akzentfarbe, Icons</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="color-swatch__preview" style="background:#3D6089;"></div>
+        <div class="color-swatch__info">
+          <div class="color-swatch__name">Blue Dark</div>
+          <div class="color-swatch__hex">#3D6089</div>
+          <div class="color-swatch__usage">Hover-Zustände, Gradienten-Endpunkt, Überschriften</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="color-swatch__preview" style="background:#EEF4FA;"></div>
+        <div class="color-swatch__info">
+          <div class="color-swatch__name">Blue Soft</div>
+          <div class="color-swatch__hex">#EEF4FA</div>
+          <div class="color-swatch__usage">Helle Hintergründe, Badges, Trust-Bar</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="color-swatch__preview" style="background:#3D8A8A;"></div>
+        <div class="color-swatch__info">
+          <div class="color-swatch__name">Teal / Salbeigrün</div>
+          <div class="color-swatch__hex">#3D8A8A</div>
+          <div class="color-swatch__usage">Sekundärakzent, Leistungs-Icons, Hervorhebungen</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="color-swatch__preview" style="background:#C97B3A;"></div>
+        <div class="color-swatch__info">
+          <div class="color-swatch__name">Amber / Wärme</div>
+          <div class="color-swatch__hex">#C97B3A</div>
+          <div class="color-swatch__usage">Sterne, Highlights, emotionale Akzente</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="color-swatch__preview" style="background:#1C2B3A;"></div>
+        <div class="color-swatch__info">
+          <div class="color-swatch__name">Ink / Dunkelblau</div>
+          <div class="color-swatch__hex">#1C2B3A</div>
+          <div class="color-swatch__usage">Primärtext, Überschriften, Footer-Hintergrund</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="color-swatch__preview" style="background:#556070;"></div>
+        <div class="color-swatch__info">
+          <div class="color-swatch__name">Ink Muted</div>
+          <div class="color-swatch__hex">#556070</div>
+          <div class="color-swatch__usage">Fließtext, Beschreibungen, sekundäre Inhalte</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="color-swatch__preview" style="background:#F4F7FB;"></div>
+        <div class="color-swatch__info">
+          <div class="color-swatch__name">Hintergrund Blau-Grau</div>
+          <div class="color-swatch__hex">#F4F7FB</div>
+          <div class="color-swatch__usage">Seiten-Hintergrund, abwechselnde Sektionen</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="color-swatch__preview" style="background:#F6F2EC;"></div>
+        <div class="color-swatch__info">
+          <div class="color-swatch__name">Warm Cream</div>
+          <div class="color-swatch__hex">#F6F2EC</div>
+          <div class="color-swatch__usage">Testimonials, warme Sektionen, Prozess-Bereich</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="color-swatch__preview" style="background:#2e7d5e;"></div>
+        <div class="color-swatch__info">
+          <div class="color-swatch__name">Success / Bestätigung</div>
+          <div class="color-swatch__hex">#2e7d5e</div>
+          <div class="color-swatch__usage">Checkmarks, Erfolgsmeldungen, Bestätigungs-Badges</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Warum diese Farben -->
+    <div class="mt-lg">
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--ink);margin-bottom:1.25rem;" class="reveal">
+        Warum genau diese Farben?
+      </h3>
+      <div class="grid-2 reveal">
+
+        <div class="why-block">
+          <div class="why-block__icon" style="background:#EEF4FA;">💙</div>
+          <div>
+            <div class="why-block__title">Blau – Vertrauen &amp; Kompetenz</div>
+            <div class="why-block__text">
+              Blau ist in der Pflege- und Gesundheitsbranche die meistverwendete Vertrauensfarbe. Sie signalisiert Seriosität, Verlässlichkeit und Professionalität. Der gewählte Mittelblauton ist bewusst <em>weicher</em> als klassische Unternehmensblautöne – er wirkt einladend statt kühl-distanziert.
+            </div>
+          </div>
+        </div>
+
+        <div class="why-block">
+          <div class="why-block__icon" style="background:rgba(61,138,138,0.1);">🌿</div>
+          <div>
+            <div class="why-block__title">Teal – Natur &amp; Fürsorge</div>
+            <div class="why-block__text">
+              Salbeigrün/Teal steht für Fürsorge, Gesundheit und Balance. Es ergänzt das Blau harmonisch und verleiht der Marke eine menschliche, pflegerische Note. In der Farbpsychologie gilt es als beruhigend und heilend – ideal für das Thema Seniorenbegleitung.
+            </div>
+          </div>
+        </div>
+
+        <div class="why-block">
+          <div class="why-block__icon" style="background:rgba(201,123,58,0.1);">🔶</div>
+          <div>
+            <div class="why-block__title">Amber – Wärme &amp; Herzlichkeit</div>
+            <div class="why-block__text">
+              Die Bernsteinfarbe bringt emotionale Wärme ins Design. Sie wird sparsam eingesetzt (Sterne, Highlights, Akzente), damit sie Aufmerksamkeit erzeugt ohne zu dominieren. Amber signalisiert: Wir sind menschlich, nicht nur professionell.
+            </div>
+          </div>
+        </div>
+
+        <div class="why-block">
+          <div class="why-block__icon" style="background:#f4f7fb;">🌫️</div>
+          <div>
+            <div class="why-block__title">Helle Hintergründe – Lesbarkeit &amp; Ruhe</div>
+            <div class="why-block__text">
+              Ein leicht bläuliches Off-White statt reinem Weiß reduziert die Lichtblende auf Bildschirmen – besonders für ältere Augen angenehmer. Die Cream-Töne erzeugen ein warmes, papierähnliches Gefühl, das Vertrautheit schafft.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     5. TYPOGRAFIE
+══════════════════════════════════════════════ -->
+<section class="section section--alt" id="typografie">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">05 · Typografie</span>
+      <h2 class="section-title">Zwei Schriften, klare Hierarchie</h2>
+      <p class="section-desc">
+        Jedes Textelement hat eine definierte Größe und Rolle. Das schafft Ordnung und Lesbarkeit.
+      </p>
+    </div>
+
+    <div class="type-showcase reveal">
+
+      <div class="type-row">
+        <div class="type-row__meta">Playfair Display<br/>700 · 3.5rem</div>
+        <div class="type-row__sample">
+          <span style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;color:var(--ink);line-height:1.2;">
+            Hilfe mit Herz
+          </span>
+        </div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-row__meta">Playfair Display<br/>700 · 2rem</div>
+        <div class="type-row__sample">
+          <span style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--ink);line-height:1.3;">
+            Was wir für Sie tun
+          </span>
+        </div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-row__meta">Playfair Display<br/>700 · 1.4rem</div>
+        <div class="type-row__sample">
+          <span style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--ink);">
+            Soziale Betreuung &amp; Alltagsbegleitung
+          </span>
+        </div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-row__meta">Inter<br/>400 · 1.125rem</div>
+        <div class="type-row__sample">
+          <span style="font-size:1.125rem;color:var(--ink-muted);line-height:1.7;">
+            Wir begleiten Seniorinnen und Senioren einfühlsam und zuverlässig – damit Sie und Ihre Angehörigen sich keine Sorgen machen müssen.
+          </span>
+        </div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-row__meta">Inter<br/>500 · 0.875rem<br/>Uppercase</div>
+        <div class="type-row__sample">
+          <span style="font-size:0.875rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--blue);">
+            Unsere Leistungen
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="grid-2 mt-lg reveal">
+      <div class="card">
+        <h4 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:0.5rem;">Playfair Display</h4>
+        <p style="font-size:0.9rem;color:var(--ink-muted);line-height:1.65;">
+          Klassische Serifenschrift für alle Überschriften. Wirkt elegant und zeitlos, verleiht der Marke Würde ohne altmodisch zu sein. Perfekt für eine Zielgruppe, die Qualität und Tradition schätzt.
+        </p>
+      </div>
+      <div class="card">
+        <h4 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:0.5rem;">Inter</h4>
+        <p style="font-size:0.9rem;color:var(--ink-muted);line-height:1.65;">
+          Modernste serifenlose Schrift für Fließtexte. Optimiert für Bildschirm-Lesbarkeit, auch in kleinen Größen. Klare Buchstabenformen unterstützen die Barrierefreiheit für sehbeeinträchtigte Nutzer.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     6. INTERAKTIONEN
+══════════════════════════════════════════════ -->
+<section class="section" id="interaktionen">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">06 · Interaktionen</span>
+      <h2 class="section-title">Was die Website „lebt"</h2>
+      <p class="section-desc">
+        Alle Interaktionen wurden in reinem JavaScript umgesetzt – kein Framework, schnell und zuverlässig.
+      </p>
+    </div>
+
+    <div class="grid-2 reveal">
+
+      <div class="interaction-card">
+        <div class="interaction-card__top">
+          <div class="interaction-icon icon--blue">🍔</div>
+          <div>
+            <div class="interaction-card__title">Mobile Navigation</div>
+            <div class="interaction-card__subtitle">Hamburger-Menü</div>
+          </div>
+        </div>
+        <p class="interaction-card__desc">
+          Auf Mobilgeräten öffnet ein Tipp auf das Drei-Balken-Symbol ein vollflächiges Slide-in-Menü. Ein Overlay verdunkelt den Hintergrund. Schließen per Tipp auf Overlay, Link-Klick oder ESC-Taste. Korrekte ARIA-Attribute für Screenreader.
+        </p>
+        <div class="interaction-card__triggers">
+          <span class="trigger-tag">Tap Hamburger</span>
+          <span class="trigger-tag">Tap Overlay</span>
+          <span class="trigger-tag">ESC-Taste</span>
+          <span class="trigger-tag">Link-Klick</span>
+        </div>
+      </div>
+
+      <div class="interaction-card">
+        <div class="interaction-card__top">
+          <div class="interaction-icon icon--teal">📌</div>
+          <div>
+            <div class="interaction-card__title">Sticky Navigation</div>
+            <div class="interaction-card__subtitle">Scroll-Effekt</div>
+          </div>
+        </div>
+        <p class="interaction-card__desc">
+          Scrollt der Nutzer mehr als 50px, erhält die Navigationsleiste einen dezenten Schatten und leichten Hintergrund-Blur. Die Telefonnummer bleibt dabei stets sichtbar – ein kritischer Faktor für Conversion.
+        </p>
+        <div class="interaction-card__triggers">
+          <span class="trigger-tag trigger-tag--teal">Scroll &gt; 50px</span>
+        </div>
+      </div>
+
+      <div class="interaction-card">
+        <div class="interaction-card__top">
+          <div class="interaction-icon icon--blue">🔍</div>
+          <div>
+            <div class="interaction-card__title">Live-Seitensuche</div>
+            <div class="interaction-card__subtitle">Instant Search</div>
+          </div>
+        </div>
+        <p class="interaction-card__desc">
+          Ein Klick auf das Lupe-Symbol öffnet ein Suchfeld direkt in der Navigation. Während der Eingabe erscheinen sofort passende Seiten als Dropdown – ohne Seitenladen. Ermöglicht auch älteren Nutzern, schnell Inhalte zu finden.
+        </p>
+        <div class="interaction-card__triggers">
+          <span class="trigger-tag">Klick Lupe</span>
+          <span class="trigger-tag">Texteingabe</span>
+          <span class="trigger-tag">ESC / X-Button</span>
+        </div>
+      </div>
+
+      <div class="interaction-card">
+        <div class="interaction-card__top">
+          <div class="interaction-icon icon--amber">🪗</div>
+          <div>
+            <div class="interaction-card__title">FAQ Akkordeon</div>
+            <div class="interaction-card__subtitle">Auf-/Zuklappen</div>
+          </div>
+        </div>
+        <p class="interaction-card__desc">
+          Auf der FAQ-Seite und in der Startseiten-Vorschau lassen sich Fragen auf- und zuklappen. Jeweils nur eine Antwort ist gleichzeitig sichtbar – das verhindert Informationsüberlastung, besonders wichtig für die Zielgruppe.
+        </p>
+        <div class="interaction-card__triggers">
+          <span class="trigger-tag trigger-tag--amber">Klick auf Frage</span>
+          <span class="trigger-tag trigger-tag--amber">Automatisch schließen</span>
+        </div>
+      </div>
+
+      <div class="interaction-card">
+        <div class="interaction-card__top">
+          <div class="interaction-icon icon--purple">💬</div>
+          <div>
+            <div class="interaction-card__title">Engagement-Banner</div>
+            <div class="interaction-card__subtitle">Intelligentes Popup</div>
+          </div>
+        </div>
+        <p class="interaction-card__desc">
+          Ein sanftes Banner erscheint in 3 Situationen: nach 35 Sekunden Verweildauer, bei Exit-Intent (Maus verlässt Fenster oben, Desktop) oder wenn jemand 60%+ gescrollt hat und dann zurückscrollt. Erscheint pro Session nur einmal. Nicht auf der Kontaktseite.
+        </p>
+        <div class="interaction-card__triggers">
+          <span class="trigger-tag">35 Sek. Verweildauer</span>
+          <span class="trigger-tag">Exit Intent</span>
+          <span class="trigger-tag">Scroll 60% + Rückwärts</span>
+        </div>
+      </div>
+
+      <div class="interaction-card">
+        <div class="interaction-card__top">
+          <div class="interaction-icon icon--green">✨</div>
+          <div>
+            <div class="interaction-card__title">Scroll-Animationen</div>
+            <div class="interaction-card__subtitle">Fade-in &amp; Slide</div>
+          </div>
+        </div>
+        <p class="interaction-card__desc">
+          Alle Inhaltsbereiche blenden beim Scrollen sanft ein (Fade-in, Slide von links/rechts). Karten erscheinen mit versetztem Timing (Stagger-Effekt). Technisch umgesetzt mit dem Intersection Observer API – performant, kein Layout-Shift.
+        </p>
+        <div class="interaction-card__triggers">
+          <span class="trigger-tag trigger-tag--teal">Element betritt Viewport</span>
+          <span class="trigger-tag trigger-tag--teal">Stagger-Delay</span>
+        </div>
+      </div>
+
+      <div class="interaction-card">
+        <div class="interaction-card__top">
+          <div class="interaction-icon icon--slate">🗺️</div>
+          <div>
+            <div class="interaction-card__title">Interaktive Karte</div>
+            <div class="interaction-card__subtitle">Leaflet / OpenStreetMap</div>
+          </div>
+        </div>
+        <p class="interaction-card__desc">
+          Auf der Standorte-Seite ist eine zoombare Karte eingebettet, die das Einzugsgebiet anzeigt. Nutzer können prüfen, ob ihr Wohnort abgedeckt ist. Keine Google-Abhängigkeit, DSGVO-freundlich durch OpenStreetMap.
+        </p>
+        <div class="interaction-card__triggers">
+          <span class="trigger-tag">Zoom</span>
+          <span class="trigger-tag">Pan / Verschieben</span>
+          <span class="trigger-tag">Marker-Klick</span>
+        </div>
+      </div>
+
+      <div class="interaction-card">
+        <div class="interaction-card__top">
+          <div class="interaction-icon icon--amber">📱</div>
+          <div>
+            <div class="interaction-card__title">Floating Phone Button</div>
+            <div class="interaction-card__subtitle">Mobiler CTA</div>
+          </div>
+        </div>
+        <p class="interaction-card__desc">
+          Auf Mobilgeräten schwebt rechts unten ein großer Telefonbutton dauerhaft im Bild. Direkt tippbar, führt zum sofortigen Anruf. Für die Zielgruppe (Senioren) ist Telefonieren nach wie vor der bevorzugte Kontaktweg.
+        </p>
+        <div class="interaction-card__triggers">
+          <span class="trigger-tag trigger-tag--amber">Nur Mobile (&lt;768px)</span>
+          <span class="trigger-tag trigger-tag--amber">Immer sichtbar</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="mt-lg reveal">
+      <div class="card" style="background:linear-gradient(135deg,#EEF4FA,#f0f8f5);">
+        <h4 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:0.5rem;">Smooth Scroll &amp; aktiver Nav-Link</h4>
+        <p style="font-size:0.9rem;color:var(--ink-muted);line-height:1.65;">
+          Alle internen Anker-Links scrollen weich zur Zielposition. Der aktive Navigationseintrag wird automatisch anhand der aktuellen Seiten-URL markiert (blauer Unterstrich). Beim Scrollen über Sections wird der passende Link aktiv hervorgehoben.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     7. BARRIEREFREIHEIT
+══════════════════════════════════════════════ -->
+<section class="section section--warm" id="accessibility">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">07 · Barrierefreiheit</span>
+      <h2 class="section-title">Designt für Ihre Zielgruppe</h2>
+      <p class="section-desc">
+        Senioren ab 65 Jahren stellen besondere Anforderungen an digitale Interfaces. Jedes Detail wurde darauf ausgelegt.
+      </p>
+    </div>
+
+    <div class="a11y-grid reveal">
+
+      <div class="a11y-card">
+        <div class="a11y-card__icon">🔤</div>
+        <div class="a11y-card__value">18px+</div>
+        <div class="a11y-card__title">Mindestschriftgröße</div>
+        <div class="a11y-card__text">Wichtige Inhalte sind niemals unter 18px – deutlich über dem Web-Standard von 16px.</div>
+      </div>
+
+      <div class="a11y-card">
+        <div class="a11y-card__icon">🎨</div>
+        <div class="a11y-card__value">4.5 : 1</div>
+        <div class="a11y-card__title">Kontrastwert Text</div>
+        <div class="a11y-card__text">WCAG AA konform. Alle Text-Hintergrund-Kombinationen erfüllen den Mindest-Kontrastwert.</div>
+      </div>
+
+      <div class="a11y-card">
+        <div class="a11y-card__icon">👆</div>
+        <div class="a11y-card__value">48 × 48px</div>
+        <div class="a11y-card__title">Touch-Targets</div>
+        <div class="a11y-card__text">Alle Buttons, Links und interaktive Elemente sind mindestens 48×48px groß – sicher tippbar.</div>
+      </div>
+
+      <div class="a11y-card">
+        <div class="a11y-card__icon">⌨️</div>
+        <div class="a11y-card__value">100%</div>
+        <div class="a11y-card__title">Tastatur-Navigation</div>
+        <div class="a11y-card__text">Vollständig per Tastatur bedienbar. Skip-Link vorhanden. Fokus-Styles klar sichtbar.</div>
+      </div>
+
+      <div class="a11y-card">
+        <div class="a11y-card__icon">📢</div>
+        <div class="a11y-card__value">ARIA</div>
+        <div class="a11y-card__title">Screenreader</div>
+        <div class="a11y-card__text">Alle Icons haben <code>aria-hidden="true"</code>. Landmarks, Roles und Labels sind korrekt gesetzt.</div>
+      </div>
+
+      <div class="a11y-card">
+        <div class="a11y-card__icon">📱</div>
+        <div class="a11y-card__value">Mobile First</div>
+        <div class="a11y-card__title">Responsive Design</div>
+        <div class="a11y-card__text">Vollständig responsive ab 320px Breite. Optimiert für Smartphones, Tablets und Desktop.</div>
+      </div>
+
+      <div class="a11y-card">
+        <div class="a11y-card__icon">📞</div>
+        <div class="a11y-card__value">Immer sichtbar</div>
+        <div class="a11y-card__title">Telefonnummer</div>
+        <div class="a11y-card__text">Die Telefonnummer bleibt auf jeder Seite sticky in der Navigation – der wichtigste Conversion-Kanal.</div>
+      </div>
+
+      <div class="a11y-card">
+        <div class="a11y-card__icon">⚡</div>
+        <div class="a11y-card__value">Schnell</div>
+        <div class="a11y-card__title">Performance</div>
+        <div class="a11y-card__text">DNS-Prefetch, Preload, optimierte Bilder. Keine schweren Frameworks. Lädt auch bei schlechtem Netz.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     8. NÄCHSTE SCHRITTE
+══════════════════════════════════════════════ -->
+<section class="section section--alt" id="naechste-schritte">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">08 · Nächste Schritte</span>
+      <h2 class="section-title">Was noch aussteht</h2>
+      <p class="section-desc">
+        Alle Seiten sind technisch fertig. Für den Live-Gang werden noch echte Inhalte und Daten benötigt.
+      </p>
+    </div>
+
+    <div class="todo-list reveal">
+
+      <div class="todo-item">
+        <div class="todo-item__icon todo-item__icon--pending">!</div>
+        <div class="todo-item__text">
+          <strong>Telefonnummer</strong> eintragen
+          <div class="todo-item__sub">Überall <code>+4989XXXXXXXX</code> durch echte Nummer ersetzen (Navigation, Footer, alle CTAs)</div>
+        </div>
+      </div>
+
+      <div class="todo-item">
+        <div class="todo-item__icon todo-item__icon--pending">!</div>
+        <div class="todo-item__text">
+          <strong>Adresse</strong> eintragen
+          <div class="todo-item__sub">Überall <code>Musterstraße 1, 85435 Erding</code> durch echte Adresse ersetzen</div>
+        </div>
+      </div>
+
+      <div class="todo-item">
+        <div class="todo-item__icon todo-item__icon--pending">!</div>
+        <div class="todo-item__text">
+          <strong>Logo</strong> einbinden
+          <div class="todo-item__sub">SVG oder AVIF-Datei als <code>images/vitalis-logo.avif</code> ablegen</div>
+        </div>
+      </div>
+
+      <div class="todo-item">
+        <div class="todo-item__icon todo-item__icon--pending">!</div>
+        <div class="todo-item__text">
+          <strong>Echte Kundenstimmen</strong> eintragen
+          <div class="todo-item__sub">3 Testimonials mit Vorname, Wohnort und Bewertungstext auf Startseite und Über-uns-Seite</div>
+        </div>
+      </div>
+
+      <div class="todo-item">
+        <div class="todo-item__icon todo-item__icon--pending">!</div>
+        <div class="todo-item__text">
+          <strong>Team-Fotos</strong> einbinden
+          <div class="todo-item__sub">Fotos der Mitarbeiter für die Über-uns-Seite (Platzhalter aktuell von Unsplash)</div>
+        </div>
+      </div>
+
+      <div class="todo-item">
+        <div class="todo-item__icon todo-item__icon--pending">!</div>
+        <div class="todo-item__text">
+          <strong>PLZ-Liste Einzugsgebiet</strong> eintragen
+          <div class="todo-item__sub">Postleitzahlen für die interaktive Karte auf standorte.html</div>
+        </div>
+      </div>
+
+      <div class="todo-item">
+        <div class="todo-item__icon todo-item__icon--pending">!</div>
+        <div class="todo-item__text">
+          <strong>Kontaktformular-Backend</strong> einrichten
+          <div class="todo-item__sub">Formspree-ID oder eigene Lösung – Platzhalter <code>formspree.io/f/PLATZHALTER</code> ersetzen</div>
+        </div>
+      </div>
+
+      <div class="todo-item">
+        <div class="todo-item__icon todo-item__icon--pending">!</div>
+        <div class="todo-item__text">
+          <strong>Impressum</strong> vervollständigen
+          <div class="todo-item__sub">HRB-Nummer, USt-ID und Geschäftsführer eintragen</div>
+        </div>
+      </div>
+
+      <div class="todo-item">
+        <div class="todo-item__icon todo-item__icon--pending">!</div>
+        <div class="todo-item__text">
+          <strong>Pflegekassen-Leistungsbeträge</strong> prüfen
+          <div class="todo-item__sub">Aktuelle 2025-Beträge nach Pflegegrad auf kostenuebernahme.html einpflegen</div>
+        </div>
+      </div>
+
+      <div class="todo-item">
+        <div class="todo-item__icon todo-item__icon--done">✓</div>
+        <div class="todo-item__text" style="color:var(--ink-muted);">
+          <strong>Alle 10 Seiten HTML-Struktur</strong> fertiggestellt
+        </div>
+      </div>
+
+      <div class="todo-item">
+        <div class="todo-item__icon todo-item__icon--done">✓</div>
+        <div class="todo-item__text" style="color:var(--ink-muted);">
+          <strong>Design-System</strong> (Farben, Typografie, Abstände, Komponenten) vollständig implementiert
+        </div>
+      </div>
+
+      <div class="todo-item">
+        <div class="todo-item__icon todo-item__icon--done">✓</div>
+        <div class="todo-item__text" style="color:var(--ink-muted);">
+          <strong>Alle Interaktionen</strong> programmiert und getestet
+        </div>
+      </div>
+
+      <div class="todo-item">
+        <div class="todo-item__icon todo-item__icon--done">✓</div>
+        <div class="todo-item__text" style="color:var(--ink-muted);">
+          <strong>Barrierefreiheit</strong> (WCAG AA, ARIA, Keyboard) implementiert
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════ -->
+<footer class="page-footer">
+  <p>
+    Erstellt für <strong>Vitalis Seniorendienst GmbH</strong> ·
+    Dokumentation Stand März 2026 ·
+    Vertraulich – nur zur internen Nutzung
+  </p>
+  <p style="margin-top:0.5rem;font-size:0.78rem;opacity:0.5;">
+    Alle Seitenstrukturen, Interaktionen und Designentscheidungen werden bei Bedarf angepasst.
+  </p>
+</footer>
+
+
+<script>
+  // ── Intersection Observer: Reveal on Scroll ──────────────
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  // ── Active TOC link on scroll ─────────────────────────────
+  const sections = document.querySelectorAll('section[id]');
+  const tocLinks = document.querySelectorAll('.toc-nav__link');
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        tocLinks.forEach(link => {
+          link.classList.toggle(
+            'is-active',
+            link.getAttribute('href') === '#' + entry.target.id
+          );
+        });
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(section => sectionObserver.observe(section));
+</script>
+
+</body>
+</html>
