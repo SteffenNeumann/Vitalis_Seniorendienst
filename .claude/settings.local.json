@@ -26,7 +26,22 @@
       "Bash(gh run:*)",
       "Bash(grep -n \"page-header.*style\\\\|style.*page-header\" /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html)",
       "Bash(grep -rn \"page-header--\" /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html)",
-      "WebFetch(domain:branchenbuch.portal.muenchen.de)"
+      "WebFetch(domain:branchenbuch.portal.muenchen.de)",
+      "WebFetch(domain:www.muenchen.de)",
+      "Bash(grep -l \"muenchen-badge\" /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html)",
+      "WebFetch(domain:s3.eu-west-1.amazonaws.com)",
+      "WebFetch(domain:static.opendi.com)",
+      "Bash(grep -n \"onclick.*closeEngagementBanner\" /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html)",
+      "Bash(grep -c \"onclick.*closeEngagementBanner\" /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html 2>/dev/null | grep -v \":0\")",
+      "Bash(node -e \"\nconst fs = require\\('fs'\\);\n// Einfacher Check: Geschweifte Klammern müssen ausgeglichen sein\n['css/components.css', 'css/responsive.css'].forEach\\(f => {\n  const txt = fs.readFileSync\\(f, 'utf8'\\);\n  let open = 0, close = 0;\n  for \\(const c of txt\\) {\n    if \\(c === '{'\\) open++;\n    if \\(c === '}'\\) close++;\n  }\n  console.log\\(f + ': { = ' + open + ', } = ' + close + \\(open === close ? ' OK' : ' MISMATCH'\\)\\);\n}\\);\n\")",
+      "WebFetch(domain:www.pflege.de)",
+      "Bash(grep -l \"back-to-top\" /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html | wc -l && grep -c \"back-to-top\" /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/css/components.css && grep -c \"backToTop\" /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/js/main.js)",
+      "Bash(node -e \"\nconst fs = require\\('fs'\\);\nconst files = [\n  '/Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/css/responsive.css',\n  '/Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/css/components.css'\n];\nfiles.forEach\\(f => {\n  const content = fs.readFileSync\\(f, 'utf8'\\);\n  let open = 0;\n  for \\(const ch of content\\) {\n    if \\(ch === '{'\\) open++;\n    if \\(ch === '}'\\) open--;\n  }\n  console.log\\(f.split\\('/'\\).pop\\(\\) + ': balance = ' + open + \\(open === 0 ? ' OK' : ' FEHLER'\\)\\);\n}\\);\n\")",
+      "Bash(node -e \"\nconst fs = require\\('fs'\\);\nconst files = [\n  '/Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/css/responsive.css',\n  '/Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/css/components.css',\n  '/Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/css/main.css'\n];\nfiles.forEach\\(f => {\n  const content = fs.readFileSync\\(f, 'utf8'\\);\n  let open = 0;\n  for \\(const ch of content\\) {\n    if \\(ch === '{'\\) open++;\n    if \\(ch === '}'\\) open--;\n  }\n  const lines = content.split\\('\\\\n'\\).length;\n  console.log\\(f.split\\('/'\\).pop\\(\\) + ': ' + lines + ' Zeilen, Klammer-Balance = ' + open + \\(open === 0 ? ' ✓' : ' FEHLER'\\)\\);\n}\\);\n\")",
+      "Bash(grep -rn 'style=.*color\\\\|style=.*background' /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html 2>/dev/null | grep -v 'transition-delay\\\\|animation' | head -30)",
+      "Bash(grep -rn \\\\\n  'var\\(--color-primary\\\\|var\\(--color-secondary\\\\|var\\(--color-bg-\\\\|var\\(--color-text\\\\|var\\(--color-white\\\\|var\\(--color-amber\\\\|var\\(--color-accent\\\\|var\\(--color-success\\\\|var\\(--color-border' \\\\\n  /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/css/ \\\\\n  /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html 2>/dev/null | grep -v 'color-danger')",
+      "Bash(grep -n \"grid grid-4\\\\|grid-4\" /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html)",
+      "Bash(gh api:*)"
     ]
   }
 }
