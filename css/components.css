@@ -601,16 +601,70 @@
 }
 
 .hero__stat {
-  background: rgba(0,0,0,0.30);
-  border: 1px solid rgba(255,255,255,0.18);
-  border-top: 1px solid rgba(255,255,255,0.32);
-  border-left: 1px solid rgba(255,255,255,0.22);
+  position: relative;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: var(--radius-lg);
   padding: var(--spacing-md) var(--spacing-lg);
+  padding-top: calc(var(--spacing-md) + 3px); /* Platz für Akzentstreifen */
   min-width: 120px;
   flex: 1;
-  text-align: center;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.12);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  text-align: left;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: background var(--transition-base), box-shadow var(--transition-base);
+  cursor: default;
+}
+
+/* Akzentstreifen oben – einheitlich Amber */
+.hero__stat::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--amber);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  transition: height 0.25s ease;
+}
+
+.hero__stat:hover {
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+.hero__stat:hover::before {
+  height: 5px;
+}
+
+/* Shimmer-Sweep: Lichtglanz läuft einmalig von links nach rechts */
+@keyframes shimmer-sweep {
+  0%   { transform: translateX(-200%); }
+  100% { transform: translateX(350%); }
+}
+
+.hero__stat::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 40%;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.12) 50%, transparent 100%);
+  border-radius: var(--radius-lg);
+  transform: translateX(-200%);
+}
+
+.hero__stat:hover::after {
+  animation: shimmer-sweep 1.1s ease-in-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__stat:hover::after { animation: none; }
 }
 
 .hero__stat-number {
@@ -618,14 +672,15 @@
   font-size: var(--fs-2xl);
   font-weight: var(--fw-bold);
   color: var(--white);
-  line-height: 1.1;
+  line-height: 1;
+  flex-shrink: 0;
 }
 
 .hero__stat-label {
   display: block;
-  font-size: var(--fs-sm);
-  color: rgba(255,255,255,0.75);
-  margin-top: 2px;
+  font-size: var(--fs-xs);
+  color: rgba(255, 255, 255, 0.80);
+  line-height: 1.35;
 }
 
 .hero__badge {
