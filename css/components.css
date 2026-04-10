@@ -564,37 +564,14 @@
 .hero {
   position: relative;
   background:
-    linear-gradient(to right, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.15) 100%),
-    url('../images/hero-homecare.jpeg') center 30% / cover no-repeat;
+    linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.45) 100%),
+    url('../images/hero-homecare-new.jpeg') center 30% / cover no-repeat;
   color: var(--white);
   padding: var(--spacing-5xl) 0;
   overflow: hidden;
   min-height: 600px;
   display: flex;
   align-items: center;
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background:
-    radial-gradient(ellipse 60% 50% at 20% 40%, rgba(255,255,255,0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 60% at 80% 60%, rgba(80,121,165,0.12) 0%, transparent 70%),
-    radial-gradient(ellipse at 20% 50%, rgba(244, 162, 97, 0.10) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 20%, rgba(255, 255, 255, 0.07) 0%, transparent 50%),
-    radial-gradient(ellipse at 60% 80%, rgba(80, 121, 165, 0.08) 0%, transparent 50%);
-  pointer-events: none;
-  z-index: 1;
-  animation: heroGlow 8s ease-in-out infinite alternate;
-}
-
-@keyframes heroGlow {
-  0% { opacity: 0.7; }
-  100% { opacity: 1; }
 }
 
 .hero__inner {
@@ -624,9 +601,7 @@
 }
 
 .hero__stat {
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(0,0,0,0.30);
   border: 1px solid rgba(255,255,255,0.18);
   border-top: 1px solid rgba(255,255,255,0.32);
   border-left: 1px solid rgba(255,255,255,0.22);
@@ -658,13 +633,12 @@
   align-items: center;
   gap: var(--spacing-xs);
   padding: var(--spacing-xs) var(--spacing-lg);
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(0, 0, 0, 0.25);
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: var(--radius-pill);
   font-size: var(--fs-sm);
   font-weight: var(--fw-medium);
   margin-bottom: var(--spacing-xl);
-  backdrop-filter: blur(8px);
 }
 
 .hero__title {
@@ -729,7 +703,7 @@
   max-width: 720px;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: var(--spacing-3xl);
+  margin-bottom: var(--spacing-xl);
 }
 
 .section-header__label {
@@ -855,6 +829,32 @@
 
 .feature-card__link:hover svg {
   transform: translateX(4px);
+}
+
+/* --- Feature Card Highlight Variant (Kurpaket, Hausnotruf) --- */
+.feature-card--highlight {
+  border-color: rgba(80, 121, 165, 0.35);
+  background: linear-gradient(135deg, var(--white) 75%, rgba(80,121,165,0.06) 100%);
+}
+
+.feature-card--highlight::before {
+  opacity: 1;
+}
+
+.feature-card__badge {
+  display: inline-block;
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  background: var(--blue);
+  color: var(--white);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  line-height: 1.6;
 }
 
 /* --- Feature Section (Two-Column) --- */
@@ -1135,7 +1135,7 @@
 .cta-section {
   background: var(--blue); /* #5079A5 – konsistent mit Page-Header */
   color: var(--white);
-  padding: var(--spacing-4xl) 0;
+  padding: var(--spacing-2xl) 0;
   position: relative;
   overflow: hidden;
 }
