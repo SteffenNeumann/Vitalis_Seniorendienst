@@ -1043,6 +1043,25 @@ body.nav-open .nav-overlay {
     padding: var(--spacing-xl) var(--spacing-lg);
   }
 
+  /* Leistungs-Trio: 1 Spalte auf Mobile */
+  .leistungs-trio__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .leistungs-trio__headline {
+    font-size: var(--fs-2xl);
+  }
+
+  .leistungs-trio__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .leistungs-trio__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
   /* CTA Section: weniger vertikales Padding auf Mobile */
   .cta-section {
     padding: var(--spacing-3xl) 0;

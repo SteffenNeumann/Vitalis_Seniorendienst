@@ -219,8 +219,7 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
         </article>
-        <article class="feature-card feature-card--highlight fade-in">
-          <span class="feature-card__badge">Neu</span>
+        <article class="feature-card fade-in">
           <div class="feature-card__icon" aria-hidden="true">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3h18v13H3z"/><path d="M8 21h8"/><path d="M12 16v5"/><path d="M7 8h10"/><path d="M7 11h6"/></svg>
           </div>
@@ -231,8 +230,7 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
         </article>
-        <article class="feature-card feature-card--highlight fade-in">
-          <span class="feature-card__badge">Neu</span>
+        <article class="feature-card fade-in">
           <div class="feature-card__icon" aria-hidden="true">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/><circle cx="17" cy="5" r="3"/></svg>
           </div>
@@ -536,16 +534,65 @@
   </script>
 
   <!-- MID-PAGE CTA (Leistungsangebot) ─────────────────── -->
-  <section class="section bg-white" aria-label="Leistungsangebot">
+  <section class="section" style="background: var(--off-white);" aria-label="Leistungsangebot">
     <div class="container">
-      <div class="midpage-cta fade-in">
-        <p class="midpage-cta__title">Haushaltshilfe, Begleitung, Arztfahrten – alles aus einer Hand</p>
-        <p class="midpage-cta__text">Alle Leistungen individuell kombinierbar – und oft vollständig durch die Pflegekasse gedeckt.</p>
-        <div class="midpage-cta__actions">
+      <div class="leistungs-trio fade-in">
+
+        <div class="leistungs-trio__header">
+          <h2 class="leistungs-trio__headline">Alles aus einer Hand</h2>
+          <p class="leistungs-trio__subtext">Alle Leistungen individuell kombinierbar – und oft vollständig durch die Pflegekasse gedeckt.</p>
+        </div>
+
+        <div class="leistungs-trio__grid">
+
+          <!-- Card 1: Haushaltshilfe -->
+          <article class="leistungs-trio__card">
+            <div class="leistungs-trio__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+            </div>
+            <h3 class="leistungs-trio__card-title">Haushaltshilfe</h3>
+            <p class="leistungs-trio__card-text">Reinigung, Einkäufe, Wäsche und mehr – wir übernehmen die alltäglichen Aufgaben zuverlässig.</p>
+          </article>
+
+          <!-- Card 2: Alltagsbegleitung -->
+          <article class="leistungs-trio__card">
+            <div class="leistungs-trio__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <h3 class="leistungs-trio__card-title">Alltagsbegleitung</h3>
+            <p class="leistungs-trio__card-text">Gesellschaft, Spaziergänge, Behördengänge – für mehr Lebensqualität und ein offenes Ohr.</p>
+          </article>
+
+          <!-- Card 3: Arztfahrten & Begleitung -->
+          <article class="leistungs-trio__card">
+            <div class="leistungs-trio__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="1" y="3" width="15" height="13" rx="2"/>
+                <path d="M16 8h4l3 3v5h-7V8z"/>
+                <circle cx="5.5" cy="18.5" r="2.5"/>
+                <circle cx="18.5" cy="18.5" r="2.5"/>
+              </svg>
+            </div>
+            <h3 class="leistungs-trio__card-title">Arztfahrten &amp; Begleitung</h3>
+            <p class="leistungs-trio__card-text">Sicher zum Arzt, zur Therapie oder zu Behörden – pünktlich, zuverlässig, mit Begleitung.</p>
+          </article>
+
+        </div><!-- /.leistungs-trio__grid -->
+
+        <div class="leistungs-trio__actions">
           <a href="leistungen.html" class="btn btn-primary">Alle Leistungen ansehen</a>
           <a href="kostenuebernahme.html" class="btn btn-secondary">Kostenübernahme prüfen</a>
         </div>
-      </div>
+
+      </div><!-- /.leistungs-trio -->
     </div>
   </section>
 
