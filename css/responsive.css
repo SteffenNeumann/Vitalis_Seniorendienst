@@ -102,12 +102,11 @@ body.nav-open .nav-overlay {
 }
 
 .hero {
-  min-height: auto;
+  min-height: 100svh;
   padding: var(--spacing-3xl) 0;
 }
 
 .hero__inner {
-  grid-template-columns: 1fr;
   gap: var(--spacing-2xl);
   text-align: center;
 }
@@ -122,7 +121,7 @@ body.nav-open .nav-overlay {
 
 .hero__trust {
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: var(--spacing-sm);
 }
 
 /* Stats: auf Mobile als Row mit Wrap */
@@ -377,7 +376,7 @@ body.nav-open .nav-overlay {
   }
 
   .hero__inner {
-    grid-template-columns: 1.2fr 0.8fr;
+    grid-template-columns: 1.4fr 0.6fr;
     text-align: left;
   }
 
@@ -389,10 +388,14 @@ body.nav-open .nav-overlay {
     flex-direction: column;
     align-items: flex-start;
     flex-wrap: nowrap;
+    align-self: center;
+    max-width: 260px;
+    width: 100%;
   }
 
   .hero__stat {
-    min-width: 180px;
+    min-width: 0;
+    width: 100%;
     flex: 0 0 auto;
     text-align: left;
   }
@@ -1401,16 +1404,18 @@ body.nav-open .nav-overlay {
 
 /* ── Tablet 768px: Spezielle Anpassungen ─────────────────── */
 @media (min-width: 480px) and (max-width: 767px) {
-  /* Hero Stats: 3 nebeneinander passen gut auf Phones 480px+ */
+  /* Hero Stats: Tablet 480–767px → wrap mit Mindestbreite */
   .hero__stats {
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     gap: var(--spacing-sm);
+    max-width: 480px;
+    margin: 0 auto;
   }
 
   .hero__stat {
     flex: 1;
-    min-width: 0;
+    min-width: 130px;
     padding: var(--spacing-sm) var(--spacing-md);
   }
 
