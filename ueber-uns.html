@@ -212,32 +212,369 @@
     </div>
   </section>
 
-  <!-- TESTIMONIAL SECTION ────────────────────────────── -->
+  <!-- TESTIMONIAL CAROUSEL ───────────────────────────── -->
   <section class="section" style="background: var(--ink-warm);" aria-labelledby="testimonial-heading">
+
+    <style>
+      /* ── Testimonial Carousel ── */
+      .tc-track {
+        display: grid;
+        margin-top: var(--spacing-3xl);
+      }
+      .tc-slide {
+        grid-area: 1 / 1;
+        opacity: 0;
+        transform: translateY(14px);
+        transition: opacity 0.45s ease, transform 0.45s ease;
+        pointer-events: none;
+        text-align: center;
+        max-width: 780px;
+        margin: 0 auto;
+        padding: 0 var(--spacing-md);
+      }
+      .tc-slide.is-active {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+      .tc-stars {
+        display: flex;
+        gap: 5px;
+        justify-content: center;
+        margin-bottom: var(--spacing-lg);
+      }
+      .tc-quote {
+        font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+        line-height: 1.75;
+        color: var(--near-black, #151414);
+        font-style: italic;
+        margin-bottom: var(--spacing-xl);
+        quotes: '\201E' '\201C';
+      }
+      .tc-quote::before { content: open-quote; }
+      .tc-quote::after  { content: close-quote; }
+      .tc-author {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacing-md);
+        margin-bottom: var(--spacing-lg);
+      }
+      .tc-avatar {
+        width: 48px; height: 48px; border-radius: 50%;
+        background: var(--primary-blue, #2f5dff);
+        color: #fff;
+        display: flex; align-items: center; justify-content: center;
+        font-weight: 700; font-size: 0.875rem;
+        flex-shrink: 0;
+        letter-spacing: 0.02em;
+      }
+      .tc-author-name {
+        font-weight: 700;
+        font-size: 1rem;
+        color: var(--near-black, #151414);
+        line-height: 1.3;
+      }
+      .tc-author-meta {
+        font-size: 0.83rem;
+        color: var(--dark-gray, #383838);
+        margin-top: 2px;
+      }
+      .tc-source {
+        display: inline-flex; align-items: center; gap: 6px;
+        font-size: 0.78rem; color: var(--dark-gray, #383838);
+        text-decoration: none;
+        border: 1px solid rgba(0,0,0,0.13);
+        border-radius: 20px;
+        padding: 5px 14px;
+        transition: border-color 0.2s, color 0.2s;
+        margin-top: var(--spacing-sm);
+      }
+      .tc-source:hover, .tc-source:focus-visible {
+        border-color: var(--primary-blue, #2f5dff);
+        color: var(--primary-blue, #2f5dff);
+        outline: none;
+      }
+      .tc-progress {
+        max-width: 780px;
+        margin: var(--spacing-xl) auto 0;
+        height: 2px;
+        background: rgba(0,0,0,0.08);
+        border-radius: 1px;
+        overflow: hidden;
+      }
+      .tc-progress-bar {
+        height: 100%;
+        background: var(--primary-blue, #2f5dff);
+        border-radius: 1px;
+        width: 0%;
+      }
+      .tc-nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacing-md);
+        margin-top: var(--spacing-xl);
+      }
+      .tc-dots { display: flex; gap: 12px; align-items: center; }
+      .tc-dot {
+        width: 10px; height: 10px; border-radius: 50%;
+        background: rgba(0,0,0,0.2);
+        border: none; cursor: pointer; padding: 0;
+        position: relative;
+        transition: background 0.3s, transform 0.3s;
+      }
+      .tc-dot::before {
+        content: '';
+        position: absolute;
+        inset: -15px;
+      }
+      .tc-dot.is-active {
+        background: var(--primary-blue, #2f5dff);
+        transform: scale(1.35);
+      }
+      .tc-arrow {
+        width: 46px; height: 46px; border-radius: 50%;
+        border: 2px solid rgba(0,0,0,0.15);
+        background: transparent;
+        cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        color: var(--near-black, #151414);
+        transition: background 0.2s, border-color 0.2s, color 0.2s;
+        flex-shrink: 0;
+      }
+      .tc-arrow:hover, .tc-arrow:focus-visible {
+        background: var(--primary-blue, #2f5dff);
+        border-color: var(--primary-blue, #2f5dff);
+        color: #fff;
+        outline: none;
+      }
+      .tc-overall {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: var(--spacing-lg);
+        font-size: 0.9rem;
+        color: var(--dark-gray, #383838);
+      }
+      .tc-overall-score {
+        font-weight: 700;
+        font-size: 1rem;
+        color: var(--near-black, #151414);
+      }
+      .tc-overall-link {
+        font-weight: 600;
+        color: var(--primary-blue, #2f5dff);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.2s;
+      }
+      .tc-overall-link:hover { border-bottom-color: var(--primary-blue, #2f5dff); }
+    </style>
+
     <div class="container">
+
+      <!-- Header -->
       <div class="section-header">
         <span class="section-header__label">Das sagen unsere Klienten</span>
         <h2 class="section-header__title" id="testimonial-heading">Vertrauen, das man spürt</h2>
         <div class="section-header__accent" aria-hidden="true"></div>
+        <div class="tc-overall">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#f9ad4d" stroke="#f9ad4d" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span class="tc-overall-score">5,0</span>
+          <span>· 4 Bewertungen auf</span>
+          <a href="https://branchenbuch.portal.muenchen.de/mhp/1379552/#bewertungen" target="_blank" rel="noopener" class="tc-overall-link">muenchen.de</a>
+        </div>
       </div>
-      <article class="testimonial-card fade-in" style="max-width: 720px; margin: var(--spacing-3xl) auto 0; text-align: center;">
-        <div class="testimonial-card__stars" aria-label="5 von 5 Sternen" style="justify-content: center;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="#f4a261" stroke="#f4a261" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="#f4a261" stroke="#f4a261" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="#f4a261" stroke="#f4a261" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="#f4a261" stroke="#f4a261" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="#f4a261" stroke="#f4a261" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        </div>
-        <blockquote class="testimonial-card__quote">„Seit meine Mutter von Vitalis betreut wird, ist sie wie ausgewechselt. Sie lacht wieder, erzählt von ihren Spaziergängen und freut sich auf jeden Besuch. Für unsere Familie ist Vitalis ein Segen – wir wissen, dass sie in liebevollen Händen ist."</blockquote>
-        <div class="testimonial-card__author" style="justify-content: center;">
-          <div class="testimonial-card__avatar" aria-hidden="true">KR</div>
-          <div>
-            <p class="testimonial-card__name">Katharina R.</p>
-            <p class="testimonial-card__role">Tochter einer Klientin, München</p>
+
+      <!-- Slides -->
+      <div class="tc-track" id="tcTrack" aria-live="polite" aria-atomic="true">
+
+        <!-- Slide 1: Roman Molz -->
+        <div class="tc-slide is-active" role="group" aria-label="Bewertung 1 von 4">
+          <div class="tc-stars" aria-label="5 von 5 Sternen">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#f9ad4d" stroke="#f9ad4d" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#f9ad4d" stroke="#f9ad4d" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#f9ad4d" stroke="#f9ad4d" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#f9ad4d" stroke="#f9ad4d" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#f9ad4d" stroke="#f9ad4d" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           </div>
+          <blockquote class="tc-quote">Nach einem schweren Unfall auf Hilfe angewiesen, bekam ich von den Vitalis-Mitarbeitern die benötigte Unterstützung. Termine und Vereinbarungen wurden zu 100% eingehalten. Die Mitarbeiter waren stets freundlich und respektvoll: bemüht meine Wünsche zu erfüllen, dazu kompetent und engagiert. Menschliche Nähe und Sympathie sorgten für eine entspannte Basis, so konnte ich die Hilfe annehmen. Nur zu empfehlen!</blockquote>
+          <div class="tc-author">
+            <div class="tc-avatar" aria-hidden="true">RM</div>
+            <div>
+              <p class="tc-author-name">Roman Molz</p>
+              <p class="tc-author-meta">Januar 2026</p>
+            </div>
+          </div>
+          <a href="https://branchenbuch.portal.muenchen.de/mhp/1379552/#bewertungen" target="_blank" rel="noopener" class="tc-source" aria-label="Bewertung auf muenchen.de ansehen">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            Bewertet auf muenchen.de
+          </a>
         </div>
-      </article>
-    </div>
+
+        <!-- Slide 2: C. Fleischer -->
+        <div class="tc-slide" role="group" aria-label="Bewertung 2 von 4">
+          <div class="tc-stars" aria-label="5 von 5 Sternen">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#f9ad4d" stroke="#f9ad4d" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#f9ad4d" stroke="#f9ad4d" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#f9ad4d" stroke="#f9ad4d" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#f9ad4d" stroke="#f9ad4d" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#f9ad4d" stroke="#f9ad4d" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <blockquote class="tc-quote">Ich bin wirklich begeistert vom Vitalis Seniorendienst. Das Team ist nicht nur professionell, sondern auch herzlich und engagiert. Man merkt sofort, dass hier die Menschen im Mittelpunkt stehen. Die Betreuung ist zuverlässig, respektvoll und individuell auf die Bedürfnisse der Seniorinnen und Senioren abgestimmt. Besonders beeindruckt hat mich, wie liebevoll und geduldig mit den älteren Menschen umgegangen wird – das ist heutzutage keine Selbstverständlichkeit mehr. Absolut empfehlenswert!</blockquote>
+          <div class="tc-author">
+            <div class="tc-avatar" aria-hidden="true">CF</div>
+            <div>
+              <p class="tc-author-name">C. Fleischer</p>
+              <p class="tc-author-meta">Juni 2025</p>
+            </div>
+          </div>
+          <a href="https://branchenbuch.portal.muenchen.de/mhp/1379552/#bewertungen" target="_blank" rel="noopener" class="tc-source" aria-label="Bewertung auf muenchen.de ansehen">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            Bewertet auf muenchen.de
+          </a>
+        </div>
+
+        <!-- Slide 3: Anonym Apr 2025 -->
+        <div class="tc-slide" role="group" aria-label="Bewertung 3 von 4">
+          <div class="tc-stars" aria-label="5 von 5 Sternen">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#f9ad4d" stroke="#f9ad4d" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#f9ad4d" stroke="#f9ad4d" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#f9ad4d" stroke="#f9ad4d" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#f9ad4d" stroke="#f9ad4d" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#f9ad4d" stroke="#f9ad4d" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <blockquote class="tc-quote">Bin aktuell absolut zufrieden mit dem Service. Faire Konditionen, kompetent, zuverlässig und freundliches Auftreten. Kann ich nur weiterempfehlen.</blockquote>
+          <div class="tc-author">
+            <div class="tc-avatar" aria-hidden="true" style="background: var(--sage-green, #4b916d);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <div>
+              <p class="tc-author-name">Anonym</p>
+              <p class="tc-author-meta">April 2025</p>
+            </div>
+          </div>
+          <a href="https://branchenbuch.portal.muenchen.de/mhp/1379552/#bewertungen" target="_blank" rel="noopener" class="tc-source" aria-label="Bewertung auf muenchen.de ansehen">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            Bewertet auf muenchen.de
+          </a>
+        </div>
+
+        <!-- Slide 4: Anonym Feb 2025 -->
+        <div class="tc-slide" role="group" aria-label="Bewertung 4 von 4">
+          <div class="tc-stars" aria-label="5 von 5 Sternen">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#f9ad4d" stroke="#f9ad4d" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#f9ad4d" stroke="#f9ad4d" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#f9ad4d" stroke="#f9ad4d" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#f9ad4d" stroke="#f9ad4d" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#f9ad4d" stroke="#f9ad4d" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <blockquote class="tc-quote">Kompetent und haben immer freie Kapazitäten. Danke für alles.</blockquote>
+          <div class="tc-author">
+            <div class="tc-avatar" aria-hidden="true" style="background: var(--sage-green, #4b916d);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <div>
+              <p class="tc-author-name">Anonym</p>
+              <p class="tc-author-meta">Februar 2025</p>
+            </div>
+          </div>
+          <a href="https://branchenbuch.portal.muenchen.de/mhp/1379552/#bewertungen" target="_blank" rel="noopener" class="tc-source" aria-label="Bewertung auf muenchen.de ansehen">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            Bewertet auf muenchen.de
+          </a>
+        </div>
+
+      </div><!-- /.tc-track -->
+
+      <!-- Progress bar -->
+      <div class="tc-progress" aria-hidden="true">
+        <div class="tc-progress-bar" id="tcProgressBar"></div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="tc-nav" aria-label="Bewertungsnavigation">
+        <button class="tc-arrow" id="tcPrev" aria-label="Vorherige Bewertung" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="tc-dots" role="tablist" aria-label="Bewertungen">
+          <button class="tc-dot is-active" role="tab" aria-selected="true"  aria-label="Bewertung 1" data-index="0" type="button"></button>
+          <button class="tc-dot"           role="tab" aria-selected="false" aria-label="Bewertung 2" data-index="1" type="button"></button>
+          <button class="tc-dot"           role="tab" aria-selected="false" aria-label="Bewertung 3" data-index="2" type="button"></button>
+          <button class="tc-dot"           role="tab" aria-selected="false" aria-label="Bewertung 4" data-index="3" type="button"></button>
+        </div>
+        <button class="tc-arrow" id="tcNext" aria-label="Nächste Bewertung" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </nav>
+
+    </div><!-- /.container -->
+
+    <script>
+    (function () {
+      var INTERVAL = 6000;
+      var slides = document.querySelectorAll('.tc-slide');
+      var dots   = document.querySelectorAll('.tc-dot');
+      var prev   = document.getElementById('tcPrev');
+      var next   = document.getElementById('tcNext');
+      var bar    = document.getElementById('tcProgressBar');
+      var track  = document.getElementById('tcTrack');
+      var current = 0;
+      var timer   = null;
+      var paused  = false;
+
+      function goTo(idx) {
+        slides[current].classList.remove('is-active');
+        dots[current].classList.remove('is-active');
+        dots[current].setAttribute('aria-selected', 'false');
+        current = (idx + slides.length) % slides.length;
+        slides[current].classList.add('is-active');
+        dots[current].classList.add('is-active');
+        dots[current].setAttribute('aria-selected', 'true');
+        resetProgress();
+      }
+
+      function resetProgress() {
+        bar.style.transition = 'none';
+        bar.style.width = '0%';
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            bar.style.transition = 'width ' + INTERVAL + 'ms linear';
+            bar.style.width = '100%';
+          });
+        });
+      }
+
+      function startTimer() {
+        clearInterval(timer);
+        timer = setInterval(function () {
+          if (!paused) goTo(current + 1);
+        }, INTERVAL);
+        resetProgress();
+      }
+
+      prev.addEventListener('click', function () { goTo(current - 1); startTimer(); });
+      next.addEventListener('click', function () { goTo(current + 1); startTimer(); });
+
+      dots.forEach(function (dot) {
+        dot.addEventListener('click', function () {
+          goTo(parseInt(dot.dataset.index, 10));
+          startTimer();
+        });
+      });
+
+      track.addEventListener('mouseenter', function () { paused = true; bar.style.animationPlayState = 'paused'; });
+      track.addEventListener('mouseleave', function () { paused = false; });
+      track.addEventListener('focusin',    function () { paused = true; });
+      track.addEventListener('focusout',   function () { paused = false; });
+
+      startTimer();
+    }());
+    </script>
+
   </section>
 
   <!-- CTA SECTION ────────────────────────────────────── -->
