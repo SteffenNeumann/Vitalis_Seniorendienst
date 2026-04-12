@@ -179,30 +179,61 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ── Engagement Banner ─────────────────────────────────────
-// Gemeinsamer State für Focus-Trap (benötigt von init + close)
+// Gemeinsamer State (module-level, damit closeEngagementBanner Zugriff hat)
 const _engagementState = { trapFn: null, previousFocusEl: null };
+let _engagementShown = false;
+let _engagementRepeatTimer = null;
+
+const ENGAGEMENT_REPEAT_DELAY = 30000; // 30 Sekunden
+
+function _showEngagementBanner() {
+  const banner = document.getElementById('engagement-banner');
+  if (!banner || _engagementShown) return;
+  _engagementShown = true;
+
+  banner.classList.add('is-visible');
+  banner.setAttribute('aria-hidden', 'false');
+
+  // Fokus merken und auf Close-Button setzen
+  _engagementState.previousFocusEl = document.activeElement;
+  setTimeout(() => banner.querySelector('.engagement-banner__close')?.focus(), 300);
+
+  // Focus-Trap aktivieren
+  _engagementState.trapFn = function(e) {
+    if (e.key !== 'Tab') return;
+    const focusable = banner.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    );
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+    } else {
+      if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  };
+  banner.addEventListener('keydown', _engagementState.trapFn);
+}
 
 function initEngagementBanner() {
   const currentPage = window.location.pathname.split('/').pop();
 
-  // Fix 3: Auf diesen Seiten kein Banner anzeigen
+  // Auf diesen Seiten kein Banner anzeigen
   const excludedPages = ['kontakt.html', 'datenschutz.html', 'impressum.html', 'karriere.html'];
   if (excludedPages.includes(currentPage)) return;
-  if (sessionStorage.getItem('engagementShown')) return;
 
   const banner = document.getElementById('engagement-banner');
   if (!banner) return;
 
-  let shown = false;
-
-  // Fix 2: Referenzen für späteres Aufräumen
+  // Referenzen für späteres Aufräumen der Erst-Trigger
   let scrollHandler = null;
   let mouseLeaveHandler = null;
 
-  // Fix 4: Page Visibility – Timer nur bei aktivem Tab laufen lassen
+  // Page Visibility – Timer nur bei aktivem Tab laufen lassen
   let timerRemaining = 35000;
   let timerStart = Date.now();
-  let idleTimer = setTimeout(showBanner, timerRemaining);
+  let idleTimer = setTimeout(showBannerAndCleanup, timerRemaining);
 
   function pauseTimer() {
     if (idleTimer !== null) {
@@ -214,10 +245,10 @@ function initEngagementBanner() {
   }
 
   function resumeTimer() {
-    if (shown) return;
-    if (idleTimer !== null) return; // läuft bereits
+    if (_engagementShown) return;
+    if (idleTimer !== null) return;
     timerStart = Date.now();
-    idleTimer = setTimeout(showBanner, timerRemaining);
+    idleTimer = setTimeout(showBannerAndCleanup, timerRemaining);
   }
 
   document.addEventListener('visibilitychange', () => {
@@ -225,40 +256,12 @@ function initEngagementBanner() {
     else resumeTimer();
   });
 
-  function showBanner() {
-    if (shown) return;
-    shown = true;
-    sessionStorage.setItem('engagementShown', '1');
-    banner.classList.add('is-visible');
-    banner.setAttribute('aria-hidden', 'false');
-
-    // Fix 2: Nicht mehr benötigte Listener entfernen
+  function showBannerAndCleanup() {
     cleanupTriggers();
-
-    // Fix 1: Fokus merken und auf Close-Button setzen
-    _engagementState.previousFocusEl = document.activeElement;
-    setTimeout(() => banner.querySelector('.engagement-banner__close')?.focus(), 300);
-
-    // Fix 1: Focus-Trap aktivieren
-    _engagementState.trapFn = function(e) {
-      if (e.key !== 'Tab') return;
-      const focusable = banner.querySelectorAll(
-        'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
-      );
-      if (!focusable.length) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-
-      if (e.shiftKey) {
-        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
-      } else {
-        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
-      }
-    };
-    banner.addEventListener('keydown', _engagementState.trapFn);
+    _showEngagementBanner();
   }
 
-  // Fix 2: Trigger-Listener aufräumen nach Anzeige
+  // Trigger-Listener aufräumen (Erst-Trigger, nicht der Repeat-Timer)
   function cleanupTriggers() {
     if (idleTimer !== null) { clearTimeout(idleTimer); idleTimer = null; }
     if (mouseLeaveHandler) { document.removeEventListener('mouseleave', mouseLeaveHandler); mouseLeaveHandler = null; }
@@ -267,22 +270,18 @@ function initEngagementBanner() {
 
   // Trigger 2: Exit Intent (Desktop) – Maus verlässt Fenster nach oben
   mouseLeaveHandler = (e) => {
-    if (e.clientY <= 0) showBanner();
+    if (e.clientY <= 0) showBannerAndCleanup();
   };
   document.addEventListener('mouseleave', mouseLeaveHandler);
 
   // Trigger 3: Nach 60% Scroll-Tiefe + Zurückscrollen
   let maxScroll = 0;
   scrollHandler = () => {
-    // Fix 5: Division-durch-Null absichern
     if (document.body.scrollHeight <= window.innerHeight) return;
-
     const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
     if (pct > maxScroll) maxScroll = pct;
-    // Wenn User >= 60% gescrolt hat und wieder nach oben scrollt
     if (maxScroll >= 60 && pct < maxScroll - 15) {
-      cleanupTriggers();
-      showBanner();
+      showBannerAndCleanup();
     }
   };
   window.addEventListener('scroll', scrollHandler, { passive: true });
@@ -293,24 +292,33 @@ function closeEngagementBanner() {
   if (banner) {
     banner.classList.remove('is-visible');
     banner.setAttribute('aria-hidden', 'true');
-    // Fix 1: Focus-Trap entfernen
+    // Focus-Trap entfernen
     if (_engagementState.trapFn) {
       banner.removeEventListener('keydown', _engagementState.trapFn);
       _engagementState.trapFn = null;
     }
-    // Fix 1: Fokus auf vorheriges Element zurücksetzen
+    // Fokus auf vorheriges Element zurücksetzen
     if (_engagementState.previousFocusEl && _engagementState.previousFocusEl.focus) {
       _engagementState.previousFocusEl.focus();
       _engagementState.previousFocusEl = null;
     }
   }
+
+  // State zurücksetzen und Banner nach 30 Sekunden erneut zeigen
+  _engagementShown = false;
+  if (_engagementRepeatTimer) clearTimeout(_engagementRepeatTimer);
+  _engagementRepeatTimer = setTimeout(_showEngagementBanner, ENGAGEMENT_REPEAT_DELAY);
 }
 
-// Global: Schließen-Button
+// Global: Schließen-Button + ESC-Taste
 document.addEventListener('click', e => {
   if (e.target.closest('.engagement-banner__close') || e.target.closest('.engagement-banner__overlay')) {
     closeEngagementBanner();
   }
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && _engagementShown) closeEngagementBanner();
 });
 
 
