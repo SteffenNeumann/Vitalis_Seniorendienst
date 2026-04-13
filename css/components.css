@@ -3547,12 +3547,42 @@
   background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 100%);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl) var(--spacing-2xl);
+  padding-top: calc(var(--spacing-xl) + 8px);
   color: var(--white);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--spacing-xl);
   flex-wrap: wrap;
+  position: relative;
+}
+
+/* Neu-starten-Button oben rechts in der Gesamt-Box */
+.wizard__result-gesamt-restart {
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-md);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  min-height: 32px;
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.65);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  border-radius: var(--radius-full);
+  transition: color 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+
+.wizard__result-gesamt-restart:hover,
+.wizard__result-gesamt-restart:focus-visible {
+  color: var(--white);
+  background: rgba(255,255,255,0.12);
+  outline: none;
 }
 
 .wizard__result-gesamt-label {
@@ -3581,18 +3611,11 @@
 .wizard__result-actions {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
-  flex-wrap: wrap;
 }
 
-@media (max-width: 480px) {
-  .wizard__result-actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .wizard__result-actions .wizard__back-btn--inline {
-    justify-content: center;
-  }
+.wizard__result-actions .btn {
+  width: 100%;
+  justify-content: center;
 }
 
 /* Hinweis-Text Ergebnis */
@@ -3728,6 +3751,64 @@
   color: var(--white);
 }
 
+
+/* Name-Zeile mit ?-Button nebeneinander */
+.wizard__result-item-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wizard__result-item-name-row .wizard__result-item-name {
+  margin: 0;
+  flex: 1;
+}
+
+/* Pill-Button "Wie berechnet? ▾ / ▴ Schließen" */
+.wizard__calc-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1.5px solid var(--teal);
+  background: transparent;
+  color: var(--teal);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+  min-height: 30px;
+}
+
+.wizard__calc-btn:hover,
+.wizard__calc-btn.is-active {
+  background: var(--teal);
+  color: var(--white);
+}
+
+/* Aufgeklappte Formelzeile */
+.wizard__vp-calc {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: var(--fs-sm);
+  color: #0f766e;
+  background: #f0fdfa;
+  border: 1px solid #99f6e4;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+.wizard__vp-calc svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #0d9488;
+}
 
 /* ─────────────────────────────────────────────────────────
    PFLEGEGRADE TAB-STEPPER

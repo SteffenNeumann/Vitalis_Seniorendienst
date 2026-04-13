@@ -436,6 +436,7 @@ function initLeistungsWizard() {
   let selectedPflege = null;
   let uwAktiv        = true;
   let vpAktiv        = true;
+  let vpCalcOpen     = false;
 
   // ── DOM-Referenzen ────────────────────────────────────
   const progressFill  = document.getElementById('wizardProgressFill');
@@ -511,6 +512,7 @@ function initLeistungsWizard() {
     let gesamtMonat = DATA.entlastung[pg];
     if (hatPflegegeld)       gesamtMonat += DATA.pflegegeld[pg];
     if (hatUW && uwAktiv)    gesamtMonat += uwBetrag;
+    if (hatVP && vpAktiv)    gesamtMonat += vpMonatlich;
 
     // HTML-Items aufbauen
     let html = '';
@@ -565,17 +567,31 @@ function initLeistungsWizard() {
     if (hatVP) {
       const inactiveClass = vpAktiv ? '' : ' wizard__result-item--inactive';
       const btnLabel      = vpAktiv ? '× ausblenden' : '+ einblenden';
+      const monatEnde     = monatNamen[11]; // Dezember
+      const calcHtml = vpCalcOpen ? `
+        <div class="wizard__vp-calc" role="note" aria-label="Berechnungsdetail">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span><strong>${DATA.verhinder[pg].toLocaleString('de-DE')} € Jahresbudget</strong> ÷ ${restMonate} Restmonate (${monatName}–${monatEnde} ${new Date().getFullYear()}) = ca. <strong>${vpMonatlich.toLocaleString('de-DE')} €/Monat</strong></span>
+        </div>` : '';
       html += `
       <div class="wizard__result-item wizard__result-item--secondary wizard__result-item--toggleable${inactiveClass}" role="listitem">
         <div class="wizard__result-item-main">
-          <p class="wizard__result-item-name">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            Verhinderungspflege §39 SGB XI
-          </p>
-          <p class="wizard__result-item-sub">ca. ${vpMonatlich.toLocaleString('de-DE')} €/Monat bei Start im ${monatName} (${restMonate} Restmonate)</p>
+          <div class="wizard__result-item-name-row">
+            <p class="wizard__result-item-name">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Verhinderungspflege §39 SGB XI
+            </p>
+            <button class="wizard__calc-btn${vpCalcOpen ? ' is-active' : ''}" data-wizard-toggle="vp-calc" type="button" aria-pressed="${vpCalcOpen}" aria-label="${vpCalcOpen ? 'Berechnung schließen' : 'Berechnung anzeigen'}">
+              ${vpCalcOpen
+                ? `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg> Schließen`
+                : `Wie berechnet? <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>`
+              }
+            </button>
+          </div>
+          ${calcHtml}
         </div>
         <div class="wizard__result-item-right">
-          <span class="wizard__result-item-betrag wizard__result-item-betrag--amber">bis zu ${DATA.verhinder[pg].toLocaleString('de-DE')} €/Jahr</span>
+          <span class="wizard__result-item-betrag wizard__result-item-betrag--amber">ca. ${vpMonatlich.toLocaleString('de-DE')} €/Monat</span>
           <button class="wizard__toggle-btn wizard__toggle-btn--teal${vpAktiv ? '' : ' wizard__toggle-btn--off'}" data-wizard-toggle="vp" type="button" aria-pressed="${vpAktiv}">${btnLabel}</button>
         </div>
       </div>`;
@@ -586,11 +602,15 @@ function initLeistungsWizard() {
     // Gesamt-Box
     const gesamtMonatStr = gesamtMonat.toLocaleString('de-DE');
     let gesamtHtml = `
+      <button class="wizard__result-gesamt-restart" data-wizard-action="restart" type="button" aria-label="Neu starten">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-4.95L1 10"/></svg>
+        Neu starten
+      </button>
       <div>
         <p class="wizard__result-gesamt-label">Monatlicher Rahmen</p>
         <p class="wizard__result-gesamt-betrag">${gesamtMonatStr} €/Monat</p>`;
     if (hatVP && vpAktiv) {
-      gesamtHtml += `<p class="wizard__result-gesamt-note">+ bis zu ${DATA.verhinder[pg].toLocaleString('de-DE')} €/Jahr Verhinderungspflege §39</p>`;
+      gesamtHtml += `<p class="wizard__result-gesamt-note">VP anteilig (${restMonate} Restmonate) · Jahresdeckel ${DATA.verhinder[pg].toLocaleString('de-DE')} €</p>`;
     }
     gesamtHtml += `</div>`;
     gesamt.innerHTML = gesamtHtml;
@@ -604,9 +624,10 @@ function initLeistungsWizard() {
     const pflege = e.target.closest('[data-wizard-pflege]')?.dataset.wizardPflege;
     const toggle = e.target.closest('[data-wizard-toggle]')?.dataset.wizardToggle;
 
-    // Toggle UW / VP
-    if (toggle === 'uw') { uwAktiv = !uwAktiv; renderResult(); return; }
-    if (toggle === 'vp') { vpAktiv = !vpAktiv; renderResult(); return; }
+    // Toggle UW / VP / VP-Calc
+    if (toggle === 'uw')      { uwAktiv    = !uwAktiv;    renderResult(); return; }
+    if (toggle === 'vp')      { vpAktiv    = !vpAktiv;    renderResult(); return; }
+    if (toggle === 'vp-calc') { vpCalcOpen = !vpCalcOpen; renderResult(); return; }
 
     // Schritt 1: Pflegegrad vorhanden?
     if (action === 'pg-yes') {
