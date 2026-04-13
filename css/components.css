@@ -3393,6 +3393,7 @@
   align-items: center;
   gap: var(--spacing-xs);
   padding: 10px var(--spacing-md);
+  margin-top: var(--spacing-xl);
   background: var(--blue-ghost);
   border: 1.5px solid rgba(47, 93, 255, 0.25);
   color: var(--blue);
