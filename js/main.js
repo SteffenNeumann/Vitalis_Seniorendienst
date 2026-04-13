@@ -506,7 +506,7 @@ function initLeistungsWizard() {
     const hatPflegegeld = (pflege === 'angehoerige' || pflege === 'beides') && DATA.pflegegeld[pg] > 0;
     const hatUW         = (pflege === 'pflegedienst' || pflege === 'beides') && DATA.sachleist[pg] > 0;
     const hatVP         = DATA.verhinder[pg] > 0;
-    const uwBetrag      = hatUW ? Math.round(DATA.sachleist[pg] * 0.4 * 100) / 100 : 0;
+    const uwBetrag      = hatUW ? Math.round(DATA.sachleist[pg] * 0.4) : 0;
 
     // Monatliche Gesamtsumme
     let gesamtMonat = DATA.entlastung[pg];
