@@ -914,3 +914,24 @@ function initFuerWenCheck() {
     });
   });
 }
+
+// ─── Schritt-2 "Mehr erfahren" Toggle ───────────────────────
+(function () {
+  var btn = document.querySelector('.step__mehr-btn');
+  if (!btn) return;
+  var panel = document.getElementById(btn.getAttribute('aria-controls'));
+  if (!panel) return;
+
+  btn.addEventListener('click', function () {
+    var expanded = btn.getAttribute('aria-expanded') === 'true';
+    if (expanded) {
+      btn.setAttribute('aria-expanded', 'false');
+      panel.hidden = true;
+      btn.querySelector('.step__mehr-btn-label') && (btn.querySelector('.step__mehr-btn-label').textContent = 'Mehr erfahren');
+    } else {
+      btn.setAttribute('aria-expanded', 'true');
+      panel.hidden = false;
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  });
+}());
