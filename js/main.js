@@ -423,18 +423,19 @@ function initLeistungsWizard() {
   const wizard = document.querySelector('.wizard');
   if (!wizard) return;
 
-  // ── Pflegekassen-Daten (Stand 2024/2025) ──────────────
+  // ── Pflegekassen-Daten (Stand 2026) ───────────────────
   const DATA = {
-    entlastung: { 1: 125, 2: 125, 3: 125, 4: 125, 5: 125 },   // §45b, alle PG
+    entlastung: { 1: 131, 2: 131, 3: 131, 4: 131, 5: 131 },    // §45b, alle PG – Stand 2026
     pflegegeld:  { 1: 0,   2: 332, 3: 573, 4: 765, 5: 947 },   // ab PG 2
-    sachleist:   { 1: 0,   2: 761, 3: 1432, 4: 1778, 5: 2200 },// ab PG 2
-    verhinder:   { 1: 0,   2: 1612, 3: 1612, 4: 1612, 5: 1612 },// ab PG 2, Jahresbetrag
-    kurzzeit:    { 1: 0,   2: 1774, 3: 1774, 4: 1774, 5: 1774 } // ab PG 2, Jahresbetrag
+    sachleist:   { 1: 0,   2: 761, 3: 1432, 4: 1778, 5: 2200 },// ab PG 2 (Basis für UW-Berechnung)
+    verhinder:   { 1: 0,   2: 3539, 3: 3539, 4: 3539, 5: 3539 } // §39, ab PG 2, Jahresbetrag – ab 2026
   };
 
   // ── Wizard-State ──────────────────────────────────────
-  let selectedPG    = null;
+  let selectedPG     = null;
   let selectedPflege = null;
+  let uwAktiv        = true;
+  let vpAktiv        = true;
 
   // ── DOM-Referenzen ────────────────────────────────────
   const progressFill  = document.getElementById('wizardProgressFill');
@@ -483,106 +484,116 @@ function initLeistungsWizard() {
   // ── Ergebnis berechnen und rendern ────────────────────
 
   function renderResult() {
-    const pg    = selectedPG;
+    const pg     = selectedPG;
     const pflege = selectedPflege;
 
-    // Leistungs-Items aufbauen
     const leistungen = document.getElementById('wizardResultLeistungen');
     const gesamt     = document.getElementById('wizardResultGesamt');
     const pgLabel    = document.getElementById('wizardResultPGLabel');
     if (!leistungen || !gesamt || !pgLabel) return;
 
     pgLabel.textContent = `Pflegegrad ${pg}`;
-    leistungen.innerHTML = '';
 
-    let gesamtMonat = 0;
-    let gesamtJahr  = 0;
-    const items = [];
+    // VP-Monatsschätzung (anteilig Jahresrestmonate)
+    const heuteMonat  = new Date().getMonth() + 1;
+    const restMonate  = 13 - heuteMonat;
+    const monatNamen  = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+    const monatName   = monatNamen[heuteMonat - 1];
+    const vpMonatlich = Math.round(DATA.verhinder[pg] / restMonate);
 
-    // Entlastungsbetrag – immer bei allen PG
-    items.push({
-      name: 'Entlastungsbetrag §45b SGB XI',
-      betrag: DATA.entlastung[pg],
-      period: 'monat',
-      type: 'highlight',
-      icon: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>'
-    });
-    gesamtMonat += DATA.entlastung[pg];
+    // Flags
+    const hatPflegegeld = (pflege === 'angehoerige' || pflege === 'beides') && DATA.pflegegeld[pg] > 0;
+    const hatUW         = (pflege === 'pflegedienst' || pflege === 'beides') && DATA.sachleist[pg] > 0;
+    const hatVP         = DATA.verhinder[pg] > 0;
+    const uwBetrag      = hatUW ? Math.round(DATA.sachleist[pg] * 0.4 * 100) / 100 : 0;
 
-    // Pflegegeld – wenn Angehörige oder Beides, ab PG 2
-    if ((pflege === 'angehoerige' || pflege === 'beides') && DATA.pflegegeld[pg] > 0) {
-      items.push({
-        name: 'Pflegegeld',
-        betrag: DATA.pflegegeld[pg],
-        period: 'monat',
-        type: 'secondary',
-        icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>'
-      });
-      gesamtMonat += DATA.pflegegeld[pg];
+    // Monatliche Gesamtsumme
+    let gesamtMonat = DATA.entlastung[pg];
+    if (hatPflegegeld)       gesamtMonat += DATA.pflegegeld[pg];
+    if (hatUW && uwAktiv)    gesamtMonat += uwBetrag;
+
+    // HTML-Items aufbauen
+    let html = '';
+
+    // Entlastungsbetrag
+    html += `
+      <div class="wizard__result-item wizard__result-item--highlight" role="listitem">
+        <p class="wizard__result-item-name">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Entlastungsbetrag §45b SGB XI
+        </p>
+        <span class="wizard__result-item-betrag">${DATA.entlastung[pg].toLocaleString('de-DE')} €/Monat</span>
+      </div>`;
+
+    // Pflegegeld
+    if (hatPflegegeld) {
+      html += `
+      <div class="wizard__result-item wizard__result-item--secondary" role="listitem">
+        <p class="wizard__result-item-name">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          Pflegegeld
+        </p>
+        <span class="wizard__result-item-betrag">${DATA.pflegegeld[pg].toLocaleString('de-DE')} €/Monat</span>
+      </div>`;
     }
 
-    // Sachleistungen – wenn Pflegedienst oder Beides, ab PG 2
-    if ((pflege === 'pflegedienst' || pflege === 'beides') && DATA.sachleist[pg] > 0) {
-      items.push({
-        name: 'Pflegesachleistungen',
-        betrag: DATA.sachleist[pg],
-        period: 'monat',
-        type: 'highlight',
-        icon: '<rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>'
-      });
-      gesamtMonat += DATA.sachleist[pg];
-    }
-
-    // Verhinderungspflege – ab PG 2
-    if (DATA.verhinder[pg] > 0) {
-      items.push({
-        name: 'Verhinderungspflege',
-        betrag: DATA.verhinder[pg],
-        period: 'jahr',
-        type: 'secondary',
-        icon: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'
-      });
-      gesamtJahr += DATA.verhinder[pg];
-    }
-
-    // Kurzzeitpflege – ab PG 2
-    if (DATA.kurzzeit[pg] > 0) {
-      items.push({
-        name: 'Kurzzeitpflege',
-        betrag: DATA.kurzzeit[pg],
-        period: 'jahr',
-        type: 'amber',
-        icon: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>'
-      });
-      gesamtJahr += DATA.kurzzeit[pg];
-    }
-
-    // HTML für Leistungs-Items bauen
-    leistungen.innerHTML = items.map(item => {
-      const modClass = item.type === 'highlight' ? 'wizard__result-item--highlight'
-                     : item.type === 'secondary'  ? 'wizard__result-item--secondary'
-                     : '';
-      const betragClass = item.type === 'amber' ? 'wizard__result-item-betrag wizard__result-item-betrag--amber'
-                        : 'wizard__result-item-betrag';
-      return `
-        <div class="wizard__result-item ${modClass}" role="listitem">
+    // UW – Umwidmung §45a (Toggle-Karte)
+    if (hatUW) {
+      const inactiveClass = uwAktiv ? '' : ' wizard__result-item--inactive';
+      const btnLabel      = uwAktiv ? '× deaktivieren' : '+ aktivieren';
+      html += `
+      <div class="wizard__result-item wizard__result-item--highlight wizard__result-item--toggleable${inactiveClass}" role="listitem">
+        <div class="wizard__result-item-main">
           <p class="wizard__result-item-name">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">${item.icon}</svg>
-            ${item.name}
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+            UW – Umwidmung §45a SGB XI
           </p>
-          <span class="${betragClass}">${formatEur(item.betrag, item.period)}</span>
-        </div>`;
-    }).join('');
+          <p class="wizard__result-item-sub">40 % von ${DATA.sachleist[pg].toLocaleString('de-DE')} € Sachleistungsbudget</p>
+          ${uwAktiv ? `<p class="wizard__result-item-warning">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Ihr Pflegegeld wird durch die UW anteilig um bis zu 40 % gekürzt.
+          </p>` : ''}
+        </div>
+        <div class="wizard__result-item-right">
+          <span class="wizard__result-item-betrag">${uwBetrag.toLocaleString('de-DE')} €/Monat</span>
+          <button class="wizard__toggle-btn${uwAktiv ? '' : ' wizard__toggle-btn--off'}" data-wizard-toggle="uw" type="button" aria-pressed="${uwAktiv}">${btnLabel}</button>
+        </div>
+      </div>`;
+    }
 
-    // Gesamt-Box aufbauen
+    // VP – Verhinderungspflege §39 (Toggle-Karte)
+    if (hatVP) {
+      const inactiveClass = vpAktiv ? '' : ' wizard__result-item--inactive';
+      const btnLabel      = vpAktiv ? '× ausblenden' : '+ einblenden';
+      html += `
+      <div class="wizard__result-item wizard__result-item--secondary wizard__result-item--toggleable${inactiveClass}" role="listitem">
+        <div class="wizard__result-item-main">
+          <p class="wizard__result-item-name">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Verhinderungspflege §39 SGB XI
+          </p>
+          <p class="wizard__result-item-sub">ca. ${vpMonatlich.toLocaleString('de-DE')} €/Monat bei Start im ${monatName} (${restMonate} Restmonate)</p>
+        </div>
+        <div class="wizard__result-item-right">
+          <span class="wizard__result-item-betrag wizard__result-item-betrag--amber">bis zu ${DATA.verhinder[pg].toLocaleString('de-DE')} €/Jahr</span>
+          <button class="wizard__toggle-btn wizard__toggle-btn--teal${vpAktiv ? '' : ' wizard__toggle-btn--off'}" data-wizard-toggle="vp" type="button" aria-pressed="${vpAktiv}">${btnLabel}</button>
+        </div>
+      </div>`;
+    }
+
+    leistungen.innerHTML = html;
+
+    // Gesamt-Box
     const gesamtMonatStr = gesamtMonat.toLocaleString('de-DE');
-    const gesamtJahrStr  = (gesamtMonat * 12 + gesamtJahr).toLocaleString('de-DE');
-    gesamt.innerHTML = `
+    let gesamtHtml = `
       <div>
         <p class="wizard__result-gesamt-label">Monatlicher Rahmen</p>
-        <p class="wizard__result-gesamt-betrag">${gesamtMonatStr} €/Monat</p>
-        <p class="wizard__result-gesamt-note">+ bis zu ${(gesamtJahr).toLocaleString('de-DE')} €/Jahr für Vertretungs- und Kurzzeitpflege</p>
-      </div>`;
+        <p class="wizard__result-gesamt-betrag">${gesamtMonatStr} €/Monat</p>`;
+    if (hatVP && vpAktiv) {
+      gesamtHtml += `<p class="wizard__result-gesamt-note">+ bis zu ${DATA.verhinder[pg].toLocaleString('de-DE')} €/Jahr Verhinderungspflege §39</p>`;
+    }
+    gesamtHtml += `</div>`;
+    gesamt.innerHTML = gesamtHtml;
   }
 
   // ── Event-Listener ────────────────────────────────────
@@ -591,6 +602,11 @@ function initLeistungsWizard() {
     const action = e.target.closest('[data-wizard-action]')?.dataset.wizardAction;
     const pg     = e.target.closest('[data-wizard-pg]')?.dataset.wizardPg;
     const pflege = e.target.closest('[data-wizard-pflege]')?.dataset.wizardPflege;
+    const toggle = e.target.closest('[data-wizard-toggle]')?.dataset.wizardToggle;
+
+    // Toggle UW / VP
+    if (toggle === 'uw') { uwAktiv = !uwAktiv; renderResult(); return; }
+    if (toggle === 'vp') { vpAktiv = !vpAktiv; renderResult(); return; }
 
     // Schritt 1: Pflegegrad vorhanden?
     if (action === 'pg-yes') {
@@ -623,8 +639,10 @@ function initLeistungsWizard() {
       showStep(step2, 66, 'Schritt 2 von 3', 1);
     }
     if (action === 'restart') {
-      selectedPG = null;
+      selectedPG     = null;
       selectedPflege = null;
+      uwAktiv        = true;
+      vpAktiv        = true;
       showStep(stepHasPG, 33, 'Schritt 1 von 3', 0);
     }
   });

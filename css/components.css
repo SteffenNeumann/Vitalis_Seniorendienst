@@ -3393,30 +3393,40 @@
   align-items: center;
   gap: var(--spacing-xs);
   padding: 10px var(--spacing-md);
-  background: none;
-  border: none;
-  color: var(--ink-muted);
+  background: var(--blue-ghost);
+  border: 1.5px solid rgba(47, 93, 255, 0.25);
+  color: var(--blue);
   font-size: var(--fs-base);
   font-weight: var(--fw-medium);
   font-family: var(--font-body);
   cursor: pointer;
   border-radius: var(--radius-md);
-  transition: color var(--transition-fast), background var(--transition-fast);
+  transition: color var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
   min-height: 48px;
 }
 
+.wizard__back-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
 .wizard__back-btn:hover {
-  color: var(--blue);
-  background: var(--blue-ghost);
+  color: #0f2ccf;
+  background: rgba(47, 93, 255, 0.14);
+  border-color: rgba(47, 93, 255, 0.45);
 }
 
 .wizard__back-btn--inline {
-  color: rgba(255,255,255,0.75);
+  color: var(--ink-muted);
+  border: 1.5px solid var(--ink-border);
+  border-radius: var(--radius-full);
+  padding: 10px var(--spacing-lg);
 }
 
 .wizard__back-btn--inline:hover {
-  color: var(--white);
-  background: rgba(255,255,255,0.12);
+  color: var(--ink);
+  background: var(--bg-section);
+  border-color: var(--ink-light);
 }
 
 /* ── Ergebnis-Anzeige ────────────────────────────────── */
@@ -3571,8 +3581,18 @@
 .wizard__result-actions {
   display: flex;
   align-items: center;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-md);
   flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+  .wizard__result-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .wizard__result-actions .wizard__back-btn--inline {
+    justify-content: center;
+  }
 }
 
 /* Hinweis-Text Ergebnis */
@@ -3590,6 +3610,122 @@
   flex-shrink: 0;
   margin-top: 3px;
   color: var(--ink-light);
+}
+
+/* ── Wizard: Toggle-Karten & neue Elemente ────────────── */
+
+.wizard__step-subtitle {
+  font-size: var(--fs-base);
+  color: var(--ink-muted);
+  margin: calc(var(--spacing-xs) * -1) 0 var(--spacing-lg);
+  line-height: 1.6;
+}
+
+/* Toggleable Item-Layout (Hauptinhalt + rechte Seite) */
+.wizard__result-item--toggleable {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--spacing-sm);
+}
+
+.wizard__result-item-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.wizard__result-item-right {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+/* Subtext (Berechnungshinweis) */
+.wizard__result-item-sub {
+  font-size: var(--fs-sm);
+  color: var(--ink-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Warnhinweis UW */
+.wizard__result-item-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: var(--fs-sm);
+  color: #92400e;
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin: var(--spacing-xs) 0 0;
+  line-height: 1.5;
+}
+
+.wizard__result-item-warning svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #d97706;
+}
+
+/* Inaktiver Zustand (ausgeblendet) */
+.wizard__result-item--inactive {
+  opacity: 0.45;
+  background: var(--bg-section) !important;
+  border-color: var(--ink-border) !important;
+}
+
+.wizard__result-item--inactive .wizard__result-item-betrag {
+  color: var(--ink-muted) !important;
+  text-decoration: line-through;
+}
+
+/* Toggle-Button */
+.wizard__toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1.5px solid var(--blue);
+  background: transparent;
+  color: var(--blue);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+  min-height: 36px;
+}
+
+.wizard__toggle-btn:hover {
+  background: var(--blue);
+  color: var(--white);
+}
+
+.wizard__toggle-btn--teal {
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+.wizard__toggle-btn--teal:hover {
+  background: var(--teal);
+  color: var(--white);
+}
+
+.wizard__toggle-btn--off {
+  border-color: var(--ink-light);
+  color: var(--ink-muted);
+}
+
+.wizard__toggle-btn--off:hover {
+  background: var(--ink-light);
+  color: var(--white);
 }
 
 
