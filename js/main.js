@@ -223,6 +223,13 @@ function initEngagementBanner() {
   const excludedPages = ['kontakt.html', 'datenschutz.html', 'impressum.html', 'karriere.html'];
   if (excludedPages.includes(currentPage)) return;
 
+  // Test-Modus: ?noBanner in der URL oder localStorage.noBanner deaktiviert das Banner seitenübergreifend
+  if (new URLSearchParams(window.location.search).has('noBanner')) {
+    localStorage.setItem('noBanner', '1');
+    return;
+  }
+  if (localStorage.getItem('noBanner')) return;
+
   const banner = document.getElementById('engagement-banner');
   if (!banner) return;
 
