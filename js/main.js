@@ -601,19 +601,19 @@ function initLeistungsWizard() {
 
     // Gesamt-Box
     const gesamtMonatStr = gesamtMonat.toLocaleString('de-DE');
-    let gesamtHtml = `
-      <button class="wizard__result-gesamt-restart" data-wizard-action="restart" type="button" aria-label="Neu starten">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-4.95L1 10"/></svg>
-        Neu starten
-      </button>
-      <div>
-        <p class="wizard__result-gesamt-label">Monatlicher Rahmen</p>
-        <p class="wizard__result-gesamt-betrag">${gesamtMonatStr} €/Monat</p>`;
-    if (hatVP && vpAktiv) {
-      gesamtHtml += `<p class="wizard__result-gesamt-note">VP anteilig (${restMonate} Restmonate) · Jahresdeckel ${DATA.verhinder[pg].toLocaleString('de-DE')} €</p>`;
-    }
-    gesamtHtml += `</div>`;
-    gesamt.innerHTML = gesamtHtml;
+    const noteText = hatVP && vpAktiv
+      ? `VP anteilig (${restMonate} Restmonate) · Jahresdeckel ${DATA.verhinder[pg].toLocaleString('de-DE')} €`
+      : '';
+    gesamt.innerHTML = `
+      <p class="wizard__result-gesamt-label">Monatlicher Rahmen</p>
+      <p class="wizard__result-gesamt-betrag">${gesamtMonatStr} €/Monat</p>
+      <div class="wizard__result-gesamt-footer">
+        <span class="wizard__result-gesamt-note">${noteText}</span>
+        <button class="wizard__result-gesamt-restart" data-wizard-action="restart" type="button" aria-label="Neu starten">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-4.95L1 10"/></svg>
+          Neu starten
+        </button>
+      </div>`;
   }
 
   // ── Event-Listener ────────────────────────────────────

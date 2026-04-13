@@ -3547,42 +3547,44 @@
   background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 100%);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl) var(--spacing-2xl);
-  padding-top: calc(var(--spacing-xl) + 8px);
   color: var(--white);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Footer-Zeile: Note links, Restart rechts */
+.wizard__result-gesamt-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--spacing-xl);
-  flex-wrap: wrap;
-  position: relative;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xs);
 }
 
-/* Neu-starten-Button oben rechts in der Gesamt-Box */
+/* "Neu starten" – Text-Link-Stil, kein Rahmen */
 .wizard__result-gesamt-restart {
-  position: absolute;
-  top: var(--spacing-sm);
-  right: var(--spacing-md);
+  flex-shrink: 0;
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 6px 12px;
-  min-height: 32px;
+  padding: 4px 0;
   background: transparent;
   border: none;
   color: rgba(255,255,255,0.65);
-  font-size: var(--fs-xs);
+  font-size: var(--fs-sm);
   font-weight: var(--fw-medium);
   cursor: pointer;
-  border-radius: var(--radius-full);
-  transition: color 0.15s, background 0.15s;
+  transition: color 0.15s;
   white-space: nowrap;
+  min-height: 32px;
 }
 
 .wizard__result-gesamt-restart:hover,
 .wizard__result-gesamt-restart:focus-visible {
   color: var(--white);
-  background: rgba(255,255,255,0.12);
   outline: none;
+  text-decoration: underline;
 }
 
 .wizard__result-gesamt-label {
@@ -3604,7 +3606,6 @@
   font-size: var(--fs-sm);
   color: rgba(255,255,255,0.7);
   margin: 0;
-  width: 100%;
 }
 
 /* Aktions-Bereich Ergebnis */
