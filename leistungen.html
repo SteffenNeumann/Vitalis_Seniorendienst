@@ -5,10 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Unsere Leistungen – Alltagsbegleitung & Haushaltshilfe | Vitalis Seniorendienst</title>
   <meta name="description" content="Entdecken Sie unsere Leistungen: Haushaltshilfe, soziale Betreuung, Arztfahrten, Einkaufshilfe und individuelle Alltagsbegleitung für Senioren im Raum München." />
-  <meta name="keywords" content="Haushaltshilfe Senioren, Alltagsbegleitung München, Arztfahrten, soziale Betreuung, §45a SGB XI" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <meta name="keywords" content="Haushaltshilfe Senioren, Alltagsbegleitung München, Arztfahrten, soziale Betreuung, §45a SGB XI" />  <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/responsive.css" />
@@ -146,10 +143,30 @@
           </div>
           <h3 class="feature-card__title">Einkaufshilfe</h3>
           <p class="feature-card__text">Wir erledigen Einkäufe nach Ihrem Wunschzettel – frisch, pünktlich und ohne Aufwand für Sie.</p>
-          <a href="#einkaufshilfe-detail" class="feature-card__link">
+          <button class="feature-card__toggle" aria-expanded="false" aria-controls="einkaufshilfe-detail">
             Mehr erfahren
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
+          </button>
+          <div id="einkaufshilfe-detail" class="feature-card__expand" hidden>
+            <ul role="list">
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Einkäufe nach Wunschzettel
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Frische Lebensmittel &amp; Drogerie
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Apotheke &amp; Rezeptabholung
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Zuverlässig zu vereinbarten Zeiten
+              </li>
+            </ul>
+          </div>
         </article>
         <article class="feature-card fade-in" id="botengaenge">
           <div class="feature-card__icon" aria-hidden="true">
@@ -157,10 +174,30 @@
           </div>
           <h3 class="feature-card__title">Botengänge &amp; Termine</h3>
           <p class="feature-card__text">Behördengänge, Post, Apotheke – wir erledigen Besorgungen und begleiten Sie sicher zu jedem Termin.</p>
-          <a href="#botengaenge-detail" class="feature-card__link">
+          <button class="feature-card__toggle" aria-expanded="false" aria-controls="botengaenge-detail">
             Mehr erfahren
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
+          </button>
+          <div id="botengaenge-detail" class="feature-card__expand" hidden>
+            <ul role="list">
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Behördengänge &amp; Ämter
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Postservice &amp; Pakete
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Begleitung zu Terminen aller Art
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Sonstige Besorgungen auf Wunsch
+              </li>
+            </ul>
+          </div>
         </article>
         <article class="feature-card fade-in">
           <div class="feature-card__icon" aria-hidden="true">

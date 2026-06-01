@@ -41,7 +41,12 @@
       "Bash(grep -rn 'style=.*color\\\\|style=.*background' /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html 2>/dev/null | grep -v 'transition-delay\\\\|animation' | head -30)",
       "Bash(grep -rn \\\\\n  'var\\(--color-primary\\\\|var\\(--color-secondary\\\\|var\\(--color-bg-\\\\|var\\(--color-text\\\\|var\\(--color-white\\\\|var\\(--color-amber\\\\|var\\(--color-accent\\\\|var\\(--color-success\\\\|var\\(--color-border' \\\\\n  /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/css/ \\\\\n  /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html 2>/dev/null | grep -v 'color-danger')",
       "Bash(grep -n \"grid grid-4\\\\|grid-4\" /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/*.html)",
-      "Bash(gh api:*)"
+      "Bash(gh api:*)",
+      "Bash(python3:*)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8080/index.html)",
+      "Bash(sort -k5 -hr)",
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/images/hero-homecare-new.jpeg)",
+      "Bash(sips --resampleWidth 1920 \"/Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/images/Soziale Betreuung.jpg\" --out \"/Users/steffen/Documents/GitHub/Vitalis_Seniorendienst/images/hero-homecare-new.jpeg\" --setProperty formatOptions 82)"
     ]
   }
 }

@@ -954,6 +954,19 @@ function initFuerWenCheck() {
   });
 }
 
+// ─── Feature-Card Toggle (Einkaufshilfe, Botengänge) ────────
+(function () {
+  document.querySelectorAll('.feature-card__toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      var panel = document.getElementById(btn.getAttribute('aria-controls'));
+      if (!panel) return;
+      btn.setAttribute('aria-expanded', String(!expanded));
+      panel.hidden = expanded;
+    });
+  });
+}());
+
 // ─── Schritt-2 "Mehr erfahren" Toggle ───────────────────────
 (function () {
   var btn = document.querySelector('.step__mehr-btn');
