@@ -5,7 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Unsere Leistungen – Alltagsbegleitung & Haushaltshilfe | Vitalis Seniorendienst</title>
   <meta name="description" content="Entdecken Sie unsere Leistungen: Haushaltshilfe, soziale Betreuung, Arztfahrten, Einkaufshilfe und individuelle Alltagsbegleitung für Senioren im Raum München." />
-  <meta name="keywords" content="Haushaltshilfe Senioren, Alltagsbegleitung München, Arztfahrten, soziale Betreuung, §45a SGB XI" />  <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <meta name="keywords" content="Haushaltshilfe Senioren, Alltagsbegleitung München, Arztfahrten, soziale Betreuung, §45a SGB XI" />
+  <!-- TODO: Domain bestätigen, falls abweichend von vitalis-seniorendienst.de -->
+  <link rel="canonical" href="https://www.vitalis-seniorendienst.de/leistungen.html" />
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:site_name" content="Vitalis Seniorendienst" />
+  <meta property="og:title" content="Unsere Leistungen – Alltagsbegleitung & Haushaltshilfe | Vitalis Seniorendienst" />
+  <meta property="og:description" content="Haushaltshilfe, soziale Betreuung, Arztfahrten und individuelle Alltagsbegleitung für Senioren im Raum München. Viele Leistungen über die Pflegekasse erstattungsfähig." />
+  <meta property="og:url" content="https://www.vitalis-seniorendienst.de/leistungen.html" />
+  <meta property="og:image" content="https://www.vitalis-seniorendienst.de/images/soziale-betreuung.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preload" href="assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/responsive.css" />
@@ -103,17 +117,37 @@
         <div class="section-header__accent" aria-hidden="true"></div>
         <p class="section-header__text">Ob Haushalt, Betreuung oder Begleitung – wir sind für Sie da, wann und wo Sie uns brauchen.</p>
       </div>
-      <div class="grid grid-3 stagger-children" style="margin-top: var(--spacing-3xl);">
+      <div class="grid grid-3 stagger-children mt-3xl">
         <article class="feature-card fade-in" id="soziale-betreuung">
           <div class="feature-card__icon" aria-hidden="true">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
           <h3 class="feature-card__title">Soziale Betreuung</h3>
           <p class="feature-card__text">Gemeinsam Zeit verbringen, Gespräche führen, Spiele spielen – gegen Einsamkeit und für mehr Lebensfreude.</p>
-          <a href="#soziale-betreuung-detail" class="feature-card__link">
+          <button class="feature-card__toggle" aria-expanded="false" aria-controls="soziale-betreuung-expand">
             Mehr erfahren
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
+          </button>
+          <div id="soziale-betreuung-expand" class="feature-card__expand" hidden>
+            <ul role="list">
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Gesellschaft &amp; Gespräche
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Spiele &amp; Aktivitäten
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Spaziergänge an der frischen Luft
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Kreativität – Malen, Basteln, Musik
+              </li>
+            </ul>
+          </div>
         </article>
         <article class="feature-card fade-in" id="haushaltshilfe">
           <div class="feature-card__icon" aria-hidden="true">
@@ -121,10 +155,30 @@
           </div>
           <h3 class="feature-card__title">Haushaltshilfe</h3>
           <p class="feature-card__text">Reinigung, Wäsche, Kochen und mehr – damit Sie in Ihrer vertrauten Umgebung gut versorgt sind und sich wohlfühlen.</p>
-          <a href="#haushaltshilfe-detail" class="feature-card__link">
+          <button class="feature-card__toggle" aria-expanded="false" aria-controls="haushaltshilfe-expand">
             Mehr erfahren
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
+          </button>
+          <div id="haushaltshilfe-expand" class="feature-card__expand" hidden>
+            <ul role="list">
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Staubsaugen &amp; Wischen
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Wäsche waschen &amp; Bügeln
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Kochen &amp; Geschirr spülen
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Bad &amp; Küche reinigen
+              </li>
+            </ul>
+          </div>
         </article>
         <article class="feature-card fade-in" id="arztfahrten">
           <div class="feature-card__icon" aria-hidden="true">
@@ -132,10 +186,30 @@
           </div>
           <h3 class="feature-card__title">Arztfahrten</h3>
           <p class="feature-card__text">Sicherer Transport zu Arztbesuchen und Terminen – inkl. Begleitung bis ins Wartezimmer und zurück nach Hause.</p>
-          <a href="#arztfahrten-detail" class="feature-card__link">
+          <button class="feature-card__toggle" aria-expanded="false" aria-controls="arztfahrten-expand">
             Mehr erfahren
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
+          </button>
+          <div id="arztfahrten-expand" class="feature-card__expand" hidden>
+            <ul role="list">
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Pünktliche Abholung zu Hause
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Begleitung ins Wartezimmer
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Unterstützung beim Arztgespräch
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Sichere Rückfahrt nach Hause
+              </li>
+            </ul>
+          </div>
         </article>
         <article class="feature-card fade-in" id="einkaufshilfe">
           <div class="feature-card__icon" aria-hidden="true">
@@ -205,17 +279,33 @@
           </div>
           <h3 class="feature-card__title">Individuelle Begleitung</h3>
           <p class="feature-card__text">Spaziergänge, Ausflüge, Hobbys – wir sind an Ihrer Seite und fördern Ihre persönlichen Interessen und Aktivitäten.</p>
-          <a href="kontakt.html" class="feature-card__link">
-            Kontakt aufnehmen
+          <button class="feature-card__toggle" aria-expanded="false" aria-controls="individuelle-expand">
+            Mehr erfahren
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
+          </button>
+          <div id="individuelle-expand" class="feature-card__expand" hidden>
+            <ul role="list">
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Spaziergänge &amp; Ausflüge
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Hobbys &amp; persönliche Interessen fördern
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Gemeinsame Aktivitäten nach Ihren Wünschen
+              </li>
+            </ul>
+          </div>
         </article>
       </div>
     </div>
   </section>
 
   <!-- FEATURE: SOZIALE BETREUUNG ─────────────────────── -->
-  <section class="section" id="soziale-betreuung-detail" style="background: var(--ink-bg);" aria-labelledby="soziale-betreuung-heading">
+  <section class="section bg-ink" id="soziale-betreuung-detail" aria-labelledby="soziale-betreuung-heading">
     <div class="container">
       <div class="feature-section">
         <div class="feature-section__content fade-in-left">
@@ -244,15 +334,18 @@
               Kreativität fördern – Malen, Basteln, Musik
             </li>
           </ul>
-          <a href="kontakt.html" class="btn btn-primary" style="margin-top: var(--spacing-xl);">Beratung anfragen</a>
+          <a href="kontakt.html" class="btn btn-primary mt-xl">Beratung anfragen</a>
         </div>
         <div class="feature-section__image fade-in-right">
-          <img
-            src="images/Soziale Betreuung.jpg"
-            alt="Betreuerin hilft zwei älteren Menschen beim gemeinsamen Basteln"
-            width="700" height="550"
-            loading="lazy"
-          />
+          <picture>
+            <source srcset="images/soziale-betreuung.avif" type="image/avif" />
+            <img
+              src="images/soziale-betreuung.jpg"
+              alt="Betreuerin hilft zwei älteren Menschen beim gemeinsamen Basteln"
+              width="1200" height="848"
+              loading="lazy" decoding="async"
+            />
+          </picture>
         </div>
       </div>
     </div>
@@ -288,22 +381,25 @@
               Bad &amp; Küche reinigen
             </li>
           </ul>
-          <a href="kontakt.html" class="btn btn-primary" style="margin-top: var(--spacing-xl);">Beratung anfragen</a>
+          <a href="kontakt.html" class="btn btn-primary mt-xl">Beratung anfragen</a>
         </div>
         <div class="feature-section__image fade-in-left">
-          <img
-            src="images/Haushaltshilfe Foto.jpg"
-            alt="Haushaltshilfe reinigt sorgfältig eine Vase im Wohnzimmer"
-            width="700" height="550"
-            loading="lazy"
-          />
+          <picture>
+            <source srcset="images/haushaltshilfe.avif" type="image/avif" />
+            <img
+              src="images/haushaltshilfe.jpg"
+              alt="Haushaltshilfe reinigt sorgfältig eine Vase im Wohnzimmer"
+              width="798" height="1200"
+              loading="lazy" decoding="async"
+            />
+          </picture>
         </div>
       </div>
     </div>
   </section>
 
   <!-- FEATURE: ARZTFAHRTEN ───────────────────────────── -->
-  <section class="section" id="arztfahrten-detail" style="background: var(--ink-bg);" aria-labelledby="arztfahrten-heading">
+  <section class="section bg-ink" id="arztfahrten-detail" aria-labelledby="arztfahrten-heading">
     <div class="container">
       <div class="feature-section">
         <div class="feature-section__content fade-in-left">
@@ -332,15 +428,18 @@
               Apotheke &amp; Rezepte einlösen
             </li>
           </ul>
-          <a href="kontakt.html" class="btn btn-primary" style="margin-top: var(--spacing-xl);">Beratung anfragen</a>
+          <a href="kontakt.html" class="btn btn-primary mt-xl">Beratung anfragen</a>
         </div>
         <div class="feature-section__image fade-in-right">
-          <img
-            src="images/Arzt mit Patient.jpg"
-            alt="Arzt im Gespräch mit älterem Patienten in der Praxis"
-            width="700" height="550"
-            loading="lazy"
-          />
+          <picture>
+            <source srcset="images/arzt-patient.avif" type="image/avif" />
+            <img
+              src="images/arzt-patient.jpg"
+              alt="Arzt im Gespräch mit älterem Patienten in der Praxis"
+              width="1200" height="800"
+              loading="lazy" decoding="async"
+            />
+          </picture>
         </div>
       </div>
     </div>
@@ -355,7 +454,7 @@
         <div class="section-header__accent" aria-hidden="true"></div>
         <p class="section-header__text">In nur vier einfachen Schritten kommen Sie zu Ihrer individuellen Alltagsbegleitung – unkompliziert und kostenlos.</p>
       </div>
-      <div class="steps stagger-children" style="margin-top: var(--spacing-3xl);">
+      <div class="steps stagger-children mt-3xl">
         <div class="step fade-in">
           <div class="step__number" aria-hidden="true">1</div>
           <h3 class="step__title">Kostenloses Erstgespräch</h3>

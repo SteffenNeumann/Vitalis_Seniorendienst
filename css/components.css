@@ -2460,6 +2460,41 @@
   border-left: 2px solid var(--amber);
 }
 
+/* ── Gruppen-Trennzeilen (Über Vitalis abrechenbar / Weitere Kassenleistungen) ── */
+.leistungs-tabelle__group td {
+  border-left: none;
+}
+
+.leistungs-tabelle__group-head {
+  padding: var(--spacing-md) var(--spacing-2xl);
+  text-align: left;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--blue-dark);
+  background: var(--blue-ghost);
+  border-top: 1px solid var(--ink-border);
+  border-bottom: 1px solid var(--ink-border);
+}
+
+/* Inline-Link innerhalb einer Leistungsbeschreibung (Cross-Selling / Formular) */
+.leistungs-tabelle__inline-link {
+  color: var(--blue);
+  font-weight: var(--fw-semibold);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.leistungs-tabelle__inline-link:hover {
+  color: var(--blue-dark);
+}
+
+/* CTA unter der Tabelle: „Alle Leistungen ansehen" */
+.leistungs-tabelle__alle-cta {
+  margin-top: var(--spacing-xl);
+}
+
 /* ── Betragswert ── */
 .leistungs-tabelle__wert {
   display: block;

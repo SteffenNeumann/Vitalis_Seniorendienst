@@ -50,7 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
       children.forEach((child, i) => {
         child.style.opacity = '0';
         child.style.transform = 'translateY(16px)';
-        child.style.transition = `opacity 0.5s ease ${i * 0.1}s, transform 0.5s ease ${i * 0.1}s`;
+        const ease = 'cubic-bezier(0.22, 0.61, 0.36, 1)';
+        const delay = `${i * 0.08}s`;
+        child.style.transition = `opacity 0.55s ${ease} ${delay}, transform 0.55s ${ease} ${delay}`;
       });
     }
 
