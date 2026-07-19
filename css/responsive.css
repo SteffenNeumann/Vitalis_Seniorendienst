@@ -103,13 +103,17 @@ body.nav-open .nav__hamburger span:nth-child(3) {
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* Nav Overlay */
+/* Nav Overlay
+   Muss UNTER dem .nav-Stacking-Context (z-index:40) liegen: der Drawer
+   (.nav__links) sitzt innerhalb von .nav und kann daher mit seinem z-index:50
+   nicht über ein Overlay auf Header-Ebene steigen. Lag das Overlay höher (49),
+   fing es alle Klicks auf die Menü-Links ab. */
 .nav-overlay {
   display: none;
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.4);
-  z-index: calc(var(--z-mobile-menu) - 1);
+  z-index: calc(var(--z-nav) - 1);
 }
 
 body.nav-open .nav-overlay {
