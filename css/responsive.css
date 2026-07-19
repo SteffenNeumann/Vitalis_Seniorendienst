@@ -27,13 +27,19 @@
   display: none;
 }
 
+/* Hamburger + Suche als Gruppe rechts (nicht mittig via space-between).
+   margin-left:auto auf dem Suchbutton schiebt beide Icons an den rechten Rand;
+   order sorgt dafür, dass der Hamburger ganz außen (rechts) sitzt. */
 .nav__hamburger {
   display: flex;
+  order: 2;
 }
 
 /* Search-Button: Kein display:none auf Mobile – Symbol bleibt zugänglich */
 .nav__search-btn {
   display: flex;
+  order: 1;
+  margin-left: auto;
 }
 
 /* Mobile Navigation: Offener Zustand */
@@ -41,11 +47,20 @@ body.nav-open {
   overflow: hidden;
 }
 
+/* backdrop-filter auf .nav erzeugt einen Containing-Block, der den
+   position:fixed-Drawer sonst im 70px hohen Nav-Balken einsperrt.
+   Im offenen Zustand entfernen, damit der Drawer am Viewport hängt. */
+body.nav-open .nav {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
 body.nav-open .nav__links {
   display: flex;
   flex-direction: column;
   position: fixed;
-  top: calc(var(--nav-height) + var(--trust-bar-height, 48px));
+  /* --header-h wird per JS auf die reale Header-Höhe gesetzt (Fallback 118px) */
+  top: var(--header-h, 118px);
   left: 0;
   right: 0;
   bottom: 0;
@@ -113,10 +128,17 @@ body.nav-open .nav-overlay {
 
 .hero__actions {
   flex-direction: column;
+  gap: var(--spacing-sm);
 }
 
+/* Hero-CTAs mobil kompakter: .btn-lg wäre sonst zu wuchtig und bricht um */
 .hero__actions .btn {
   width: 100%;
+  max-width: 340px;
+  margin-inline: auto;
+  padding: 14px 24px;
+  font-size: var(--fs-base);
+  min-height: 52px;
 }
 
 .hero__trust {
@@ -124,27 +146,74 @@ body.nav-open .nav-overlay {
   gap: var(--spacing-sm);
 }
 
-/* Stats: auf Mobile als Row mit Wrap */
+/* Stats: 3 kompakte Karten nebeneinander, Inhalt vertikal zentriert */
 .hero__stats {
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
+  gap: var(--spacing-sm);
 }
 
 .hero__stat {
-  min-width: 120px;
-  flex: 1;
+  min-width: 0;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  gap: 2px;
+  padding: var(--spacing-md) var(--spacing-xs);
+  padding-top: calc(var(--spacing-md) + 3px);
+}
+
+.hero__stat-number {
+  font-size: var(--fs-xl);
+}
+
+/* Labels normal umbrechen – nicht buchstabenweise (überschreibt overflow-wrap:anywhere) */
+.hero__stat-label {
+  text-align: center;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+  font-size: 0.75rem;
+  line-height: 1.25;
+}
+
+/* Trust-Bar: kompakte, einzeilige Scroll-Leiste statt 4 gestapelter Zeilen */
+.trust-bar {
+  font-size: 0.8125rem;
 }
 
 .trust-bar__inner {
-  flex-direction: column;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-sm) var(--container-padding);
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  gap: var(--spacing-md);
+  padding: 0 var(--container-padding);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x proximity;
+}
+
+.trust-bar__inner::-webkit-scrollbar {
+  display: none;
+}
+
+.trust-bar__item {
+  scroll-snap-align: start;
+}
+
+.trust-bar__item svg {
+  width: 15px;
+  height: 15px;
 }
 
 .trust-bar__divider {
-  display: none;
+  display: block;
+  height: 14px;
 }
 
 .grid-2,
@@ -397,7 +466,23 @@ body.nav-open .nav-overlay {
     min-width: 0;
     width: 100%;
     flex: 0 0 auto;
+    /* Desktop: horizontale Karte (Zahl links, Label rechts) wiederherstellen */
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--spacing-sm);
     text-align: left;
+    padding: var(--spacing-md) var(--spacing-lg);
+    padding-top: calc(var(--spacing-md) + 3px);
+  }
+
+  .hero__stat-number {
+    font-size: var(--fs-2xl);
+  }
+
+  .hero__stat-label {
+    text-align: left;
+    font-size: var(--fs-xs);
   }
 
   .hero__trust {
@@ -987,30 +1072,33 @@ body.nav-open .nav-overlay {
 
 /* ── Trust Bar: Overflow auf sehr kleinen Screens verhindern ── */
 @media (max-width: 479px) {
-  .trust-bar {
-    overflow: hidden;
-  }
-
   .trust-bar__inner {
     padding: var(--spacing-xs) var(--container-padding);
   }
 
-  /* Trust-Bar-Texte dürfen wrappen, damit nichts abgeschnitten wird */
+  /* Einzeilige, horizontal scrollbare Leiste – Items bleiben in einer Zeile */
   .trust-bar__item {
-    white-space: normal;
-    text-align: center;
-    justify-content: center;
+    white-space: nowrap;
+    justify-content: flex-start;
   }
 }
 
 /* ── Nav: Such-Overlay auf Mobile korrekt positionieren ─────── */
 @media (max-width: 767px) {
-  /* Suche nimmt auf Mobile die verfügbare Breite ein,
-     Logo (links) + Hamburger (rechts) bleiben erreichbar.
-     ca. 130px für Logo + Hamburger reservieren */
+  /* Suche wird auf Mobile zur vollflächigen, deckenden Leiste zwischen den
+     Seitenrändern. Sie hat eine eigene X-Schließen-Schaltfläche, daher werden
+     Logo und Hamburger währenddessen verdeckt bzw. ausgeblendet – kein
+     Überlappen mehr (INT-158). */
   .nav.is-searching .nav__search-wrap {
-    width: calc(100% - 130px);
-    right: calc(var(--container-padding) + 48px);
+    width: calc(100% - 2 * var(--container-padding));
+    right: var(--container-padding);
+  }
+
+  /* Hamburger hat höhere z-index als die Suchleiste und würde sonst
+     durchscheinen – während der Suche komplett ausblenden. */
+  .nav.is-searching .nav__hamburger {
+    opacity: 0;
+    pointer-events: none;
   }
 
   /* Nav Actions: Suchbutton bleibt sichtbar, alle anderen Aktionen versteckt */

@@ -12,6 +12,15 @@ document.addEventListener('DOMContentLoaded', () => {
     hamburger.addEventListener('click', () => {
       const isOpen = document.body.classList.toggle('nav-open');
       hamburger.setAttribute('aria-expanded', isOpen);
+      // Drawer exakt unter dem realen Header ausrichten (Trust-Bar-Höhe variiert)
+      if (isOpen) {
+        const header = document.querySelector('.site-header');
+        if (header) {
+          document.documentElement.style.setProperty(
+            '--header-h', Math.round(header.getBoundingClientRect().bottom) + 'px'
+          );
+        }
+      }
     });
   }
 
@@ -769,56 +778,104 @@ function initPlzChecker() {
   const feedback = document.getElementById('plz-feedback');
   if (!input || !feedback) return;
 
+  // Alle 88 Kunden-PLZ (Vitalis Gebiet, Stand 2026-05-04), Landkreis-Zuordnung
+  // via openPLZ-API, gruppiert nach den 7 Regionen der Standorte-Seite (INT-217).
   const PLZ_DATA = {
-    // Landkreis Erding
-    '85435': { name: 'Landkreis Erding',    coords: [48.3059, 12.0714] },
-    '85445': { name: 'Landkreis Erding',    coords: [48.3059, 12.0714] },
-    '85452': { name: 'Landkreis Erding',    coords: [48.3059, 12.0714] },
-    '85456': { name: 'Landkreis Erding',    coords: [48.3059, 12.0714] },
-    '85457': { name: 'Landkreis Erding',    coords: [48.3059, 12.0714] },
-    '85461': { name: 'Landkreis Erding',    coords: [48.3059, 12.0714] },
-    '85462': { name: 'Landkreis Erding',    coords: [48.3059, 12.0714] },
-    '85463': { name: 'Landkreis Erding',    coords: [48.3059, 12.0714] },
-    '85464': { name: 'Landkreis Erding',    coords: [48.3059, 12.0714] },
-    '85465': { name: 'Landkreis Erding',    coords: [48.3059, 12.0714] },
-    // Landkreis Ebersberg
+    // Landkreis Erding (16)
+    '85435': { name: 'Landkreis Erding', coords: [48.3059, 12.0714] },
+    '85445': { name: 'Landkreis Erding', coords: [48.3059, 12.0714] },
+    '85447': { name: 'Landkreis Erding', coords: [48.3059, 12.0714] },
+    '85452': { name: 'Landkreis Erding', coords: [48.3059, 12.0714] },
+    '85456': { name: 'Landkreis Erding', coords: [48.3059, 12.0714] },
+    '85457': { name: 'Landkreis Erding', coords: [48.3059, 12.0714] },
+    '85459': { name: 'Landkreis Erding', coords: [48.3059, 12.0714] },
+    '85461': { name: 'Landkreis Erding', coords: [48.3059, 12.0714] },
+    '85462': { name: 'Landkreis Erding', coords: [48.3059, 12.0714] },
+    '85464': { name: 'Landkreis Erding', coords: [48.3059, 12.0714] },
+    '85465': { name: 'Landkreis Erding', coords: [48.3059, 12.0714] },
+    '85467': { name: 'Landkreis Erding', coords: [48.3059, 12.0714] },
+    '85469': { name: 'Landkreis Erding', coords: [48.3059, 12.0714] },
+    '85656': { name: 'Landkreis Erding', coords: [48.3059, 12.0714] },
+    '85659': { name: 'Landkreis Erding', coords: [48.3059, 12.0714] },
+    '85669': { name: 'Landkreis Erding', coords: [48.3059, 12.0714] },
+    // Dorfen und Umgebung (4)
+    '84405': { name: 'Dorfen und Umgebung', coords: [48.2653, 12.1580] },
+    '84416': { name: 'Dorfen und Umgebung', coords: [48.2653, 12.1580] },
+    '84424': { name: 'Dorfen und Umgebung', coords: [48.2653, 12.1580] },
+    '84435': { name: 'Dorfen und Umgebung', coords: [48.2653, 12.1580] },
+    // Landkreis Ebersberg (21)
+    '83550': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
+    '83553': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
     '85560': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
     '85567': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
     '85570': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
-    '85579': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
     '85586': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
     '85591': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
     '85598': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
     '85599': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
     '85604': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
     '85614': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
-    '85622': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
+    '85617': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
     '85625': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
-    '85630': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
-    '85635': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
-    '85640': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
-    // Landkreis Freising
-    '85354': { name: 'Landkreis Freising',  coords: [48.3975, 11.7251] },
-    '85356': { name: 'Landkreis Freising',  coords: [48.3975, 11.7251] },
-    '85368': { name: 'Landkreis Freising',  coords: [48.3975, 11.7251] },
-    '85375': { name: 'Landkreis Freising',  coords: [48.3975, 11.7251] },
-    '85386': { name: 'Landkreis Freising',  coords: [48.3975, 11.7251] },
-    '85391': { name: 'Landkreis Freising',  coords: [48.3975, 11.7251] },
-    '85395': { name: 'Landkreis Freising',  coords: [48.3975, 11.7251] },
-    // Landkreis Moosburg
-    '85405': { name: 'Landkreis Moosburg',  coords: [48.4655, 11.9338] },
-    '85416': { name: 'Landkreis Moosburg',  coords: [48.4655, 11.9338] },
-    '85417': { name: 'Landkreis Moosburg',  coords: [48.4655, 11.9338] },
-    // Landkreis Landshut
-    '84028': { name: 'Landkreis Landshut',  coords: [48.5369, 12.1545] },
-    '84030': { name: 'Landkreis Landshut',  coords: [48.5369, 12.1545] },
-    '84032': { name: 'Landkreis Landshut',  coords: [48.5369, 12.1545] },
-    '84034': { name: 'Landkreis Landshut',  coords: [48.5369, 12.1545] },
-    '84036': { name: 'Landkreis Landshut',  coords: [48.5369, 12.1545] },
-    // Einzelorte
-    '85737': { name: 'Ismaning',            coords: [48.2286, 11.6826] },
-    '85748': { name: 'Garching',            coords: [48.2489, 11.6529] },
-    '85774': { name: 'Unterföhring',        coords: [48.1855, 11.7218] }
+    '85643': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
+    '85646': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
+    '85652': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
+    '85658': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
+    '85661': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
+    '85664': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
+    '85665': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
+    '85667': { name: 'Landkreis Ebersberg', coords: [48.0774, 11.9664] },
+    // Landkreis Freising (17)
+    '85354': { name: 'Landkreis Freising', coords: [48.3975, 11.7251] },
+    '85356': { name: 'Landkreis Freising', coords: [48.3975, 11.7251] },
+    '85375': { name: 'Landkreis Freising', coords: [48.3975, 11.7251] },
+    '85376': { name: 'Landkreis Freising', coords: [48.3975, 11.7251] },
+    '85386': { name: 'Landkreis Freising', coords: [48.3975, 11.7251] },
+    '85395': { name: 'Landkreis Freising', coords: [48.3975, 11.7251] },
+    '85399': { name: 'Landkreis Freising', coords: [48.3975, 11.7251] },
+    '85402': { name: 'Landkreis Freising', coords: [48.3975, 11.7251] },
+    '85405': { name: 'Landkreis Freising', coords: [48.3975, 11.7251] },
+    '85406': { name: 'Landkreis Freising', coords: [48.3975, 11.7251] },
+    '85408': { name: 'Landkreis Freising', coords: [48.3975, 11.7251] },
+    '85410': { name: 'Landkreis Freising', coords: [48.3975, 11.7251] },
+    '85413': { name: 'Landkreis Freising', coords: [48.3975, 11.7251] },
+    '85416': { name: 'Landkreis Freising', coords: [48.3975, 11.7251] },
+    '85417': { name: 'Landkreis Freising', coords: [48.3975, 11.7251] },
+    '85419': { name: 'Landkreis Freising', coords: [48.3975, 11.7251] },
+    '85716': { name: 'Landkreis Freising', coords: [48.3975, 11.7251] },
+    // Landkreis Moosburg (1)
+    '85368': { name: 'Landkreis Moosburg', coords: [48.4655, 11.9338] },
+    // Landkreis Landshut (10)
+    '84028': { name: 'Landkreis Landshut', coords: [48.5369, 12.1545] },
+    '84030': { name: 'Landkreis Landshut', coords: [48.5369, 12.1545] },
+    '84032': { name: 'Landkreis Landshut', coords: [48.5369, 12.1545] },
+    '84034': { name: 'Landkreis Landshut', coords: [48.5369, 12.1545] },
+    '84036': { name: 'Landkreis Landshut', coords: [48.5369, 12.1545] },
+    '84079': { name: 'Landkreis Landshut', coords: [48.5369, 12.1545] },
+    '84166': { name: 'Landkreis Landshut', coords: [48.5369, 12.1545] },
+    '84172': { name: 'Landkreis Landshut', coords: [48.5369, 12.1545] },
+    '84174': { name: 'Landkreis Landshut', coords: [48.5369, 12.1545] },
+    '84184': { name: 'Landkreis Landshut', coords: [48.5369, 12.1545] },
+    // München Nord (19)
+    '80805': { name: 'München Nord', coords: [48.1800, 11.6100] },
+    '80807': { name: 'München Nord', coords: [48.1800, 11.6100] },
+    '80933': { name: 'München Nord', coords: [48.1800, 11.6100] },
+    '80935': { name: 'München Nord', coords: [48.1800, 11.6100] },
+    '80937': { name: 'München Nord', coords: [48.1800, 11.6100] },
+    '80939': { name: 'München Nord', coords: [48.1800, 11.6100] },
+    '80995': { name: 'München Nord', coords: [48.1800, 11.6100] },
+    '81677': { name: 'München Nord', coords: [48.1800, 11.6100] },
+    '81679': { name: 'München Nord', coords: [48.1800, 11.6100] },
+    '81925': { name: 'München Nord', coords: [48.1800, 11.6100] },
+    '81927': { name: 'München Nord', coords: [48.1800, 11.6100] },
+    '81929': { name: 'München Nord', coords: [48.1800, 11.6100] },
+    '85551': { name: 'München Nord', coords: [48.1800, 11.6100] },
+    '85609': { name: 'München Nord', coords: [48.1800, 11.6100] },
+    '85622': { name: 'München Nord', coords: [48.1800, 11.6100] },
+    '85737': { name: 'München Nord', coords: [48.1800, 11.6100] },
+    '85748': { name: 'München Nord', coords: [48.1800, 11.6100] },
+    '85764': { name: 'München Nord', coords: [48.1800, 11.6100] },
+    '85774': { name: 'München Nord', coords: [48.1800, 11.6100] }
   };
 
   function checkPlz(val) {

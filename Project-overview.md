@@ -124,11 +124,34 @@ Vollständige, responsive Unternehmenswebsite für die **Vitalis Seniorendienst 
 - [ ] Logo-Datei vorhanden?
 - [ ] Team-Fotos vorhanden?
 - [ ] Kontaktformular-Backend (Formspree / eigenes)?
-- [ ] PLZ-Liste für Einzugsgebiet
+- [x] PLZ-Liste für Einzugsgebiet – geliefert (88 PLZ, INT-217) & im PLZ-Checker integriert
+- [ ] mapyx.io-Karten-PNG (Kunde exportiert, INT-217)
 - [ ] Pflegekassen-Leistungsbeträge (aktuell 2024/2025)
 - [ ] Echte Testimonials / Kundenzitate
 
 ## Changelog
+
+### 2026-07-19 – INT-217: Standorte-Seite Umbau (Regionen, PLZ-Checker, CTA, Karte)
+Branch `steffen/int-215-kostentabelle-leistungen-10k`
+
+- **Regionen:** Intro-Text emotionalisiert („In diesen Regionen sind wir für Sie da – zuverlässig,
+  persönlich und mit viel Herz im Alltag."). Kachel-Liste neu = **7 Regionen** (Erding, Ebersberg,
+  Freising, Moosburg, Landshut, **München Nord**, **Dorfen und Umgebung**) **ohne Untertexte**.
+  Alte Einzelorte Ismaning/Garching/Unterföhring → in „München Nord" aufgegangen.
+  Inline-Style-Wildwuchs in saubere BEM-Komponente `.region-grid` / `.region-card` überführt (components.css).
+- **Vitalis-West-Kachel:** letzte Kachel `.region-card--branch` (blaue Gradient-Akzentkachel) verlinkt
+  extern auf `https://www.vitalis-west.de/` (`target="_blank" rel="noopener"` + „öffnet in neuem Tab").
+- **CTA „Ihr Ort ist nicht dabei?":** schwache gestrichelte Box → solide, präsente Akzent-Karte
+  `.region-cta` (Gradient-Topbar, Icon, großer Button).
+- **PLZ-Checker:** mit allen **88 echten Kunden-PLZ** aus `doc/PLZ suchen_Vitalis Gebiet _2026-05-04_all.numbers`
+  befüllt (`PLZ_DATA` in js/main.js). Landkreis-Zuordnung via openPLZ-API, auf die 7 Regionen gemappt
+  (Ebersberg 21, München Nord 19, Freising 17, Erding 16, Landshut 10, Dorfen 4, Moosburg 1).
+- **Karte:** `orte`-Marker auf die 7 Regionen angeglichen. ⏳ Offen: „Neue Karte → Mapyx". mapyx.io
+  bietet **kein Embed/iframe/API**, nur PNG-Export → Kunde exportiert Karte mit allen 88 PLZ als PNG,
+  Einbau als `images/einzugsgebiet-mapyx.png` (Anleitung als Kommentar im Karten-Block hinterlegt);
+  bis dahin bleibt die Leaflet/OSM-Karte als funktionierender Platzhalter.
+- Verifiziert per Playwright (Desktop 1280 + Mobile 390): 8 Kacheln, Branch-Link, CTA und
+  PLZ-Checker-Rückmeldungen (inkl. Edge-Cases) korrekt.
 
 ### 2026-07-19 – Kostenübernahme-Feinschliff, Footer- & Mobile-Fixes
 Branch `steffen/int-215-kostentabelle-leistungen-10k`
