@@ -12,25 +12,34 @@ Vollständige, responsive Unternehmenswebsite für die **Vitalis Seniorendienst 
 - **HTML5** – semantisch korrekt, ARIA-konform
 - **CSS3** – Custom Properties, Flexbox, CSS Grid, keine Framework-Abhängigkeit
 - **Vanilla JavaScript** – Progressive Enhancement, keine Build-Tools nötig
-- **Fonts**: Google Fonts (Inter für Body, Playfair Display für Headings)
-- **Icons**: Lucide Icons (SVG, eingebettet)
+- **Fonts**: **self-hosted** (woff2 in `assets/fonts/`, DSGVO-konform, kein Google-Fonts-Call) –
+  **Fraunces** für Headings (`--font-heading`), **Source Sans 3** für Body (`--font-body`).
+  Preload: `source-sans-3-latin.woff2` auf allen Seiten. (Früher: Google Fonts Inter/Playfair – 2026-07 getauscht.)
+- **Icons**: Inline-SVG (Feather/Lucide-Stil), direkt im Markup eingebettet
+- **Karte**: Leaflet.js + OpenStreetMap-Tiles; Landkreis-Flächen als inline-GeoJSON (`js/regionen-geo.js`)
 
-## Farbpalette (Markenfarben)
-| Farbe | Hex | Verwendung |
+## Farbpalette (real implementiert, `css/main.css` :root)
+> Gedeckte Palette (blau/teal/greige). Die früher hier stehenden knalligeren Werte waren veraltet.
+
+| Token | Hex | Verwendung |
 |-------|-----|-----------|
-| Primary Blue | `#3b6cb7` | Buttons, Links, Hauptakzent |
-| Primary Dark | `#2a518f` | Hover-States, Gradient-Endpunkt |
-| Primary Light | `#e8eef8` | Helle Hintergründe, Akzent-BG |
-| Secondary Teal | `#4a9d8f` | Sekundärakzent, Badges |
-| Accent Amber | `#f4a261` | Highlights, Sterne, Kontrastakzent |
-| Text Dark | `#1e2d45` | Primärtext |
-| Text Muted | `#5a6a80` | Sekundärtext |
-| BG Light | `#f0f4fb` | Helles Blau-Grau für Sektionen |
-| BG Cream | `#f5f1eb` | Warmes Creme |
-| BG Warm | `#faf8f5` | Warmes Off-White |
-| Border | `#d0dae8` | Rahmen, Trennlinien |
-| White | `#ffffff` | Karten, Formulare |
-| Success | `#2e7d5e` | Erfolgsmeldungen |
+| `--blue` | `#5079A5` | Primärfarbe: Buttons, Links, Akzente, Karten-Highlight |
+| `--blue-dark` | `#3D6089` | Hover, Gradient-Endpunkt, Highlight-Rand |
+| `--blue-soft` | `#EEF4FA` | Helle Akzent-Hintergründe (z. B. `.region-cta`) |
+| `--blue-ghost` | `rgba(80,121,165,.08)` | Icon-Kreis-Füllungen |
+| `--teal` / `--teal-dark` | `#327878` / `#2E6B6B` | Sekundärakzent, Badges |
+| `--amber` / `--amber-dark` | `#C97B3A` / `#A85E1F` | Highlights, Sterne, Kontrast |
+| `--ink` | `#1C2B3A` | Primärtext |
+| `--ink-muted` | `#556070` | Sekundärtext |
+| `--ink-light` | `#7A8A9A` | Tertiärtext, Bildunterschriften |
+| `--ink-border` | `#CDD8E8` | Rahmen, Trennlinien |
+| `--ink-bg` | `#F4F7FB` | Helles Blau-Grau für Sektionen |
+| `--ink-warm` | `#F6F2EC` | Warmes Creme |
+| `--white` | `#ffffff` | Karten, Formulare |
+| `--color-danger` | `#d4534a` | Fehlermeldungen |
+
+**Hinweis Hero:** Das Hero-Overlay auf index.html ist bewusst warm-creme (Espresso/Greige-Gradient in
+`css/components.css`), nicht blau – auf Kundenwunsch (Blau wirkte zu kalt).
 
 ## Seiten-Struktur
 | Datei | Seite | Status |
@@ -64,12 +73,13 @@ Vollständige, responsive Unternehmenswebsite für die **Vitalis Seniorendienst 
 │   ├── components.css    # Wiederverwendbare Komponenten (Buttons, Karten, Nav)
 │   └── responsive.css    # Media Queries (Mobile-first)
 ├── js/
-│   ├── main.js           # Navigation, Scroll-Effekte, allg. Interaktivität
-│   └── animations.js     # Intersection Observer, Einblend-Animationen
+│   ├── main.js           # Navigation, Scroll, Suche, PLZ-Checker, Karten-Highlight-Aufruf
+│   ├── animations.js     # Intersection Observer, Einblend-Animationen
+│   └── regionen-geo.js   # Landkreis-Flächen (GeoJSON inline) für die Standorte-Karte (INT-217)
+├── images/               # Hero-Bilder, Logo (avif), Badges
 ├── assets/
-│   ├── images/           # Hero-Bilder, Team-Fotos (Platzhalter)
-│   ├── icons/            # SVG-Icons
-│   └── fonts/            # Lokale Fonts (optional)
+│   └── fonts/            # Self-hosted woff2 (Fraunces, Source Sans 3) – DSGVO
+├── doc/                  # Quelldaten (PLZ-.numbers, Abo-Kosten) – nicht Teil des Deploys
 └── Project-overview.md
 ```
 
@@ -89,7 +99,7 @@ Vollständige, responsive Unternehmenswebsite für die **Vitalis Seniorendienst 
 - Seniorenbetreuung Landkreis Erding / Ebersberg / Freising
 
 ## Inhaltliche Platzhalter (auf Anfrage zu befüllen)
-- PLZ-Liste für Einzugsgebiet (Karte Standorte-Seite)
+- ~~PLZ-Liste für Einzugsgebiet~~ ✅ geliefert & eingebaut (88 PLZ, INT-217)
 - Pflegekassen-Leistungstabelle (Kostenübernahme-Seite)
 - Team-Fotos & Mitarbeiterdaten
 - Echte Kundenzitate / Testimonials
@@ -97,9 +107,13 @@ Vollständige, responsive Unternehmenswebsite für die **Vitalis Seniorendienst 
 - Partner-Logos (AOK, DAK, Pflegenetzwerk Erding)
 
 ## Externe Abhängigkeiten
-- Google Fonts (Inter, Playfair Display)
-- Leaflet.js (OpenStreetMap für Standorte-Karte)
-- Formspree oder ähnlich für Kontaktformular (Platzhalter)
+- **Keine Google Fonts** mehr – Fonts self-hosted (DSGVO, `assets/fonts/`)
+- **Leaflet.js 1.9.4** (unpkg CDN) + OpenStreetMap-Tiles für die Standorte-Karte
+- **Landkreis-Grenzen**: einmalig zur Build-Zeit aus `georef-germany-kreis` (opendatasoft) geholt und
+  per **mapshaper** zu 5 Highlight-Flächen verschmolzen/vereinfacht → als `js/regionen-geo.js` inline
+  eingebettet (zur Laufzeit **kein** externer Call, kein fetch/CORS)
+- **openPLZ-API** (openplzapi.org): einmalig für die PLZ→Landkreis-Zuordnung genutzt (nicht zur Laufzeit)
+- Formspree oder ähnlich für Kontaktformular (Platzhalter, Backend noch offen)
 
 ## Implementierungs-Phasen
 1. **Phase 1**: CSS Design-System + Komponenten (main.css, components.css) ✅
@@ -112,7 +126,7 @@ Vollständige, responsive Unternehmenswebsite für die **Vitalis Seniorendienst 
 ## Noch zu befüllen (wenn Daten vorliegen)
 - Telefonnummer (überall `+4989XXXXXXXX` ersetzen)
 - Echte Adresse (überall `Musterstraße 1, 85435 Erding` prüfen)
-- PLZ-Liste für Standorte-Karte (standorte.html)
+- ~~PLZ-Liste für Standorte-Karte~~ ✅ eingebaut (standorte.html, 88 PLZ + interaktive Karte)
 - Pflegekassen-Leistungsbeträge aktuell prüfen (kostenuebernahme.html)
 - Echte Testimonials (index.html, ueber-uns.html)
 - Team-Fotos und Namen (ueber-uns.html)
@@ -177,8 +191,9 @@ Branch `steffen/int-215-kostentabelle-leistungen-10k`
   Verifiziert per Playwright @375px: index/kostenuebernahme/standorte ohne horizontalen Scroll.
 - **INT-159 (Darkmode):** storniert – für die Senioren-Zielgruppe kein Mehrwert bei hohem Pflegeaufwand.
 
-> **Hinweis Doku-Pflege:** Abschnitte „Technologie-Stack" und „Farbpalette" oben sind teils veraltet
-> (Fonts real: Fraunces + Source Sans 3, self-hosted/DSGVO; gedecktere Palette) – separate Aufräumaufgabe.
+> **Doku-Pflege erledigt (2026-07-19):** „Technologie-Stack", „Farbpalette", „Dateistruktur" und
+> „Externe Abhängigkeiten" auf den realen Stand gebracht (self-hosted Fonts, gedeckte Palette,
+> `regionen-geo.js`, Leaflet/opendatasoft/mapshaper).
 
 ---
-*Erstellt: 2026-03-11 | Letzte Änderung: 2026-07-19 | Status: In Umsetzung (Kunden-Feedback-Runde)*
+*Erstellt: 2026-03-11 | Letzte Änderung: 2026-07-19 (INT-217 komplett + Doku-Sync) | Status: In Umsetzung (Kunden-Feedback-Runde)*
