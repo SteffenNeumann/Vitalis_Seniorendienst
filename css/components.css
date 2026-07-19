@@ -273,6 +273,7 @@
   width: 0;
   opacity: 0;
   pointer-events: none;
+  overflow: hidden; /* 0-Breite muss die Such-Bar clippen, sonst horizontaler Overflow (INT-152) */
   transition: width 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease;
   z-index: 10;
 }
@@ -280,6 +281,7 @@
   width: min(560px, calc(100% - 180px));
   opacity: 1;
   pointer-events: auto;
+  overflow: visible; /* Ergebnis-Dropdown darf überstehen, sobald Suche aktiv */
 }
 
 .nav__search-bar {
@@ -698,6 +700,8 @@
   font-size: var(--fs-xs);
   color: rgba(255, 255, 255, 0.80);
   line-height: 1.35;
+  min-width: 0; /* im Flex-Row umbrechen statt Karte über Viewport dehnen (INT-152) */
+  overflow-wrap: anywhere;
 }
 
 .hero__badge {
@@ -1869,7 +1873,7 @@
   text-decoration: none;
   transition: color var(--transition-fast);
   white-space: normal;
-  word-break: break-all;
+  overflow-wrap: anywhere; /* bricht lange Wörter (E-Mail) nur bei Bedarf, nicht mitten in der Telefonnummer */
 }
 
 .footer__contact-item a:hover {

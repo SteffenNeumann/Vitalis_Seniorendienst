@@ -128,5 +128,31 @@ Vollständige, responsive Unternehmenswebsite für die **Vitalis Seniorendienst 
 - [ ] Pflegekassen-Leistungsbeträge (aktuell 2024/2025)
 - [ ] Echte Testimonials / Kundenzitate
 
+## Changelog
+
+### 2026-07-19 – Kostenübernahme-Feinschliff, Footer- & Mobile-Fixes
+Branch `steffen/int-215-kostentabelle-leistungen-10k`
+
+- **INT-215 (Kostenübernahme-Tabelle):**
+  - Hausnotruf-Zeile: echter Partner-Link zum kostenfreien Lifeo-Formular gesetzt
+    (`https://anfrage.lifeo.de/`, öffnet in neuem Tab) statt Platzhalter auf `kontakt.html`.
+  - Pflegehilfsmittel zum Verbrauch: Betrag **40 €/Monat** final bestätigt (gesetzl. Stand §40 SGB XI),
+    TODO-Kommentar entfernt.
+  - ⏳ Offen: Link zum internen „Alle Leistungen der Pflegekasse"-Formular (kommt vom Kunden);
+    veraltete 2026-Beträge (Pflegegeld/Sachleistungen) noch nicht korrigiert (wartet auf Freigabe).
+- **INT-158 (Footer Spaltenbreite):** Zeilenumbrüche in den Footer-Kategorien behoben –
+  `word-break: break-all` → `overflow-wrap: anywhere` (E-Mail/Telefon brechen nicht mehr mitten im Wort);
+  4-Spalten-Grid greift jetzt erst ab **1280px** statt 1024px (dazwischen roomy 2-spaltig).
+  Verifiziert per Playwright bei 1024/1200px.
+- **INT-152 (Mobile Design):** horizontales Scrollen auf Mobile beseitigt
+  (`.nav__search-wrap { overflow:hidden }` im geschlossenen Zustand, `.hero__stat-label` bricht um),
+  Touch-Targets auf **44px** angehoben (Tel/E-Mail-Links, Nav-Such-Buttons, Breadcrumb, Tabellen-Inline-Links),
+  Buttons dürfen auf ≤767px umbrechen. Alle Regeln auf `≤767px` begrenzt → kein Desktop-Regress.
+  Verifiziert per Playwright @375px: index/kostenuebernahme/standorte ohne horizontalen Scroll.
+- **INT-159 (Darkmode):** storniert – für die Senioren-Zielgruppe kein Mehrwert bei hohem Pflegeaufwand.
+
+> **Hinweis Doku-Pflege:** Abschnitte „Technologie-Stack" und „Farbpalette" oben sind teils veraltet
+> (Fonts real: Fraunces + Source Sans 3, self-hosted/DSGVO; gedecktere Palette) – separate Aufräumaufgabe.
+
 ---
-*Erstellt: 2026-03-11 | Status: In Planung*
+*Erstellt: 2026-03-11 | Letzte Änderung: 2026-07-19 | Status: In Umsetzung (Kunden-Feedback-Runde)*

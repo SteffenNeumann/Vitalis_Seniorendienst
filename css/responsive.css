@@ -453,14 +453,8 @@ body.nav-open .nav-overlay {
     grid-template-columns: 1fr 1fr;
   }
 
-  .footer__grid {
-    grid-template-columns: 1.2fr 1fr 1.5fr 0.8fr;
-    gap: var(--spacing-2xl);
-  }
-
-  .footer__brand {
-    grid-column: auto;
-  }
+  /* Footer bleibt bis 1280px 2-spaltig (Marke volle Breite),
+     damit Kontaktspalte auf Laptops nicht umbricht (INT-158). */
 }
 
 /* --- 1280px+ (Large Desktop) --- */
@@ -471,6 +465,15 @@ body.nav-open .nav-overlay {
 
   .hero__title {
     font-size: 3.75rem;
+  }
+
+  .footer__grid {
+    grid-template-columns: 1.3fr 1fr 1.6fr 0.9fr;
+    gap: var(--spacing-2xl);
+  }
+
+  .footer__brand {
+    grid-column: auto;
   }
 }
 
@@ -1609,5 +1612,54 @@ body.nav-open .nav-overlay {
   .fuer-wen__panel-inner {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   INT-152 · Mobile-Design-Verbesserungen (≤767px)
+   Overflow-Beseitigung + 44px Touch-Targets (Senioren-A11y).
+   Alle Regeln bewusst auf ≤767px begrenzt → kein Desktop-Regress.
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 767px) {
+
+  /* ── Buttons dürfen umbrechen statt den Viewport zu sprengen ──
+     Ursache Overflow kostenuebernahme: langer nowrap-Button (409px). */
+  .btn {
+    white-space: normal;
+    max-width: 100%;
+  }
+
+  /* ── Breadcrumb-Links: 44px Touch-Höhe ── */
+  .page-header__breadcrumb a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* ── Footer-Kontaktlinks (Tel/E-Mail): 44px Touch-Höhe ── */
+  .footer__contact-item a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  /* ── Nav-Such-Buttons: 44px Touch-Targets ── */
+  .nav__search-btn {
+    width: 44px;
+    height: 44px;
+  }
+  .nav__search-close {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* ── Inline-Links in der Leistungstabelle: 44px Touch-Höhe ── */
+  .leistungs-tabelle__inline-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    touch-action: manipulation;
   }
 }
