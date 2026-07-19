@@ -204,19 +204,11 @@
         <p class="section-header__text">Alle Regionen, in denen wir für Sie tätig sind – übersichtlich dargestellt.</p>
       </div>
       <div class="region-map">
-        <!-- ══ mapyx.io-KARTE (INT-217) ══════════════════════════════
-             Sobald das mapyx.io-PNG mit allen 88 Kunden-PLZ vorliegt:
-             1. Bild als images/einzugsgebiet-mapyx.png (oder .avif) ablegen
-             2. Den <div id="map"> unten sowie den Leaflet-Block am Seitenende entfernen
-             3. Diesen Bild-Block einkommentieren:
-        <figure style="margin:0;">
-          <img class="region-map__img" src="images/einzugsgebiet-mapyx.png"
-               alt="Karte des Vitalis-Einzugsgebiets mit allen abgedeckten Postleitzahlen"
-               width="1200" height="800" loading="lazy" />
-          <figcaption class="region-map__caption">Unser Einzugsgebiet – alle Postleitzahlen, in denen wir für Sie tätig sind.</figcaption>
-        </figure>
-             ═══════════════════════════════════════════════════════════ -->
-        <div id="map" style="height: 500px; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-lg);" role="img" aria-label="Karte des Einzugsgebiets von Vitalis Seniorendienst"></div>
+        <!-- Interaktive Karte (INT-217): Landkreis-Flächen des Einzugsgebiets.
+             Bei Eingabe einer PLZ im Checker oben wird die passende Region
+             hervorgehoben und angezoomt (js/regionen-geo.js + Script am Seitenende). -->
+        <div id="map" style="height: 500px; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-lg);" role="img" aria-label="Interaktive Karte des Einzugsgebiets von Vitalis Seniorendienst – zeigt die betreuten Landkreise"></div>
+        <p class="region-map__caption">Tipp: Geben Sie oben Ihre Postleitzahl ein – wir heben Ihren Landkreis auf der Karte hervor.</p>
       </div>
     </div>
   </section>
@@ -365,39 +357,63 @@
 <script src="js/main.js"></script>
 <script src="js/animations.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script src="js/regionen-geo.js"></script>
 <script>
   (function() {
-    window.vitalisMap = L.map('map', { scrollWheelZoom: false }).setView([48.3, 11.9], 9);
+    var map = L.map('map', { scrollWheelZoom: false });
+    window.vitalisMap = map;
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       maxZoom: 18
-    }).addTo(window.vitalisMap);
+    }).addTo(map);
 
-    var vitalisIcon = L.divIcon({
-      className: 'custom-marker',
-      html: '<div style="background:#5079A5;color:white;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;box-shadow:0 2px 8px rgba(80,121,165,0.4);">V</div>',
-      iconSize: [36, 36],
-      iconAnchor: [18, 18]
-    });
+    /* Landkreis-Flächen des Einzugsgebiets (INT-217).
+       Dezent umrandet als Grundzustand; bei PLZ-Treffer wird die passende
+       Fläche hervorgehoben und angezoomt (window.vitalisHighlightRegion). */
+    var STYLE_BASE  = { color: '#5079A5', weight: 1.5, opacity: 0.55, fillColor: '#5079A5', fillOpacity: 0.07 };
+    var STYLE_HIGH  = { color: '#3D6089', weight: 3,   opacity: 1,    fillColor: '#5079A5', fillOpacity: 0.30 };
 
-    var orte = [
-      [48.3059, 12.0714, 'Landkreis Erding'],
-      [48.0774, 11.9664, 'Landkreis Ebersberg'],
-      [48.3975, 11.7251, 'Landkreis Freising'],
-      [48.4655, 11.9338, 'Landkreis Moosburg'],
-      [48.5369, 12.1545, 'Landkreis Landshut'],
-      [48.1800, 11.6100, 'München Nord'],
-      [48.2653, 12.1580, 'Dorfen und Umgebung']
-    ];
+    var layersByRegion = {};
+    var geoLayer = null;
 
-    orte.forEach(function(ort) {
-      L.marker([ort[0], ort[1]], { icon: vitalisIcon })
-        .addTo(window.vitalisMap)
-        .bindPopup('<strong style="color:#5079A5;">' + ort[2] + '</strong><br/>Vitalis Seniorendienst ist hier für Sie tätig.');
-    });
+    if (window.VITALIS_REGIONS && window.L) {
+      geoLayer = L.geoJSON(window.VITALIS_REGIONS, {
+        style: function() { return STYLE_BASE; },
+        onEachFeature: function(feature, layer) {
+          var p = feature.properties || {};
+          layersByRegion[p.region] = layer;
+          layer.bindTooltip(p.label || '', { sticky: true, direction: 'top' });
+        }
+      }).addTo(map);
+      map.fitBounds(geoLayer.getBounds(), { padding: [24, 24] });
+    } else {
+      map.setView([48.3, 11.9], 9);
+    }
+
+    /* Wird vom PLZ-Checker (js/main.js) bei einem Treffer aufgerufen. */
+    window.vitalisHighlightRegion = function(regionKey) {
+      if (!geoLayer) return;
+      geoLayer.setStyle(STYLE_BASE);
+      var layer = layersByRegion[regionKey];
+      if (layer) {
+        layer.setStyle(STYLE_HIGH);
+        if (layer.bringToFront) layer.bringToFront();
+        map.fitBounds(layer.getBounds(), { padding: [40, 40], maxZoom: 11 });
+        layer.openTooltip();
+      } else {
+        map.fitBounds(geoLayer.getBounds(), { padding: [24, 24] });
+      }
+    };
+
+    /* Grundzustand wiederherstellen (z.B. bei No-Match). */
+    window.vitalisResetRegions = function() {
+      if (!geoLayer) return;
+      geoLayer.setStyle(STYLE_BASE);
+      map.fitBounds(geoLayer.getBounds(), { padding: [24, 24] });
+    };
 
     /* Sicherstellen dass die Karte korrekte Dimensionen kennt */
-    setTimeout(function() { window.vitalisMap.invalidateSize(); }, 250);
+    setTimeout(function() { map.invalidateSize(); if (geoLayer) map.fitBounds(geoLayer.getBounds(), { padding: [24, 24] }); }, 250);
   })();
 </script>
 </body>

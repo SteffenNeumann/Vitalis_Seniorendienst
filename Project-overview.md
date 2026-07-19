@@ -125,7 +125,7 @@ Vollständige, responsive Unternehmenswebsite für die **Vitalis Seniorendienst 
 - [ ] Team-Fotos vorhanden?
 - [ ] Kontaktformular-Backend (Formspree / eigenes)?
 - [x] PLZ-Liste für Einzugsgebiet – geliefert (88 PLZ, INT-217) & im PLZ-Checker integriert
-- [ ] mapyx.io-Karten-PNG (Kunde exportiert, INT-217)
+- [x] Karte (INT-217) – interaktive Landkreis-Hervorhebung bei PLZ-Eingabe (mapyx verworfen, da kein Embed)
 - [ ] Pflegekassen-Leistungsbeträge (aktuell 2024/2025)
 - [ ] Echte Testimonials / Kundenzitate
 
@@ -146,10 +146,13 @@ Branch `steffen/int-215-kostentabelle-leistungen-10k`
 - **PLZ-Checker:** mit allen **88 echten Kunden-PLZ** aus `doc/PLZ suchen_Vitalis Gebiet _2026-05-04_all.numbers`
   befüllt (`PLZ_DATA` in js/main.js). Landkreis-Zuordnung via openPLZ-API, auf die 7 Regionen gemappt
   (Ebersberg 21, München Nord 19, Freising 17, Erding 16, Landshut 10, Dorfen 4, Moosburg 1).
-- **Karte:** `orte`-Marker auf die 7 Regionen angeglichen. ⏳ Offen: „Neue Karte → Mapyx". mapyx.io
-  bietet **kein Embed/iframe/API**, nur PNG-Export → Kunde exportiert Karte mit allen 88 PLZ als PNG,
-  Einbau als `images/einzugsgebiet-mapyx.png` (Anleitung als Kommentar im Karten-Block hinterlegt);
-  bis dahin bleibt die Leaflet/OSM-Karte als funktionierender Platzhalter.
+- **Interaktive Karte (statt mapyx):** mapyx.io bietet kein Embed/API (nur PNG) und kann nicht auf die
+  Suche reagieren → stattdessen **interaktive Landkreis-Hervorhebung** umgesetzt: Gibt der Besucher seine
+  PLZ ein, wird der zugehörige Landkreis auf der Leaflet-Karte umrandet, eingefärbt und angezoomt.
+  Landkreis-Flächen aus `georef-germany-kreis` (opendatasoft), via mapshaper zu **5 Highlight-Flächen**
+  verschmolzen/vereinfacht (Erding, Ebersberg, Freising, Landshut=Stadt+LK, München=Stadt+LK) und als
+  `js/regionen-geo.js` (~8 KB, inline, kein fetch/CORS) eingebunden. Dorfen→Lkr. Erding, Moosburg→Lkr.
+  Freising (korrekte Kreis-Zuordnung). Verifiziert für alle 5 Highlight-Fälle + No-Match-Reset.
 - Verifiziert per Playwright (Desktop 1280 + Mobile 390): 8 Kacheln, Branch-Link, CTA und
   PLZ-Checker-Rückmeldungen (inkl. Edge-Cases) korrekt.
 

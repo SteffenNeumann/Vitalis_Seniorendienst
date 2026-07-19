@@ -878,6 +878,18 @@ function initPlzChecker() {
     '85774': { name: 'München Nord', coords: [48.1800, 11.6100] }
   };
 
+  // Region-Anzeigename -> Highlight-Fläche auf der Karte (js/regionen-geo.js).
+  // Dorfen liegt im Lkr. Erding, Moosburg im Lkr. Freising -> Kreis-Fläche.
+  const REGION_KEY = {
+    'Landkreis Erding':     'erding',
+    'Dorfen und Umgebung':  'erding',
+    'Landkreis Ebersberg':  'ebersberg',
+    'Landkreis Freising':   'freising',
+    'Landkreis Moosburg':   'freising',
+    'Landkreis Landshut':   'landshut',
+    'München Nord':         'muenchen'
+  };
+
   function checkPlz(val) {
     feedback.className = 'plz-checker__feedback';
     if (val.length < 5) {
@@ -896,14 +908,19 @@ function initPlzChecker() {
             '<a href="kontakt.html" class="btn btn-primary btn-sm">Jetzt kostenlos beraten lassen</a>' +
           '</div>' +
         '</div>';
-      if (window.vitalisMap) {
-        var mapEl = document.getElementById('map');
-        if (mapEl) {
-          mapEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      var mapEl = document.getElementById('map');
+      if (mapEl) {
+        mapEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Passenden Landkreis auf der Karte hervorheben (INT-217).
+        if (typeof window.vitalisHighlightRegion === 'function') {
+          var regionKey = REGION_KEY[entry.name];
+          setTimeout(function() { window.vitalisHighlightRegion(regionKey); }, 400);
+        } else if (window.vitalisMap && entry.coords) {
           setTimeout(function() { window.vitalisMap.flyTo(entry.coords, 12); }, 400);
         }
       }
     } else {
+      if (typeof window.vitalisResetRegions === 'function') window.vitalisResetRegions();
       feedback.classList.add('plz-checker__feedback--no-match');
       feedback.innerHTML =
         '<div class="plz-checker__result plz-checker__result--no-match">' +
