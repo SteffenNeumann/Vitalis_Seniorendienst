@@ -315,8 +315,8 @@
       }
       .tc-dots { display: flex; gap: 12px; align-items: center; }
       .tc-dot {
-        width: 10px; height: 10px; border-radius: 50%;
-        background: rgba(0,0,0,0.2);
+        width: 14px; height: 14px; border-radius: 50%; /* 10→14px: für Senioren besser sichtbar */
+        background: rgba(0,0,0,0.28);
         border: none; cursor: pointer; padding: 0;
         position: relative;
         transition: background 0.3s, transform 0.3s;
@@ -324,10 +324,10 @@
       .tc-dot::before {
         content: '';
         position: absolute;
-        inset: -17px; /* INT-152: unsichtbare Trefferfläche 44px für Touch */
+        inset: -17px; /* INT-152: unsichtbare Trefferfläche 48px für Touch */
       }
       .tc-dot.is-active {
-        background: var(--primary-blue, #2f5dff);
+        background: var(--blue, #5079A5); /* Palette-Blau statt undefiniertem --primary-blue (#2f5dff) */
         transform: scale(1.35);
       }
       .tc-arrow {
