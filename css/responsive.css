@@ -138,11 +138,13 @@ body.nav-open .nav-overlay {
 /* Hero-CTAs mobil kompakter: .btn-lg wäre sonst zu wuchtig und bricht um */
 .hero__actions .btn {
   width: 100%;
-  max-width: 340px;
+  /* min(): verhindert Randberührung auf 360px-Geräten (vorher ragten 340px + Padding raus) */
+  max-width: min(340px, calc(100vw - 40px));
   margin-inline: auto;
   padding: 14px 24px;
   font-size: var(--fs-base);
   min-height: 52px;
+  text-wrap: balance; /* gleichmäßigerer Umbruch langer Labels ("Jetzt kostenlos beraten lassen") */
 }
 
 .hero__trust {
@@ -156,6 +158,7 @@ body.nav-open .nav-overlay {
   flex-wrap: nowrap;
   justify-content: center;
   gap: var(--spacing-sm);
+  min-width: 0; /* direktes Grid-Item: darf schrumpfen statt den Track zu dehnen */
 }
 
 .hero__stat {
@@ -187,6 +190,21 @@ body.nav-open .nav-overlay {
 /* Trust-Bar: kompakte, einzeilige Scroll-Leiste statt 4 gestapelter Zeilen */
 .trust-bar {
   font-size: 0.8125rem;
+  position: relative;
+}
+
+/* Rechter Fade als Scroll-Affordance: signalisiert, dass weitere Badges scrollbar sind
+   (Zielgruppe 65+ erkennt sonst die versteckte Scrollbar nicht) */
+.trust-bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 36px;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(80, 121, 165, 0) 0%, var(--blue) 92%);
+  z-index: 1;
 }
 
 .trust-bar__inner {

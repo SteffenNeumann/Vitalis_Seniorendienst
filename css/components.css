@@ -580,7 +580,7 @@
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr); /* minmax(0,…) statt 1fr: Track darf unter min-content schrumpfen → kein Überlauf auf 360px */
   align-items: center;
   gap: var(--spacing-3xl);
   text-align: center;
@@ -591,6 +591,7 @@
 
 .hero__content {
   max-width: 720px;
+  min-width: 0; /* Grid-Item darf schrumpfen – verhindert Überlauf auf schmalen Screens (360px) */
 }
 
 /* --- Hero Stats (rechte Spalte Desktop) --- */
@@ -604,7 +605,8 @@
 
 .hero__stat {
   position: relative;
-  background: rgba(0, 0, 0, 0.45);
+  /* 0.6 statt 0.45: Karte 3 liegt über hellerem Bildbereich, Text-Kontrast sonst < WCAG AA (INT-Mobile) */
+  background: rgba(0, 0, 0, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: var(--radius-lg);
   padding: var(--spacing-md) var(--spacing-lg);
@@ -655,7 +657,7 @@
 /* Hover nur auf echten Pointer-Geräten (nicht Touch) */
 @media (hover: hover) {
   .hero__stat:hover {
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(0, 0, 0, 0.5);
     box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.14);
   }
 
@@ -693,12 +695,14 @@
   color: var(--white);
   line-height: 1;
   flex-shrink: 0;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55); /* Lesbarkeit über hellem Hero-Bild sichern */
 }
 
 .hero__stat-label {
   display: block;
   font-size: var(--fs-xs);
-  color: rgba(255, 255, 255, 0.80);
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
   line-height: 1.35;
   min-width: 0; /* im Flex-Row umbrechen statt Karte über Viewport dehnen (INT-152) */
   overflow-wrap: anywhere;
@@ -1638,7 +1642,8 @@
   align-items: center;
   gap: 6px;
   margin-top: var(--spacing-sm);
-  padding: 6px 0;
+  min-height: 48px; /* Senioren-Touch-Target: vorher 38px hoch */
+  padding: 11px 0;
   background: none;
   border: none;
   cursor: pointer;
