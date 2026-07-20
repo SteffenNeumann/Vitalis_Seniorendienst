@@ -3,3 +3,6 @@
 
 # OS / editor cruft
 .DS_Store
+
+# Interne Geschäftsdaten – nicht ins öffentliche Repo (nur lokal)
+doc/*.numbers
